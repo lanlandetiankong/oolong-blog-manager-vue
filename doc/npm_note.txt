@@ -1,0 +1,12 @@
+#jquery
+npm install -s jquery
+#富文本编辑器
+npm install vue-quill-editor
+npm install quill
+npm install quill-image-resize-module --save
+npm install quill-image-drop-module --save
+
+npm install quill-image-extend-module --save-dev
+
+#验证码
+npm i vue2-verify

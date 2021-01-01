@@ -1,0 +1,21 @@
+端口:{
+    java:20200
+    vue:9081
+    静态资源:8090
+}
+
+
+
+所以：
+脚本：{
+    java:
+        java -jar obl-web.jar
+    vue:
+        http-server -p 9081
+    静态资源:
+        anywhere -p 8090
+}
+
+
+#快速关闭 nginx(nginx假死情况下才使用)
+taskkill /f /t /im nginx.exe

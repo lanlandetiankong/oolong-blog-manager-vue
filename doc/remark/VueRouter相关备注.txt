@@ -1,0 +1,27 @@
+VueRouter相关备注
+
+
+Example:(后面加#的代表非必要参数,#后面[]起来的值代表默认值)
+
+{
+    path:'',
+    redirect:'',    //重定向#
+    component:'',   //组件位置
+    children:[
+        {
+            path:'',
+            component: _import('组件路径'),
+            name:'',
+            meta:{
+                title:'',   //必要，目前组件打开后tag展示的名称
+                icon:'',    //# TODO 目前没派上用处，待改为动态添加router后，当后台没配置图标时，将采用当前配置的icon作为图标展示
+                keepAliveFlag:true, //是否在tag上缓存该组件，tag关闭该标签后移除缓存，切换标签时不会销毁该组件
+                visitLimit:false ,  //#[true] route是否访问受控，明确指明为false后该route不需要后台授权也能进行访问
+                parentRouterCompName:indexParentRouterCompName,     //必要！指明后所挂载的上级组件名,才能配合vuex、vuerouter 进行组件缓存
+                selfCompName:'UserZoneCenterView'   //必要！指明后所挂载的上级组件名,才能配合vuex、vuerouter 进行组件缓存
+            }
+        }
+    ]
+
+
+}
