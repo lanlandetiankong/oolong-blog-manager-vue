@@ -8,12 +8,15 @@ const _import = require('~Router/_import_' + process.env.NODE_ENV)
 //index的基本布局
 import Layout from '@/layout/Layout'
 
+//em
 import EmployeeRouter from './main/em/employee/index'
 import PermissionRouter from './main/em/permission/index'
 import AnnouncementRouter from './main/em/announcement/index'
 
-import UserZoneRouter from './main/regular/userZone/index'
+//obl
+import ArticleRouter from './main/obl/article/index'
 
+import UserZoneRouter from './main/regular/userZone/index'
 //登录、注册
 import MemberRouter from './member/index.js'
 //错误页面
@@ -50,10 +53,11 @@ export const constantRouterMap = [
                     selfCompName:'UserZoneCenterView'
                 }
             },
+            AnnouncementRouter,
             EmployeeRouter,
             PermissionRouter,
+            ArticleRouter,
             UserZoneRouter,
-            AnnouncementRouter,
         ]
     },
     MemberRouter,
@@ -78,6 +82,7 @@ const vueRouter = new VueRouter({
 vueRouter.beforeEach((to,from,next) => {
     var _this = this ;
     var passFlag = true ;
+    debugger;
     //判断token等信息，决定路由是否可以放行
     let carryOnFlag = TokenUtil.isRouteCarryOn(to,from);
     if(carryOnFlag == false){

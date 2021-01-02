@@ -1,0 +1,75 @@
+const _import = require('~Router/_import_' + process.env.NODE_ENV);
+//所挂载的 page 组件名
+const parentRouterCompName = "OblArticlePage" ;
+const ArticleRouter = {
+    path:'article',
+    component:_import('index/obl/article/OblArticlePage'),
+    name:'article',
+    meta:{
+        selfCompName:'OblArticlePage'
+    },
+    children:[
+        {
+            path:'create',
+            component:_import('index/obl/article/create/OblArticleCreateView'),
+            name:'articleCreate',
+            meta:{
+                title:'写文章',icon:"reconciliation",keepAliveFlag:true,
+                parentRouterCompName,
+                selfCompName:'ArticleCreateView'
+            }
+        },
+        {
+            path:'all_list',
+            component:_import('index/obl/article/allList/OblArticleAllListView'),
+            name:'articleAllList',
+            meta:{
+                title:'文章列表',icon:"bars",keepAliveFlag:true,
+                parentRouterCompName,
+                selfCompName:'ArticleAllListView'
+            }
+        },
+        {
+            path:'my_create_list',
+            component:_import('index/obl/article/myCreateList/OblArticleMyCreateListView'),
+            name:'articleMyCreateList',
+            meta:{
+                title:'我的文章',icon:"bars",keepAliveFlag:true,
+                parentRouterCompName,
+                selfCompName:'ArticleMyCreateListView'
+            }
+        },
+        {
+            path:'tag',
+            component:_import('index/obl/article/tag/OblArticleTagView'),
+            name:'articleTag',
+            meta:{
+                title:'文章标签',icon:"reconciliation",keepAliveFlag:true,
+                parentRouterCompName,
+                selfCompName:'ArticleTagView'
+            }
+        },
+        {
+            path:'my_draft_list',
+            component:_import('index/obl/article/myDraftList/OblArticleMyDraftListView'),
+            name:'articleMyDraftList',
+            meta:{
+                title:'草稿箱',icon:"bars",keepAliveFlag:true,
+                parentRouterCompName,
+                selfCompName:'ArticleMyDraftListView'
+            }
+        },
+        {
+            path:'display',
+            component:_import('index/obl/article/display/OblArticleDisplayView'),
+            name:'articleDisplay',
+            meta:{
+                title:'文章展示',icon:"book",keepAliveFlag:true,
+                visitLimit:false ,
+                parentRouterCompName,
+                selfCompName:'ArticleTagView'
+            }
+        },
+    ]
+};
+export default ArticleRouter ;
