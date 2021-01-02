@@ -15,6 +15,7 @@
                     :gutter="6"
                     justify="start"
                     type="flex"
+                    align="middle"
                 >
                     <a-col>
                         <a-button type="primary" icon="check"
@@ -36,12 +37,12 @@
                     </a-col>
                     <a-col>
                         <a-switch
-                            :checkedChildren="$t('langMap.table.config.showQuery')"
-                            :unCheckedChildren="$t('langMap.table.config.hiddenQuery')"
                             size="large"
-                            :style="{height:'30px'}"
                             v-model="searchConf.showAble"
-                        />
+                        >
+                            <a-icon slot="checkedChildren" type="filter" />
+                            <a-icon slot="unCheckedChildren" type="eye-invisible" />
+                        </a-switch>
                     </a-col>
                 </a-row>
             </div>

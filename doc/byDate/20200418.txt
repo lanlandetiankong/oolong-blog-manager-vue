@@ -53,3 +53,17 @@ this.$t('langMap.commons.forms.pleaseFillOut','')
 请选择
 this.$t('langMap.commons.forms.pleaseSelect','')
 
+
+
+
+langMap.table.config.showQuery
+
+align="middle"
+
+<a-switch
+                            size="large"
+                            v-model="searchConf.showAble"
+                        >
+                            <a-icon slot="checkedChildren" type="filter" />
+                            <a-icon slot="unCheckedChildren" type="eye-invisible" />
+                        </a-switch>
