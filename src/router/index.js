@@ -82,7 +82,6 @@ const vueRouter = new VueRouter({
 vueRouter.beforeEach((to,from,next) => {
     var _this = this ;
     var passFlag = true ;
-    debugger;
     //判断token等信息，决定路由是否可以放行
     let carryOnFlag = TokenUtil.isRouteCarryOn(to,from);
     if(carryOnFlag == false){

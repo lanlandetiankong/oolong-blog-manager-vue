@@ -18,9 +18,9 @@ export const OblArticleTagApi = {
         }
         return axios.post('/oblCtl/oblArticleTag/queryDtoPage',qs.stringify(obj)).then(res => res.data);
     },
-    getItemById(announcementTagId){  //根据id查询item
+    getItemById(fid){  //根据id查询item
         var params = {
-            announcementTagId:announcementTagId
+            fid:fid
         }
         return axios.post("/oblCtl/oblArticleTag/queryOneById",qs.stringify(params)).then(res => res.data) ;
     },
