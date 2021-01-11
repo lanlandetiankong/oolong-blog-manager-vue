@@ -1,18 +1,25 @@
 <template>
     <div>
         <a-row>
-            <a-col :span="3">
-                <a-button size="large" icon="inbox"
-                          @click="handleCreateDraftByForm"
-                >{{$t('langMap.button.actions.saveAsDraft')}}</a-button>
-            </a-col>
-            <a-col :span="3">
-                <a-button size="large" type="primary" icon="check"
-                          @click="handleCreateByForm"
-                >{{$t('langMap.button.actions.publish')}}</a-button>
-            </a-col>
+            <a-steps :current="stepConf.current" type="navigation" size="small" :style="stepConf.stepStyle">
+                <a-step v-for="(item,index) in stepConf.steps" :key="index" :title="item.title"/>
+            </a-steps>
         </a-row>
-        <br/>
+        <template v-show="currentStepKey == stepConf.steps.done.key">
+            <a-row>
+                <a-col :span="3">
+                    <a-button size="large" icon="inbox"
+                              @click="handleCreateDraftByForm"
+                    >{{$t('langMap.button.actions.saveAsDraft')}}</a-button>
+                </a-col>
+                <a-col :span="3">
+                    <a-button size="large" type="primary" icon="check"
+                              @click="handleCreateByForm"
+                    >{{$t('langMap.button.actions.publish')}}</a-button>
+                </a-col>
+            </a-row>
+            <br/>
+        </template>
         <a-row>
             <a-col :span="22">
                 <a-input  allowClear size="large"
@@ -73,7 +80,29 @@
                 {type:'array'}
             ]
         };
+        const stepConst = {
+            basic:{
+                key:'basic1',
+                title:'写'
+            },
+            more:{
+                key:'more',
+                title:'其他'
+            },
+            done:{
+                key:'done',
+                title:'提交'
+            },
+        };
         return {
+            stepConf:{
+                current:0,
+                steps:stepConst,
+                stepStyle: {
+                    marginBottom: '20px',
+                    boxShadow: '0px -1px 0 0 #e8e8e8 inset',
+                }
+            },
             createForm:{},
             updateForm:{
                 flag:false,
@@ -112,8 +141,6 @@
         },
         dealUpdateFormValue(formObj){   //form表单更新
             var _this = this ;
-            console.log("dealUpdateFormValue");
-            console.log(formObj);
             if(typeof _this.createForm.updateFields != "undefined"){ //避免未初始化form的时候就调用了updatefield
                 _this.createForm.updateFields({
                     summary: _this.$form.createFormField({
@@ -278,6 +305,11 @@
                 }
             }
         });
+    },
+    computed:{
+        currentStepKey() {
+            return 1;
+        }
     },
     mounted(){
         var _this = this ;
