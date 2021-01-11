@@ -132,6 +132,7 @@ export const langMap = {
                 tagName:'Tag name',
                 lockedStatus:'Lock Status',
                 weights:'Weights',
+                summary:'Summary'
             },
             em:{
                 user:{
@@ -192,6 +193,10 @@ export const langMap = {
                 }
             },
             obl:{
+                article:{
+                    title:'Title',
+                    content:'Content'
+                },
                 articleCategory:{
                     name:'Name',
                     iconName:'Icon name',

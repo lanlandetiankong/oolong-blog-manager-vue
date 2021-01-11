@@ -83,8 +83,7 @@
         name: "AnnouncementCreateView",
         components: {ATextarea,BaseQuillEditor},
         data(){
-            var _this = this ;
-            var paramsRules ={
+            const paramsRules ={
                 keyWord:[
                     {required:true,message:this.$t('langMap.commons.forms.pleaseFillOut',[this.$t('langMap.table.fields.common.keyword')])}
                 ],

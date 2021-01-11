@@ -132,6 +132,7 @@ export const langMap = {
                 tagName:'标签名',
                 lockedStatus:'锁状态',
                 weights:'权重',
+                summary:'简介'
             },
             em:{
                 user:{
@@ -192,6 +193,10 @@ export const langMap = {
                 }
             },
             obl:{
+                article:{
+                    title:'标题',
+                    content:'内容'
+                },
                 articleCategory:{
                     name:'名称',
                     iconName:'图标',
