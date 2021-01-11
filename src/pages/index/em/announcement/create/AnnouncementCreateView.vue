@@ -15,13 +15,10 @@
             </a-row>
             <br/>
             <a-row>
-                <a-col :span="2">
-                    <a-button size="large">{{$t('langMap.table.fields.common.title')}}</a-button>
-                </a-col>
                 <a-col :span="22">
                     <a-input  allowClear size="large"
-                              :placeholder="$t('langMap.commons.forms.pleaseEnterTitle')"
-                             v-model="formObj.title"
+                              :addonBefore="$t('langMap.table.fields.common.title')"
+                              v-model="formObj.title"
                     />
                 </a-col>
             </a-row>
