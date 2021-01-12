@@ -107,6 +107,7 @@
 </template>
 
 <script>
+    import BeeUtil from '~Assets/js/util/bee/BeeUtil.js' ;
     import {toolbars} from '~Config/mavon_editor/mavon.conf'
     import {ArticleCreateApi} from './oblArticleCreateApi.js'
     import {OblCommonMixin} from '~Layout/mixin/OblCommonMixin';
@@ -185,54 +186,54 @@
             }
         },
         methods:{
-            goPreviousStep(){
+            goPreviousStep() {
                 //上一步
                 this.stepConf.current--;
             },
-            goNextStep(){
+            goNextStep() {
                 //下一步
-                var _this = this ;
+                var _this = this;
                 let currentKey = this.currentStepKey;
                 //验证
-                if(currentKey == _this.stepConf.steps.basic.key){
-                    let flag = (_this.formObj.title && _this.formObj.content && _this.formObj.originContent) ? true : false ;
-                    if(!flag){
-                        _this.$message.warning(_this.$t('langMap.commons.forms.pleaseFillOutTwo',[_this.$t('langMap.table.fields.obl.article.title'),_this.$t('langMap.table.fields.obl.article.content')]));
-                        return ;
+                if (currentKey == _this.stepConf.steps.basic.key) {
+                    let flag = (_this.formObj.title && _this.formObj.content && _this.formObj.originContent) ? true : false;
+                    if (!flag) {
+                        _this.$message.warning(_this.$t('langMap.commons.forms.pleaseFillOutTwo', [_this.$t('langMap.table.fields.obl.article.title'), _this.$t('langMap.table.fields.obl.article.content')]));
+                        return;
                     }
                 }
-                if(currentKey == this.stepConf.steps.more.key){
-                    let flag = true ;
+                if (currentKey == this.stepConf.steps.more.key) {
+                    let flag = true;
                     _this.createForm.validateFields((err, values) => {
-                        if(err){
-                            flag = false ;
+                        if (err) {
+                            flag = false;
                         }
                     });
-                    if(!flag){
-                        _this.$message.warning(_this.$t('langMap.commons.forms.pleaseFillOutTwo',[_this.$t('langMap.table.fields.common.summary'),_this.$t('langMap.table.fields.common.tag')]));
-                        return ;
+                    if (!flag) {
+                        _this.$message.warning(_this.$t('langMap.commons.forms.pleaseFillOutTwo', [_this.$t('langMap.table.fields.common.summary'), _this.$t('langMap.table.fields.common.tag')]));
+                        return;
                     }
                 }
-                if(currentKey == this.stepConf.steps.done.key){
+                if (currentKey == this.stepConf.steps.done.key) {
                     //最终步骤，next不会到这里，不拦截
                 }
                 this.stepConf.current++;
             },
-            changeRstStatus(val){
+            changeRstStatus(val) {
                 //修改结果状态
-                if(typeof val == "undefined" || val == null){
-                    this.rstConf.current = this.rstConf.status.theDefault ;
-                }   else {
-                    if(typeof val == "string"){
-                        this.rstConf.current = val ;
-                    }   else if(typeof val == "boolean"){
-                        this.rstConf.current = (val == true) ? this.rstConf.status.success : this.rstConf.status.failure ;
+                if (typeof val == "undefined" || val == null) {
+                    this.rstConf.current = this.rstConf.status.theDefault;
+                } else {
+                    if (typeof val == "string") {
+                        this.rstConf.current = val;
+                    } else if (typeof val == "boolean") {
+                        this.rstConf.current = (val == true) ? this.rstConf.status.success : this.rstConf.status.failure;
                     }
                 }
             },
-            dealUpdateFormValue(formObj){   //form表单更新
-                var _this = this ;
-                if(typeof _this.createForm.updateFields != "undefined"){ //避免未初始化form的时候就调用了updatefield
+            dealUpdateFormValue(formObj) {   //form表单更新
+                var _this = this;
+                if (typeof _this.createForm.updateFields != "undefined") { //避免未初始化form的时候就调用了updatefield
                     _this.createForm.updateFields({
                         summary: _this.$form.createFormField({
                             ...formObj,
@@ -245,66 +246,66 @@
                     });
                 }
             },
-            dealGetAllTagList(){    //取得所有的 文章标签
-                var _this = this ;
-                ArticleCreateApi.getAllArticleTagEnums().then((res) =>{
-                    if(res.success){
-                        _this.bindData.articleTagList = res.enumData.list ;
+            dealGetAllTagList() {    //取得所有的 文章标签
+                var _this = this;
+                ArticleCreateApi.getAllArticleTagEnums().then((res) => {
+                    if (res.success) {
+                        _this.bindData.articleTagList = res.enumData.list;
                     }
                 })
             },
-            handleContentChange(value,render){
+            handleContentChange(value, render) {
                 //render: value 经过markdown解析后的结果
-                this.formObj.originContent = value ;
+                this.formObj.originContent = value;
             },
-            dealCheckSubmitAble(){  //判断是否可以 创建
-                var _this = this ;
+            dealCheckSubmitAble() {  //判断是否可以 创建
+                var _this = this;
                 let tempTitle = _this.formObj.title;
-                let tempContent  = _this.formObj.content;
-                let tempOriginContent  = _this.formObj.originContent;
-                if(tempTitle.length == 0 || tempContent.length == 0 || tempOriginContent.length == 0){
-                    return false ;
+                let tempContent = _this.formObj.content;
+                let tempOriginContent = _this.formObj.originContent;
+                if (tempTitle.length == 0 || tempContent.length == 0 || tempOriginContent.length == 0) {
+                    return false;
                 }
-                return true ;
+                return true;
             },
-            dealFormValuesMapToObj(values){
-                var formObjTemp = this.formObj ;
-                if(values){
+            dealFormValuesMapToObj(values) {
+                var formObjTemp = this.formObj;
+                if (values) {
                     formObjTemp['summary'] = values.summary;
                     formObjTemp['tagIds'] = values.tagIds;
                 }
-                return formObjTemp ;
+                return formObjTemp;
             },
             //确认发表博文
-            handleCreateByForm(e){
-                var _this = this ;
+            handleCreateByForm(e) {
+                var _this = this;
                 //验证是否未编辑
-                let submitAble = this.dealCheckSubmitAble() ;
-                if(submitAble == false){
-                    _this.$message.warning(_this.$t('langMap.commons.forms.pleaseFillOutTwo',[_this.$t('langMap.table.fields.obl.article.title'),_this.$t('langMap.table.fields.obl.article.content')]));
-                    return false ;
-                }   else {
+                let submitAble = this.dealCheckSubmitAble();
+                if (submitAble == false) {
+                    _this.$message.warning(_this.$t('langMap.commons.forms.pleaseFillOutTwo', [_this.$t('langMap.table.fields.obl.article.title'), _this.$t('langMap.table.fields.obl.article.content')]));
+                    return false;
+                } else {
                     //取得请求的参数：标题&内容、用户信息
                     _this.createForm.validateFields((err, values) => {
                         if (!err) {
-                            _this.formObj = _this.dealFormValuesMapToObj(values) ;
-                            if(_this.updateForm.flag == true){  //发布 更新后的 文章草稿
-                                ArticleCreateApi.createFromDraft(_this.formObj).then((res) =>{
-                                    if(res.success){
-                                        _this.$message.success(res.msg) ;
-                                        _this.rstConf.bean = res.bean ;
-                                    }   else {
-                                        _this.rstConf.bean = {} ;
+                            _this.formObj = _this.dealFormValuesMapToObj(values);
+                            if (_this.updateForm.flag == true) {  //发布 更新后的 文章草稿
+                                ArticleCreateApi.createFromDraft(_this.formObj).then((res) => {
+                                    if (res.success) {
+                                        _this.$message.success(res.msg);
+                                        _this.rstConf.bean = res.bean;
+                                    } else {
+                                        _this.rstConf.bean = {};
                                     }
                                     _this.changeRstStatus(res.success);
                                 })
-                            }   else{   //直接发布
-                                ArticleCreateApi.createByForm(_this.formObj).then((res) =>{
-                                    if(res.success){
-                                        _this.$message.success(res.msg) ;
-                                        _this.rstConf.bean = res.bean ;
-                                    }   else {
-                                        _this.rstConf.bean = {} ;
+                            } else {   //直接发布
+                                ArticleCreateApi.createByForm(_this.formObj).then((res) => {
+                                    if (res.success) {
+                                        _this.$message.success(res.msg);
+                                        _this.rstConf.bean = res.bean;
+                                    } else {
+                                        _this.rstConf.bean = {};
                                     }
                                     _this.changeRstStatus(res.success);
                                 })
@@ -313,37 +314,37 @@
                     });
                 }
             },
-            handleCreateDraftByForm(){    //存储为草稿
-                var _this = this ;
+            handleCreateDraftByForm() {    //存储为草稿
+                var _this = this;
                 //验证是否未编辑
-                let isCreateAble = this.dealCheckSubmitAble() ;
-                if(isCreateAble == false){
-                    _this.$message.warning(_this.$t('langMap.commons.forms.pleaseFillOutTwo',[_this.$t('langMap.table.fields.obl.article.title'),_this.$t('langMap.table.fields.obl.article.content')]));
-                    return false ;
-                }   else {
+                let isCreateAble = this.dealCheckSubmitAble();
+                if (isCreateAble == false) {
+                    _this.$message.warning(_this.$t('langMap.commons.forms.pleaseFillOutTwo', [_this.$t('langMap.table.fields.obl.article.title'), _this.$t('langMap.table.fields.obl.article.content')]));
+                    return false;
+                } else {
                     //取得请求的参数：标题&内容、用户信息
                     this.createForm.validateFields((err, values) => {
                         if (!err) {
-                            _this.formObj = _this.dealFormValuesMapToObj(values) ;
-                            if(_this.updateForm.flag == true) {  //更新文章草稿
-                                ArticleCreateApi.updateDraftByForm(_this.formObj).then((res) =>{
-                                    if(res.success){
-                                        _this.$message.success(res.msg) ;
-                                        _this.rstConf.bean = res.bean ;
-                                    }   else {
-                                        _this.rstConf.bean = {} ;
+                            _this.formObj = _this.dealFormValuesMapToObj(values);
+                            if (_this.updateForm.flag == true) {  //更新文章草稿
+                                ArticleCreateApi.updateDraftByForm(_this.formObj).then((res) => {
+                                    if (res.success) {
+                                        _this.$message.success(res.msg);
+                                        _this.rstConf.bean = res.bean;
+                                    } else {
+                                        _this.rstConf.bean = {};
                                     }
                                     _this.changeRstStatus(res.success);
                                 })
-                            }   else {  //添加到 草稿
-                                ArticleCreateApi.createDraftByForm(_this.formObj).then((res) =>{
-                                    if(res.success){
-                                        _this.$message.success(res.msg) ;
-                                        _this.rstConf.bean = res.bean ;
-                                    }   else {
-                                        _this.rstConf.bean = {} ;
+                            } else {  //添加到 草稿
+                                ArticleCreateApi.createDraftByForm(_this.formObj).then((res) => {
+                                    if (res.success) {
+                                        _this.$message.success(res.msg);
+                                        _this.rstConf.bean = res.bean;
+                                    } else {
+                                        _this.rstConf.bean = {};
                                     }
-                                    _this.rstConf.bean = res.bean ;
+                                    _this.rstConf.bean = res.bean;
                                     _this.changeRstStatus(res.success);
                                 })
                             }
@@ -351,29 +352,33 @@
                     });
                 }
             },
-            dealRenderDraftToForm(fid){
-                var _this = this ;
-                if(!fid){
-                    return ;
+            dealRenderDraftToForm(fid) {
+                var _this = this;
+                if (!fid) {
+                    return;
                 }
-                ArticleCreateApi.getIDraftItemById(fid).then((res) =>{
-                    if(res.success){
-                        var resBean = res.bean ;
-                        if(resBean){
-                            _this.formObj = resBean ;
+                ArticleCreateApi.getIDraftItemById(fid).then((res) => {
+                    if (res.success) {
+                        var resBean = res.bean;
+                        if (resBean) {
+                            _this.formObj = resBean;
                         }
                     }
                 })
             },
-            goToViewDetail(){
-                if(typeof this.rstConf.bean == 'undefined' || this.rstConf.bean == null){
-                    return ;
+            goToViewDetail() {
+                if (typeof this.rstConf.bean == 'undefined' || this.rstConf.bean == null) {
+                    return;
                 }
-                if(!this.rstConf.bean.fid){
-                    return ;
+                if (!this.rstConf.bean.fid) {
+                    return;
                 }
-                this.mixin_closeTagAndJump(this.mixinData.routerConst.article.display);
-            }
+                var params = {
+                    fid: this.rstConf.bean.fid
+                }
+                var url = BeeUtil.UrlUtils.objToUrl(this.mixinData.routerConst.article.display,params);
+                this.mixin_closeTagAndJump(url);
+            },
         },
         computed:{
             currentStepKey() {
