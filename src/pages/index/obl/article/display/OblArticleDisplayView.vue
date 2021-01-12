@@ -1,5 +1,9 @@
 <template>
-    <h1>OblArticleDisplayView {{formFid}}</h1>
+    <div>
+        <h1>OblArticleDisplayView {{formFid}}</h1>
+        <div v-html="formData.content">
+        </div>
+    </div>
 </template>
 
 <script>
@@ -8,7 +12,9 @@
         name: "OblArticleDisplayView",
         data(){
             return {
-                formData:{}
+                formData:{
+                    content:''
+                }
             }
         },
         computed:{
