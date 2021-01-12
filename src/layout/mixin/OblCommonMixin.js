@@ -3,7 +3,16 @@ import {ConstantObj} from "~Components/constant_define";
 
 export const OblCommonMixin = {
     data(){
-
+        return {
+            //数据必须都写到mixinData之下
+            mixinData:{
+                routerConst:{
+                    article:{
+                        display:'/index/article/display'
+                    }
+                }
+            }
+        }
     },
     computed:{
         ...mapGetters([
@@ -118,7 +127,25 @@ export const OblCommonMixin = {
             var _obj = JSON.stringify(obj),
                 objClone = JSON.parse(_obj);
             return objClone;
-        }
+        },
+        mixin_closeTagAndJump(goToRoute){  //关闭当前标签并跳转到指定路由
+            var selectedTag = this.$route ;
+            //关闭当前所选标签
+            this.$store.dispatch('doDelVisitedViews',selectedTag).then((views) => {
+                if(goToRoute){
+                    //有指定路由，跳转
+                    this.$router.push(goToRoute) ;
+                }   else {
+                    //无指定路由，跳转上一个tag
+                    const latestView = views.slice(-1)[0] ;
+                    if(latestView) {
+                        this.$router.push(latestView.path) ;
+                    }   else {
+                        this.$router.push('/') ;
+                    }
+                }
+            })
+        },
     }
 
 

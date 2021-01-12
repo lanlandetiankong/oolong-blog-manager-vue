@@ -5,10 +5,6 @@ import {i18nUtil} from "~Config/i18n/i18nUtil";
  * routeSecurityUtil 路由安全工具
  */
 
-/**
- * 常量- 页面
- * @type {{login: {path: string}}}
- */
 const RoutePageConst = {
     login:{
         path:'/member/login'
@@ -67,7 +63,6 @@ function getUserToken() {
     }
     return null ;
 }
-
 
 export const TokenUtil = {
     loginOut(){

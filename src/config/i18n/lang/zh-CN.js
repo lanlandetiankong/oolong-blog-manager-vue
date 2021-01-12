@@ -364,5 +364,32 @@ export const langMap = {
                 }
             }
         }
+    },
+    results:{
+        universal:{
+          success:{
+              title:'操作成功'
+          },
+          failure:{
+              title:'操作失败',
+              extra:{
+                  serverError:'系统出错了'
+              }
+          }
+        },
+        article:{
+            create:{
+                success:{
+                    extra:{
+                        viewDetail:'查看文章'
+                    }
+                },
+                failure:{
+                    extra:{
+                        retry:'重试'
+                    }
+                }
+            }
+        }
     }
 }

@@ -1,89 +1,121 @@
 <template>
     <div>
-        <a-row type="flex">
-            <a-col span="auto">
-                <a-button-group>
-                    <a-button v-if="stepConf.current > 0"
-                              @click="goPreviousStep"
-                    > {{$t('langMap.button.actions.goPreviousStep')}}<a-icon type="left" />
-                    </a-button>
-                    <a-button type="primary"
-                              v-if="stepConf.current < Object.keys(stepConf.steps).length - 1"
-                              @click="goNextStep"
-                    > <a-icon type="right" />{{$t('langMap.button.actions.goNextStep')}}
-                    </a-button>
-                </a-button-group>
-            </a-col>
-        </a-row>
-        <a-row>
-            <a-steps :current="stepConf.current" type="navigation" size="small" :style="stepConf.stepStyle">
-                <a-step v-for="(item,index) in stepConf.steps" :key="index" :title="item.title" :description="item.description" :subTitle="item.subTitle"/>
-            </a-steps>
-        </a-row>
-        <a-row v-show="currentStepKey == stepConf.steps.basic.key">
-            <a-col :span="22">
-                <a-input  allowClear size="large"
-                          :addonBefore="$t('langMap.table.fields.common.title')"
-                          v-model="formObj.title"
-                />
-            </a-col>
-        </a-row>
-        <a-form
-            layout="inline"
-            :form="createForm"
-            v-show="currentStepKey == stepConf.steps.more.key"
-        >
-            <a-row :type="formLayout.row.type">
-                <a-col :span="formLayout.defaultColSpan">
-                    <a-form-item :label="$t('langMap.table.fields.common.summary')">
-                        <a-input v-decorator="formFieldConf.summary"/>
-                    </a-form-item>
-                </a-col>
-                <a-col :span="formLayout.dblColSpan">
-                    <a-form-item :label="$t('langMap.table.fields.common.tag')">
-                        <a-select showSearch allowClear
-                                  mode="multiple"
-                                  :placeholder="$t('langMap.commons.forms.pleaseChoose')"
-                                  style="width: 360px"
-                                  optionFilterProp="children"
-                                  :options="bindData.articleTagList"
-                                  :filterOption="getFilterOption"
-                                  v-decorator="formFieldConf.tagIds"
-                        >
-                        </a-select>
-                    </a-form-item>
+        <div v-show="rstConf.current == rstConf.status.theDefault">
+            <a-row type="flex">
+                <a-col span="auto">
+                    <a-button-group>
+                        <a-button v-if="stepConf.current > 0"
+                                  @click="goPreviousStep"
+                        > {{$t('langMap.button.actions.goPreviousStep')}}<a-icon type="left" />
+                        </a-button>
+                        <a-button type="primary"
+                                  v-if="stepConf.current < Object.keys(stepConf.steps).length - 1"
+                                  @click="goNextStep"
+                        > <a-icon type="right" />{{$t('langMap.button.actions.goNextStep')}}
+                        </a-button>
+                    </a-button-group>
                 </a-col>
             </a-row>
-        </a-form>
-        <div v-show="currentStepKey == stepConf.steps.basic.key">
-            <mavon-editor
-                v-bind="editorConf"
-                v-model="formObj.content"
-                @change="handleContentChange"
-                @save="handleCreateByForm"
-            />
+            <a-row>
+                <a-steps :current="stepConf.current" type="navigation" size="small" :style="stepConf.stepStyle">
+                    <a-step v-for="(item,index) in stepConf.steps" :key="index" :title="item.title" :description="item.description" :subTitle="item.subTitle"/>
+                </a-steps>
+            </a-row>
+            <a-row v-show="currentStepKey == stepConf.steps.basic.key">
+                <a-col :span="22">
+                    <a-input  allowClear size="large"
+                              :addonBefore="$t('langMap.table.fields.common.title')"
+                              v-model="formObj.title"
+                    />
+                </a-col>
+            </a-row>
+            <a-form
+                layout="inline"
+                :form="createForm"
+                v-show="currentStepKey == stepConf.steps.more.key"
+            >
+                <a-row :type="formLayout.row.type">
+                    <a-col :span="formLayout.defaultColSpan">
+                        <a-form-item :label="$t('langMap.table.fields.common.summary')">
+                            <a-input v-decorator="formFieldConf.summary"/>
+                        </a-form-item>
+                    </a-col>
+                    <a-col :span="formLayout.dblColSpan">
+                        <a-form-item :label="$t('langMap.table.fields.common.tag')">
+                            <a-select showSearch allowClear
+                                      mode="multiple"
+                                      :placeholder="$t('langMap.commons.forms.pleaseChoose')"
+                                      style="width: 360px"
+                                      optionFilterProp="children"
+                                      :options="bindData.articleTagList"
+                                      :filterOption="getFilterOption"
+                                      v-decorator="formFieldConf.tagIds"
+                            >
+                            </a-select>
+                        </a-form-item>
+                    </a-col>
+                </a-row>
+            </a-form>
+            <div v-show="currentStepKey == stepConf.steps.basic.key">
+                <mavon-editor
+                    v-bind="editorConf"
+                    v-model="formObj.content"
+                    @change="handleContentChange"
+                    @save="handleCreateByForm"
+                />
+            </div>
+            <a-row type="flex" justify="center" align="middle">
+                <a-col span="auto">
+                    <a-button-group v-show="currentStepKey == stepConf.steps.done.key">
+                        <a-button size="large" icon="inbox"
+                                  @click="handleCreateDraftByForm"
+                        >{{$t('langMap.button.actions.saveAsDraft')}}</a-button>
+                        <a-button size="large" type="primary" icon="check"
+                                  @click="handleCreateByForm"
+                        >{{$t('langMap.button.actions.publish')}}</a-button>
+                    </a-button-group>
+                </a-col>
+            </a-row>
         </div>
-        <a-row type="flex" justify="center" align="middle">
-            <a-col span="auto">
-                <a-button-group v-show="currentStepKey == stepConf.steps.done.key">
-                    <a-button size="large" icon="inbox"
-                              @click="handleCreateDraftByForm"
-                    >{{$t('langMap.button.actions.saveAsDraft')}}</a-button>
-                    <a-button size="large" type="primary" icon="check"
-                              @click="handleCreateByForm"
-                    >{{$t('langMap.button.actions.publish')}}</a-button>
-                </a-button-group>
-            </a-col>
-        </a-row>
+        <!-- Result Dom Write Here -->
+        <div class="result">
+            <div v-show="rstConf.current == rstConf.status.success">
+                <a-result
+                    status="success"
+                    :title="$t('langMap.results.universal.success.title')"
+                >
+                    <template #extra>
+                        <a-button key="console" type="primary" @click="goToViewDetail" >
+                            {{$t('langMap.results.article.create.success.extra.viewDetail')}}
+                        </a-button>
+                    </template>
+                </a-result>
+            </div>
+            <div v-show="rstConf.current == rstConf.status.failure">
+                <a-result status="500"
+                          :title="$t('langMap.results.universal.failure.title')"
+                          :sub-title="$t('langMap.results.universal.failure.extra.serverError')">
+                    <template #extra>
+                        <a-button type="primary">
+                            {{$t('langMap.results.article.create.failure.extra.retry')}}
+                        </a-button>
+                    </template>
+                </a-result>
+            </div>
+        </div>
     </div>
 </template>
 
 <script>
     import {toolbars} from '~Config/mavon_editor/mavon.conf'
     import {ArticleCreateApi} from './oblArticleCreateApi.js'
+    import {OblCommonMixin} from '~Layout/mixin/OblCommonMixin';
+
     export default {
         name: "OblArticleCreateView",
+        mixins:[OblCommonMixin],
         data(){
+            //form验证规则
             const paramsRules ={
                 summary:[
                     {required:true,message:this.$t('langMap.commons.forms.pleaseFillOut',[this.$t('langMap.table.fields.common.summary')])}
@@ -93,18 +125,24 @@
                     {type:'array'}
                 ]
             };
-            //为了保证可以通过key作为判断条件，且避免由于Object不能保证keys的插入顺序而带来的异常，先定义在Map，再转Object到data
-            //要根据index的话用map取得对应key并返回。
-            // warning:请勿对stepConstMap、stepConst进行数据的修改
+            //A-Result(
+            const rstStatus = {
+                theDefault:'theDefault',
+                success:'success',
+                failure:'failure'
+            };
+            //A-Steps(为了保证可以通过key作为判断条件，且避免由于Object不能保证keys的插入顺序而带来的异常，先定义在Map，再转Object到data)
             const stepConstMap = new Map();
-            //stepConstMap.set("basic",{key:"basic",title:"写",description:'写文章'});
-            //stepConstMap.set("more",{key:"more",title:"其他",description:'选择标签与分类'});
-            //stepConstMap.set("done",{key:"done",title:"提交",description:'提交文章'});
             stepConstMap.set("basic",this.$t('langMap.steps.article.create.basic'));
             stepConstMap.set("more",this.$t('langMap.steps.article.create.more'));
             stepConstMap.set("done",this.$t('langMap.steps.article.create.done'));
             let stepConst = Object.fromEntries(stepConstMap);
             return {
+                rstConf:{
+                    current:rstStatus.theDefault,
+                    status:rstStatus,
+                    bean:{}
+                },
                 stepConf:{
                     current:0,
                     steps:stepConst,
@@ -151,10 +189,11 @@
                 return (option.componentOptions.children[0].text.toLowerCase().indexOf(input.toLowerCase()) >= 0);
             },
             goPreviousStep(){
+                //上一步
                 this.stepConf.current--;
             },
             goNextStep(){
-                debugger;
+                //下一步
                 var _this = this ;
                 let currentKey = this.currentStepKey;
                 //验证
@@ -181,6 +220,18 @@
                     //最终步骤，next不会到这里，不拦截
                 }
                 this.stepConf.current++;
+            },
+            changeRstStatus(val){
+                //修改结果状态
+                if(typeof val == "undefined" || val == null){
+                    this.rstConf.current = this.rstConf.status.theDefault ;
+                }   else {
+                    if(typeof val == "string"){
+                        this.rstConf.current = val ;
+                    }   else if(typeof val == "boolean"){
+                        this.rstConf.current = (val == true) ? this.rstConf.status.success : this.rstConf.status.failure ;
+                    }
+                }
             },
             dealUpdateFormValue(formObj){   //form表单更新
                 var _this = this ;
@@ -240,23 +291,25 @@
                     _this.createForm.validateFields((err, values) => {
                         if (!err) {
                             _this.formObj = _this.dealFormValuesMapToObj(values) ;
-                            console.log("dealFormValuesMapToObj");
-                            console.log(_this.formObj);
                             if(_this.updateForm.flag == true){  //发布 更新后的 文章草稿
                                 ArticleCreateApi.createFromDraft(_this.formObj).then((res) =>{
                                     if(res.success){
                                         _this.$message.success(res.msg) ;
-                                        //关闭当前页面
-                                        _this.doTagItemSelectedClose();
+                                        _this.rstConf.bean = res.bean ;
+                                    }   else {
+                                        _this.rstConf.bean = {} ;
                                     }
+                                    _this.changeRstStatus(res.success);
                                 })
                             }   else{   //直接发布
                                 ArticleCreateApi.createByForm(_this.formObj).then((res) =>{
                                     if(res.success){
                                         _this.$message.success(res.msg) ;
-                                        //关闭当前页面
-                                        _this.doTagItemSelectedClose();
+                                        _this.rstConf.bean = res.bean ;
+                                    }   else {
+                                        _this.rstConf.bean = {} ;
                                     }
+                                    _this.changeRstStatus(res.success);
                                 })
                             }
                         }
@@ -279,49 +332,50 @@
                                 ArticleCreateApi.updateDraftByForm(_this.formObj).then((res) =>{
                                     if(res.success){
                                         _this.$message.success(res.msg) ;
-                                        //关闭当前页面
-                                        _this.doTagItemSelectedClose();
+                                        _this.rstConf.bean = res.bean ;
+                                    }   else {
+                                        _this.rstConf.bean = {} ;
                                     }
+                                    _this.changeRstStatus(res.success);
                                 })
                             }   else {  //添加到 草稿
                                 ArticleCreateApi.createDraftByForm(_this.formObj).then((res) =>{
                                     if(res.success){
                                         _this.$message.success(res.msg) ;
-                                        //关闭当前页面
-                                        _this.doTagItemSelectedClose();
+                                        _this.rstConf.bean = res.bean ;
+                                    }   else {
+                                        _this.rstConf.bean = {} ;
                                     }
+                                    _this.rstConf.bean = res.bean ;
+                                    _this.changeRstStatus(res.success);
                                 })
                             }
                         }
                     });
                 }
             },
-            doTagItemSelectedClose(){  //关闭当前标签
-                var selectedTag = this.$route ;
-                //关闭当前所选标签
-                this.$store.dispatch('doDelVisitedViews',selectedTag).then((views) => {
-                    const latestView = views.slice(-1)[0] ;
-                    if(latestView) {
-                        this.$router.push(latestView.path) ;
-                    }   else {
-                        this.$router.push('/') ;
+            dealRenderDraftToForm(fid){
+                var _this = this ;
+                if(!fid){
+                    return ;
+                }
+                ArticleCreateApi.getIDraftItemById(fid).then((res) =>{
+                    if(res.success){
+                        var resBean = res.bean ;
+                        if(resBean){
+                            _this.formObj = resBean ;
+                        }
                     }
                 })
             },
-            dealRenderDraftToForm(fid){
-                var _this = this ;
-                if(fid){
-                    ArticleCreateApi.getIDraftItemById(fid).then((res) =>{
-                        if(res.success){
-                            var resBean = res.bean ;
-                            if(resBean){
-                                _this.formObj = resBean ;
-                                console.log("_this.formObj");
-                                console.log(_this.formObj);
-                            }
-                        }
-                    })
+            goToViewDetail(){
+                if(typeof this.rstConf.bean == 'undefined' || this.rstConf.bean == null){
+                    return ;
                 }
+                if(!this.rstConf.bean.fid){
+                    return ;
+                }
+                this.mixin_closeTagAndJump(this.mixinData.routerConst.article.display);
             }
         },
         computed:{
