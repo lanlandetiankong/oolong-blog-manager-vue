@@ -206,7 +206,7 @@
                                     if(res.success){
                                         _this.$message.success(res.msg) ;
                                         //关闭当前页面
-                                        _this.doTagItemSelectedClose();
+                                        _this.mixin_closeTagAndJump();
                                     }
                                 })
                             }   else{   //直接发布
@@ -214,7 +214,7 @@
                                     if(res.success){
                                         _this.$message.success(res.msg) ;
                                         //关闭当前页面
-                                        _this.doTagItemSelectedClose();
+                                        _this.mixin_closeTagAndJump();
                                     }
                                 })
                             }
@@ -240,7 +240,7 @@
                                     if(res.success){
                                         _this.$message.success(res.msg) ;
                                         //关闭当前页面
-                                        _this.doTagItemSelectedClose();
+                                        _this.mixin_closeTagAndJump();
                                     }
                                 })
                             }   else {  //添加到 草稿
@@ -248,25 +248,13 @@
                                     if(res.success){
                                         _this.$message.success(res.msg) ;
                                         //关闭当前页面
-                                        _this.doTagItemSelectedClose();
+                                        _this.mixin_closeTagAndJump();
                                     }
                                 })
                             }
                         }
                     });
                 }
-            },
-            doTagItemSelectedClose(){  //关闭当前标签
-                var selectedTag = this.$route ;
-                //关闭当前所选标签
-                this.$store.dispatch('doDelVisitedViews',selectedTag).then((views) => {
-                    const latestView = views.slice(-1)[0] ;
-                    if(latestView) {
-                        this.$router.push(latestView.path) ;
-                    }   else {
-                        this.$router.push('/') ;
-                    }
-                })
             },
             dealRenderDraftToForm(fid){
                 var _this = this ;
