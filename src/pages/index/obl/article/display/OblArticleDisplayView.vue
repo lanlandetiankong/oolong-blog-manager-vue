@@ -8,7 +8,7 @@
         name: "OblArticleDisplayView",
         data(){
             return {
-                formConf:{}
+                formData:{}
             }
         },
         computed:{
@@ -22,25 +22,29 @@
                 return this.$route.query ;
             }
         },
-        watch: {
-            formFid(oval,nval){
-                if(!nval){
-                    return ;
-                }
-                this.renderObj();
-            }
-        },
         methods:{
-            renderObj(){
+            renderFormData(){
+                var _this = this ;
                 if(!this.formFid){
                     return ;
                 }
                 OblArticleDisplayApi.getItemById(this.formFid).then((res) =>{
                     if(res.success){
-                        _this.formConf = res.bean ;
+                        _this.formData = res.bean ;
                     }
                 });
             }
+        },
+        watch: {
+            $route(route) {
+                if(!this.formFid){
+                    return ;
+                }
+                this.renderFormData();
+            }
+        },
+        mounted() {
+            this.renderFormData();
         }
     }
 </script>

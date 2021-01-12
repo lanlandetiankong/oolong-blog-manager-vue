@@ -1,20 +1,20 @@
 <template>
     <div>
-        <div v-if="typeof(announcement.obj) != 'undefined' && announcement.obj != null"
+        <div v-if="typeof(formData) != 'undefined' && formData != null"
         >
             <a-layout>
                 <a-layout-header :style="styleConf.layout.header.base">
                     <a-row type="flex" justify="center">
                         <a-col :span="24" style="font-size: 30px;">
-                            {{announcement.obj.title}}
+                            {{formData.title}}
                         </a-col>
                     </a-row>
                 </a-layout-header>
                 <a-layout-content :style="styleConf.layout.content.baae">
                     <div class="ql-container ql-snow" :style="styleConf.layout.content.rootDiv">
                         <div class="ql-editor">
-                            <div v-html="announcement.obj.content">
-                                {{announcement.obj.content}}
+                            <div v-html="formData.content">
+                                {{formData.content}}
                             </div>
                         </div>
                     </div>
@@ -29,9 +29,7 @@
         name: "AnnouncementDisplayView",
         data(){
             return {
-                announcement:{
-                    obj:{},
-                },
+                formData:{},
                 styleConf:{
                     layout:{
                         header:{
@@ -69,28 +67,29 @@
             }
         },
         methods:{
-            renderObj(){
+            renderFormData(){
+                //渲染formData 的值
                 var _this = this ;
                 if(!this.formFid){
                     return ;
                 }
                 AnnouncementDisplayApi.getItemById(this.formFid).then((res) =>{
                     if(res.success){
-                        _this.announcement.obj = res.bean ;
+                        _this.formData = res.bean ;
                     }
                 });
             }
         },
         watch: {
-            formFid(oval,nval){
-                if(!nval){
+            $route(route) {
+                if(!this.formFid){
                     return ;
                 }
-                this.renderObj();
+                this.renderFormData();
             }
         },
         mounted() {
-            this.renderObj();
+            this.renderFormData();
         }
     }
 </script>
