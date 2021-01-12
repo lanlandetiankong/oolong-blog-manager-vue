@@ -37,6 +37,8 @@ export const langMap = {
             switchToNextOne:'下一张',
             clearCache:'清理缓存',
             refreshMenuCache:'刷新菜单缓存',
+            goNextStep:'下一步',
+            goPreviousStep:'上一步',
         },
         member:{
             account:'账号',
@@ -338,6 +340,28 @@ export const langMap = {
                 resourceNotFound:'请求错误,未找到该资源',
                 serverDistracted:'服务器开小差了',
                 sessionExpired:'会话信息已过期，请重新登录！'
+            }
+        }
+    },
+    steps:{
+        //必须有key切key必须为英文(请勿修改key)
+        article:{
+            create:{
+                basic:{
+                    key:'basic',
+                    title:'写',
+                    description:'写文章'
+                },
+                more:{
+                    key:'more',
+                    title:'其他',
+                    description:'选择标签与分类'
+                },
+                done:{
+                    key:'done',
+                    title:'提交',
+                    description:'提交文章'
+                }
             }
         }
     }

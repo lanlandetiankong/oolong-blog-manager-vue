@@ -37,6 +37,8 @@ export const langMap = {
             switchToNextOne:'Switch to the next one',
             clearCache:'Clear cache',
             refreshMenuCache:'Refresh menu cache',
+            goNextStep:'Next step',
+            goPreviousStep:'Previous step'
         },
         member:{
             account:'Account',
@@ -338,6 +340,28 @@ export const langMap = {
                 resourceNotFound:'Request error,the resource was not found',
                 serverDistracted:'The server is out of order',
                 sessionExpired:'The session information has expired, please log in again!'
+            }
+        }
+    },
+    steps:{
+        //必须有key切key必须为英文(请勿修改key)
+        article:{
+            create:{
+                basic:{
+                    key:'basic',
+                    title:'Write',
+                    description:'Write article'
+                },
+                more:{
+                    key:'more',
+                    title:'Other',
+                    description:'Select label and category'
+                },
+                done:{
+                    key:'done',
+                    title:'Submit',
+                    description:'Submit an article'
+                }
             }
         }
     }

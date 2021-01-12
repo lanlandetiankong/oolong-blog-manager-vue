@@ -1,26 +1,26 @@
 <template>
     <div>
+        <a-row type="flex">
+            <a-col span="auto">
+                <a-button-group>
+                    <a-button v-if="stepConf.current > 0"
+                              @click="goPreviousStep"
+                    > {{$t('langMap.button.actions.goPreviousStep')}}<a-icon type="left" />
+                    </a-button>
+                    <a-button type="primary"
+                              v-if="stepConf.current < Object.keys(stepConf.steps).length - 1"
+                              @click="goNextStep"
+                    > <a-icon type="right" />{{$t('langMap.button.actions.goNextStep')}}
+                    </a-button>
+                </a-button-group>
+            </a-col>
+        </a-row>
         <a-row>
             <a-steps :current="stepConf.current" type="navigation" size="small" :style="stepConf.stepStyle">
-                <a-step v-for="(item,index) in stepConf.steps" :key="index" :title="item.title"/>
+                <a-step v-for="(item,index) in stepConf.steps" :key="index" :title="item.title" :description="item.description" :subTitle="item.subTitle"/>
             </a-steps>
         </a-row>
-        <template v-show="currentStepKey == stepConf.steps.done.key">
-            <a-row>
-                <a-col :span="3">
-                    <a-button size="large" icon="inbox"
-                              @click="handleCreateDraftByForm"
-                    >{{$t('langMap.button.actions.saveAsDraft')}}</a-button>
-                </a-col>
-                <a-col :span="3">
-                    <a-button size="large" type="primary" icon="check"
-                              @click="handleCreateByForm"
-                    >{{$t('langMap.button.actions.publish')}}</a-button>
-                </a-col>
-            </a-row>
-            <br/>
-        </template>
-        <a-row>
+        <a-row v-show="currentStepKey == stepConf.steps.basic.key">
             <a-col :span="22">
                 <a-input  allowClear size="large"
                           :addonBefore="$t('langMap.table.fields.common.title')"
@@ -31,6 +31,7 @@
         <a-form
             layout="inline"
             :form="createForm"
+            v-show="currentStepKey == stepConf.steps.more.key"
         >
             <a-row :type="formLayout.row.type">
                 <a-col :span="formLayout.defaultColSpan">
@@ -54,7 +55,7 @@
                 </a-col>
             </a-row>
         </a-form>
-        <div>
+        <div v-show="currentStepKey == stepConf.steps.basic.key">
             <mavon-editor
                 v-bind="editorConf"
                 v-model="formObj.content"
@@ -62,6 +63,18 @@
                 @save="handleCreateByForm"
             />
         </div>
+        <a-row type="flex" justify="center" align="middle">
+            <a-col span="auto">
+                <a-button-group v-show="currentStepKey == stepConf.steps.done.key">
+                    <a-button size="large" icon="inbox"
+                              @click="handleCreateDraftByForm"
+                    >{{$t('langMap.button.actions.saveAsDraft')}}</a-button>
+                    <a-button size="large" type="primary" icon="check"
+                              @click="handleCreateByForm"
+                    >{{$t('langMap.button.actions.publish')}}</a-button>
+                </a-button-group>
+            </a-col>
+        </a-row>
     </div>
 </template>
 
@@ -69,275 +82,310 @@
     import {toolbars} from '~Config/mavon_editor/mavon.conf'
     import {ArticleCreateApi} from './oblArticleCreateApi.js'
     export default {
-    name: "OblArticleCreateView",
-    data(){
-        const paramsRules ={
-            summary:[
-                {required:true,message:this.$t('langMap.commons.forms.pleaseFillOut',[this.$t('langMap.table.fields.common.summary')])}
-            ],
-            tagIds:[
-                {required:true,message:this.$t('langMap.commons.forms.pleaseSelect',[this.$t('langMap.table.fields.common.tag')])},
-                {type:'array'}
-            ]
-        };
-        const stepConst = {
-            basic:{
-                key:'basic1',
-                title:'写'
-            },
-            more:{
-                key:'more',
-                title:'其他'
-            },
-            done:{
-                key:'done',
-                title:'提交'
-            },
-        };
-        return {
-            stepConf:{
-                current:0,
-                steps:stepConst,
-                stepStyle: {
-                    marginBottom: '20px',
-                    boxShadow: '0px -1px 0 0 #e8e8e8 inset',
-                }
-            },
-            createForm:{},
-            updateForm:{
-                flag:false,
-                fid:'',
-                initFlag:false
-            },
-            formLayout:{
-                row:{
-                    type:"flex"
+        name: "OblArticleCreateView",
+        data(){
+            const paramsRules ={
+                summary:[
+                    {required:true,message:this.$t('langMap.commons.forms.pleaseFillOut',[this.$t('langMap.table.fields.common.summary')])}
+                ],
+                tagIds:[
+                    {required:true,message:this.$t('langMap.commons.forms.pleaseSelect',[this.$t('langMap.table.fields.common.tag')])},
+                    {type:'array'}
+                ]
+            };
+            //为了保证可以通过key作为判断条件，且避免由于Object不能保证keys的插入顺序而带来的异常，先定义在Map，再转Object到data
+            //要根据index的话用map取得对应key并返回。
+            // warning:请勿对stepConstMap、stepConst进行数据的修改
+            const stepConstMap = new Map();
+            //stepConstMap.set("basic",{key:"basic",title:"写",description:'写文章'});
+            //stepConstMap.set("more",{key:"more",title:"其他",description:'选择标签与分类'});
+            //stepConstMap.set("done",{key:"done",title:"提交",description:'提交文章'});
+            stepConstMap.set("basic",this.$t('langMap.steps.article.create.basic'));
+            stepConstMap.set("more",this.$t('langMap.steps.article.create.more'));
+            stepConstMap.set("done",this.$t('langMap.steps.article.create.done'));
+            let stepConst = Object.fromEntries(stepConstMap);
+            return {
+                stepConf:{
+                    current:0,
+                    steps:stepConst,
+                    stepsMap:stepConstMap,
+                    stepStyle: {
+                        marginBottom: '20px',
+                        boxShadow: '0px -1px 0 0 #e8e8e8 inset',
+                    }
                 },
-                defaultColSpan: 8,
-                dblColSpan:12,
-            },
-            bindData:{
-                articleTagList:[]
-            },
-            formFieldConf:{
-                summary:["summary",{rules:paramsRules.summary}],
-                tagIds:["tagIds",{rules:paramsRules.tagIds}]
-            },
-            editorConf:{
-                toolbars
-            },
-            formObj:{
-                title:'',
-                content:'',
-                originContent:'',
-                tagIds:undefined,
-                summary:''
-            }
-        }
-    },
-    methods:{
-        getFilterOption(input,option){
-            return (option.componentOptions.children[0].text.toLowerCase().indexOf(input.toLowerCase()) >= 0);
-        },
-        dealUpdateFormValue(formObj){   //form表单更新
-            var _this = this ;
-            if(typeof _this.createForm.updateFields != "undefined"){ //避免未初始化form的时候就调用了updatefield
-                _this.createForm.updateFields({
-                    summary: _this.$form.createFormField({
-                        ...formObj,
-                        value: formObj.summary,
-                    }),
-                    tagIds: _this.$form.createFormField({
-                        ...formObj,
-                        value: formObj.tagIds,
-                    })
-                });
-            }
-        },
-        dealGetAllTagList(){    //取得所有的 文章标签
-            var _this = this ;
-            ArticleCreateApi.getAllArticleTagEnums().then((res) =>{
-                if(res.success){
-                    _this.bindData.articleTagList = res.enumData.list ;
+                createForm:{},
+                updateForm:{
+                    flag:false,
+                    fid:'',
+                    initFlag:false
+                },
+                formLayout:{
+                    row:{
+                        type:"flex"
+                    },
+                    defaultColSpan: 8,
+                    dblColSpan:12,
+                },
+                bindData:{
+                    articleTagList:[]
+                },
+                formFieldConf:{
+                    summary:["summary",{rules:paramsRules.summary}],
+                    tagIds:["tagIds",{rules:paramsRules.tagIds}]
+                },
+                editorConf:{
+                    toolbars
+                },
+                formObj:{
+                    title:'',
+                    content:'',
+                    originContent:'',
+                    tagIds:undefined,
+                    summary:''
                 }
-            })
-        },
-        handleContentChange(value,render){
-            //render: value 经过markdown解析后的结果
-            this.formObj.originContent = value ;
-        },
-        dealCheckSubmitAble(){  //判断是否可以 创建
-            var _this = this ;
-            let tempTitle = _this.formObj.title;
-            let tempContent  = _this.formObj.content;
-            let tempOriginContent  = _this.formObj.originContent;
-            if(tempTitle.length == 0 || tempContent.length == 0 || tempOriginContent.length == 0){
-                return false ;
             }
-            return true ;
         },
-        dealFormValuesMapToObj(values){
-            var formObjTemp = this.formObj ;
-            if(values){
-                formObjTemp['summary'] = values.summary;
-                formObjTemp['tagIds'] = values.tagIds;
-            }
-            return formObjTemp ;
-        },
-        //确认发表博文
-        handleCreateByForm(e){
-            var _this = this ;
-            //验证是否未编辑
-            let submitAble = this.dealCheckSubmitAble() ;
-            if(submitAble == false){
-                _this.$message.warning(_this.$t('langMap.commons.forms.pleaseFillOutTwo',[_this.$t('langMap.table.fields.obl.article.title'),_this.$t('langMap.table.fields.obl.article.content')]));
-                return false ;
-            }   else {
-                //取得请求的参数：标题&内容、用户信息
-                var formObjTemp = _this.formObj ;
-                _this.createForm.validateFields((err, values) => {
-                    if (!err) {
-                        _this.formObj = _this.dealFormValuesMapToObj(values) ;
-                        console.log("dealFormValuesMapToObj");
-                        console.log(_this.formObj);
-                        if(_this.updateForm.flag == true){  //发布 更新后的 文章草稿
-                            ArticleCreateApi.createFromDraft(_this.formObj).then((res) =>{
-                                if(res.success){
-                                    _this.$message.success(res.msg) ;
-                                    //关闭当前页面
-                                    _this.doTagItemSelectedClose();
-                                }
-                            })
-                        }   else{   //直接发布
-                            ArticleCreateApi.createByForm(_this.formObj).then((res) =>{
-                                if(res.success){
-                                    _this.$message.success(res.msg) ;
-                                    //关闭当前页面
-                                    _this.doTagItemSelectedClose();
-                                }
-                            })
-                        }
+        methods:{
+            getFilterOption(input,option){
+                return (option.componentOptions.children[0].text.toLowerCase().indexOf(input.toLowerCase()) >= 0);
+            },
+            goPreviousStep(){
+                this.stepConf.current--;
+            },
+            goNextStep(){
+                debugger;
+                var _this = this ;
+                let currentKey = this.currentStepKey;
+                //验证
+                if(currentKey == _this.stepConf.steps.basic.key){
+                    let flag = (_this.formObj.title && _this.formObj.content && _this.formObj.originContent) ? true : false ;
+                    if(!flag){
+                        _this.$message.warning(_this.$t('langMap.commons.forms.pleaseFillOutTwo',[_this.$t('langMap.table.fields.obl.article.title'),_this.$t('langMap.table.fields.obl.article.content')]));
+                        return ;
                     }
-                });
-            }
-        },
-        handleCreateDraftByForm(){    //存储为草稿
-            var _this = this ;
-            //验证是否未编辑
-            let isCreateAble = this.dealCheckSubmitAble() ;
-            if(isCreateAble == false){
-                _this.$message.warning(_this.$t('langMap.commons.forms.pleaseFillOutTwo',[_this.$t('langMap.table.fields.obl.article.title'),_this.$t('langMap.table.fields.obl.article.content')]));
-                return false ;
-            }   else {
-                //取得请求的参数：标题&内容、用户信息
-                var formObjTemp = _this.formObj ;
-                this.createForm.validateFields((err, values) => {
-                    if (!err) {
-                        _this.formObj = _this.dealFormValuesMapToObj(values) ;
-                        if(_this.updateForm.flag == true) {  //更新文章草稿
-                            ArticleCreateApi.updateDraftByForm(_this.formObj).then((res) =>{
-                                if(res.success){
-                                    _this.$message.success(res.msg) ;
-                                    //关闭当前页面
-                                    _this.doTagItemSelectedClose();
-                                }
-                            })
-                        }   else {  //添加到 草稿
-                            ArticleCreateApi.createDraftByForm(_this.formObj).then((res) =>{
-                                if(res.success){
-                                    _this.$message.success(res.msg) ;
-                                    //关闭当前页面
-                                    _this.doTagItemSelectedClose();
-                                }
-                            })
-                        }
-                    }
-                });
-            }
-        },
-        doTagItemSelectedClose(){  //关闭当前标签
-            var selectedTag = this.$route ;
-            //关闭当前所选标签
-            this.$store.dispatch('doDelVisitedViews',selectedTag).then((views) => {
-                const latestView = views.slice(-1)[0] ;
-                if(latestView) {
-                    this.$router.push(latestView.path) ;
-                }   else {
-                    this.$router.push('/') ;
                 }
-            })
-        },
-        dealRenderDraftToForm(fid){
-            var _this = this ;
-            if(fid){
-                ArticleCreateApi.getIDraftItemById(fid).then((res) =>{
+                if(currentKey == this.stepConf.steps.more.key){
+                    let flag = true ;
+                    _this.createForm.validateFields((err, values) => {
+                        if(err){
+                            flag = false ;
+                        }
+                    });
+                    if(!flag){
+                        _this.$message.warning(_this.$t('langMap.commons.forms.pleaseFillOutTwo',[_this.$t('langMap.table.fields.common.summary'),_this.$t('langMap.table.fields.common.tag')]));
+                        return ;
+                    }
+                }
+                if(currentKey == this.stepConf.steps.done.key){
+                    //最终步骤，next不会到这里，不拦截
+                }
+                this.stepConf.current++;
+            },
+            dealUpdateFormValue(formObj){   //form表单更新
+                var _this = this ;
+                if(typeof _this.createForm.updateFields != "undefined"){ //避免未初始化form的时候就调用了updatefield
+                    _this.createForm.updateFields({
+                        summary: _this.$form.createFormField({
+                            ...formObj,
+                            value: formObj.summary,
+                        }),
+                        tagIds: _this.$form.createFormField({
+                            ...formObj,
+                            value: formObj.tagIds,
+                        })
+                    });
+                }
+            },
+            dealGetAllTagList(){    //取得所有的 文章标签
+                var _this = this ;
+                ArticleCreateApi.getAllArticleTagEnums().then((res) =>{
                     if(res.success){
-                        var resBean = res.bean ;
-                        if(resBean){
-                            _this.formObj = resBean ;
-                            console.log("_this.formObj");
-                            console.log(_this.formObj);
-                        }
+                        _this.bindData.articleTagList = res.enumData.list ;
                     }
                 })
-            }
-        }
-    },
-    created(){
-        var _this = this ;
-        _this.createForm = this.$form.createForm(_this,{
-            name:'createForm',
-            onFieldsChange: (_, changedFields) => {
-                //console.log(changedFields);
-                this.$emit('change', changedFields);
             },
-            mapPropsToFields:() =>{
-                //console.log(_this.formObj);
-                return {
-                    summary: this.$form.createFormField({
-                        ..._this.formObj,
-                        value: _this.formObj.summary
-                    }),
-                    tagIds: this.$form.createFormField({
-                        ..._this.formObj,
-                        value: _this.formObj.tagIds
-                    }),
-                }
-            }
-        });
-    },
-    computed:{
-        currentStepKey() {
-            return 1;
-        }
-    },
-    mounted(){
-        var _this = this ;
-        var routeQuery = this.$route.query ;
-        if(routeQuery){
-            _this.updateForm.fid = routeQuery.fid ;
-            var action = routeQuery.action ;
-            if(action == "update"){ //表示 该页面处理的是 文章草稿 更新
-                _this.updateForm.flag = true ;
-                _this.dealRenderDraftToForm(_this.updateForm.fid);
-            }
-        }
-        this.dealGetAllTagList() ;
-    },
-    watch:{
-        formObj: {
-            handler (val, oval) {
+            handleContentChange(value,render){
+                //render: value 经过markdown解析后的结果
+                this.formObj.originContent = value ;
+            },
+            dealCheckSubmitAble(){  //判断是否可以 创建
                 var _this = this ;
-                if(_this.updateForm.flag == true && _this.updateForm.initFlag == false){
-                    _this.dealUpdateFormValue(val);
-                    _this.updateForm.initFlag = true ;
+                let tempTitle = _this.formObj.title;
+                let tempContent  = _this.formObj.content;
+                let tempOriginContent  = _this.formObj.originContent;
+                if(tempTitle.length == 0 || tempContent.length == 0 || tempOriginContent.length == 0){
+                    return false ;
+                }
+                return true ;
+            },
+            dealFormValuesMapToObj(values){
+                var formObjTemp = this.formObj ;
+                if(values){
+                    formObjTemp['summary'] = values.summary;
+                    formObjTemp['tagIds'] = values.tagIds;
+                }
+                return formObjTemp ;
+            },
+            //确认发表博文
+            handleCreateByForm(e){
+                var _this = this ;
+                //验证是否未编辑
+                let submitAble = this.dealCheckSubmitAble() ;
+                if(submitAble == false){
+                    _this.$message.warning(_this.$t('langMap.commons.forms.pleaseFillOutTwo',[_this.$t('langMap.table.fields.obl.article.title'),_this.$t('langMap.table.fields.obl.article.content')]));
+                    return false ;
+                }   else {
+                    //取得请求的参数：标题&内容、用户信息
+                    _this.createForm.validateFields((err, values) => {
+                        if (!err) {
+                            _this.formObj = _this.dealFormValuesMapToObj(values) ;
+                            console.log("dealFormValuesMapToObj");
+                            console.log(_this.formObj);
+                            if(_this.updateForm.flag == true){  //发布 更新后的 文章草稿
+                                ArticleCreateApi.createFromDraft(_this.formObj).then((res) =>{
+                                    if(res.success){
+                                        _this.$message.success(res.msg) ;
+                                        //关闭当前页面
+                                        _this.doTagItemSelectedClose();
+                                    }
+                                })
+                            }   else{   //直接发布
+                                ArticleCreateApi.createByForm(_this.formObj).then((res) =>{
+                                    if(res.success){
+                                        _this.$message.success(res.msg) ;
+                                        //关闭当前页面
+                                        _this.doTagItemSelectedClose();
+                                    }
+                                })
+                            }
+                        }
+                    });
                 }
             },
-            deep: true,
-            immediate:true
-        }
-    },
-}
+            handleCreateDraftByForm(){    //存储为草稿
+                var _this = this ;
+                //验证是否未编辑
+                let isCreateAble = this.dealCheckSubmitAble() ;
+                if(isCreateAble == false){
+                    _this.$message.warning(_this.$t('langMap.commons.forms.pleaseFillOutTwo',[_this.$t('langMap.table.fields.obl.article.title'),_this.$t('langMap.table.fields.obl.article.content')]));
+                    return false ;
+                }   else {
+                    //取得请求的参数：标题&内容、用户信息
+                    this.createForm.validateFields((err, values) => {
+                        if (!err) {
+                            _this.formObj = _this.dealFormValuesMapToObj(values) ;
+                            if(_this.updateForm.flag == true) {  //更新文章草稿
+                                ArticleCreateApi.updateDraftByForm(_this.formObj).then((res) =>{
+                                    if(res.success){
+                                        _this.$message.success(res.msg) ;
+                                        //关闭当前页面
+                                        _this.doTagItemSelectedClose();
+                                    }
+                                })
+                            }   else {  //添加到 草稿
+                                ArticleCreateApi.createDraftByForm(_this.formObj).then((res) =>{
+                                    if(res.success){
+                                        _this.$message.success(res.msg) ;
+                                        //关闭当前页面
+                                        _this.doTagItemSelectedClose();
+                                    }
+                                })
+                            }
+                        }
+                    });
+                }
+            },
+            doTagItemSelectedClose(){  //关闭当前标签
+                var selectedTag = this.$route ;
+                //关闭当前所选标签
+                this.$store.dispatch('doDelVisitedViews',selectedTag).then((views) => {
+                    const latestView = views.slice(-1)[0] ;
+                    if(latestView) {
+                        this.$router.push(latestView.path) ;
+                    }   else {
+                        this.$router.push('/') ;
+                    }
+                })
+            },
+            dealRenderDraftToForm(fid){
+                var _this = this ;
+                if(fid){
+                    ArticleCreateApi.getIDraftItemById(fid).then((res) =>{
+                        if(res.success){
+                            var resBean = res.bean ;
+                            if(resBean){
+                                _this.formObj = resBean ;
+                                console.log("_this.formObj");
+                                console.log(_this.formObj);
+                            }
+                        }
+                    })
+                }
+            }
+        },
+        computed:{
+            currentStepKey() {
+                const arr = this.currentStepArr;
+                return arr[this.stepConf.current];
+            },
+            currentStepArr(){
+                if(!this.stepConf.stepsMap){
+                    return [] ;
+                }
+                return Array.from(this.stepConf.stepsMap.keys());
+            }
+        },
+        created(){
+            var _this = this ;
+            _this.createForm = this.$form.createForm(_this,{
+                name:'createForm',
+                onFieldsChange: (_, changedFields) => {
+                    //console.log(changedFields);
+                    this.$emit('change', changedFields);
+                },
+                mapPropsToFields:() =>{
+                    //console.log(_this.formObj);
+                    return {
+                        summary: this.$form.createFormField({
+                            ..._this.formObj,
+                            value: _this.formObj.summary
+                        }),
+                        tagIds: this.$form.createFormField({
+                            ..._this.formObj,
+                            value: _this.formObj.tagIds
+                        }),
+                    }
+                }
+            });
+        },
+        mounted(){
+            var _this = this ;
+            var routeQuery = this.$route.query ;
+            if(routeQuery){
+                _this.updateForm.fid = routeQuery.fid ;
+                var action = routeQuery.action ;
+                if(action == "update"){ //表示 该页面处理的是 文章草稿 更新
+                    _this.updateForm.flag = true ;
+                    _this.dealRenderDraftToForm(_this.updateForm.fid);
+                }
+            }
+            this.dealGetAllTagList() ;
+        },
+        watch:{
+            formObj: {
+                handler (val, oval) {
+                    var _this = this ;
+                    if(_this.updateForm.flag == true && _this.updateForm.initFlag == false){
+                        _this.dealUpdateFormValue(val);
+                        _this.updateForm.initFlag = true ;
+                    }
+                },
+                deep: true,
+                immediate:true
+            }
+        },
+    }
 </script>
 
 <style scoped>
