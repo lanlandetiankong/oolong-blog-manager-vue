@@ -78,16 +78,17 @@
         },
         created(){
             this.doBasePageCachesRefresh();
-        },
-        mounted(){
             this.$nextTick(()=>{ // 页面渲染完成后的回调
-                const heightVal = this.$refs.appMain.offsetHeight ;
-                this.$store.dispatch('doSetStyleOfAppMain',{
-                    height:heightVal
-                }) ;
+                const appMainRef = this.$refs.appMain ;
+                if(appMainRef){
+                    const heightVal = appMainRef.offsetHeight ;
+                    this.$store.dispatch('doSetStyleOfAppMain',{
+                        height:heightVal
+                    }) ;
+                }
                 this.styleConf = this.$store.getters.styleStore_appMain;
             })
-        }
+        },
     }
 </script>
 <style>
