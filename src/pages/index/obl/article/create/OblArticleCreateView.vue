@@ -59,7 +59,7 @@
             <div v-show="currentStepKey == stepConf.steps.basic.key">
                 <mavon-editor
                     v-bind="editorConf"
-                    v-model="formObj.content"
+                    v-model="formObj.originContent"
                     @change="handleContentChange"
                     @save="handleCreateByForm"
                 />
@@ -256,7 +256,7 @@
             },
             handleContentChange(value, render) {
                 //render: value 经过markdown解析后的结果
-                this.formObj.originContent = value;
+                this.formObj.content = render;
             },
             dealCheckSubmitAble() {  //判断是否可以 创建
                 var _this = this;
