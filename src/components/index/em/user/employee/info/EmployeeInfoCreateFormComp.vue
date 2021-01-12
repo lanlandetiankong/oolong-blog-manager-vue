@@ -20,7 +20,7 @@
                               :placeholder="$t('langMap.commons.forms.pleaseChoose')"
                               optionFilterProp="children"
                               :options="belongTenants"
-                              :filterOption="getFilterOption"
+                              :filterOption="mixin_getFilterOption"
                               v-decorator="formFieldConf.belongTenantId"
                     >
                     </a-select>
@@ -80,13 +80,14 @@
 </template>
 <script>
     import {FormBaseConfObj} from "~Components/constant_define";
-
     import {dealNumberToStr} from '~Assets/js/util/baseUtil';
+    import {OblCommonMixin} from '~Layout/mixin/OblCommonMixin';
     import AFormItem from "ant-design-vue/es/form/FormItem";
     import HeadImgUpload from "~Components/regular/common/img/HeadImgUpload";
     export default {
         name: "EmployeeInfoCreateFormComp",
         components: {HeadImgUpload, AFormItem},
+        mixins:[OblCommonMixin],
         props:{
             visible:Boolean,
             actionType:String,
@@ -173,10 +174,6 @@
                         }),
                     });
                 }
-            },
-            getFilterOption(input,option){
-                //[租户]select 搜索过滤
-                return (option.componentOptions.children[0].text.toLowerCase().indexOf(input.toLowerCase()) >= 0);
             },
             dealGetHeadAvatarUrlVal(){  //取得[用户头像上传后的图片object]
                 return this.$refs.headImgUploadRef.avatarUrlVal ;

@@ -67,3 +67,10 @@ align="middle"
                             <a-icon slot="checkedChildren" type="filter" />
                             <a-icon slot="unCheckedChildren" type="eye-invisible" />
                         </a-switch>
+
+
+import {OblCommonMixin} from '~Layout/mixin/OblCommonMixin';
+
+mixins:[OblCommonMixin],
+
+mixin_getFilterOption

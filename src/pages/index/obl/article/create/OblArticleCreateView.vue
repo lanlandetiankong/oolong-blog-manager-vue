@@ -48,7 +48,7 @@
                                       style="width: 360px"
                                       optionFilterProp="children"
                                       :options="bindData.articleTagList"
-                                      :filterOption="getFilterOption"
+                                      :filterOption="mixin_getFilterOption"
                                       v-decorator="formFieldConf.tagIds"
                             >
                             </a-select>
@@ -185,9 +185,6 @@
             }
         },
         methods:{
-            getFilterOption(input,option){
-                return (option.componentOptions.children[0].text.toLowerCase().indexOf(input.toLowerCase()) >= 0);
-            },
             goPreviousStep(){
                 //上一步
                 this.stepConf.current--;

@@ -25,7 +25,7 @@
                               :placeholder="$t('langMap.commons.forms.pleaseChoose')"
                               optionFilterProp="children"
                               :options="typeEnumArr"
-                              :filterOption="getFilterOption"
+                              :filterOption="mixin_getFilterOption"
                               v-decorator="formFieldConf.type"
                     >
                     </a-select>
@@ -46,12 +46,14 @@
 </template>
 <script>
     import {FormBaseConfObj} from "~Components/constant_define";
+    import {OblCommonMixin} from '~Layout/mixin/OblCommonMixin';
 
     import AFormItem from "ant-design-vue/es/form/FormItem";
     import ATextarea from "ant-design-vue/es/input/TextArea";
     export default {
         name: "EmployeeJobCreateFormComp",
         components: {ATextarea, AFormItem},
+        mixins:[OblCommonMixin],
         props:{
             visible:Boolean,
             actionType:String,
@@ -107,9 +109,6 @@
                        })
                    });
                }
-            },
-            getFilterOption(input,option){
-                return (option.componentOptions.children[0].text.toLowerCase().indexOf(input.toLowerCase()) >= 0);
             }
         },
         computed:{

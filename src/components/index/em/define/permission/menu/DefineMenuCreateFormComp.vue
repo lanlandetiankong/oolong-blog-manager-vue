@@ -58,7 +58,7 @@
                               :placeholder="$t('langMap.commons.forms.pleaseChoose')"
                               optionFilterProp="children"
                               :options="menuUrlJumpTypes"
-                              :filterOption="getFilterOption"
+                              :filterOption="mixin_getFilterOption"
                               v-decorator="formFieldConf.urlJumpType"
                     >
                     </a-select>
@@ -84,15 +84,18 @@
 </template>
 <script>
     import {FormBaseConfObj} from "~Components/constant_define";
+    import {MenuCreateFormApi} from './menuManagerCompsApi'
+    import {OblCommonMixin} from '~Layout/mixin/OblCommonMixin';
 
     import AFormItem from "ant-design-vue/es/form/FormItem";
     import ATextarea from "ant-design-vue/es/input/TextArea";
 
-    import {MenuCreateFormApi} from './menuManagerCompsApi'
+
 
     export default {
         name: "DefineMenuCreateFormComp",
         components: {ATextarea, AFormItem},
+        mixins:[OblCommonMixin],
         props:{
             visible:Boolean,
             actionType:String,
@@ -153,9 +156,6 @@
             }
         },
         methods:{
-            getFilterOption(input,option){
-                return (option.componentOptions.children[0].text.toLowerCase().indexOf(input.toLowerCase()) >= 0);
-            },
             dealUpdateFormValue(formObj){
                 var _this = this ;
                 _this.formValObj = _this.formObj ;

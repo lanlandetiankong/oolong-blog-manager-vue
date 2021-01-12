@@ -40,7 +40,7 @@
                                       style="width: 180px"
                                       optionFilterProp="children"
                                       :options="[]"
-                                      :filterOption="getPermissionTypeFilterOption"
+                                      :filterOption="mixin_getFilterOption"
                                       v-decorator="formFieldConf.publishDepartment"
                             >
                             </a-select>
@@ -56,7 +56,7 @@
                                       style="width: 360px"
                                       optionFilterProp="children"
                                       :options="bindData.announcementTagList"
-                                      :filterOption="getPermissionTypeFilterOption"
+                                      :filterOption="mixin_getFilterOption"
                                       v-decorator="formFieldConf.tagIds"
                             >
                             </a-select>
@@ -73,12 +73,14 @@
 </template>
 <script>
     import {AnnouncementCreateApi} from './announcementCreateApi'
+    import {OblCommonMixin} from '~Layout/mixin/OblCommonMixin';
 
     import BaseQuillEditor from '~Components/regular/common/quill/BaseQuillEditor';
     import ATextarea from "ant-design-vue/es/input/TextArea";
     export default {
         name: "AnnouncementCreateView",
         components: {ATextarea,BaseQuillEditor},
+        mixins:[OblCommonMixin],
         data(){
             const paramsRules ={
                 keyWord:[
@@ -129,13 +131,7 @@
                 }
             }
         },
-        computed:{
-
-        },
         methods:{
-            getPermissionTypeFilterOption(input,option){
-                return (option.componentOptions.children[0].text.toLowerCase().indexOf(input.toLowerCase()) >= 0);
-            },
             dealUpdateFormValue(formObj){   //form表单更新
                 var _this = this ;
                 console.log("dealUpdateFormValue");

@@ -34,7 +34,7 @@
                                               optionFilterProp="children"
                                               :disabled="item.disabled"
                                               :options="item.options"
-                                              :filterOption="getFilterOption"
+                                              :filterOption="mixin_getFilterOption"
                                               v-decorator="item.decorator"
                                     >
                                     </a-select>
@@ -78,9 +78,11 @@
 </template>
 
 <script>
+    import {OblCommonMixin} from '~Layout/mixin/OblCommonMixin';
     import {FormItemTypeEnum,ConstantObj} from '~Components/constant_define';
     export default {
         name: "QueryFormComp",
+        mixins:[OblCommonMixin],
         props:{
             formItemConf:{
                 type:Object,
@@ -124,10 +126,7 @@
                         _this.$emit('execQuery',e,values) ;
                     }
                 });
-            },
-            getFilterOption(input,option){
-                return (option.componentOptions.children[0].text.toLowerCase().indexOf(input.toLowerCase()) >= 0);
-            },
+            }
         }
     }
 </script>

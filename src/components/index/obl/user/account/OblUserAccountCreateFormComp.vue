@@ -123,10 +123,6 @@
                     });
                 }
             },
-            getFilterOption(input,option){
-                //[租户]select 搜索过滤
-                return (option.componentOptions.children[0].text.toLowerCase().indexOf(input.toLowerCase()) >= 0);
-            },
             dealGetHeadAvatarUrlVal(){  //取得[用户头像上传后的图片object]
                 return this.$refs.headImgUploadRef.avatarUrlVal ;
             },
