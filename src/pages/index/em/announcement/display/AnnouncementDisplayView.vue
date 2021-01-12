@@ -31,7 +31,6 @@
             return {
                 announcement:{
                     obj:{},
-                    fid:''
                 },
                 styleConf:{
                     layout:{
@@ -58,22 +57,40 @@
 
             }
         },
-        mounted(){
-            var _this = this ;
-            var routeQuery = this.$route.query ;
-            if(routeQuery){
-                _this.announcement.fid = routeQuery.fid ;
+        computed:{
+            formFid(){
+                if(this.queryConf){
+                    return this.queryConf.fid ;
+                }
+                return '';
+            },
+            queryConf(){
+                return this.$route.query ;
             }
-            if(_this.announcement.fid){
-                AnnouncementDisplayApi.getItemById(_this.announcement.fid).then((res) =>{
+        },
+        methods:{
+            renderObj(){
+                var _this = this ;
+                if(!this.formFid){
+                    return ;
+                }
+                AnnouncementDisplayApi.getItemById(this.formFid).then((res) =>{
                     if(res.success){
                         _this.announcement.obj = res.bean ;
                     }
                 });
             }
         },
-        destroyed(){
-            console.log("公告展示-页面销毁 ...")
+        watch: {
+            formFid(oval,nval){
+                if(!nval){
+                    return ;
+                }
+                this.renderObj();
+            }
+        },
+        mounted() {
+            this.renderObj();
         }
     }
 </script>
