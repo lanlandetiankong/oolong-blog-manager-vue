@@ -119,16 +119,20 @@
                     fieldName:'name',matching:QueryMatchType.like
                 },
                 pid:{
-                    fieldName:'pid',matching:QueryMatchType.equals,drawerAble:false
+                    fieldName:'pid',drawerAble:false
                 },
                 parentName:{
-                    fieldLabel:this.$t('langMap.table.fields.obl.articleCategory.name'),
+                    fieldLabel:this.$t('langMap.table.fields.obl.articleCategory.parentName'),
                     fieldName:'parentName',searchAble:false,
                     fieldKeySplitArr:['parent','name'],isNeedSplit:true
                 },
+                description:{
+                    fieldLabel:this.$t('langMap.table.fields.common.description'),
+                    fieldName:'description',matching:QueryMatchType.like
+                },
                 remark:{
                     fieldLabel:this.$t('langMap.table.fields.common.remark'),
-                    fieldName:'remark',matching:QueryMatchType.equals
+                    fieldName:'remark',matching:QueryMatchType.like
                 }
             };
             return {
@@ -149,12 +153,18 @@
                         },
                         pid:{
                             key:'pid',
-                            formType:FormItemTypeEnum.Input,
-                            label:this.$t('langMap.table.fields.obl.articleCategory.name'),
+                            formType:FormItemTypeEnum.TreeSelect,
+                            label:this.$t('langMap.table.fields.obl.articleCategory.parentName'),
                             decorator:["pid", {rules: []}],
                             treeDefaultExpandAll:false,
                             treeNodeFilterProp:"title",
                             treeData:[]
+                        },
+                        description:{
+                            key:'description',
+                            formType:FormItemTypeEnum.Input,
+                            label:this.$t('langMap.table.fields.common.description'),
+                            decorator:["description", {rules: []}],
                         },
                         remark:{
                             key:'remark',
@@ -171,13 +181,19 @@
                         align:textAlignDefault,
                         dataIndex: 'name',
                         key: 'name',
-                        width:100,
+                        width:110,
                     },{
                         title: this.$t('langMap.table.fields.obl.articleCategory.parentName'),
                         align:textAlignDefault,
                         dataIndex: 'parent.name',
                         key: 'parent.name',
-                        width:100,
+                        width:110,
+                    },{
+                        title: this.$t('langMap.table.fields.common.description'),
+                        align:textAlignDefault,
+                        dataIndex: 'description',
+                        key: 'description',
+                        width:160,
                     },{
                         title: this.$t('langMap.table.fields.obl.articleCategory.iconName'),
                         align:textAlignDefault,
@@ -186,25 +202,25 @@
                         scopedSlots:{
                             customRender:'iconRender'
                         },
-                        width:60
+                        width:40
                     },{
                         title: this.$t('langMap.table.fields.common.level'),
                         align:textAlignDefault,
                         dataIndex: 'level',
                         key: 'level',
-                        width:70
+                        width:40
                     },{
                         title: this.$t('langMap.table.fields.common.weights'),
                         align:textAlignDefault,
                         dataIndex: 'weights',
                         key: 'weights',
-                        width:70
+                        width:60
                     },{
                         title:this.$t('langMap.table.header.operation'),
                         align:textAlignDefault,
                         dataIndex:"operation",
-                        key:'operation',
                         fixed:'right',
+                        key:'operation',
                         width:220,
                         scopedSlots: { customRender: 'action' }
                     }],
@@ -479,6 +495,7 @@
                 handler (val, oval) {
                     //绑定枚举值变化监听并处理
                     this.searchConf.formItemConf.pid.treeData = this.binding.pidList ;
+                    console.log(this.searchConf.formItemConf.pid.treeData) ;
                 },
                 deep: true,
                 immediate:true

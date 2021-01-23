@@ -50,6 +50,16 @@ const ArticleRouter = {
             }
         },
         {
+            path:'category',
+            component:_import('index/obl/article/category/OblArticleCategoryView'),
+            name:'articleCategory',
+            meta:{
+                title:'文章分类',icon:"reconciliation",keepAliveFlag:true,
+                parentRouterCompName,
+                selfCompName:'ArticleCategoryView'
+            }
+        },
+        {
             path:'my_draft_list',
             component:_import('index/obl/article/myDraftList/OblArticleMyDraftListView'),
             name:'articleMyDraftList',

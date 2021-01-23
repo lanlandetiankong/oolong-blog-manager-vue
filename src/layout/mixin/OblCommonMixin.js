@@ -1,4 +1,5 @@
 import { mapGetters } from 'vuex' ;
+import {QueryMatchType} from '~Components/regular/common/drawer/drawer_define.js'
 import {ConstantObj} from "~Components/constant_define";
 
 export const OblCommonMixin = {
@@ -56,10 +57,11 @@ export const OblCommonMixin = {
                     }
                     const queryVal = queryObj[key] ;
                     if(queryVal || queryVal == 0){
+                        let theMatching = (searchFieldObj.matching) ? searchFieldObj.matching : QueryMatchType.equals;
                         queryFieldArr.push({
                             fieldName:searchFieldObj.fieldName,
                             value:queryObj[key],
-                            matching:searchFieldObj.matching
+                            matching:theMatching
                         });
                     }
                 }

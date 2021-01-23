@@ -199,7 +199,7 @@
                         },
                         pid:{
                             key:'pid',
-                            formType:FormItemTypeEnum.Input,
+                            formType:FormItemTypeEnum.TreeSelect,
                             label:this.$t('langMap.table.fields.em.menu.parentMenuName'),
                             decorator:["pid", {rules: []}],
                             treeDefaultExpandAll:false,

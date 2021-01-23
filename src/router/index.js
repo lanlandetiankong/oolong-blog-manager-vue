@@ -16,8 +16,9 @@ import AnnouncementRouter from './main/em/announcement/index'
 //obl
 import ArticleRouter from './main/obl/article/index'
 
-import UserZoneRouter from './main/regular/userZone/index'
+
 //登录、注册
+import UserZoneRouter from './main/regular/userZone/index'
 import MemberRouter from './member/index.js'
 //错误页面
 import Error4XXRouter from  './error/error4xx/index'
