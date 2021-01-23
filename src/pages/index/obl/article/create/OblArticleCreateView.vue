@@ -49,7 +49,7 @@
                                       optionFilterProp="children"
                                       :options="bindData.articleTagList"
                                       :filterOption="mixin_getFilterOption"
-                                      v-decorator="formFieldConf.tagIds"
+                                      v-decorator="formFieldConf.tagIdList"
                             >
                             </a-select>
                         </a-form-item>
@@ -121,7 +121,7 @@
                 summary:[
                     {required:true,message:this.$t('langMap.commons.forms.pleaseFillOut',[this.$t('langMap.table.fields.common.summary')])}
                 ],
-                tagIds:[
+                tagIdList:[
                     {required:true,message:this.$t('langMap.commons.forms.pleaseSelect',[this.$t('langMap.table.fields.common.tag')])},
                     {type:'array'}
                 ]
@@ -171,7 +171,7 @@
                 },
                 formFieldConf:{
                     summary:["summary",{rules:paramsRules.summary}],
-                    tagIds:["tagIds",{rules:paramsRules.tagIds}]
+                    tagIdList:["tagIdList",{rules:paramsRules.tagIdList}]
                 },
                 editorConf:{
                     toolbars
@@ -180,7 +180,7 @@
                     title:'',
                     content:'',
                     originContent:'',
-                    tagIds:undefined,
+                    tagIdList:undefined,
                     summary:''
                 }
             }
@@ -239,9 +239,9 @@
                             ...formObj,
                             value: formObj.summary,
                         }),
-                        tagIds: _this.$form.createFormField({
+                        tagIdList: _this.$form.createFormField({
                             ...formObj,
-                            value: formObj.tagIds,
+                            value: formObj.tagIdList,
                         })
                     });
                 }
@@ -272,7 +272,7 @@
                 var formObjTemp = this.formObj;
                 if (values) {
                     formObjTemp['summary'] = values.summary;
-                    formObjTemp['tagIds'] = values.tagIds;
+                    formObjTemp['tagIdList'] = values.tagIdList;
                 }
                 return formObjTemp;
             },
@@ -407,9 +407,9 @@
                             ..._this.formObj,
                             value: _this.formObj.summary
                         }),
-                        tagIds: this.$form.createFormField({
+                        tagIdList: this.$form.createFormField({
                             ..._this.formObj,
-                            value: _this.formObj.tagIds
+                            value: _this.formObj.tagIdList
                         }),
                     }
                 }
