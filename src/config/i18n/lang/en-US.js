@@ -119,7 +119,7 @@ export const langMap = {
                 type:'Type',
                 remark:'Remark',
                 createUserName:'Create user name',
-                lastModifyerName:'Last modify name',
+                updateUserName:'Update user name',
                 createTime:'Create time',
                 updateTime:'Update time',
                 description:'Description',

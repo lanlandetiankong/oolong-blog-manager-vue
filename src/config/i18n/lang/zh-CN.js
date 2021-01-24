@@ -119,7 +119,7 @@ export const langMap = {
                 type:'类型',
                 remark:'备注',
                 createUserName:'创建人',
-                lastModifyerName:'最后修改人',
+                updateUserName:'最后修改人',
                 createTime:'创建时间',
                 updateTime:'最后修改时间',
                 description:'描述',

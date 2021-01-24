@@ -53,10 +53,10 @@
                         fieldName:'remark',searchAble:false,isNeedSplit:true,
                         fieldKeySplitArr:['createUser','userName']
                     },
-                    lastModifyerName:{
-                        fieldLabel:this.$t('langMap.table.fields.common.lastModifyerName'),
-                        fieldName:'lastModifyerName',searchAble:false,isNeedSplit:true,
-                        fieldKeySplitArr:['lastModifyer','userName']
+                    updateUserName:{
+                        fieldLabel:this.$t('langMap.table.fields.common.updateUserName'),
+                        fieldName:'updateUserName',searchAble:false,isNeedSplit:true,
+                        fieldKeySplitArr:['updateUser','userName']
                     },
                     createTime:{
                         fieldLabel:this.$t('langMap.table.fields.common.createTime'),
@@ -111,8 +111,8 @@
                 if(obj.hasOwnProperty('createUserName') === false){
                     obj['createUserName'] = _this.fixedFieldConf['createUserName'] ;
                 }
-                if(obj.hasOwnProperty('lastModifyerName') === false){
-                    obj['lastModifyerName'] = _this.fixedFieldConf['lastModifyerName'] ;
+                if(obj.hasOwnProperty('updateUserName') === false){
+                    obj['updateUserName'] = _this.fixedFieldConf['updateUserName'] ;
                 }
                 if(obj.hasOwnProperty('createTime') === false){
                     obj['createTime'] = _this.fixedFieldConf['createTime'] ;
