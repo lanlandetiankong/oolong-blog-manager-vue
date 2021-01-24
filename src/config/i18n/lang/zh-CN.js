@@ -91,6 +91,7 @@ export const langMap = {
         },
         obl:{
             title:{
+                detailForArticle:'文章详情',
                 detailForOblArticleCategory:'文章类别详情',
                 detailForOblArticleTag:'文章标签详情',
                 detailForArticleCollectCategory:'文章收藏类别详情',
@@ -199,7 +200,18 @@ export const langMap = {
             obl:{
                 article:{
                     title:'标题',
-                    content:'内容'
+                    content:'内容',
+                    summary:'简介',
+                    editorType:'编辑器类型',
+                    viewCount:'浏览次数',
+                    commentCount:'评论次数',
+                    likeCount:'点赞次数',
+                    collectCount:'收藏次数',
+                    auditState:'审核状态',
+                    isPublished:'是否已发布',
+                    publishTime:'发布时间',
+                    tagIds:'标签id',
+                    tagName:'标签',
                 },
                 articleCategory:{
                     name:'名称',
@@ -247,6 +259,16 @@ export const langMap = {
             lockStatus:{
                 locked:'已锁定',
                 unlock:'未锁定'
+            },
+            publishStatus:{
+                published:'已发布',
+                unpublished:'未发布',
+            },
+            auditStatus:{
+                notApproved:'未审批',
+                approval:'审批中',
+                approved:'已审批',
+
             }
         },
         valueMap:{

@@ -91,6 +91,7 @@ export const langMap = {
         },
         obl:{
             title:{
+                detailForArticle:'Detail for article',
                 detailForOblArticleCategory:'Detail for article category',
                 detailForOblArticleTag:'Detail for article tag',
                 detailForArticleCollectCategory:'Detail for article collect category',
@@ -199,7 +200,18 @@ export const langMap = {
             obl:{
                 article:{
                     title:'Title',
-                    content:'Content'
+                    content:'Content',
+                    summary:'Summary',
+                    editorType:'Editor type',
+                    viewCount:'View count',
+                    commentCount:'Comment count',
+                    likeCount:'Like count',
+                    collectCount:'Collect count',
+                    auditState:'Approval Status',
+                    isPublished:'Is it published',
+                    publishTime:'Published time',
+                    tagIds:'Tag id',
+                    tagName:'Tag'
                 },
                 articleCategory:{
                     name:'Name',
@@ -245,8 +257,16 @@ export const langMap = {
         },
         enums:{
             lockStatus:{
-                locked:'locked',
-                unlock:'unlock'
+                locked:'Locked',
+                unlock:'Unlock'
+            },
+            publishStatus:{
+                published:'Published',
+                unpublished:'Unpublished',
+            },
+            auditStatus:{
+                approved:'Approved',
+                approval:'Approval'
             }
         },
         valueMap:{
