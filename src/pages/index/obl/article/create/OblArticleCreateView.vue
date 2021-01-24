@@ -21,6 +21,7 @@
                     <a-step v-for="(item,index) in stepConf.steps" :key="index" :title="item.title" :description="item.description" :subTitle="item.subTitle"/>
                 </a-steps>
             </a-row>
+            <!-- Step-基本/写 -->
             <a-row v-show="currentStepKey == stepConf.steps.basic.key">
                 <a-col :span="22">
                     <a-input  allowClear size="large"
@@ -29,29 +30,45 @@
                     />
                 </a-col>
             </a-row>
+            <!-- Step-更多 -->
             <a-form
-                layout="inline"
+                layout="vertical"
                 :form="createForm"
                 v-show="currentStepKey == stepConf.steps.more.key"
             >
-                <a-row :type="formLayout.row.type">
-                    <a-col :span="formLayout.defaultColSpan">
-                        <a-form-item :label="$t('langMap.table.fields.common.summary')">
-                            <a-input v-decorator="formFieldConf.summary"/>
-                        </a-form-item>
-                    </a-col>
-                    <a-col :span="formLayout.dblColSpan">
+                <a-row :gutter="16"
+                    :type="formLayout.row.type">
+                    <a-col :span="18">
                         <a-form-item :label="$t('langMap.table.fields.common.tag')">
                             <a-select showSearch allowClear
                                       mode="multiple"
                                       :placeholder="$t('langMap.commons.forms.pleaseChoose')"
-                                      style="width: 360px"
                                       optionFilterProp="children"
                                       :options="bindData.articleTagList"
                                       :filterOption="mixin_getFilterOption"
                                       v-decorator="formFieldConf.tagIdList"
                             >
                             </a-select>
+                        </a-form-item>
+                    </a-col>
+                    <a-col :span="18">
+                        <a-form-item :label="$t('langMap.table.fields.common.category')">
+                            <a-tree-select
+                                :placeholder="$t('langMap.commons.forms.pleaseChoose')"
+                                showSearch allowClear
+                                v-decorator="formFieldConf.categoryIdList"
+                                :treeNodeFilterProp="treeSelectConf.categoryId.treeNodeFilterProp"
+                                :treeDefaultExpandAll="treeSelectConf.categoryId.treeDefaultExpandAll"
+                                :treeData="bindData.categoryIdList"
+                            />
+                        </a-form-item>
+                    </a-col>
+                </a-row>
+                <a-row :type="formLayout.row.type">
+                    <a-col :span="24">
+                        <a-form-item :label="$t('langMap.table.fields.common.summary')">
+                            <a-textarea :auto-size="{ minRows: 3, maxRows: 5 }"
+                                v-decorator="formFieldConf.summary"/>
                         </a-form-item>
                     </a-col>
                 </a-row>
@@ -79,6 +96,7 @@
         </div>
         <!-- Result Dom Write Here -->
         <div class="result">
+            <!-- Dom-操作成功 -->
             <div v-show="rstConf.current == rstConf.status.success">
                 <a-result
                     status="success"
@@ -91,6 +109,7 @@
                     </template>
                 </a-result>
             </div>
+            <!-- Dom-操作失败 -->
             <div v-show="rstConf.current == rstConf.status.failure">
                 <a-result status="500"
                           :title="$t('langMap.results.universal.failure.title')"
@@ -124,6 +143,9 @@
                 tagIdList:[
                     {required:true,message:this.$t('langMap.commons.forms.pleaseSelect',[this.$t('langMap.table.fields.common.tag')])},
                     {type:'array'}
+                ],
+                categoryIdList:[
+                    {required:true,message:this.$t('langMap.commons.forms.pleaseSelect',[this.$t('langMap.table.fields.common.category')])},
                 ]
             };
             //A-Result(
@@ -167,11 +189,13 @@
                     dblColSpan:12,
                 },
                 bindData:{
-                    articleTagList:[]
+                    articleTagList:[],
+                    categoryIdList:[]
                 },
                 formFieldConf:{
                     summary:["summary",{rules:paramsRules.summary}],
-                    tagIdList:["tagIdList",{rules:paramsRules.tagIdList}]
+                    tagIdList:["tagIdList",{rules:paramsRules.tagIdList}],
+                    categoryIdList:["categoryIdList",{rules:paramsRules.categoryIdList}],
                 },
                 editorConf:{
                     toolbars
@@ -181,7 +205,14 @@
                     content:'',
                     originContent:'',
                     tagIdList:undefined,
+                    categoryIdList:undefined,
                     summary:''
+                },
+                treeSelectConf:{
+                    categoryId:{
+                        treeDefaultExpandAll:true,
+                        treeNodeFilterProp:"title",
+                    }
                 }
             }
         },
@@ -242,6 +273,10 @@
                         tagIdList: _this.$form.createFormField({
                             ...formObj,
                             value: formObj.tagIdList,
+                        }),
+                        categoryIdList: _this.$form.createFormField({
+                            ...formObj,
+                            value: formObj.categoryIdList,
                         })
                     });
                 }
@@ -251,6 +286,14 @@
                 ArticleCreateApi.getAllArticleTagEnums().then((res) => {
                     if (res.success) {
                         _this.bindData.articleTagList = res.enumData.list;
+                    }
+                })
+            },
+            dealGetAllCategoryTree() {    //取得所有的 文章分类
+                var _this = this;
+                ArticleCreateApi.getAllArticleCategoryTree().then((res) => {
+                    if (res.success) {
+                        _this.bindData.categoryIdList = res.gridList;
                     }
                 })
             },
@@ -273,6 +316,7 @@
                 if (values) {
                     formObjTemp['summary'] = values.summary;
                     formObjTemp['tagIdList'] = values.tagIdList;
+                    formObjTemp['categoryIdList'] = values.categoryIdList;
                 }
                 return formObjTemp;
             },
@@ -411,6 +455,10 @@
                             ..._this.formObj,
                             value: _this.formObj.tagIdList
                         }),
+                        categoryIdList: this.$form.createFormField({
+                            ..._this.formObj,
+                            value: _this.formObj.categoryIdList
+                        }),
                     }
                 }
             });
@@ -427,6 +475,7 @@
                 }
             }
             this.dealGetAllTagList() ;
+            this.dealGetAllCategoryTree() ;
         },
         watch:{
             formObj: {

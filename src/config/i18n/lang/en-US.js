@@ -132,6 +132,8 @@ export const langMap = {
                 styleVal:'Style',
                 tag:'Tag',
                 tagName:'Tag name',
+                category:'Category',
+                categoryName:'Category name',
                 lockedStatus:'Lock Status',
                 weights:'Weights',
                 summary:'Summary'

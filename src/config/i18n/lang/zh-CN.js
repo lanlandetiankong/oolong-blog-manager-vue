@@ -132,6 +132,8 @@ export const langMap = {
                 styleVal:'样式',
                 tag:'标签',
                 tagName:'标签名',
+                category:'分类',
+                categoryName:'分类名',
                 lockedStatus:'锁状态',
                 weights:'权重',
                 summary:'简介'

@@ -81,6 +81,13 @@
         </div>
         <!-- 弹窗dom-区域 -->
         <div>
+            <row-detail-drawer-comp
+                :drawerConf="drawerConf.detail.articleCategory.conf"
+                :dataObj="drawerConf.detail.articleCategory.dataObj"
+                :visible="drawerConf.detail.articleCategory.visible"
+                :drawerFieldConf="drawerConf.detail.articleCategory.drawerFieldConf"
+                @execClose="handleDetailDrawerClose"
+            />
             <obl-article-category-create-form-comp
                 v-if="dialogFormConf.initFlag"
                 ref="oblArticleCategoryCreateFormRef"
@@ -260,7 +267,7 @@
                     detail:{
                         articleCategory:{
                             conf:{
-                                title:this.$t('langMap.drawer.obl.article.detailForOblArticleCategory'),
+                                title:this.$t('langMap.drawer.obl.title.detailForOblArticleCategory'),
                             },
                             visible:false,
                             dataObj:{},
