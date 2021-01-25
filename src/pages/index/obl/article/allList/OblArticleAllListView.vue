@@ -128,32 +128,24 @@
             //字段配置(Query/Drawer)
             const fieldInfoConfObj = {
                 title:{
-                    fieldLabel:this.$t('langMap.table.fields.obl.article.title'),
-                    fieldName:'title', matching:QueryMatchType.like,
+                    fieldLabel:this.$t('langMap.table.fields.obl.article.title')
                 },
                 keyWord:{
                     fieldLabel:this.$t('langMap.table.fields.obl.article.content'),
-                    fieldName:'content', matching:QueryMatchType.like,
                 },
                 summary:{
                     fieldLabel:this.$t('langMap.table.fields.obl.article.summary'),
-                    fieldName:'summary', matching:QueryMatchType.like,
                 },
                 tagIds:{
-                    fieldName:'tagIds', matching:QueryMatchType.like,drawerAble:false,
+                    fieldName:'tagIds',drawerAble:false,
                 },
                 content:{
                     fieldLabel:this.$t('langMap.table.fields.obl.article.content'),
-                    fieldName:'content', matching:QueryMatchType.like,type:DrawerFieldTypeEnum.HtmlDom
-                },
-                remark:{
-                    fieldLabel:this.$t('langMap.table.fields.common.remark'),
-                    fieldName:'remark', matching:QueryMatchType.like,
+                    type:DrawerFieldTypeEnum.HtmlDom
                 }
             };
             return {
                 ConstantObj,
-                fieldInfoConf:fieldInfoConfObj,
                 binding:{
                     articleTagList:[]
                 },
@@ -366,7 +358,7 @@
             handleSearchFormQuery(e,values) {    //带查询条件 检索文章列表
                 const _this = this;
                 //取得 bean 形式 的查询条件数组
-                const searchFieldArr = _this.mixin_dealGetSearchFormQueryConf(_this.fieldInfoConf,values);
+                const searchFieldArr = _this.mixin_dealGetSearchFormQueryConf(null,values);
                 _this.changeQueryLoading(true);
                 ArticleAllListApi.getPageQuery(searchFieldArr,_this.tableConf.pagination,_this.tableConf.sorter).then((res) => {
                     if (res) {

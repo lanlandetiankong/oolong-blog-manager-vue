@@ -44,6 +44,12 @@ export const OblCommonMixin = {
             return menuId ;
         },
         mixin_dealGetSearchFormQueryConf(queryConf,queryObj){
+            if(typeof queryObj != "object"){
+                return {} ;
+            }
+            return queryObj;
+        },
+        mixin_dealGetSearchFormQueryConf2(queryConf,queryObj){
             const queryFieldArr = [] ;
             if(queryObj) {
                 for (const key in queryObj){
