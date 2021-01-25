@@ -48,13 +48,16 @@
                     :scroll="tableConf.scroll"
                     @change="handleTableChange"
                 >
-                    <span slot="editorTypeRender" slot-scope="text,record,index">
-                        <span>
-                            <a-tag color="blue"
-                                   v-if="record.editorType == 1">
-                                Markdown
-                            </a-tag>
-                        </span>
+
+                    <span slot="categoryNamesRender" slot-scope="text,record,index">
+                        <a-tag color="blue" v-for="categoryItem in record.categoryNameList">
+                            {{categoryItem}}
+                        </a-tag>
+                    </span>
+                    <span slot="tagNamesRender" slot-scope="text,record,index">
+                        <a-tag color="blue" v-for="tagItem of record.tagNameList">
+                            {{tagItem}}
+                        </a-tag>
                     </span>
                     <span slot="isPublishedRender" slot-scope="text,record,index">
                         <span>
@@ -82,6 +85,12 @@
                                 {{$t('langMap.commons.enums.auditStatus.approval')}}
                             </a-tag>
                         </span>
+                    </span>
+                    <span slot="editorTypeRender" slot-scope="text,record,index">
+                        <a-tag color="blue"
+                               v-if="record.editorType == 1">
+                            Markdown
+                        </a-tag>
                     </span>
                     <template slot="action" slot-scope="text,record">
                         <span>
@@ -193,20 +202,34 @@
                         title: this.$t('langMap.table.fields.obl.article.title'),
                         align:textAlignDefault,
                         dataIndex: 'title',
-                        width:100,
+                        width:180,
                         key: 'title'
+                    },  {
+                        title: this.$t('langMap.table.fields.obl.article.categoryNames'),
+                        align:textAlignDefault,
+                        dataIndex: 'categoryNames',
+                        width:70,
+                        key: 'categoryNames',
+                        scopedSlots: { customRender: 'categoryNamesRender' }
+                    },  {
+                        title: this.$t('langMap.table.fields.obl.article.tagNames'),
+                        align:textAlignDefault,
+                        dataIndex: 'tagNames',
+                        width:70,
+                        key: 'tagNames',
+                        scopedSlots: { customRender: 'tagNamesRender' }
                     },  {
                         title: this.$t('langMap.table.fields.obl.article.auditState'),
                         align:textAlignDefault,
                         dataIndex: 'auditState',
-                        width:70,
+                        width:90,
                         key: 'auditState',
                         scopedSlots: { customRender: 'auditStateRender' }
-                    },   {
+                    },  {
                         title: this.$t('langMap.table.fields.obl.article.isPublished'),
                         align:textAlignDefault,
                         dataIndex: 'isPublished',
-                        width:70,
+                        width:90,
                         key: 'isPublished',
                         scopedSlots: { customRender: 'isPublishedRender' }
                     },  {
@@ -232,37 +255,38 @@
                         title: this.$t('langMap.table.fields.obl.article.viewCount'),
                         align:textAlignDefault,
                         dataIndex: 'viewCount',
-                        width:70,
+                        width:90,
                         key: 'viewCount',
                     },  {
                         title: this.$t('langMap.table.fields.obl.article.commentCount'),
                         align:textAlignDefault,
                         dataIndex: 'commentCount',
-                        width:70,
+                        width:90,
                         key: 'commentCount',
                     },  {
                         title: this.$t('langMap.table.fields.obl.article.likeCount'),
                         align:textAlignDefault,
                         dataIndex: 'likeCount',
-                        width:70,
+                        width:90,
                         key: 'likeCount',
                     },  {
                         title: this.$t('langMap.table.fields.obl.article.collectCount'),
                         align:textAlignDefault,
                         dataIndex: 'collectCount',
-                        width:70,
+                        width:90,
                         key: 'collectCount',
                     }, {
                         title: this.$t('langMap.table.fields.obl.article.editorType'),
                         align:textAlignDefault,
                         key: 'editorType',
-                        width:100,
+                        width:110,
                         scopedSlots: { customRender: 'editorTypeRender' }
                     },  {
                         title:this.$t('langMap.table.header.operation'),
                         align:textAlignDefault,
                         dataIndex:"operation",
                         key:'operation',
+                        fixed:'right',
                         width:220,
                         scopedSlots: { customRender: 'action' }
                     }],
