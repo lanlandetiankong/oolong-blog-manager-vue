@@ -68,6 +68,9 @@
                             </a-tag>
                         </span>
                     </span>
+                    <span slot="publishTimeRender" slot-scope="text,record,index">
+                        {{record.publishTime | formatCnDateTime}}
+                    </span>
                     <span slot="auditStateRender" slot-scope="text,record,index">
                         <span>
                             <a-tag color="blue"
@@ -213,8 +216,9 @@
                         title: this.$t('langMap.table.fields.obl.article.publishTime'),
                         align:textAlignDefault,
                         dataIndex: 'publishTime',
-                        width:70,
+                        width:180,
                         key: 'publishTime',
+                        scopedSlots: { customRender: 'publishTimeRender' }
                     }, {
                         title: this.$t('langMap.table.fields.obl.article.summary'),
                         align:textAlignDefault,
