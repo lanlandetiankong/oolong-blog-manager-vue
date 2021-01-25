@@ -89,6 +89,10 @@
                                 {{$t('langMap.drawer.actions.detail')}}
                             </a>
                             <a-divider type="vertical" />
+                            <a @click="goToViewDetail($event,record)">
+                                {{$t('langMap.results.article.create.success.extra.viewDetail')}}
+                            </a>
+                            <a-divider type="vertical" />
                             <a-button type="danger" size="small" @click="handleDeleteOneById(record.fid)">{{$t('langMap.button.actions.delById')}}</a-button>
                         </span>
                     </template>
@@ -108,6 +112,7 @@
     </div>
 </template>
 <script>
+    import BeeUtil from '~Assets/js/util/bee/BeeUtil.js' ;
     import {ArticleAllListApi} from './OblArticleAllListApi'
     import {DrawerFieldTypeEnum,QueryMatchType} from '~Components/regular/common/drawer/drawer_define.js'
     import {OblCommonMixin} from '~Layout/mixin/OblCommonMixin';
@@ -430,7 +435,15 @@
             },
             handleDetailDrawerClose(e){ //Drawer-文章 详情关闭
                 this.drawerConf.detail.article.visible = false ;
-            }
+            },
+            goToViewDetail(e,record) {
+                if(!record){
+                    return ;
+                }
+                var params = record ;
+                var url = BeeUtil.UrlUtils.objToUrl(this.mixinData.routerConst.article.display,params);
+                this.mixin_jump(url);
+            },
         },
         watch:{
             binding:{

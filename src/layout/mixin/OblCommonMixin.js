@@ -148,6 +148,12 @@ export const OblCommonMixin = {
                 }
             })
         },
+        mixin_jump(goToRoute){  //跳转到指定路由
+            if(!goToRoute){
+                return ;
+            }
+            this.$router.push(goToRoute) ;
+        },
         mixin_getFilterOption(input,option){
             return (option.componentOptions.children[0].text.toLowerCase().indexOf(input.toLowerCase()) >= 0);
         }

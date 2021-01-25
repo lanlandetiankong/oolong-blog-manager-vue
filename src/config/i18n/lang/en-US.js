@@ -265,8 +265,9 @@ export const langMap = {
                 unpublished:'Unpublished',
             },
             auditStatus:{
-                approved:'Approved',
-                approval:'Approval'
+                notApproved:'Not approved',
+                approval:'Approval',
+                approved:'Approved'
             }
         },
         valueMap:{
@@ -383,6 +384,33 @@ export const langMap = {
                     key:'done',
                     title:'Submit',
                     description:'Submit an article'
+                }
+            }
+        }
+    },
+    results:{
+        universal:{
+            success:{
+                title:'Successful operation'
+            },
+            failure:{
+                title:'Operation failed',
+                extra:{
+                    serverError:'System error'
+                }
+            }
+        },
+        article:{
+            create:{
+                success:{
+                    extra:{
+                        viewDetail:'View article'
+                    }
+                },
+                failure:{
+                    extra:{
+                        retry:'Retry'
+                    }
                 }
             }
         }
