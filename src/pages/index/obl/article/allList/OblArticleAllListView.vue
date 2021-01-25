@@ -69,7 +69,7 @@
                         </span>
                     </span>
                     <span slot="publishTimeRender" slot-scope="text,record,index">
-                        {{record.publishTime | formatCnDateTime}}
+                        {{record.publishTime | formatBaseDateTime}}
                     </span>
                     <span slot="auditStateRender" slot-scope="text,record,index">
                         <span>

@@ -5,6 +5,7 @@ import App from './App'
 import router from './router'
 import store from '@/store/index'
 import VueI18n from 'vue-i18n'
+import DateFilter from './filter/DateFilter'
 
 import Antd from 'ant-design-vue'
 import 'ant-design-vue/dist/antd.css'
@@ -16,8 +17,6 @@ import VueScroll from 'vuescroll'
 import VueScrollConf from '~Config/vuescroll/vuescroll.conf.js'
 
 import VueCookies from 'vue-cookies'
-import moment from 'moment'
-import 'moment/locale/zh-cn';
 
 //富文本编辑器
 import VueQuillEditor from 'vue-quill-editor'
@@ -57,16 +56,7 @@ const i18n = new VueI18n({
 window.vuei18n = i18n ;
 
 
-moment.locale('zh-cn');
-// 定义全局时间戳过滤器
-Vue.filter('formatCnDateTime', function(value) {
-    if(!value){
-        return '' ;
-    }
-    return moment(value).format('YYYY-MM-DD HH:mm:ss')
-})
 
-//moment().startOf('day').fromNow();
 
 //router每次跳转都刷新页面的处理
 //Vue.prototype.router = router;
@@ -75,6 +65,7 @@ new Vue({
   router,
   store,
   i18n,
+  DateFilter,
   components: { App },
   template: '<App/>'
 })
