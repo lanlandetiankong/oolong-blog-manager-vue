@@ -50,12 +50,12 @@
                 >
 
                     <span slot="categoryNamesRender" slot-scope="text,record,index">
-                        <a-tag color="blue" v-for="categoryItem in record.categoryNameList">
+                        <a-tag color="blue" :key="idx" v-for="(categoryItem,idx) in record.categoryNameList">
                             {{categoryItem}}
                         </a-tag>
                     </span>
                     <span slot="tagNamesRender" slot-scope="text,record,index">
-                        <a-tag color="blue" v-for="tagItem of record.tagNameList">
+                        <a-tag color="blue" :key="idx" v-for="(tagItem,idx) of record.tagNameList">
                             {{tagItem}}
                         </a-tag>
                     </span>
