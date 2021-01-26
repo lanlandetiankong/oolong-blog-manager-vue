@@ -310,7 +310,7 @@
                         locked:{
                             key:'locked',
                             formType:FormItemTypeEnum.Select,
-                            label:this.$t('langMap.table.fields.common.label'),
+                            label:this.$t('langMap.table.fields.common.lockedStatus'),
                             decorator:["locked", {rules: []}],
                             options:[]
                         }
@@ -355,12 +355,12 @@
                         dataIndex: 'email',
                         key: 'email',
                     }, {
-                        title: this.$t('langMap.table.fields.common.lockedStatus'),
+                        title: this.$t('langMap.table.fields.em.user.userType'),
                         align:textAlignDefault,
                         key: 'userTypeStr',
                         scopedSlots: { customRender: 'userTypeStr' },
                     },{
-                        title: this.$t('langMap.table.fields.em.user.locked'),
+                        title: this.$t('langMap.table.fields.common.lockedStatus'),
                         align:textAlignDefault,
                         key: 'locked',
                         scopedSlots: { customRender: 'locked' },
