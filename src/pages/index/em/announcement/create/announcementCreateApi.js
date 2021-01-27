@@ -37,7 +37,7 @@ export const AnnouncementCreateApi = {
             "weights":true
         }
         var obj = {
-            queryObj:JSON.stringify([]),
+            queryObj:JSON.stringify({}),
             //paginationObj:JSON.stringify({}),
             sortObj:JSON.stringify(sortObj),
         }

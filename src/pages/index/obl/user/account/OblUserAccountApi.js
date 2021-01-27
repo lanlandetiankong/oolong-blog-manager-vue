@@ -106,7 +106,7 @@ export const OblUserAccountApi = {
     getAllDefineTenantEnums() {  //取得 租户 列表
         var sortObj = {}
         var obj = {
-            queryObj: JSON.stringify([]),
+            queryObj: JSON.stringify({}),
             //paginationObj:JSON.stringify({}),
             //sortObj:JSON.stringify(sortObj),
         }
@@ -116,7 +116,7 @@ export const OblUserAccountApi = {
     getAllDefineDepartmentTrees() {  //取得 租户 列表
         var sortObj = {}
         var obj = {
-            queryObj: JSON.stringify([]),
+            queryObj: JSON.stringify({}),
         }
         //查询所有[租户定义]信息
         return axios.post('/oblCtl/define/defineDepartment/queryTreeSelect', qs.stringify(obj)).then(res => res.data);

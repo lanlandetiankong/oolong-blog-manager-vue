@@ -37,7 +37,7 @@ export const ArticleCreateApi = {
             "weights":true
         }
         var obj = {
-            queryObj:JSON.stringify([]),
+            queryObj:JSON.stringify({}),
             //paginationObj:JSON.stringify({}),
             sortObj:JSON.stringify(sortObj),
         }
@@ -46,7 +46,7 @@ export const ArticleCreateApi = {
     },
     getAllArticleCategoryTree() {  //取得 文章分类 树
         var obj = {
-            queryObj:JSON.stringify([]),
+            queryObj:JSON.stringify({}),
         }
         //查询所有文章标签信息
         return axios.post('/oblCtl/oblArticleCategory/queryTreeSelect',qs.stringify(obj)).then(res => res.data);
