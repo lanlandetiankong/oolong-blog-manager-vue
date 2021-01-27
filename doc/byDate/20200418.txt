@@ -74,3 +74,13 @@ import {OblCommonMixin} from '~Layout/mixin/OblCommonMixin';
 mixins:[OblCommonMixin],
 
 mixin_getFilterOption
+
+
+?autoAddFixedField
+
+//QueryMatchType.like
+//matching
+foreignName
+drawerAble
+
+import {DrawerFieldTypeEnum,QueryMatchType} from '~Components/regular/common/drawer/drawer_define.js'

@@ -49,31 +49,6 @@ export const OblCommonMixin = {
             }
             return queryObj;
         },
-        mixin_dealGetSearchFormQueryConf2(queryConf,queryObj){
-            const queryFieldArr = [] ;
-            if(queryObj) {
-                for (const key in queryObj){
-                    const searchFieldObj = queryConf[key];
-                    if(typeof searchFieldObj == "undefined"){
-                        continue ;
-                    }
-                    const searchAbleVal = this.mixin_defaultIfblank(searchFieldObj.searchAble,true);
-                    if(searchAbleVal == false){
-                        continue ;
-                    }
-                    const queryVal = queryObj[key] ;
-                    if(queryVal || queryVal == 0){
-                        let theMatching = (searchFieldObj.matching) ? searchFieldObj.matching : QueryMatchType.equals;
-                        queryFieldArr.push({
-                            fieldName:searchFieldObj.fieldName,
-                            value:queryObj[key],
-                            matching:theMatching
-                        });
-                    }
-                }
-            }
-            return queryFieldArr ;
-        },
         mixin_defaultIfblank(val,defval){   //当blank时取默认值
             if(typeof val == "undefined" || val == null || val == ""){
                 return defval ;
