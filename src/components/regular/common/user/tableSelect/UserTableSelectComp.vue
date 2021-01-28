@@ -43,6 +43,8 @@
     import jquery from 'jquery';
     import {UserTableSelectCompApi} from './userTableSelectCompApi'
     import {UserCommonApis} from '~Apis/user/UserCommonApis.js'
+    import {FormItemTypeEnum} from "~Components/constant_define";
+
     import {OblCommonMixin} from '~Layout/mixin/OblCommonMixin';
     import {QueryMatchType} from '~Components/regular/common/drawer/drawer_define.js'
     import QueryFormComp from '~Components/regular/query/QueryFormComp'
@@ -78,12 +80,6 @@
                 default:[]
             },
             searchFlagConf:{
-                belongTenantId:{
-                    show:true,
-                    search:true,
-                    modifyVal:true,
-                    defaultVal:''
-                },
                 belongDepartmentId: {
                     show:true,
                     search:true,
@@ -142,9 +138,6 @@
                     fieldLabel:this.$t('langMap.table.fields.em.user.userType'),
                     fieldName:'userType', matching:QueryMatchType.equals,drawerAble:false
                 },
-                belongTenantId:{
-                    fieldName:'defineTenantId',matching:QueryMatchType.equals, foreignName:'userTenant',drawerAble:false,
-                },
                 belongDepartmentId:{
                     fieldName:'defineDepartmentId', matching:QueryMatchType.equals, foreignName:'userDepartment',drawerAble:false,
                 },
@@ -157,7 +150,6 @@
             return {
                 fieldInfoConf:fieldInfoConfObj,
                 binding:{
-                    belongTenants:[],
                     belongDepartments:[],
                     userTypes:[],
                     lockStates:[]
@@ -166,13 +158,6 @@
                     showAble:false,
                     loadingFlag: false,
                     formItemConf:{
-                        belongTenantId:{
-                            key:'belongTenantId',
-                            formType:FormItemTypeEnum.Select,
-                            label:this.$t('langMap.table.fields.em.tenant.belongTenant'),
-                            decorator:["belongTenantId", {rules: [],initialValue:_this.$props.searchFlagConf.belongTenantId.defaultVal}],
-                            options:[]
-                        },
                         belongDepartmentId:{
                             key:'belongDepartmentId',
                             formType:FormItemTypeEnum.TreeSelect,
@@ -333,15 +318,7 @@
                     }
                 })
             },
-            dealGetDefineTenantEnumList(){  //取得 所属租户-枚举列表
-                var _this = this ;
-                UserTableSelectCompApi.getAllDefineTenantEnums().then((res) => {
-                    if(res && res.success){
-                        _this.searchConf.binding.belongTenants = res.enumData.list ;
-                    }
-                })
-            },
-            dealGetDefineDepartmentTreeData(){  //取得 所属租户-枚举列表
+            dealGetDefineDepartmentTreeData(){  //取得 所属部门-枚举列表
                 var _this = this ;
                 UserTableSelectCompApi.getAllDefineDepartmentTrees().then((res) => {
                     if(res && res.success){
@@ -461,7 +438,6 @@
             binding:{
                 handler (val, oval) {
                     //绑定枚举值变化监听并处理
-                    this.searchConf.formItemConf.belongTenantId.options = this.binding.belongTenants ;
                     this.searchConf.formItemConf.belongDepartmentId.treeData = this.binding.belongDepartments ;
                     this.searchConf.formItemConf.userType.options = this.binding.userTypes ;
                     this.searchConf.formItemConf.locked.options = this.binding.lockStates ;
@@ -473,7 +449,6 @@
         created() {
             this.dealGetAllUserAccounts();
             this.dealGetUserTypeEnumList();
-            this.dealGetDefineTenantEnumList();
             this.dealGetDefineDepartmentTreeData();
             this.dealGetLockStateEnumList();
         }

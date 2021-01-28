@@ -84,7 +84,6 @@ export const langMap = {
                 detailForDefineRole:'Detail for define role',
                 detailForDefineJob:'Detail for define job',
                 detailForDefinePermission:'Detail for define permission',
-                detailForDefineTenant:'Detail for define tenant ',
                 detailForDefineForm:'Detail for define form ',
                 detailForDefineFormType:'Detail for define form type',
             }
@@ -145,7 +144,10 @@ export const langMap = {
                     userName:'Nick name',
                     avatarUrl:'Avatar',
                     email:'Email',
+                    phone:'Phone Number',
                     userType:'User type',
+                    sex:'Sex',
+                    address:'Address'
                 },
                 module:{
                     iconName:'Icon Value',
@@ -167,10 +169,6 @@ export const langMap = {
                     parentDepartmentName:' Parent department name',
                     belongDepartment:'Belong department',
                     publishDepartment:'Publish department',
-                },
-                tenant:{
-                    tenantName:'Tenant Name',
-                    belongTenant:'Belong tenant',
                 },
                 role:{
                     roleName:'Role name',

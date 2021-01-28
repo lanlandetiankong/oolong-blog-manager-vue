@@ -540,7 +540,7 @@
                 this.tableConf.sorter = sorter ;
                 this.mixin_invokeQuery(this);
             },
-            handleDetailDrawerShow(e,record){   //Drawer-租户定义 详情展示
+            handleDetailDrawerShow(e,record){   //Drawer-详情展示
                 if(typeof record != "undefined"){
                     this.drawerConf.detail.definePermission.dataObj = record ;
                     this.drawerConf.detail.definePermission.visible = true ;
@@ -548,7 +548,7 @@
                     this.$message.error(this.$t('langMap.message.warning.openInvalidRowDetails'));
                 }
             },
-            handleDetailDrawerClose(e){ //Drawer-租户定义 详情关闭
+            handleDetailDrawerClose(e){ //Drawer-详情关闭
                 this.drawerConf.detail.definePermission.visible = false ;
             }
         },

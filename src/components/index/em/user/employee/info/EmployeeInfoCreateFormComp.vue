@@ -13,18 +13,6 @@
                 layout="vertical"
                 :form="createForm"
             >
-                <a-form-item :label="$t('langMap.table.fields.em.tenant.belongTenant')"
-                             v-bind="FormBaseConfObj.formItemLayout"
-                >
-                    <a-select showSearch allowClear
-                              :placeholder="$t('langMap.commons.forms.pleaseChoose')"
-                              optionFilterProp="children"
-                              :options="belongTenants"
-                              :filterOption="mixin_getFilterOption"
-                              v-decorator="formFieldConf.belongTenantId"
-                    >
-                    </a-select>
-                </a-form-item>
                 <a-form-item :label="$t('langMap.table.fields.em.department.belongDepartment')"
                              v-bind="FormBaseConfObj.formItemLayout"
                 >
@@ -92,7 +80,6 @@
             visible:Boolean,
             actionType:String,
             formObj:Object,
-            belongTenants:Array,
             belongDepartmentTrees:Array
         },
         data(){
@@ -108,9 +95,6 @@
                     {type: 'email',message:this.$t('langMap.commons.forms.fillInValid',[this.$t('langMap.table.fields.em.user.email')])}
                 ],
                 avatarUrl:[],
-                belongTenantId:[
-                    {required:true,message:this.$t('langMap.commons.forms.pleaseSelect',[this.$t('langMap.table.fields.em.tenant.belongTenant')])}
-                ],
                 belongDepartmentId:[
                     {required:true,message:this.$t('langMap.commons.forms.pleaseSelect',[this.$t('langMap.table.fields.em.department.belongDepartment')])}
                 ],
@@ -125,7 +109,6 @@
                     userName: ["userName", {rules: paramsRules.userName}],
                     email: ["email", {rules: paramsRules.email}],
                     avatarUrl: ["avatarUrl", {rules: paramsRules.avatarUrl}],
-                    belongTenantId: ["belongTenantId", {rules: paramsRules.belongTenantId}],
                     belongDepartmentId: ["belongDepartmentId", {rules: paramsRules.belongDepartmentId}],
                     locked: ["locked", {rules: paramsRules.locked}]
                 },
@@ -159,10 +142,6 @@
                         avatarUrl: _this.$form.createFormField({
                             ...formObj,
                             value: formObj.avatarUrl,
-                        }),
-                        belongTenantId: _this.$form.createFormField({
-                            ...formObj,
-                            value: formObj.belongTenantId,
                         }),
                         belongDepartmentId: _this.$form.createFormField({
                             ...formObj,
@@ -229,10 +208,6 @@
                         avatarUrl: this.$form.createFormField({
                             ..._this.formObj,
                             value: _this.formObj.avatarUrl
-                        }),
-                        belongTenantId: this.$form.createFormField({
-                            ..._this.formObj,
-                            value: _this.formObj.belongTenantId
                         }),
                         belongDepartmentId: this.$form.createFormField({
                             ..._this.formObj,

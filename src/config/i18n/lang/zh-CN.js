@@ -84,7 +84,6 @@ export const langMap = {
                 detailForDefineRole:'角色定义详情',
                 detailForDefineJob:'职务详情',
                 detailForDefinePermission:'权限定义详情',
-                detailForDefineTenant:'租户信息详情',
                 detailForDefineForm:'表单定义详情',
                 detailForDefineFormType:'表单类型定义详情',
             }
@@ -145,7 +144,10 @@ export const langMap = {
                     userName:'用户名',
                     avatarUrl:'头像',
                     email:'邮箱',
+                    phone:'手机号',
                     userType:'用户类型',
+                    sex:'性别',
+                    address:'地址'
                 },
                 module:{
                     iconName:'图标值',
@@ -167,10 +169,6 @@ export const langMap = {
                     parentDepartmentName:'上级部门名',
                     belongDepartment:'所属部门',
                     publishDepartment:'发布部门',
-                },
-                tenant:{
-                    tenantName:'租户名',
-                    belongTenant:'所属租户',
                 },
                 role:{
                     roleName:'角色名',

@@ -33,22 +33,12 @@ export const UserTableSelectCompApi = {
         }
         return axios.post('/oblCtl/define/defineJob/queryPage', qs.stringify(obj)).then(res => res.data);
     },
-    getAllDefineTenantEnums() {  //取得 租户 列表
-        var sortObj = {}
-        var obj = {
-            queryObj: JSON.stringify({}),
-            //paginationObj:JSON.stringify({}),
-            //sortObj:JSON.stringify(sortObj),
-        }
-        //查询所有[租户定义]信息
-        return axios.post('/oblCtl/organization/defineTenant/gainEnumSelect', qs.stringify(obj)).then(res => res.data);
-    },
-    getAllDefineDepartmentTrees() {  //取得 租户 列表
+    getAllDefineDepartmentTrees() {  //取得 部门 列表
         var sortObj = {}
         var obj = {
             queryObj: JSON.stringify({}),
         }
-        //查询所有[租户定义]信息
+        //查询所有[部门]信息
         return axios.post('/oblCtl/define/defineDepartment/queryTreeSelect', qs.stringify(obj)).then(res => res.data);
     }
 }

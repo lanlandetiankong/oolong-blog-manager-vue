@@ -74,5 +74,11 @@ export const i18nUtil =  {
     },
     equalsLocale(localeVal){
         return checkEqualsLocale(localeVal);
+    },
+    getI18nLocale(){
+        return getI18nLocale();
+    },
+    isZhCnLocale(){
+        return getI18nLocale() == 'zh-CN' ;
     }
 }

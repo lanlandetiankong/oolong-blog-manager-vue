@@ -39,16 +39,6 @@ const EmployeeRouter = {
                 parentRouterCompName,
                 selfCompName:'DepartmentManagerView'
             }
-        },
-        {
-            path:'tenant/manager',
-            component:_import('index/em/employee/tenant/TenantManagerView'),
-            name:'tenantManager',
-            meta:{
-                title:'租户管理',icon:"user",keepAliveFlag:true,
-                parentRouterCompName,
-                selfCompName:'TenantManagerView'
-            }
         }
     ]
 };

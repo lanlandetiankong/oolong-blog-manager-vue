@@ -111,6 +111,9 @@
                         {{$t('langMap.commons.enums.lockStatus.unlock')}}
                     </a-tag>
                 </span>
+                <span slot="sexRender" slot-scope="text,record,index">
+                        {{record.sex | formatConstOfSex}}
+                    </span>
                 <template slot="action" slot-scope="text,record">
                     <span>
                         <a @click="handleDetailDrawerShow($event,record)">
@@ -138,7 +141,6 @@
                 :visible="dialogFormConf.visible"
                 :formObj="dialogFormObj"
                 :actionType="dialogFormConf.actionType"
-                :belongTenants="binding.belongTenants"
                 :belongDepartmentTrees="binding.belongDepartments"
                 @createFormCancel="handleCreateFormCancel"
                 @createFormSubmit="handleCreateFormSubmit"
@@ -221,9 +223,6 @@
                 userName:{
                     fieldLabel:this.$t('langMap.table.fields.em.user.userName'),
                 },
-                belongTenantName:{
-                    fieldLabel:this.$t('langMap.table.fields.em.tenant.belongTenant'),
-                },
                 belongDepartmentName:{
                     fieldLabel:this.$t('langMap.table.fields.em.department.belongDepartment'),
                     isNeedSplit:true,fieldKeySplitArr:['belongDepartment','name'],
@@ -237,9 +236,6 @@
                 userTypeStr:{
                     fieldLabel:this.$t('langMap.table.fields.em.user.userType'),
                     searchAble:false
-                },
-                belongTenantId:{
-                    fieldName:'defineTenantId',drawerAble:false,
                 },
                 belongDepartmentId:{
                     fieldName:'defineDepartmentId',drawerAble:false,
@@ -259,13 +255,6 @@
                     showAble:false,
                     loadingFlag: false,
                     formItemConf:{
-                        belongTenantId:{
-                            key:'belongTenantId',
-                            formType:FormItemTypeEnum.Select,
-                            label:this.$t('langMap.table.fields.em.tenant.belongTenant'),
-                            decorator:["belongTenantId", {rules: []}],
-                            options:[]
-                        },
                         belongDepartmentId:{
                             key:'belongDepartmentId',
                             formType:FormItemTypeEnum.TreeSelect,
@@ -310,7 +299,6 @@
                     }
                 },
                 binding:{
-                    belongTenants:[],
                     belongDepartments:[],
                     userTypes:[],
                     lockStates:[]
@@ -330,34 +318,45 @@
                         dataIndex: 'userName',
                         sorter:true,
                         key: 'userName',
-                    }, {
-                        title: this.$t('langMap.table.fields.em.tenant.belongTenant'),
-                        align:textAlignDefault,
-                        dataIndex: 'belongTenant.name',
-                        sorter:true,
-                        key: 'belongTenant.name',
-                    },  {
+                    },{
                         title: this.$t('langMap.table.fields.em.department.belongDepartment'),
                         align:textAlignDefault,
                         dataIndex: 'belongDepartment.name',
                         sorter:true,
                         key: 'belongDepartment.name',
+                    },  {
+                        title: this.$t('langMap.table.fields.em.user.phone'),
+                        align:textAlignDefault,
+                        dataIndex: 'phone',
+                        sorter:true,
+                        key: 'phone',
                     }, {
                         title: this.$t('langMap.table.fields.em.user.email'),
                         align:textAlignDefault,
                         dataIndex: 'email',
                         key: 'email',
+                    },{
+                        title: this.$t('langMap.table.fields.em.user.sex'),
+                        align:textAlignDefault,
+                        key: 'sex',
+                        scopedSlots: { customRender: 'sexRender' },
                     }, {
                         title: this.$t('langMap.table.fields.em.user.userType'),
                         align:textAlignDefault,
                         key: 'userTypeStr',
                         scopedSlots: { customRender: 'userTypeStr' },
-                    },{
+                    }, {
                         title: this.$t('langMap.table.fields.common.lockedStatus'),
                         align:textAlignDefault,
                         key: 'locked',
                         scopedSlots: { customRender: 'locked' },
                     }, {
+                        title: this.$t('langMap.table.fields.em.user.address'),
+                        align:textAlignDefault,
+                        dataIndex: 'address',
+                        width:170,
+                        key: 'address',
+                    },{
                         title:this.$t('langMap.table.header.operation'),
                         align:textAlignDefault,
                         dataIndex:"operation",
@@ -390,7 +389,6 @@
                     account: '',
                     email: '',
                     userType: '',
-                    belongTenantId: '',
                     belongDepartmentId: '',
                     locked:'0'
                 },
@@ -399,7 +397,6 @@
                     account: '',
                     email: '',
                     userType: '',
-                    belongTenantId: '',
                     belongDepartmentId: '',
                     locked:'0'
                 },
@@ -523,15 +520,7 @@
                     }
                 })
             },
-            dealGetDefineTenantEnumList(){  //取得 所属租户-枚举列表
-                var _this = this ;
-                EmpInfoApi.getAllDefineTenantEnums().then((res) => {
-                    if(res && res.success){
-                        _this.binding.belongTenants = res.enumData.list ;
-                    }
-                })
-            },
-            dealGetDefineDepartmentTreeData(){  //取得 所属租户-枚举列表
+            dealGetDefineDepartmentTreeData(){  //取得 所属部门-枚举列表
                 var _this = this ;
                 EmpInfoApi.getAllDefineDepartmentTrees().then((res) => {
                     if(res && res.success){
@@ -984,7 +973,6 @@
         },
         created(){
             this.dealGetUserTypeEnumList();
-            this.dealGetDefineTenantEnumList();
             this.dealGetDefineDepartmentTreeData();
             this.dealGetLockStateEnumList();
         },
@@ -995,7 +983,6 @@
             binding:{
                 handler (val, oval) {
                     //绑定枚举值变化监听并处理
-                    this.searchConf.formItemConf.belongTenantId.options = this.binding.belongTenants ;
                     this.searchConf.formItemConf.belongDepartmentId.treeData = this.binding.belongDepartments ;
                     this.searchConf.formItemConf.userType.options = this.binding.userTypes ;
                     this.searchConf.formItemConf.locked.options = this.binding.lockStates ;
