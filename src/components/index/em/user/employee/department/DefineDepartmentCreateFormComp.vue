@@ -35,7 +35,7 @@
                 >
                     <a-input v-decorator="formFieldConf.code"/>
                 </a-form-item>
-                <a-form-item :label="$t('langMap.table..fields.common.Val')"
+                <a-form-item :label="$t('langMap.table.fields.common.weights')"
                              v-bind="FormBaseConfObj.formItemLayout"
                 >
                     <a-input-number v-decorator="formFieldConf.weights"/>
