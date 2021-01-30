@@ -224,7 +224,7 @@
                         },
                         urlJumpType:{
                             key:'urlJumpType',
-                            formType:FormItemTypeEnum.Input,
+                            formType:FormItemTypeEnum.Select,
                             label:this.$t('langMap.table.fields.em.menu.urlJumpType'),
                             decorator:["urlJumpType", {rules: []}],
                             options:[]

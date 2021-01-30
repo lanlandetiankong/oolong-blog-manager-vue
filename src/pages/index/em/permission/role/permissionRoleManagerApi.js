@@ -33,7 +33,7 @@ export const PermissionRoleManagerApi = {
     },
     getAllDefinePermissions() {     //取得所有定义的权限
         var obj = {
-            queryObj:[],
+            queryObj:{},
             paginationObj:{}
         }
         //查询所有权限信息
