@@ -138,7 +138,6 @@
 </template>
 
 <script>
-    import {QueryMatchType} from '~Components/regular/common/drawer/drawer_define.js'
     import {OblCommonMixin} from '~Layout/mixin/OblCommonMixin';
     import {PermissionRoleManagerApi} from './permissionRoleManagerApi.js'
     import {PermissionCommonApis} from '~Apis/permission/PermissionCommonApis.js'
@@ -158,19 +157,19 @@
             const fieldInfoConfObj = {
                 name:{
                     fieldLabel:this.$t('langMap.table.fields.em.permission.permissionName'),
-                    fieldName:'name', matching:QueryMatchType.like
+                    fieldName:'name'
                 },
                 code:{
                     fieldLabel:this.$t('langMap.table.fields.common.code'),
-                    fieldName:'code', matching:QueryMatchType.like,
+                    fieldName:'code',
                 },
                 type:{
                     fieldLabel:this.$t('langMap.table.fields.common.type'),
-                    fieldName:'type',matching:QueryMatchType.equals,
+                    fieldName:'type',
                 },
                 remark:{
                     fieldLabel:this.$t('langMap.table.fields.common.remark'),
-                    fieldName:'remark', matching:QueryMatchType.like,
+                    fieldName:'remark',
                 }
             };
             return {

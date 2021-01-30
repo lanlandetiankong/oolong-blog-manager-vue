@@ -100,7 +100,6 @@
 <script>
     import {AnnouncementTagApi} from './announcementTagApi.js'
     import {OblCommonMixin} from '~Layout/mixin/OblCommonMixin';
-    import {QueryMatchType} from '~Components/regular/common/drawer/drawer_define.js'
     import {FormItemTypeEnum,ConstantObj} from "~Components/constant_define";
 
     import QueryFormComp from '~Components/regular/query/QueryFormComp'
@@ -116,19 +115,19 @@
             const fieldInfoConfObj = {
                 name:{
                     fieldLabel:this.$t('langMap.table.fields.em.announcementTag.tagName'),
-                    fieldName:'name', matching:QueryMatchType.like,
+                    fieldName:'name'
                 },
                 description:{
                     fieldLabel:this.$t('langMap.table.fields.em.announcementTag.description'),
-                    fieldName:'description', matching:QueryMatchType.like,
+                    fieldName:'description'
                 },
                 weights:{
                     fieldLabel:this.$t('langMap.table.fields.common.weights'),
-                    fieldName:'weights', matching:QueryMatchType.equals,
+                    fieldName:'weights'
                 },
                 remark:{
                     fieldLabel:this.$t('langMap.table.fields.common.remark'),
-                    fieldName:'remark', matching:QueryMatchType.like,
+                    fieldName:'remark'
                 }
             };
             return {

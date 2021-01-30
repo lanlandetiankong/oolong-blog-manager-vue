@@ -102,7 +102,6 @@
     </div>
 </template>
 <script>
-    import {QueryMatchType} from '~Components/regular/common/drawer/drawer_define.js'
     import {OblCommonMixin} from '~Layout/mixin/OblCommonMixin';
     import {OblArticleCategoryApi} from './OblArticleCategoryApi.js'
     import {FormItemTypeEnum,ConstantObj} from "~Components/constant_define";
@@ -123,7 +122,7 @@
             const fieldInfoConfObj = {
                 name:{
                     fieldLabel:this.$t('langMap.table.fields.obl.articleCategory.name'),
-                    fieldName:'name',matching:QueryMatchType.like
+                    fieldName:'name'
                 },
                 pid:{
                     fieldName:'pid',drawerAble:false
@@ -134,11 +133,11 @@
                 },
                 description:{
                     fieldLabel:this.$t('langMap.table.fields.common.description'),
-                    fieldName:'description',matching:QueryMatchType.like
+                    fieldName:'description'
                 },
                 remark:{
                     fieldLabel:this.$t('langMap.table.fields.common.remark'),
-                    fieldName:'remark',matching:QueryMatchType.like
+                    fieldName:'remark'
                 }
             };
             return {

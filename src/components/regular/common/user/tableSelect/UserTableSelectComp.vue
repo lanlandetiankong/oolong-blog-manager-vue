@@ -41,12 +41,12 @@
 
 <script>
     import jquery from 'jquery';
+    import {DrawerFieldTypeEnum} from "./drawer_define";
     import {UserTableSelectCompApi} from './userTableSelectCompApi'
     import {UserCommonApis} from '~Apis/user/UserCommonApis.js'
     import {FormItemTypeEnum} from "~Components/constant_define";
 
     import {OblCommonMixin} from '~Layout/mixin/OblCommonMixin';
-    import {QueryMatchType} from '~Components/regular/common/drawer/drawer_define.js'
     import QueryFormComp from '~Components/regular/query/QueryFormComp'
     import SearchFilterBtnComp from '~Components/regular/common/search/SearchFilterBtnComp'
 
@@ -124,26 +124,26 @@
             const fieldInfoConfObj = {
                 account:{
                     fieldLabel:this.$t('langMap.table.fields.em.user.userAccount'),
-                    fieldName:'account', matching:QueryMatchType.like,
+                    fieldName:'account'
                 },
                 userName:{
                     fieldLabel:this.$t('langMap.table.fields.em.user.userName'),
-                    fieldName:'userName', matching:QueryMatchType.like,
+                    fieldName:'userName'
                 },
                 email:{
                     fieldLabel:this.$t('langMap.table.fields.em.user.email'),
-                    fieldName:'email', matching:QueryMatchType.like,
+                    fieldName:'email'
                 },
                 userType:{
                     fieldLabel:this.$t('langMap.table.fields.em.user.userType'),
-                    fieldName:'userType', matching:QueryMatchType.equals,drawerAble:false
+                    fieldName:'userType',drawerAble:false
                 },
                 belongDepartmentId:{
-                    fieldName:'defineDepartmentId', matching:QueryMatchType.equals, foreignName:'userDepartment',drawerAble:false,
+                    fieldName:'defineDepartmentId',drawerAble:false,
                 },
                 locked:{
                     fieldLabel:this.$t('langMap.table.fields.common.lockedStatus'),
-                    fieldName:'locked', matching:QueryMatchType.equals,type:DrawerFieldTypeEnum.Enum,
+                    fieldName:'locked', type:DrawerFieldTypeEnum.Enum,
                     enumValMap:{"1":"已锁定", "0":"未锁定"}
                 }
             };

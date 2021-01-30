@@ -13,7 +13,6 @@
     </div>
 </template>
 <script>
-    import {QueryMatchType} from '~Components/regular/common/drawer/drawer_define.js'
     import {OblCommonMixin} from '~Layout/mixin/OblCommonMixin';
 
     import SimpleDetailDrawerComp from '~Components/regular/common/drawer/SimpleDetailDrawerComp';
@@ -46,7 +45,7 @@
                 fixedFieldConf:{
                     remark:{
                         fieldLabel:this.$t('langMap.table.fields.common.remark'),
-                        fieldName:'remark', matching:QueryMatchType.like,
+                        fieldName:'remark'
                     },
                     createUserName:{
                         fieldLabel:this.$t('langMap.table.fields.common.createUserName'),

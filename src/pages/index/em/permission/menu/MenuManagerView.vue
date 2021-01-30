@@ -129,7 +129,6 @@
     import AFormItem from "ant-design-vue/es/form/FormItem";
     import ACol from "ant-design-vue/es/grid/Col";
 
-    import {QueryMatchType} from '~Components/regular/common/drawer/drawer_define.js'
     import {OblCommonMixin} from '~Layout/mixin/OblCommonMixin';
     import {MenuManagerApi} from './menuManagerApi.js'
     import {ModuleCommonApis} from '~Apis/module/ModuleCommonApis.js'
@@ -149,10 +148,10 @@
             const fieldInfoConfObj = {
                 menuName:{
                     fieldLabel:this.$t('langMap.table.fields.em.menu.menuName'),
-                    fieldName:'menuName',matching:QueryMatchType.like
+                    fieldName:'menuName'
                 },
                 pid:{
-                    fieldName:'pid',matching:QueryMatchType.equals,drawerAble:false
+                    fieldName:'pid'
                 },
                 parentMenuName:{
                     fieldLabel:this.$t('langMap.table.fields.em.menu.parentMenuName'),
@@ -160,23 +159,23 @@
                 },
                 label:{
                     fieldLabel:this.$t('langMap.table.fields.common.label'),
-                    fieldName:'label',matching:QueryMatchType.like
+                    fieldName:'label'
                 },
                 routerUrl:{
                     fieldLabel:this.$t('langMap.table.fields.em.menu.routerUrl'),
-                    fieldName:'routerUrl',matching:QueryMatchType.like
+                    fieldName:'routerUrl'
                 },
                 hrefUrl:{
                     fieldLabel:this.$t('langMap.table.fields.em.menu.hrefUrl'),
-                    fieldName:'name',matching:QueryMatchType.like
+                    fieldName:'name'
                 },
                 urlJumpType:{
                     fieldLabel:this.$t('langMap.table.fields.em.menu.urlJumpType'),
-                    fieldName:'urlJumpType',matching:QueryMatchType.like
+                    fieldName:'urlJumpType'
                 },
                 remark:{
                     fieldLabel:this.$t('langMap.table.fields.common.remark'),
-                    fieldName:'remark',matching:QueryMatchType.equals
+                    fieldName:'remark'
                 }
             };
             return {

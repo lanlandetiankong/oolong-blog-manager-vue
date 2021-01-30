@@ -98,7 +98,6 @@
     import AFormItem from "ant-design-vue/es/form/FormItem";
     import ACol from "ant-design-vue/es/grid/Col";
 
-    import {QueryMatchType} from '~Components/regular/common/drawer/drawer_define.js'
     import {DepartmentManagerApi} from './departmentManagerApi.js'
     import {OblCommonMixin} from '~Layout/mixin/OblCommonMixin';
     import {FormItemTypeEnum,ConstantObj} from "~Components/constant_define";
@@ -116,10 +115,10 @@
             const fieldInfoConfObj = {
                 name:{
                     fieldLabel:this.$t('langMap.table.fields.em.department.departmentName'),
-                    fieldName:'name', matching:QueryMatchType.like,
+                    fieldName:'name',
                 },
                 pid:{
-                    fieldName:'pid', matching:QueryMatchType.equals, drawerAble:false
+                    fieldName:'pid', drawerAble:false
                 },
                 parentDepartmentName:{
                     fieldLabel:this.$t('langMap.table.fields.em.department.parentDepartmentName'),
@@ -127,19 +126,19 @@
                 },
                 code:{
                     fieldLabel:this.$t('langMap.table.fields.common.code'),
-                    fieldName:'code', matching:QueryMatchType.like,
+                    fieldName:'code',
                 },
                 level:{
                     fieldLabel:this.$t('langMap.table.fields.common.level'),
-                    fieldName:'level', matching:QueryMatchType.equals,value:0
+                    fieldName:'level',value:0
                 },
                 description:{
                     fieldLabel:this.$t('langMap.table.fields.common.description'),
-                    fieldName:'description', matching:QueryMatchType.like,
+                    fieldName:'description',
                 },
                 remark:{
                     fieldLabel:this.$t('langMap.table.fields.common.remark'),
-                    fieldName:'remark', matching:QueryMatchType.like,
+                    fieldName:'remark',
                 }
             };
             return {

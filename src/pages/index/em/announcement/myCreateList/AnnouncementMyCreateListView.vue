@@ -79,7 +79,7 @@
 </template>
 <script>
     import {AnnouncementMyCreateListApi} from './announcementMyCreateListApi'
-    import {DrawerFieldTypeEnum,QueryMatchType} from '~Components/regular/common/drawer/drawer_define.js'
+    import {DrawerFieldTypeEnum} from '~Components/regular/common/drawer/drawer_define.js'
     import {OblCommonMixin} from '~Layout/mixin/OblCommonMixin';
     import {FormItemTypeEnum,ConstantObj} from "~Components/constant_define";
     import QueryFormComp from '~Components/regular/query/QueryFormComp'
@@ -95,14 +95,14 @@
             const fieldInfoConfObj = {
                 title:{
                     fieldLabel:this.$t('langMap.table.fields.em.announcement.title'),
-                    fieldName:'title', matching:QueryMatchType.like,
+                    fieldName:'title',
                 },
                 keyWord:{
                     fieldLabel:this.$t('langMap.table.fields.em.announcement.keyWord'),
-                    fieldName:'keyWord', matching:QueryMatchType.like,
+                    fieldName:'keyWord',
                 },
                 tagIds:{
-                    fieldName:'tagIds', matching:QueryMatchType.like,drawerAble:false,
+                    fieldName:'tagIds',drawerAble:false,
                 },
                 tagNameOfStr:{
                     fieldLabel:this.$t('langMap.table.fields.em.announcement.tagNameOfStr'),
@@ -110,11 +110,11 @@
                 },
                 content:{
                     fieldLabel:this.$t('langMap.table.fields.em.announcement.content'),
-                    fieldName:'content', matching:QueryMatchType.like,type:DrawerFieldTypeEnum.HtmlDom
+                    fieldName:'content',type:DrawerFieldTypeEnum.HtmlDom
                 },
                 remark:{
                     fieldLabel:this.$t('langMap.table.fields.common.remark'),
-                    fieldName:'remark', matching:QueryMatchType.like,
+                    fieldName:'remark',
                 }
             };
             return {

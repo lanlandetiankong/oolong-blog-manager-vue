@@ -123,7 +123,7 @@
 <script>
     import BeeUtil from '~Assets/js/util/bee/BeeUtil.js' ;
     import {ArticleAllListApi} from './OblArticleAllListApi'
-    import {DrawerFieldTypeEnum,QueryMatchType} from '~Components/regular/common/drawer/drawer_define.js'
+    import {DrawerFieldTypeEnum} from '~Components/regular/common/drawer/drawer_define.js'
     import {OblCommonMixin} from '~Layout/mixin/OblCommonMixin';
     import {FormItemTypeEnum,ConstantObj} from "~Components/constant_define";
     import QueryFormComp from '~Components/regular/query/QueryFormComp'

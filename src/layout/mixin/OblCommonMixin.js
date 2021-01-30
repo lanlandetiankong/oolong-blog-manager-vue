@@ -1,5 +1,4 @@
 import { mapGetters } from 'vuex' ;
-import {QueryMatchType} from '~Components/regular/common/drawer/drawer_define.js'
 import {ConstantObj} from "~Components/constant_define";
 
 export const OblCommonMixin = {

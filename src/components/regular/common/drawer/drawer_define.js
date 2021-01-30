@@ -11,10 +11,5 @@ export const DrawerFieldTypeEnum = {
     HtmlDom:"htmlDom"
 }
 
-export const QueryMatchType = {
-    like:'like',
-    equals:'equals'
-}
-
 
 export const CommonDateFormatTypeEnum = CommonDateFormatTypeObj;
