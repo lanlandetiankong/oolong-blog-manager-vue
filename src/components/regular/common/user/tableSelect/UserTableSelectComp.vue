@@ -279,37 +279,6 @@
                     _this.changeQueryLoading(false);
                 })
             },
-            dealGetSearchFormQueryConf(queryObj){   //取得查询基本配置
-                var _this = this ;
-                var queryFieldArr = [] ;
-                if(queryObj) {
-                    for (var key in queryObj){
-
-                        var searchFieldObj = searchFormQueryConf[key];
-                        var searchFlagConfItem = _this.searchFlagConf[key];
-                        //是否可以作为搜索条件
-                        var searchFlagTmp = _this.handleGetSearchFlagBoolean(searchFlagConfItem,"show",true);
-                        if(searchFieldObj && (searchFlagTmp == true)){
-                            const queryVal = queryObj[key] ;
-                            if(queryVal || queryVal == 0){
-                                searchFieldObj['value'] = queryObj[key];
-                                queryFieldArr.push(searchFieldObj);
-                            }
-                        }
-                    }
-                }
-                return queryFieldArr ;
-            },
-            handleGetSearchFlagBoolean(searchFlagConfItem,key,defaultVal){
-                if(!searchFlagConfItem){
-                    return defaultVal ;
-                }
-                var itemFlag = searchFlagConfItem[key];
-                if(typeof itemFlag == "undefined" || itemFlag ==null){
-                    return defaultVal;
-                }
-                return itemFlag;
-            },
             dealGetUserTypeEnumList(){  //取得 用户类型-枚举列表
                 var _this = this ;
                 UserCommonApis.getAllUserType().then((res) => {
@@ -395,7 +364,7 @@
             handleSearchFormQuery(e,values) {   //带查询条件 检索用户列表
                 var _this = this;
                 //取得 bean 形式 的查询条件数组
-                var searchFieldArr = _this.dealGetSearchFormQueryConf(values);
+                var searchFieldArr = _this.mixin_dealGetSearchFormQueryConf(_this.fieldInfoConf,values);
                 _this.changeQueryLoading(true);
                 UserTableSelectCompApi.getPageQuery(searchFieldArr,_this.tableConf.pagination,_this.tableConf.sorter).then((res) => {
                     if (res) {
