@@ -109,8 +109,7 @@
                 },
                 parentName:{
                     fieldLabel:this.$t('langMap.table.fields.obl.articleCollectCategory.parentName'),
-                    fieldName:'parentName',searchAble:false,
-                    fieldKeySplitArr:['parent','name'],isNeedSplit:true
+                    fieldName:'parentName',searchAble:false
                 },
                 remark:{
                     fieldLabel:this.$t('langMap.table.fields.common.remark'),
@@ -161,8 +160,8 @@
                     },{
                         title: this.$t('langMap.table.fields.obl.articleCollectCategory.parentName'),
                         align:textAlignDefault,
-                        dataIndex: 'parent.name',
-                        key: 'parent.name',
+                        dataIndex: 'parentName',
+                        key: 'parentName',
                         width:100,
                     },{
                         title: this.$t('langMap.table.fields.obl.articleCollectCategory.iconName'),

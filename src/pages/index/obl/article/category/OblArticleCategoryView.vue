@@ -131,7 +131,6 @@
                 parentName:{
                     fieldLabel:this.$t('langMap.table.fields.obl.articleCategory.parentName'),
                     fieldName:'parentName',searchAble:false,
-                    fieldKeySplitArr:['parent','name'],isNeedSplit:true
                 },
                 description:{
                     fieldLabel:this.$t('langMap.table.fields.common.description'),
@@ -192,8 +191,8 @@
                     },{
                         title: this.$t('langMap.table.fields.obl.articleCategory.parentName'),
                         align:textAlignDefault,
-                        dataIndex: 'parent.name',
-                        key: 'parent.name',
+                        dataIndex: 'parentName',
+                        key: 'parentName',
                         width:110,
                     },{
                         title: this.$t('langMap.table.fields.common.description'),

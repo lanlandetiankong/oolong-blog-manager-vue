@@ -123,8 +123,7 @@
                 },
                 parentDepartmentName:{
                     fieldLabel:this.$t('langMap.table.fields.em.department.parentDepartmentName'),
-                    fieldName:'parentDepartmentName',searchAble:false,
-                    isNeedSplit:true,fieldKeySplitArr:['parentDepartment','name']
+                    fieldName:'parentDepartmentName',searchAble:false
                 },
                 code:{
                     fieldLabel:this.$t('langMap.table.fields.common.code'),
@@ -204,8 +203,8 @@
                     }, {
                         title: this.$t('langMap.table.fields.em.department.parentDepartmentName'),
                         align:textAlignDefault,
-                        dataIndex: 'parentDepartment.name',
-                        key: 'parentDepartment.name',
+                        dataIndex: 'parentName',
+                        key: 'parentName',
                         width:100,
                     },{
                         title: this.$t('langMap.table.fields.common.code'),

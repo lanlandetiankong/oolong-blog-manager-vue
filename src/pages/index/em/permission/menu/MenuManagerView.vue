@@ -156,8 +156,7 @@
                 },
                 parentMenuName:{
                     fieldLabel:this.$t('langMap.table.fields.em.menu.parentMenuName'),
-                    fieldName:'parentMenuName',searchAble:false,
-                    fieldKeySplitArr:['parentMenu','menuName'],isNeedSplit:true
+                    fieldName:'parentMenuName',searchAble:false
                 },
                 label:{
                     fieldLabel:this.$t('langMap.table.fields.common.label'),
@@ -250,8 +249,8 @@
                     },{
                         title: this.$t('langMap.table.fields.em.menu.parentMenuName'),
                         align:textAlignDefault,
-                        dataIndex: 'parentMenu.menuName',
-                        key: 'parentMenu.menuName',
+                        dataIndex: 'parentName',
+                        key: 'parentName',
                         width:100,
                     },{
                         title: this.$t('langMap.table.fields.em.menu.iconName'),

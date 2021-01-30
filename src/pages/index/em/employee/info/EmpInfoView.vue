@@ -224,8 +224,7 @@
                     fieldLabel:this.$t('langMap.table.fields.em.user.userName'),
                 },
                 belongDepartmentName:{
-                    fieldLabel:this.$t('langMap.table.fields.em.department.belongDepartment'),
-                    isNeedSplit:true,fieldKeySplitArr:['belongDepartment','name'],
+                    fieldLabel:this.$t('langMap.table.fields.em.department.belongDepartment')
                 },
                 email:{
                     fieldLabel:this.$t('langMap.table.fields.em.user.email'),
