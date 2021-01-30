@@ -16,7 +16,7 @@ export const OblArticleTagApi = {
             paginationObj:JSON.stringify(pagination),
             sortObj:JSON.stringify(sortObj),
         }
-        return axios.post('/oblCtl/oblArticleTag/queryDtoPage',qs.stringify(obj)).then(res => res.data);
+        return axios.post('/oblCtl/oblArticleTag/queryPage',qs.stringify(obj)).then(res => res.data);
     },
     getItemById(fid){  //根据id查询item
         var params = {

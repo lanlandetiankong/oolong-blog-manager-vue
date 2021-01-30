@@ -22,7 +22,7 @@ export const OblArticleCollectCategoryApi = {
             paginationObj:JSON.stringify(pagination),
             sortObj:JSON.stringify(sortObj),
         }
-        return axios.post('/oblCtl/article/oblArticleCategory/queryDtoPage',qs.stringify(obj)).then(res => res.data);
+        return axios.post('/oblCtl/article/oblArticleCategory/queryPage',qs.stringify(obj)).then(res => res.data);
     },
     getItemById(fid){  //根据id查询item
         var params = {

@@ -17,7 +17,7 @@ export const PermissionRoleManagerApi = {
             sortObj:JSON.stringify(sortObj),
         }
         //查询所有角色信息
-        return axios.post('/oblCtl/define/defineRole/queryDtoPage',qs.stringify(obj)).then(res => res.data);
+        return axios.post('/oblCtl/define/defineRole/queryPage',qs.stringify(obj)).then(res => res.data);
     },
     getItemById(defineRoleId){  //根据角色id查询角色信息
         var params = {

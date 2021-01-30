@@ -30,7 +30,7 @@ export const AnnouncementMyCreateListApi = {
             onlySelf:true
         }
         //查询所有公告信息
-        return axios.post('/oblCtl/announcement/queryDtoPage',qs.stringify(obj)).then(res => res.data);
+        return axios.post('/oblCtl/announcement/queryPage',qs.stringify(obj)).then(res => res.data);
     },
     batchDeleteByIds(ids) {  //批量删除
         var obj = {

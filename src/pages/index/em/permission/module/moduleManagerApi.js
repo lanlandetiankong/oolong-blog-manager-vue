@@ -17,7 +17,7 @@ export const ModuleManagerApi = {
             sortObj:JSON.stringify(sortObj),
         }
         //查询所有模块信息
-        return axios.post('/oblCtl/module/define_module/queryDtoPage',qs.stringify(obj)).then(res => res.data);
+        return axios.post('/oblCtl/module/define_module/queryPage',qs.stringify(obj)).then(res => res.data);
     },
     getItemById(defineModuleId){  //根据模块id查询模块信息
         var params = {

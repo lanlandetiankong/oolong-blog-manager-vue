@@ -17,7 +17,7 @@ export const PermissionManagerApi = {
             sortObj:JSON.stringify(sortObj),
         }
         //查询所有权限信息
-        return axios.post('/oblCtl/define/definePermission/queryDtoPage',qs.stringify(obj)).then(res => res.data);
+        return axios.post('/oblCtl/define/definePermission/queryPage',qs.stringify(obj)).then(res => res.data);
     },
     getItemById(definePermissionId){  //根据权限id查询权限信息
         var params = {

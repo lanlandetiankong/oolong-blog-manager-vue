@@ -17,7 +17,7 @@ export const UserTableSelectCompApi = {
             sortObj: JSON.stringify(sortObj),
         }
         //查询所有用户信息
-        return axios.post('/oblCtl/commmon/component/user/userAccount/queryDtoPage', qs.stringify(obj)).then(res => res.data);
+        return axios.post('/oblCtl/commmon/component/user/userAccount/queryPage', qs.stringify(obj)).then(res => res.data);
     },
     getAllDefineRoles() {     //取得所有定义的角色
         var obj = {
