@@ -6,16 +6,13 @@ import qs from 'qs'
 /* 不要使用 // 进行注释！！！！！！！！！！！！！！！！！！！！！！！！   */
 
 export const OblArticleTagApi = {
-    getPageQuery(queryArr,pagination,sorter) {
+    getPageQuery(query,pagination,sorter) {
         var sortObj = {}
-        if(sorter){
-            sorter.field = sorter.order ;
-        }
-        var obj = {
-            queryObj:JSON.stringify(queryArr),
+        const obj = {
+            queryObj:JSON.stringify(query),
             paginationObj:JSON.stringify(pagination),
-            sortObj:JSON.stringify(sortObj),
-        }
+            sortObj:JSON.stringify(sortObj)
+        };
         return axios.post('/oblCtl/oblArticleTag/queryPage',qs.stringify(obj)).then(res => res.data);
     },
     getItemById(fid){  //根据id查询item

@@ -21,14 +21,14 @@ export const UserTableSelectCompApi = {
     },
     getAllDefineRoles() {     //取得所有定义的角色
         var obj = {
-            queryObj: [],
+            queryObj: {},
             paginationObj: {}
         }
         return axios.post('/oblCtl/define/defineRole/queryPage', qs.stringify(obj)).then(res => res.data);
     },
     getAllDefineJobs() {     //取得所有定义的职务
         var obj = {
-            queryObj: [],
+            queryObj: {},
             paginationObj: {}
         }
         return axios.post('/oblCtl/define/defineJob/queryPage', qs.stringify(obj)).then(res => res.data);
