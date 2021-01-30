@@ -50,17 +50,15 @@
                     },
                     createUserName:{
                         fieldLabel:this.$t('langMap.table.fields.common.createUserName'),
-                        fieldName:'remark',searchAble:false,isNeedSplit:true,
-                        fieldKeySplitArr:['createUser','userName']
+                        fieldName:'createUserName'
                     },
                     updateUserName:{
                         fieldLabel:this.$t('langMap.table.fields.common.updateUserName'),
-                        fieldName:'updateUserName',searchAble:false,isNeedSplit:true,
-                        fieldKeySplitArr:['updateUser','userName']
+                        fieldName:'updateUserName'
                     },
                     createTime:{
                         fieldLabel:this.$t('langMap.table.fields.common.createTime'),
-                        fieldName:'createTime',searchAble:false,
+                        fieldName:'createTime',
                         type:DrawerFieldTypeEnum.Date,
                         format:{
                             date:CommonDateFormatTypeEnum.yMdhms_cn
@@ -68,7 +66,7 @@
                     },
                     updateTime:{
                         fieldLabel:this.$t('langMap.table.fields.common.updateTime'),
-                        fieldName:'updateTime',searchAble:false,
+                        fieldName:'updateTime',
                         type:DrawerFieldTypeEnum.Date,
                         format:{
                             date:CommonDateFormatTypeEnum.yMdhms_cn
