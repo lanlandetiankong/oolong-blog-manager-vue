@@ -223,7 +223,7 @@ http.post = function (url, data, options) {
                         if (typeof(respMsg) != "undefined" && respMsg != null && respMsg.replace(/(^s*)|(s*$)/g, "").length != 0) {
                             message.error(respMsg);
                         }
-                        let actionType = respData.errorActionType;
+                        let actionType = respData.actionType;
                         if(actionType){     //如果发生异常时，后端明确指明有操作要求
                             //请求明确要求需要重新登录
                             if("AuthenticationExpired" == actionType){

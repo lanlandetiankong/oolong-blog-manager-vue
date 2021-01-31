@@ -47,15 +47,13 @@
         methods:{
             handleLoginFormSubmit(e,loginForm,submitRes){
                 var _this = this ;
-                if(submitRes){
-                    if(submitRes.success){ //后台登录验证成功
-                        _this.cacheMixin_handleSetUserTokenToCache(_this,submitRes.accountToken);
-                        _this.cacheMixin_handleSetAuthorizationToCache(_this,submitRes.authorization);
-                        _this.cacheMixin_handleSetRouterUrlsToCache(_this,submitRes.routerUrlSet);
-                        _this.cacheMixin_handleSetGrantedPermissionsToCache(_this,submitRes.permissionSet);
-                        _this.cacheMixin_handleMenuListToCache(_this,false);
-                        _this.$router.push("/index");
-                    }
+                if(submitRes.success){ //后台登录验证成功
+                    _this.cacheMixin_handleSetUserTokenToCache(_this,submitRes.accountToken);
+                    _this.cacheMixin_handleSetAuthorizationToCache(_this,submitRes.authorization);
+                    _this.cacheMixin_handleSetRouterUrlsToCache(_this,submitRes.routerUrlSet);
+                    _this.cacheMixin_handleSetGrantedPermissionsToCache(_this,submitRes.permissionSet);
+                    _this.cacheMixin_handleMenuListToCache(_this,false);
+                    _this.$router.push("/index");
                 }
             },
         }
