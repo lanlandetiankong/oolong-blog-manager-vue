@@ -304,7 +304,7 @@
             dealGetRoleTypeEnumList(){  //取得 用户类型-枚举列表
                 var _this = this ;
                 PermissionCommonApis.getAllRoleTypes().then((res) => {
-                    if(res && res.success){
+                    if(res.success){
                         _this.binding.roleTypes = res.enumData.list ;
                     }
                 })
@@ -312,21 +312,17 @@
             dealGetAllPermissionList(){  //取得 所有的权限定义
                 var _this = this ;
                 return PermissionRoleManagerApi.getAllDefinePermissions().then((res) => {
-                    if(res && res.success){
-                        if(res.gridList){
-                            _this.dialogGrantPermissionObj.all = res.gridList ;
-                            _this.dealAllItemToTransferDataSource(res.gridList);
-                        }
+                    if(res.success){
+                        _this.dialogGrantPermissionObj.all = res.gridList ;
+                        _this.dealAllItemToTransferDataSource(res.gridList);
                     }
                 })
             },
             dealGetAllMenuTreeList(){  //取得 所有的[菜单定义]Tree
                 var _this = this ;
                 return PermissionRoleManagerApi.getAllDefineMenuTree().then((res) => {
-                    if(res && res.success){
-                        if(res.gridList){
-                            _this.dialogGrantMenusObj.treeData = res.gridList ;
-                        }
+                    if(res.success){
+                        _this.dialogGrantMenusObj.treeData = res.gridList ;
                     }
                 })
             },
@@ -354,22 +350,18 @@
                 var _this = this;
                 var delIds = _this.tableCheckIdList;
                 PermissionRoleManagerApi.batchDeleteByIds(delIds).then((res) => {
-                    if (res) {
-                        if (res.success) {  //已经有对错误进行预处理
-                            this.$message.success(res.msg);
-                            _this.mixin_invokeQuery(_this); //表格重新搜索
-                        }
+                    if (res.success) {  //已经有对错误进行预处理
+                        this.$message.success(res.msg);
+                        _this.mixin_invokeQuery(_this); //表格重新搜索
                     }
                 })
             },
             dealDelOneRowById(delId) {   //根据id 删除
                 var _this = this;
                 PermissionRoleManagerApi.deleteById(delId).then((res) => {
-                    if (res) {
-                        if (res.success) {  //已经有对错误进行预处理
-                            _this.$message.success(res.msg);
-                            _this.mixin_invokeQuery(_this); //表格重新搜索
-                        }
+                    if (res.success) {  //已经有对错误进行预处理
+                        _this.$message.success(res.msg);
+                        _this.mixin_invokeQuery(_this); //表格重新搜索
                     }
                 })
             },
@@ -431,14 +423,10 @@
                 var searchFieldArr = _this.mixin_dealGetSearchFormQueryConf(_this.fieldInfoConf,values);
                 _this.changeQueryLoading(true);
                 PermissionRoleManagerApi.getPageQuery(searchFieldArr,_this.tableConf.pagination,_this.tableConf.sorter).then((res) => {
-                    if (res) {
-                        this.tableConf.data = res.gridList;
-                        if(res.vpage){ //总个数
-                            this.tableConf.pagination.total = res.vpage.total ;
-                        }
-                        //清空 已勾选
-                        _this.tableCheckIdList = [] ;
-                    }
+                    this.tableConf.data = res.gridList;
+                    this.tableConf.pagination.total = res.vpage.total ;
+                    //清空 已勾选
+                    _this.tableCheckIdList = [] ;
                     _this.changeQueryLoading(false);
                 }).catch((e) =>{
                     _this.changeQueryLoading(false);
@@ -530,13 +518,9 @@
                     var closeDialogFlag = true;
                     if (_this.dialogFormConf.actionType == "create") {        //新建-提交
                         PermissionRoleManagerApi.createByForm(values).then((res) => {
-                            if (res) {
-                                if (res.success) {  //异常已经有预处理了
-                                    this.$message.success(res.msg);
-                                    _this.mixin_invokeQuery(_this); //表格重新搜索
-                                } else {
-                                    closeDialogFlag = false;
-                                }
+                            if (res.success) {  //异常已经有预处理了
+                                this.$message.success(res.msg);
+                                _this.mixin_invokeQuery(_this); //表格重新搜索
                             } else {
                                 closeDialogFlag = false;
                             }
@@ -548,13 +532,9 @@
                     } else if (_this.dialogFormConf.actionType == "update") {   //更新-提交
                         values['fid'] = _this.dialogFormObj.fid;   //提交时，回填fid值
                         PermissionRoleManagerApi.updateByForm(values).then((res) => {
-                            if (res) {
-                                if (res.success) {  //异常已经有预处理了
-                                    this.$message.success(res.msg);
-                                    _this.mixin_invokeQuery(_this); //表格重新搜索
-                                } else {
-                                    closeDialogFlag = false;
-                                }
+                            if (res.success) {  //异常已经有预处理了
+                                this.$message.success(res.msg);
+                                _this.mixin_invokeQuery(_this); //表格重新搜索
                             } else {
                                 closeDialogFlag = false;
                             }
@@ -576,12 +556,8 @@
                 var _this = this;
                 PermissionRoleManagerApi.grantPermissionToRole(roleId,targetIdList).then((res) =>{
                     var closeDialogFlag = true ;
-                    if (res) {
-                        if (res.success) {  //异常已经有预处理了
-                            this.$message.success(res.msg);
-                        } else {
-                            closeDialogFlag = false;
-                        }
+                    if (res.success) {  //异常已经有预处理了
+                        this.$message.success(res.msg);
                     } else {
                         closeDialogFlag = false;
                     }
@@ -598,12 +574,8 @@
                 var _this = this;
                 PermissionRoleManagerApi.grantMenusToRole(roleId,checkIds,halfCheckIds).then((res) =>{
                     var closeDialogFlag = true ;
-                    if (res) {
-                        if (res.success) {  //异常已经有预处理了
-                            this.$message.success(res.msg);
-                        } else {
-                            closeDialogFlag = false;
-                        }
+                    if (res.success) {  //异常已经有预处理了
+                        this.$message.success(res.msg);
                     } else {
                         closeDialogFlag = false;
                     }

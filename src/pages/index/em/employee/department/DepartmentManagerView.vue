@@ -299,10 +299,8 @@
             dealGetPidTreeData(){  //取得 部门定义-树形数据
                 var _this = this ;
                 DepartmentManagerApi.getAllDefineDepartmentTree().then((res) => {
-                    if(res && res.success){
-                        if(res.gridList){
-                            _this.binding.pidList = res.gridList ;
-                        }
+                    if(res.success){
+                        _this.binding.pidList = res.gridList ;
                     }
                 })
             },
@@ -316,22 +314,18 @@
                 var _this = this;
                 var delIds = _this.tableCheckIdList;
                 DepartmentManagerApi.batchDeleteByIds(delIds).then((res) => {
-                    if (res) {
-                        if (res.success) {  //已经有对错误进行预处理
-                            this.$message.success(res.msg);
-                            _this.mixin_invokeQuery(_this); //表格重新搜索
-                        }
+                    if (res.success) {  //已经有对错误进行预处理
+                        this.$message.success(res.msg);
+                        _this.mixin_invokeQuery(_this); //表格重新搜索
                     }
                 })
             },
             dealDelOneRowById(delId) {   //根据id 删除
                 var _this = this;
                 DepartmentManagerApi.deleteById(delId).then((res) => {
-                    if (res) {
-                        if (res.success) {  //已经有对错误进行预处理
-                            _this.$message.success(res.msg);
-                            _this.mixin_invokeQuery(_this); //表格重新搜索
-                        }
+                    if (res.success) {  //已经有对错误进行预处理
+                        _this.$message.success(res.msg);
+                        _this.mixin_invokeQuery(_this); //表格重新搜索
                     }
                 })
             },
@@ -341,14 +335,10 @@
                 var searchFieldArr = _this.mixin_dealGetSearchFormQueryConf(_this.fieldInfoConf,values);
                 _this.changeQueryLoading(true);
                 DepartmentManagerApi.getPageQuery(searchFieldArr,_this.tableConf.pagination,_this.tableConf.sorter).then((res) => {
-                    if (res) {
-                        this.tableConf.data = res.gridList;
-                        if(res.vpage){ //总个数
-                            this.tableConf.pagination.total = res.vpage.total ;
-                        }
-                        //清空 已勾选
-                        _this.tableCheckIdList = [] ;
-                    }
+                    this.tableConf.data = res.gridList;
+                    this.tableConf.pagination.total = res.vpage.total ;
+                    //清空 已勾选
+                    _this.tableCheckIdList = [] ;
                     _this.changeQueryLoading(false);
                 }).catch((e) =>{
                     _this.changeQueryLoading(false);
@@ -421,13 +411,9 @@
                     var closeDialogFlag = true;
                     if (_this.dialogFormConf.actionType == "create") {        //新建-提交
                         DepartmentManagerApi.createByForm(values).then((res) => {
-                            if (res) {
-                                if (res.success) {  //异常已经有预处理了
-                                    this.$message.success(res.msg);
-                                    _this.mixin_invokeQuery(_this); //表格重新搜索
-                                } else {
-                                    closeDialogFlag = false;
-                                }
+                            if (res.success) {  //异常已经有预处理了
+                                this.$message.success(res.msg);
+                                _this.mixin_invokeQuery(_this); //表格重新搜索
                             } else {
                                 closeDialogFlag = false;
                             }
@@ -439,13 +425,9 @@
                     } else if (_this.dialogFormConf.actionType == "update") {   //更新-提交
                         values['fid'] = _this.dialogFormObj.fid;   //提交时，回填fid值
                         DepartmentManagerApi.updateByForm(values).then((res) => {
-                            if (res) {
-                                if (res.success) {  //异常已经有预处理了
-                                    this.$message.success(res.msg);
-                                    _this.mixin_invokeQuery(_this); //表格重新搜索
-                                } else {
-                                    closeDialogFlag = false;
-                                }
+                            if (res.success) {  //异常已经有预处理了
+                                this.$message.success(res.msg);
+                                _this.mixin_invokeQuery(_this); //表格重新搜索
                             } else {
                                 closeDialogFlag = false;
                             }

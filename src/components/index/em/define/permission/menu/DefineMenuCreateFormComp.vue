@@ -210,7 +210,7 @@
             handleUpdateActionInit(){   //弹窗展示为[更新-操作]的初始化
                 var _this = this ;
                 MenuCreateFormApi.getDefineMenuTreeFilterChildrens(_this.formObj.fid).then((res) => { //更新 上级菜单 树
-                    if(res && res.success){
+                    if(res.success){
                         _this.treeSelectConf.pid.selftTreeData  = res.gridList ;
                     }
                 })

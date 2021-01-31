@@ -457,22 +457,18 @@
                 var _this = this;
                 var delIds = _this.tableCheckIdList;
                 EmpInfoApi.batchDeleteByIds(delIds).then((res) => {
-                    if (res) {
-                        if (res.success) {  //已经有对错误进行预处理
-                            this.$message.success(res.msg);
-                            _this.mixin_invokeQuery(_this); //表格重新搜索
-                        }
+                    if (res.success) {  //已经有对错误进行预处理
+                        this.$message.success(res.msg);
+                        _this.mixin_invokeQuery(_this); //表格重新搜索
                     }
                 })
             },
             dealDelOneRowById(delId) {   //根据id 删除
                 var _this = this;
                 EmpInfoApi.deleteById(delId).then((res) => {
-                    if (res) {
-                        if (res.success) {  //已经有对错误进行预处理
-                            _this.$message.success(res.msg);
-                            _this.mixin_invokeQuery(_this); //表格重新搜索
-                        }
+                    if (res.success) {  //已经有对错误进行预处理
+                        _this.$message.success(res.msg);
+                        _this.mixin_invokeQuery(_this); //表格重新搜索
                     }
                 })
             },
@@ -480,41 +476,37 @@
                 var _this = this;
                 var delIds = _this.tableCheckIdList;
                 EmpInfoApi.batchLockByIds(delIds,lockFlag).then((res) => {
-                    if (res) {
-                        if (res.success) {  //已经有对错误进行预处理
-                            this.$message.success(res.msg);
-                            _this.mixin_invokeQuery(_this); //表格重新搜索
-                        }
+                    if (res.success) {  //已经有对错误进行预处理
+                        this.$message.success(res.msg);
+                        _this.mixin_invokeQuery(_this); //表格重新搜索
                     }
                 })
             },
             dealChangeLockOneRowById(delId,lockFlag) {   //根据id 锁定/解锁
                 var _this = this;
                 EmpInfoApi.lockById(delId,lockFlag).then((res) => {
-                    if (res) {
-                        if (res.success) {  //已经有对错误进行预处理
-                            _this.$message.success(res.msg);
-                            var tableDatas = _this.tableConf.data ;
-                            var tableDatasTemp = [] ;
-                            var lockedVal = lockFlag ? 1 : 0;
-                            if(tableDatas && tableDatas.length > 0){
-                                jquery.each(tableDatas,function (idx,val) {
-                                    if(val.fid == delId){   //修改锁定状态,
-                                        val.locked = lockedVal
-                                    }
-                                    tableDatasTemp.push(val);
-                                })
-                            }
-                            _this.tableConf.data = tableDatasTemp ;
-                            //_this.mixin_invokeQuery(_this); //表格重新搜索
+                    if (res.success) {  //已经有对错误进行预处理
+                        _this.$message.success(res.msg);
+                        var tableDatas = _this.tableConf.data ;
+                        var tableDatasTemp = [] ;
+                        var lockedVal = lockFlag ? 1 : 0;
+                        if(tableDatas && tableDatas.length > 0){
+                            jquery.each(tableDatas,function (idx,val) {
+                                if(val.fid == delId){   //修改锁定状态,
+                                    val.locked = lockedVal
+                                }
+                                tableDatasTemp.push(val);
+                            })
                         }
+                        _this.tableConf.data = tableDatasTemp ;
+                        //_this.mixin_invokeQuery(_this); //表格重新搜索
                     }
                 })
             },
             dealGetUserTypeEnumList(){  //取得 用户类型-枚举列表
                 var _this = this ;
                 UserCommonApis.getAllUserType().then((res) => {
-                    if(res && res.success){
+                    if(res.success){
                         _this.binding.userTypes = res.enumData.list ;
                     }
                 })
@@ -522,17 +514,15 @@
             dealGetDefineDepartmentTreeData(){  //取得 所属部门-枚举列表
                 var _this = this ;
                 EmpInfoApi.getAllDefineDepartmentTrees().then((res) => {
-                    if(res && res.success){
-                        if(res.gridList){
-                            _this.binding.belongDepartments = res.gridList ;
-                        }
+                    if(res.success){
+                        _this.binding.belongDepartments = res.gridList ;
                     }
                 })
             },
             dealGetLockStateEnumList(){  //取得 用户锁定状态-枚举列表
                 var _this = this ;
                 UserCommonApis.getAllUserLockStateType().then((res) => {
-                    if(res && res.success){
+                    if(res.success){
                         _this.binding.lockStates = res.enumData.list ;
                     }
                 })
@@ -540,22 +530,18 @@
             dealGetAllRoleList(){  //取得 所有的角色定义
                 var _this = this ;
                 return EmpInfoApi.getAllDefineRoles().then((res) => {
-                    if(res && res.success){
-                        if(res.gridList){
-                            _this.dialogGrantRoleObj.all = res.gridList ;
-                            _this.dealAllRoleItemToTransferDataSource(res.gridList);
-                        }
+                    if(res.success){
+                        _this.dialogGrantRoleObj.all = res.gridList ;
+                        _this.dealAllRoleItemToTransferDataSource(res.gridList);
                     }
                 })
             },
             dealGetAllJobList(){  //取得 所有的职务定义
                 var _this = this ;
                 return EmpInfoApi.getAllDefineJobs().then((res) => {
-                    if(res && res.success){
-                        if(res.gridList){
-                            _this.dialogGrantJobObj.all = res.gridList ;
-                            _this.dealAllJobItemToTransferDataSource(res.gridList);
-                        }
+                    if(res.success){
+                        _this.dialogGrantJobObj.all = res.gridList ;
+                        _this.dealAllJobItemToTransferDataSource(res.gridList);
                     }
                 })
             },
@@ -652,14 +638,10 @@
                 const searchFieldArr = _this.mixin_dealGetSearchFormQueryConf(_this.fieldInfoConf,values);
                 _this.changeQueryLoading(true);
                 EmpInfoApi.getPageQuery(searchFieldArr,_this.tableConf.pagination,_this.tableConf.sorter).then((res) => {
-                    if (res) {
-                        this.tableConf.data = res.gridList;
-                        if(res.vpage){ //总个数
-                            this.tableConf.pagination.total = res.vpage.total ;
-                        }
-                        //清空 已勾选
-                        _this.tableCheckIdList = [] ;
-                    }
+                    this.tableConf.data = res.gridList;
+                    this.tableConf.pagination.total = res.vpage.total ;
+                    //清空 已勾选
+                    _this.tableCheckIdList = [] ;
                     _this.changeQueryLoading(false);
                 }).catch((e) =>{
                     _this.changeQueryLoading(false);
@@ -728,13 +710,9 @@
                     var closeDialogFlag = true;
                     if (_this.dialogFormConf.actionType == "create") {        //新建-提交
                         EmpInfoApi.createByForm(values,avatarUrl).then((res) => {
-                            if (res) {
-                                if (res.success) {  //异常已经有预处理了
-                                    this.$message.success(res.msg);
-                                    _this.mixin_invokeQuery(_this); //表格重新搜索
-                                } else {
-                                    closeDialogFlag = false;
-                                }
+                            if (res.success) {  //异常已经有预处理了
+                                this.$message.success(res.msg);
+                                _this.mixin_invokeQuery(_this); //表格重新搜索
                             } else {
                                 closeDialogFlag = false;
                             }
@@ -746,13 +724,9 @@
                     } else if (_this.dialogFormConf.actionType == "update") {   //更新-提交
                         values['fid'] = _this.dialogFormObj.fid;   //提交时，回填fid值
                         EmpInfoApi.updateByForm(values,avatarUrl).then((res) => {
-                            if (res) {
-                                if (res.success) {  //异常已经有预处理了
-                                    this.$message.success(res.msg);
-                                    _this.mixin_invokeQuery(_this); //表格重新搜索
-                                } else {
-                                    closeDialogFlag = false;
-                                }
+                            if (res.success) {  //异常已经有预处理了
+                                this.$message.success(res.msg);
+                                _this.mixin_invokeQuery(_this); //表格重新搜索
                             } else {
                                 closeDialogFlag = false;
                             }
@@ -863,12 +837,8 @@
                 var _this = this;
                 EmpInfoApi.grantRoleToUser(userAccountId,targetIdList).then((res) =>{
                     var closeDialogFlag = true ;
-                    if (res) {
-                        if (res.success) {  //异常已经有预处理了
-                            this.$message.success(res.msg);
-                        } else {
-                            closeDialogFlag = false;
-                        }
+                    if (res.success) {  //异常已经有预处理了
+                        this.$message.success(res.msg);
                     } else {
                         closeDialogFlag = false;
                     }
@@ -897,12 +867,8 @@
                 var _this = this;
                 EmpInfoApi.grantJobToUser(userAccountId,targetIdList).then((res) =>{
                     var closeDialogFlag = true ;
-                    if (res) {
-                        if (res.success) {  //异常已经有预处理了
-                            this.$message.success(res.msg);
-                        } else {
-                            closeDialogFlag = false;
-                        }
+                    if (res.success) {  //异常已经有预处理了
+                        this.$message.success(res.msg);
                     } else {
                         closeDialogFlag = false;
                     }

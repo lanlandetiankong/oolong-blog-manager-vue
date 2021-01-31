@@ -22,31 +22,31 @@ var instance = axios.create({
                 notification.error({
                     message:i18nUtil.getKey('langMap.http.notify.message.error'),
                     description:i18nUtil.getKey('langMap.http.notify.description.requestError')
-                })
-                break
+                });
+                break;
             case 401:
                 notification.warning({
                     message:i18nUtil.getKey('langMap.http.notify.message.warning'),
                     description:i18nUtil.getKey('langMap.http.notify.description.grantFailed')
-                })
+                });
                 return;
             case 403:
                 notification.warning({
                     message:i18nUtil.getKey('langMap.http.notify.message.warning'),
                     description:i18nUtil.getKey('langMap.http.notify.description.accessDenied')
-                })
-                break
+                });
+                break;
             case 404:
                 notification.warning({
                     message:i18nUtil.getKey('langMap.http.notify.message.warning'),
                     description:i18nUtil.getKey('langMap.http.notify.description.resourceNotFound')
-                })
-                break
+                });
+                break;
             case 500:
                 notification.error({
                     message:i18nUtil.getKey('langMap.http.notify.message.error'),
                     description:i18nUtil.getKey('langMap.http.notify.description.serverDistracted')
-                })
+                });
                 break
         }
         return status >= 200 && status < 300
@@ -60,7 +60,7 @@ var instance = axios.create({
         }
         return data;
     }],
-})
+});
 
 // 添加请求拦截器
 instance.interceptors.request.use(
@@ -68,7 +68,6 @@ instance.interceptors.request.use(
         var cfgUserToken = window.sessionStorage.getItem("userToken");
         var cfgAuthorization = window.sessionStorage.getItem("authorization");
         cfgAuthorization = typeof cfgAuthorization == "undefined" ? "" : cfgAuthorization ;
-        //var tokenStr = qs.stringify(JSON.parse(cfgUserToken)) ;
         // 请求头添加token
         if (cfgUserToken) {
             var cfgUserTokenObj = JSON.parse(cfgUserToken);
@@ -76,11 +75,11 @@ instance.interceptors.request.use(
                 account:cfgUserTokenObj['account'],
                 token:cfgUserTokenObj['token'],
                 userAccountId:cfgUserTokenObj['userAccountId']
-            }
+            };
             //config.headers['token'] = JSON.parse(cfgUserToken).token;
             config.headers['token'] = JSON.stringify(userTokenObj);
         } else {
-            console.log("employee is loginout");
+            console.info("employee is loginout");
         }
         config.headers['authorization'] = cfgAuthorization;
         store.dispatch('doSetAjaxLoading',true) ;
@@ -89,7 +88,7 @@ instance.interceptors.request.use(
     error => {
         return Promise.reject(error)
     }
-)
+);
 
 
 // 响应拦截器
@@ -170,7 +169,7 @@ http.get = function (url, options) {
                 }
             })
             .catch(e => {
-                console.log(e)
+                console.error(e)
             }, err => {
                 notification.error({
                     message:i18nUtil.getKey('langMap.http.notify.message.error'),
@@ -179,7 +178,7 @@ http.get = function (url, options) {
                 reject(err);
             })
     })
-}
+};
 
 http.post = function (url, data, options) {
     return new Promise((resolve, reject) => {
@@ -191,53 +190,53 @@ http.post = function (url, data, options) {
                     reject(response) ;
                     return false ;
                 }
-                const respData = response.data ;
                 //对返回结果的预先处理
-                if (respData) {
-                    if(respData instanceof Blob){   //判断是否是Blob文件流
-                        let fileReader = new FileReader();
-                        fileReader.onload = function() {
-                            try {
-                                let jsonData = JSON.parse(this.result);  // 说明是普通对象数据，后台转换失败
-                                if (jsonData.success) {
-                                    resolve(response);
-                                }   else {
-                                    message.error(jsonData.msg);
-                                    reject(response);
-                                }
-                            } catch (err) {   // 解析成对象失败，说明是正常的文件流
+                const respData = response.data ;
+                //如果没有返回的data则放行请求
+                if(typeof respData =="undefined" || respData == null){
+                    resolve({});
+                    return true;
+                }
+                if(respData instanceof Blob){   //判断是否是Blob文件流
+                    let fileReader = new FileReader();
+                    fileReader.onload = function() {
+                        try {
+                            let jsonData = JSON.parse(this.result);  // 说明是普通对象数据，后台转换失败
+                            if (jsonData.success) {
                                 resolve(response);
+                            }   else {
+                                message.error(jsonData.msg);
+                                reject(response);
                             }
-                        };
-                        fileReader.readAsText(respData);    //触发onload
-                    }   else {
-                        let isSuccess = respData.success;
-                        //Error:不放行
-                        if (typeof(isSuccess) != "undefined" && isSuccess != null && isSuccess === true) {
-                            let respHasWarning = respData.hasWarning;
-                            if (typeof(respHasWarning) == "undefined" || respHasWarning == null) {
-                                respHasWarning = false;
-                            }
-                            resolve(response);
-                        } else {
-                            let tempRespInfo = respData.msg ? respData.msg : "操作出现异常！";
-                            if (typeof(tempRespInfo) != "undefined" && tempRespInfo != null && tempRespInfo.replace(/(^s*)|(s*$)/g, "").length != 0) {
-                                message.error(tempRespInfo);
-                            }
-                            let tempErrorActionType = respData.errorActionType;
-                            if(tempErrorActionType){     //如果发生异常时，后端明确指明有操作要求
-                                if("AuthenticationExpired" == tempErrorActionType){  //请求明确要求需要重新登录
-                                    TokenUtil.loginOut();
-                                }
-                            }
+                        } catch (err) {   // 解析成对象失败，说明是正常的文件流
                             resolve(response);
                         }
+                    };
+                    fileReader.readAsText(respData);    //触发onload
+                }   else {
+                    let isSuccess = respData.success;
+                    //请求成功
+                    if (typeof(isSuccess) != "undefined" && isSuccess != null && isSuccess === true) {
+                        resolve(response);
+                    } else {
+                        let respMsg = respData.msg ? respData.msg : "操作出现异常！";
+                        if (typeof(respMsg) != "undefined" && respMsg != null && respMsg.replace(/(^s*)|(s*$)/g, "").length != 0) {
+                            message.error(respMsg);
+                        }
+                        let actionType = respData.errorActionType;
+                        if(actionType){     //如果发生异常时，后端明确指明有操作要求
+                            //请求明确要求需要重新登录
+                            if("AuthenticationExpired" == actionType){
+                                TokenUtil.loginOut();
+                            }
+                        }
+                        resolve(response);
                     }
                 }
             })
             .catch(e => {
                 store.dispatch('doSetAjaxLoading',false) ;
-                console.log(e);
+                console.error(e);
                 reject(e);
             })
 

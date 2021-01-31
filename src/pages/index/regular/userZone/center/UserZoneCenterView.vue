@@ -98,79 +98,67 @@
 
 <script>
     import {TokenUtil} from '~Router/routeSecurityUtil';
-    import constantParams from '~Config/constantParams' ;
+    import constantParams from '~Config/constantParams';
     import {UserZoneCenterApi} from './userZoneCenterApi.js'
 
     export default {
         name: "UserZoneCenterView",
         data() {
             return {
-                layoutConf:{
-                    default:{
-                        gutter:6,
-                        span:6
+                layoutConf: {
+                    default: {
+                        gutter: 6,
+                        span: 6
                     },
-                    roleCard:{
-                        headStyle:{
-
+                    roleCard: {
+                        headStyle: {},
+                        bodyStyle: {},
+                        style: {
+                            width: "100%"
                         },
-                        bodyStyle:{
-
-                        },
-                        style:{
-                            width:"100%"
-                        },
-                        rows:{
-                            span:2,
-                            tag:{
-                                color:"#87d068"
+                        rows: {
+                            span: 2,
+                            tag: {
+                                color: "#87d068"
                             }
                         }
                     },
-                    permissionCard:{
-                        headStyle:{
-
+                    permissionCard: {
+                        headStyle: {},
+                        bodyStyle: {},
+                        style: {
+                            width: "100%"
                         },
-                        bodyStyle:{
-
-                        },
-                        style:{
-                            width:"100%"
-                        },
-                        rows:{
-                            span:2,
-                            tag:{
-                                color:"#87d068"
+                        rows: {
+                            span: 2,
+                            tag: {
+                                color: "#87d068"
                             }
                         }
                     },
-                    jobCard:{
-                        headStyle:{
-
+                    jobCard: {
+                        headStyle: {},
+                        bodyStyle: {},
+                        style: {
+                            width: "100%"
                         },
-                        bodyStyle:{
-
-                        },
-                        style:{
-                            width:"100%"
-                        },
-                        rows:{
-                            span:2,
-                            tag:{
-                                color:"#87d068"
+                        rows: {
+                            span: 2,
+                            tag: {
+                                color: "#87d068"
                             }
                         }
                     }
                 },
-                dataObj:{
-                    role:{
-                        checkArr:[]
+                dataObj: {
+                    role: {
+                        checkArr: []
                     },
-                    permission:{
-                        checkArr:[]
+                    permission: {
+                        checkArr: []
                     },
-                    job:{
-                        checkArr:[]
+                    job: {
+                        checkArr: []
                     }
                 }
             }
@@ -187,50 +175,44 @@
                     }
                 }
             },
-            userTokenCacheObj(){    //取得用户缓存信息
+            userTokenCacheObj() {    //取得用户缓存信息
                 var userTokenCache = window.sessionStorage.getItem("userToken");
-                if(typeof userTokenCache == "undefined" || userTokenCache == null){
-                    return {} ;
-                }   else {
+                if (typeof userTokenCache == "undefined" || userTokenCache == null) {
+                    return {};
+                } else {
                     var userTokenObj = JSON.parse(userTokenCache);
-                    return userTokenObj ;
+                    return userTokenObj;
                 }
             }
         },
-        methods:{
-            dealGetAllUserRoles(){      //查询当前登录用户的所有角色
+        methods: {
+            dealGetAllUserRoles() {      //查询当前登录用户的所有角色
                 var userTokenObj = TokenUtil.getUserToken();
-                if(userTokenObj){
+                if (userTokenObj) {
                     UserZoneCenterApi.getAllRoleByUserAccountId(userTokenObj.userAccountId).then((res) => {
-                        if (res) {
-                            this.dataObj.role.checkArr = res.gridList;
-                        }
+                        this.dataObj.role.checkArr = res.gridList;
                     })
                 }
             },
-            dealGetAllUserPermissions(){    //查询当前登录用户的所有权限
+            dealGetAllUserPermissions() {    //查询当前登录用户的所有权限
                 var userTokenObj = TokenUtil.getUserToken();
-                if(userTokenObj){
+                if (userTokenObj) {
                     UserZoneCenterApi.getAllPermissionByUserAccountId(userTokenObj.userAccountId).then((res) => {
-                        if (res) {
-                            this.dataObj.permission.checkArr = res.gridList;
-                        }
+                        this.dataObj.permission.checkArr = res.gridList;
                     })
                 }
             },
-            dealGetAllUserJobs(){    //查询当前登录用户的所有职务
+            dealGetAllUserJobs() {    //查询当前登录用户的所有职务
                 var userTokenObj = TokenUtil.getUserToken();
-                if(userTokenObj){
+                if (userTokenObj) {
                     UserZoneCenterApi.getAllJobByUserAccountId(userTokenObj.userAccountId).then((res) => {
-                        if (res) {
-                            this.dataObj.job.checkArr = res.gridList;
-                        }
+                        this.dataObj.job.checkArr = res.gridList;
                     })
                 }
             }
         },
-        mounted(){
-            this.dealGetAllUserRoles() ;
+        mounted() {
+            this.dealGetAllUserRoles();
             this.dealGetAllUserPermissions();
             this.dealGetAllUserJobs();
         }

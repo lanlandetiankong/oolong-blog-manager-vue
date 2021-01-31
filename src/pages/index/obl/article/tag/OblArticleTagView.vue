@@ -40,8 +40,8 @@
                             size="large"
                             v-model="searchConf.showAble"
                         >
-                            <a-icon slot="checkedChildren" type="filter" />
-                            <a-icon slot="unCheckedChildren" type="eye-invisible" />
+                            <a-icon slot="checkedChildren" type="filter"/>
+                            <a-icon slot="unCheckedChildren" type="eye-invisible"/>
                         </a-switch>
                     </a-col>
                 </a-row>
@@ -69,7 +69,7 @@
                             <a @click="handleDetailDrawerShow($event,record)">
                                 {{$t('langMap.drawer.actions.detail')}}
                             </a>
-                            <a-divider type="vertical" />
+                            <a-divider type="vertical"/>
                             <a-button type="danger" size="small" @click="handleDeleteOneById(record.fid)">{{$t('langMap.button.actions.delById')}}</a-button>
                         </span>
                     </template>
@@ -100,63 +100,62 @@
 <script>
     import {OblArticleTagApi} from './OblArticleTagApi.js'
     import {OblCommonMixin} from '~Layout/mixin/OblCommonMixin';
-    import {FormItemTypeEnum,ConstantObj} from "~Components/constant_define";
+    import {FormItemTypeEnum, ConstantObj} from "~Components/constant_define";
 
     import QueryFormComp from '~Components/regular/query/QueryFormComp'
     import OblArticleTagCreateFormComp from "~Components/index/obl/article/tag/OblArticleTagCreateFormComp";
     import RowDetailDrawerComp from '~Components/regular/common/drawer/RowDetailDrawerComp';
+
     export default {
         name: "OblArticleTagView",
-        components: {QueryFormComp,OblArticleTagCreateFormComp,RowDetailDrawerComp},
-        mixins:[OblCommonMixin],
+        components: {QueryFormComp, OblArticleTagCreateFormComp, RowDetailDrawerComp},
+        mixins: [OblCommonMixin],
         data() {
-            const textAlignDefault = 'left' ;
+            const textAlignDefault = 'left';
             //字段配置(Query/Drawer)
             const fieldInfoConfObj = {
-                name:{
-                    fieldLabel:this.$t('langMap.table.fields.obl.articleTag.name'),
-                    fieldName:'name',
+                name: {
+                    fieldLabel: this.$t('langMap.table.fields.obl.articleTag.name'),
+                    fieldName: 'name',
                 },
-                description:{
-                    fieldLabel:this.$t('langMap.table.fields.common.description'),
-                    fieldName:'description',
+                description: {
+                    fieldLabel: this.$t('langMap.table.fields.common.description'),
+                    fieldName: 'description',
                 },
-                weights:{
-                    fieldLabel:this.$t('langMap.table.fields.common.weights'),
-                    fieldName:'weights',
+                weights: {
+                    fieldLabel: this.$t('langMap.table.fields.common.weights'),
+                    fieldName: 'weights',
                 },
-                remark:{
-                    fieldLabel:this.$t('langMap.table.fields.common.remark'),
-                    fieldName:'remark',
+                remark: {
+                    fieldLabel: this.$t('langMap.table.fields.common.remark'),
+                    fieldName: 'remark',
                 }
             };
             return {
                 ConstantObj,
-                fieldInfoConf:fieldInfoConfObj,
-                binding:{
-
-                },
-                searchConf:{
-                    showAble:false,
-                    loadingFlag:false,
-                    formItemConf:{
-                        name:{
-                            key:'name',
-                            formType:FormItemTypeEnum.Input,
-                            label:this.$t('langMap.table.fields.common.tagName'),
-                            decorator:["name", {rules: []}],
+                fieldInfoConf: fieldInfoConfObj,
+                binding: {},
+                searchConf: {
+                    showAble: false,
+                    loadingFlag: false,
+                    formItemConf: {
+                        name: {
+                            key: 'name',
+                            formType: FormItemTypeEnum.Input,
+                            label: this.$t('langMap.table.fields.common.tagName'),
+                            decorator: ["name", {rules: []}],
                         },
-                        description:{
-                            key:'description',
-                            formType:FormItemTypeEnum.Input,
-                            label:this.$t('langMap.table.fields.common.description'),
-                            decorator:["description", {rules: []}],
+                        description: {
+                            key: 'description',
+                            formType: FormItemTypeEnum.Input,
+                            label: this.$t('langMap.table.fields.common.description'),
+                            decorator: ["description", {rules: []}],
                         },
-                        remark:{
-                            key:'remark',
-                            formType:FormItemTypeEnum.Input,
-                            label:this.$t('langMap.table.fields.common.remark'),
-                            decorator:["title", {rules: []}],
+                        remark: {
+                            key: 'remark',
+                            formType: FormItemTypeEnum.Input,
+                            label: this.$t('langMap.table.fields.common.remark'),
+                            decorator: ["title", {rules: []}],
                         }
                     },
                 },
@@ -164,41 +163,41 @@
                     data: [],
                     columns: [{
                         title: this.$t('langMap.table.fields.obl.articleTag.name'),
-                        align:textAlignDefault,
+                        align: textAlignDefault,
                         dataIndex: 'name',
                         key: 'name'
                     }, {
                         title: this.$t('langMap.table.fields.common.description'),
-                        align:textAlignDefault,
+                        align: textAlignDefault,
                         dataIndex: 'description',
                         key: 'description',
                     }, {
                         title: this.$t('langMap.table.fields.common.weights'),
-                        align:textAlignDefault,
+                        align: textAlignDefault,
                         dataIndex: 'weights',
                         key: 'weights'
-                    },{
-                        title:this.$t('langMap.table.header.operation'),
-                        align:textAlignDefault,
-                        dataIndex:"operation",
-                        key:'operation',
-                        fixed:'right',
-                        width:220,
-                        scopedSlots: { customRender: 'action' }
+                    }, {
+                        title: this.$t('langMap.table.header.operation'),
+                        align: textAlignDefault,
+                        dataIndex: "operation",
+                        key: 'operation',
+                        fixed: 'right',
+                        width: 220,
+                        scopedSlots: {customRender: 'action'}
                     }],
                     pagination: {
-                        current:1,
-                        pageSize:10,
-                        pageSizeOptions:['10','20','50','100'],
-                        showQuickJumper:false,
-                        showSizeChanger:true,
-                        total:0,
-                        showTotal(total,range){
-                            return `${range[0]}-${range[1]} of ${total} items` ;
+                        current: 1,
+                        pageSize: 10,
+                        pageSizeOptions: ['10', '20', '50', '100'],
+                        showQuickJumper: false,
+                        showSizeChanger: true,
+                        total: 0,
+                        showTotal(total, range) {
+                            return `${range[0]}-${range[1]} of ${total} items`;
                         }
                     },
-                    filters:{},
-                    sorter:{}
+                    filters: {},
+                    sorter: {}
                 },
                 tableCheckIdList: [],
                 dialogFormConf: {
@@ -208,23 +207,23 @@
                 dialogFormObj: {
                     name: '',
                     description: '',
-                    weights:0
+                    weights: 0
                 },
-                drawerConf:{
-                    detail:{
-                        articleTag:{
-                            conf:{
-                                title:this.$t('langMap.drawer.obl.title.detailForOblArticleTag'),
+                drawerConf: {
+                    detail: {
+                        articleTag: {
+                            conf: {
+                                title: this.$t('langMap.drawer.obl.title.detailForOblArticleTag'),
                             },
-                            visible:false,
-                            dataObj:{},
-                            drawerFieldConf:fieldInfoConfObj
+                            visible: false,
+                            dataObj: {},
+                            drawerFieldConf: fieldInfoConfObj
                         },
                     },
                 },
             }
         },
-        computed:{
+        computed: {
             rowSelection() {    //行选择
                 return {
                     selectedRowKeys: this.tableCheckIdList,
@@ -233,7 +232,7 @@
                     },
                     getCheckboxProps: record => ({  //选择框的默认属性配置
                         props: {
-                            name:record.fid
+                            name: record.fid
                         }
                     }),
                 };
@@ -243,9 +242,9 @@
             dealGetDialogRefFormObj() {    //返回 弹窗表单 的form对象
                 return this.$refs.createFormRef.createForm;
             },
-            changeQueryLoading(loadingFlag){   //修改[表格搜索]是否在 加载状态中
-                if(typeof loadingFlag == "undefined" || loadingFlag == null){
-                    loadingFlag = false ;
+            changeQueryLoading(loadingFlag) {   //修改[表格搜索]是否在 加载状态中
+                if (typeof loadingFlag == "undefined" || loadingFlag == null) {
+                    loadingFlag = false;
                 }
                 this.searchConf.loadingFlag = loadingFlag;
             },
@@ -253,41 +252,34 @@
                 var _this = this;
                 var delIds = _this.tableCheckIdList;
                 OblArticleTagApi.batchDeleteByIds(delIds).then((res) => {
-                    if (res) {
-                        if (res.success) {  //已经有对错误进行预处理
-                            this.$message.success(res.msg);
-                            _this.mixin_invokeQuery(_this); //表格重新搜索
-                        }
+
+                    if (res.success) {  //已经有对错误进行预处理
+                        this.$message.success(res.msg);
+                        _this.mixin_invokeQuery(_this); //表格重新搜索
                     }
                 })
             },
             dealDelOneRowById(delId) {   //根据id 删除
                 var _this = this;
                 OblArticleTagApi.deleteById(delId).then((res) => {
-                    if (res) {
-                        if (res.success) {  //已经有对错误进行预处理
-                            _this.$message.success(res.msg);
-                            _this.mixin_invokeQuery(_this); //表格重新搜索
-                        }
+                    if (res.success) {  //已经有对错误进行预处理
+                        _this.$message.success(res.msg);
+                        _this.mixin_invokeQuery(_this); //表格重新搜索
                     }
                 })
             },
-            handleSearchFormQuery(e,values) {   //带查询条件 检索列表
-                var _this = this ;
+            handleSearchFormQuery(e, values) {   //带查询条件 检索列表
+                var _this = this;
                 //取得 bean 形式 的查询条件数组
-                var searchFieldArr = _this.mixin_dealGetSearchFormQueryConf(_this.fieldInfoConf,values);
+                var searchFieldArr = _this.mixin_dealGetSearchFormQueryConf(_this.fieldInfoConf, values);
                 _this.changeQueryLoading(true);
-                OblArticleTagApi.getPageQuery(searchFieldArr,_this.tableConf.pagination,_this.tableConf.sorter).then((res) => {
-                    if (res) {
-                        this.tableConf.data = res.gridList;
-                        if(res.vpage){ //总个数
-                            this.tableConf.pagination.total = res.vpage.total ;
-                        }
-                        //清空 已勾选
-                        _this.tableCheckIdList = [] ;
-                    }
+                OblArticleTagApi.getPageQuery(searchFieldArr, _this.tableConf.pagination, _this.tableConf.sorter).then((res) => {
+                    this.tableConf.data = res.gridList;
+                    this.tableConf.pagination.total = res.vpage.total;
+                    //清空 已勾选
+                    _this.tableCheckIdList = [];
                     _this.changeQueryLoading(false);
-                }).catch((e) =>{
+                }).catch((e) => {
                     _this.changeQueryLoading(false);
                 })
             },
@@ -327,7 +319,7 @@
                     _this.$message.warning(this.$t('langMap.message.warning.pleaseSelectTheOnlyRowOfDataForDelete'));
                 } else {
                     _this.$confirm({
-                        content: _this.$t('langMap.message.confirm.isConfirmDeleteWhatSelectedRow',[selectDelIds.length]),
+                        content: _this.$t('langMap.message.confirm.isConfirmDeleteWhatSelectedRow', [selectDelIds.length]),
                         okText: _this.$t('langMap.button.actions.confirm'),
                         cancelText: _this.$t('langMap.button.actions.cancel'),
                         onOk() {
@@ -353,13 +345,9 @@
                     var closeDialogFlag = true;
                     if (_this.dialogFormConf.actionType == "create") {        //新建-提交
                         OblArticleTagApi.createByForm(values).then((res) => {
-                            if (res) {
-                                if (res.success) {  //异常已经有预处理了
-                                    this.$message.success(res.msg);
-                                    _this.mixin_invokeQuery(_this); //表格重新搜索
-                                } else {
-                                    closeDialogFlag = false;
-                                }
+                            if (res.success) {  //异常已经有预处理了
+                                this.$message.success(res.msg);
+                                _this.mixin_invokeQuery(_this); //表格重新搜索
                             } else {
                                 closeDialogFlag = false;
                             }
@@ -371,13 +359,9 @@
                     } else if (_this.dialogFormConf.actionType == "update") {   //更新-提交
                         values['fid'] = _this.dialogFormObj.fid;   //提交时，回填fid值
                         OblArticleTagApi.updateByForm(values).then((res) => {
-                            if (res) {
-                                if (res.success) {  //异常已经有预处理了
-                                    this.$message.success(res.msg);
-                                    _this.mixin_invokeQuery(_this); //表格重新搜索
-                                } else {
-                                    closeDialogFlag = false;
-                                }
+                            if (res.success) {  //异常已经有预处理了
+                                this.$message.success(res.msg);
+                                _this.mixin_invokeQuery(_this); //表格重新搜索
                             } else {
                                 closeDialogFlag = false;
                             }
@@ -410,30 +394,30 @@
                 }
             },
             handleTableChange(pagination, filters, sorter) {    //表格变动-页码跳转/排序/筛选
-                this.tableConf.pagination = pagination ;
-                this.tableConf.filters = filters ;
-                this.tableConf.sorter = sorter ;
+                this.tableConf.pagination = pagination;
+                this.tableConf.filters = filters;
+                this.tableConf.sorter = sorter;
                 this.mixin_invokeQuery(this);
             },
-            handleDetailDrawerShow(e,record){   //Drawer 详情展示
-                if(typeof record != "undefined"){
-                    this.drawerConf.detail.articleTag.dataObj = record ;
-                    this.drawerConf.detail.articleTag.visible = true ;
-                }   else {
+            handleDetailDrawerShow(e, record) {   //Drawer 详情展示
+                if (typeof record != "undefined") {
+                    this.drawerConf.detail.articleTag.dataObj = record;
+                    this.drawerConf.detail.articleTag.visible = true;
+                } else {
                     this.$message.error(this.$t('langMap.message.warning.openInvalidRowDetails'));
                 }
             },
-            handleDetailDrawerClose(e){ //Drawer 详情关闭
-                this.drawerConf.detail.articleTag.visible = false ;
+            handleDetailDrawerClose(e) { //Drawer 详情关闭
+                this.drawerConf.detail.articleTag.visible = false;
             }
         },
-        watch:{},
-        created(){
+        watch: {},
+        created() {
         },
         mounted() {
             this.mixin_invokeQuery(this);
         },
-        destroyed(){
+        destroyed() {
             console.log("文章类别-页面销毁 ...")
         }
     }

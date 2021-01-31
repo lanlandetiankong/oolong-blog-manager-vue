@@ -6,27 +6,31 @@
                     <a-button-group>
                         <a-button v-if="stepConf.current > 0"
                                   @click="goPreviousStep"
-                        > {{$t('langMap.button.actions.goPreviousStep')}}<a-icon type="left" />
+                        > {{$t('langMap.button.actions.goPreviousStep')}}
+                            <a-icon type="left"/>
                         </a-button>
                         <a-button type="primary"
                                   v-if="stepConf.current < Object.keys(stepConf.steps).length - 1"
                                   @click="goNextStep"
-                        > <a-icon type="right" />{{$t('langMap.button.actions.goNextStep')}}
+                        >
+                            <a-icon type="right"/>
+                            {{$t('langMap.button.actions.goNextStep')}}
                         </a-button>
                     </a-button-group>
                 </a-col>
             </a-row>
             <a-row>
                 <a-steps :current="stepConf.current" type="navigation" size="small" :style="stepConf.stepStyle">
-                    <a-step v-for="(item,index) in stepConf.steps" :key="index" :title="item.title" :description="item.description" :subTitle="item.subTitle"/>
+                    <a-step v-for="(item,index) in stepConf.steps" :key="index" :title="item.title"
+                            :description="item.description" :subTitle="item.subTitle"/>
                 </a-steps>
             </a-row>
             <!-- Step-基本/写 -->
             <a-row v-show="currentStepKey == stepConf.steps.basic.key">
                 <a-col :span="22">
-                    <a-input  allowClear size="large"
-                              :addonBefore="$t('langMap.table.fields.common.title')"
-                              v-model="formObj.title"
+                    <a-input allowClear size="large"
+                             :addonBefore="$t('langMap.table.fields.common.title')"
+                             v-model="formObj.title"
                     />
                 </a-col>
             </a-row>
@@ -37,7 +41,7 @@
                 v-show="currentStepKey == stepConf.steps.more.key"
             >
                 <a-row :gutter="16"
-                    :type="formLayout.row.type">
+                       :type="formLayout.row.type">
                     <a-col :span="18">
                         <a-form-item :label="$t('langMap.table.fields.common.tag')">
                             <a-select showSearch allowClear
@@ -68,7 +72,7 @@
                     <a-col :span="24">
                         <a-form-item :label="$t('langMap.table.fields.common.summary')">
                             <a-textarea :auto-size="{ minRows: 3, maxRows: 5 }"
-                                v-decorator="formFieldConf.summary"/>
+                                        v-decorator="formFieldConf.summary"/>
                         </a-form-item>
                     </a-col>
                 </a-row>
@@ -86,10 +90,12 @@
                     <a-button-group v-show="currentStepKey == stepConf.steps.done.key">
                         <a-button size="large" icon="inbox"
                                   @click="handleCreateDraftByForm"
-                        >{{$t('langMap.button.actions.saveAsDraft')}}</a-button>
+                        >{{$t('langMap.button.actions.saveAsDraft')}}
+                        </a-button>
                         <a-button size="large" type="primary" icon="check"
                                   @click="handleCreateByForm"
-                        >{{$t('langMap.button.actions.publish')}}</a-button>
+                        >{{$t('langMap.button.actions.publish')}}
+                        </a-button>
                     </a-button-group>
                 </a-col>
             </a-row>
@@ -103,7 +109,7 @@
                     :title="$t('langMap.results.universal.success.title')"
                 >
                     <template #extra>
-                        <a-button key="console" type="primary" @click="goToViewDetail" >
+                        <a-button key="console" type="primary" @click="goToViewDetail">
                             {{$t('langMap.results.article.create.success.extra.viewDetail')}}
                         </a-button>
                     </template>
@@ -133,90 +139,99 @@
 
     export default {
         name: "OblArticleCreateView",
-        mixins:[OblCommonMixin],
-        data(){
+        mixins: [OblCommonMixin],
+        data() {
             //form验证规则
-            const paramsRules ={
-                summary:[
-                    {required:true,message:this.$t('langMap.commons.forms.pleaseFillOut',[this.$t('langMap.table.fields.common.summary')])}
+            const paramsRules = {
+                summary: [
+                    {
+                        required: true,
+                        message: this.$t('langMap.commons.forms.pleaseFillOut', [this.$t('langMap.table.fields.common.summary')])
+                    }
                 ],
-                tagIdList:[
-                    {required:true,message:this.$t('langMap.commons.forms.pleaseSelect',[this.$t('langMap.table.fields.common.tag')])},
-                    {type:'array'}
+                tagIdList: [
+                    {
+                        required: true,
+                        message: this.$t('langMap.commons.forms.pleaseSelect', [this.$t('langMap.table.fields.common.tag')])
+                    },
+                    {type: 'array'}
                 ],
-                categoryIdList:[
-                    {required:true,message:this.$t('langMap.commons.forms.pleaseSelect',[this.$t('langMap.table.fields.common.category')])},
+                categoryIdList: [
+                    {
+                        required: true,
+                        message: this.$t('langMap.commons.forms.pleaseSelect', [this.$t('langMap.table.fields.common.category')])
+                    },
                 ]
             };
             //A-Result(
             const rstStatus = {
-                theDefault:'theDefault',
-                success:'success',
-                failure:'failure'
+                theDefault: 'theDefault',
+                success: 'success',
+                failure: 'failure'
             };
             //A-Steps(为了保证可以通过key作为判断条件，且避免由于Object不能保证keys的插入顺序而带来的异常，先定义在Map，再转Object到data)
             const stepConstMap = new Map();
-            stepConstMap.set("basic",this.$t('langMap.steps.article.create.basic'));
-            stepConstMap.set("more",this.$t('langMap.steps.article.create.more'));
-            stepConstMap.set("done",this.$t('langMap.steps.article.create.done'));
+            stepConstMap.set("basic", this.$t('langMap.steps.article.create.basic'));
+            stepConstMap.set("more", this.$t('langMap.steps.article.create.more'));
+            stepConstMap.set("done", this.$t('langMap.steps.article.create.done'));
             let stepConst = Object.fromEntries(stepConstMap);
             return {
-                rstConf:{
-                    current:rstStatus.theDefault,
-                    status:rstStatus,
-                    bean:{}
+                rstConf: {
+                    current: rstStatus.theDefault,
+                    status: rstStatus,
+                    bean: {}
                 },
-                stepConf:{
-                    current:0,
-                    steps:stepConst,
-                    stepsMap:stepConstMap,
+                stepConf: {
+                    current: 0,
+                    steps: stepConst,
+                    stepsMap: stepConstMap,
                     stepStyle: {
                         marginBottom: '20px',
                         boxShadow: '0px -1px 0 0 #e8e8e8 inset',
                     }
                 },
-                createForm:{},
-                updateForm:{
-                    flag:false,
-                    fid:'',
-                    initFlag:false
+                createForm: {},
+                updateForm: {
+                    flag: false,
+                    fid: '',
+                    initFlag: false
                 },
-                formLayout:{
-                    row:{
-                        type:"flex"
+                formLayout: {
+                    row: {
+                        type: "flex"
                     },
                     defaultColSpan: 8,
-                    dblColSpan:12,
+                    dblColSpan: 12,
                 },
-                bindData:{
-                    articleTagList:[],
-                    categoryIdList:[]
+                bindData: {
+                    articleTagList: [],
+                    categoryIdList: []
                 },
-                formFieldConf:{
-                    summary:["summary",{rules:paramsRules.summary}],
-                    tagIdList:["tagIdList",{rules:paramsRules.tagIdList}],
-                    categoryIdList:["categoryIdList",{rules:paramsRules.categoryIdList}],
+                formFieldConf: {
+                    summary: ["summary", {rules: paramsRules.summary}],
+                    tagIdList: ["tagIdList", {rules: paramsRules.tagIdList}],
+                    categoryIdList: ["categoryIdList", {rules: paramsRules.categoryIdList}],
                 },
-                editorConf:{
+                editorConf: {
                     toolbars
                 },
-                formObj:{
-                    title:'',
-                    content:'',
-                    originContent:'',
-                    tagIdList:undefined,
-                    categoryIdList:undefined,
-                    summary:''
+                formObj: {
+                    title: '',
+                    content: '',
+                    originContent: '',
+                    tagIdList: undefined,
+                    categoryIdList: undefined,
+                    summary: ''
                 },
-                treeSelectConf:{
-                    categoryId:{
-                        treeDefaultExpandAll:true,
-                        treeNodeFilterProp:"title",
+                treeSelectConf: {
+                    categoryId: {
+                        treeDefaultExpandAll: true,
+                        treeNodeFilterProp: "title",
                     }
                 }
             }
         },
-        methods:{
+        methods: {
             goPreviousStep() {
                 //上一步
                 this.stepConf.current--;
@@ -403,10 +418,7 @@
                 }
                 ArticleCreateApi.getIDraftItemById(fid).then((res) => {
                     if (res.success) {
-                        var resBean = res.bean;
-                        if (resBean) {
-                            _this.formObj = resBean;
-                        }
+                        _this.formObj = res.bean;
                     }
                 })
             },
@@ -420,31 +432,31 @@
                 var params = {
                     fid: this.rstConf.bean.fid
                 }
-                var url = BeeUtil.UrlUtils.objToUrl(this.mixinData.routerConst.article.display,params);
+                var url = BeeUtil.UrlUtils.objToUrl(this.mixinData.routerConst.article.display, params);
                 this.mixin_closeTagAndJump(url);
             },
         },
-        computed:{
+        computed: {
             currentStepKey() {
                 const arr = this.currentStepArr;
                 return arr[this.stepConf.current];
             },
-            currentStepArr(){
-                if(!this.stepConf.stepsMap){
-                    return [] ;
+            currentStepArr() {
+                if (!this.stepConf.stepsMap) {
+                    return [];
                 }
                 return Array.from(this.stepConf.stepsMap.keys());
             }
         },
-        created(){
-            var _this = this ;
-            _this.createForm = this.$form.createForm(_this,{
-                name:'createForm',
+        created() {
+            var _this = this;
+            _this.createForm = this.$form.createForm(_this, {
+                name: 'createForm',
                 onFieldsChange: (_, changedFields) => {
                     //console.log(changedFields);
                     this.$emit('change', changedFields);
                 },
-                mapPropsToFields:() =>{
+                mapPropsToFields: () => {
                     //console.log(_this.formObj);
                     return {
                         summary: this.$form.createFormField({
@@ -463,31 +475,31 @@
                 }
             });
         },
-        mounted(){
-            var _this = this ;
-            var routeQuery = this.$route.query ;
-            if(routeQuery){
-                _this.updateForm.fid = routeQuery.fid ;
-                var action = routeQuery.action ;
-                if(action == "update"){ //表示 该页面处理的是 文章草稿 更新
-                    _this.updateForm.flag = true ;
+        mounted() {
+            var _this = this;
+            var routeQuery = this.$route.query;
+            if (routeQuery) {
+                _this.updateForm.fid = routeQuery.fid;
+                var action = routeQuery.action;
+                if (action == "update") { //表示 该页面处理的是 文章草稿 更新
+                    _this.updateForm.flag = true;
                     _this.dealRenderDraftToForm(_this.updateForm.fid);
                 }
             }
-            this.dealGetAllTagList() ;
-            this.dealGetAllCategoryTree() ;
+            this.dealGetAllTagList();
+            this.dealGetAllCategoryTree();
         },
-        watch:{
+        watch: {
             formObj: {
-                handler (val, oval) {
-                    var _this = this ;
-                    if(_this.updateForm.flag == true && _this.updateForm.initFlag == false){
+                handler(val, oval) {
+                    var _this = this;
+                    if (_this.updateForm.flag == true && _this.updateForm.initFlag == false) {
                         _this.dealUpdateFormValue(val);
-                        _this.updateForm.initFlag = true ;
+                        _this.updateForm.initFlag = true;
                     }
                 },
                 deep: true,
-                immediate:true
+                immediate: true
             }
         },
     }

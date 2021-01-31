@@ -271,22 +271,18 @@
                 var _this = this;
                 var delIds = _this.tableCheckIdList;
                 AnnouncementAllListApi.batchDeleteByIds(delIds).then((res) => {
-                    if (res) {
-                        if (res.success) {  //已经有对错误进行预处理
-                            this.$message.success(res.msg);
-                            _this.mixin_invokeQuery(_this); //表格重新搜索
-                        }
+                    if (res.success) {  //已经有对错误进行预处理
+                        this.$message.success(res.msg);
+                        _this.mixin_invokeQuery(_this); //表格重新搜索
                     }
                 })
             },
             dealDelOneRowById(delId) {   //根据id 删除
                 var _this = this;
                 AnnouncementAllListApi.deleteById(delId).then((res) => {
-                    if (res) {
-                        if (res.success) {  //已经有对错误进行预处理
-                            _this.$message.success(res.msg);
-                            _this.mixin_invokeQuery(_this); //表格重新搜索
-                        }
+                    if (res.success) {  //已经有对错误进行预处理
+                        _this.$message.success(res.msg);
+                        _this.mixin_invokeQuery(_this); //表格重新搜索
                     }
                 })
             },
@@ -296,14 +292,10 @@
                 const searchFieldArr = _this.mixin_dealGetSearchFormQueryConf(_this.fieldInfoConf,values);
                 _this.changeQueryLoading(true);
                 AnnouncementAllListApi.getPageQuery(searchFieldArr,_this.tableConf.pagination,_this.tableConf.sorter).then((res) => {
-                    if (res) {
-                        this.tableConf.data = res.gridList;
-                        if(res.vpage){ //总个数
-                            this.tableConf.pagination.total = res.vpage.total ;
-                        }
-                        //清空 已勾选
-                        _this.tableCheckIdList = [] ;
-                    }
+                    this.tableConf.data = res.gridList;
+                    this.tableConf.pagination.total = res.vpage.total ;
+                    //清空 已勾选
+                    _this.tableCheckIdList = [] ;
                     _this.changeQueryLoading(false);
                 }).catch((e) =>{
                     _this.changeQueryLoading(false);

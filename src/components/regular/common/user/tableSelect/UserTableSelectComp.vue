@@ -268,12 +268,8 @@
                 var _this = this ;
                 _this.changeQueryLoading(true);
                 UserTableSelectCompApi.getPageQuery().then((res) => {
-                    if (res) {
-                        this.tableConf.data = res.gridList;
-                        if(res.vpage){ //总个数
-                            this.tableConf.pagination.total = res.vpage.total ;
-                        }
-                    }
+                    this.tableConf.data = res.gridList;
+                    this.tableConf.pagination.total = res.vpage.total ;
                     _this.changeQueryLoading(false);
                 }).catch((e) =>{
                     _this.changeQueryLoading(false);
@@ -282,7 +278,7 @@
             dealGetUserTypeEnumList(){  //取得 用户类型-枚举列表
                 var _this = this ;
                 UserCommonApis.getAllUserType().then((res) => {
-                    if(res && res.success){
+                    if(res.success){
                         _this.searchConf.binding.userTypes = res.enumData.list ;
                     }
                 })
@@ -290,17 +286,15 @@
             dealGetDefineDepartmentTreeData(){  //取得 所属部门-枚举列表
                 var _this = this ;
                 UserTableSelectCompApi.getAllDefineDepartmentTrees().then((res) => {
-                    if(res && res.success){
-                        if(res.gridList){
-                            _this.searchConf.treeSelectConf.belongDepartmentId.treeData = res.gridList ;
-                        }
+                    if(res.success){
+                        _this.searchConf.treeSelectConf.belongDepartmentId.treeData = res.gridList ;
                     }
                 })
             },
             dealGetLockStateEnumList(){  //取得 用户锁定状态-枚举列表
                 var _this = this ;
                 UserCommonApis.getAllUserLockStateType().then((res) => {
-                    if(res && res.success){
+                    if(res.success){
                         _this.searchConf.binding.lockStates = res.enumData.list ;
                     }
                 })
@@ -308,22 +302,18 @@
             dealGetAllRoleList(){  //取得 所有的角色定义
                 var _this = this ;
                 return UserTableSelectCompApi.getAllDefineRoles().then((res) => {
-                    if(res && res.success){
-                        if(res.gridList){
-                            _this.dialogGrantRoleObj.all = res.gridList ;
-                            _this.dealAllRoleItemToTransferDataSource(res.gridList);
-                        }
+                    if(res.success){
+                        _this.dialogGrantRoleObj.all = res.gridList ;
+                        _this.dealAllRoleItemToTransferDataSource(res.gridList);
                     }
                 })
             },
             dealGetAllJobList(){  //取得 所有的职务定义
                 var _this = this ;
                 return UserTableSelectCompApi.getAllDefineJobs().then((res) => {
-                    if(res && res.success){
-                        if(res.gridList){
-                            _this.dialogGrantJobObj.all = res.gridList ;
-                            _this.dealAllJobItemToTransferDataSource(res.gridList);
-                        }
+                    if(res.success){
+                        _this.dialogGrantJobObj.all = res.gridList ;
+                        _this.dealAllJobItemToTransferDataSource(res.gridList);
                     }
                 })
             },
@@ -367,14 +357,10 @@
                 var searchFieldArr = _this.mixin_dealGetSearchFormQueryConf(_this.fieldInfoConf,values);
                 _this.changeQueryLoading(true);
                 UserTableSelectCompApi.getPageQuery(searchFieldArr,_this.tableConf.pagination,_this.tableConf.sorter).then((res) => {
-                    if (res) {
-                        this.tableConf.data = res.gridList;
-                        if(res.vpage){ //总个数
-                            this.tableConf.pagination.total = res.vpage.total ;
-                        }
-                        //清空 已勾选
-                        _this.tableCheckIdList = [] ;
-                    }
+                    this.tableConf.data = res.gridList;
+                    this.tableConf.pagination.total = res.vpage.total ;
+                    //清空 已勾选
+                    _this.tableCheckIdList = [] ;
                     _this.changeQueryLoading(false);
                 }).catch((e) =>{
                     _this.changeQueryLoading(false);
