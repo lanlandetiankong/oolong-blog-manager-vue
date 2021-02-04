@@ -19,9 +19,9 @@ export const AnnouncementTagApi = {
         //查询所有公告标签信息
         return axios.post('/oblCtl/announcementTag/queryPage',qs.stringify(obj)).then(res => res.data);
     },
-    getItemById(announcementTagId){  //根据公告标签id查询公告标签信息
+    getItemById(fid){  //根据公告标签id查询公告标签信息
         var params = {
-            announcementTagId:announcementTagId
+            fid:fid
         }
         return axios.post("/oblCtl/announcementTag/queryOneById",qs.stringify(params)).then(res => res.data) ;
     },

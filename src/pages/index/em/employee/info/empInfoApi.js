@@ -17,9 +17,9 @@ export const EmpInfoApi = {
         //查询所有用户信息
         return axios.post('/oblCtl/user/userAccount/queryPage', qs.stringify(obj)).then(res => res.data);
     },
-    getItemById(userAccountId) {  //根据用户id查询用户信息
+    getItemById(fid) {  //根据用户id查询用户信息
         var params = {
-            accountId: userAccountId
+            fid: fid
         }
         return axios.post("/oblCtl/user/userAccount/queryOneById", qs.stringify(params)).then(res => res.data);
     },

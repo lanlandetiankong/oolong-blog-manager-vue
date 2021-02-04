@@ -26,9 +26,9 @@ export const MenuManagerApi = {
         //查询所有菜单信息
         return axios.post('/oblCtl/define/defineMenu/queryPage',qs.stringify(obj)).then(res => res.data);
     },
-    getItemById(defineMenuId){  //根据菜单id查询菜单信息
+    getItemById(fid){  //根据菜单id查询菜单信息
         var params = {
-            defineMenuId:defineMenuId
+            fid:fid
         }
         return axios.post("/oblCtl/define/defineMenu/queryOneById",qs.stringify(params)).then(res => res.data) ;
     },

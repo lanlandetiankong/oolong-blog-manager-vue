@@ -23,9 +23,9 @@ export const DepartmentManagerApi = {
         //查询所有部门信息
         return axios.post('/oblCtl/define/defineDepartment/queryPage',qs.stringify(obj)).then(res => res.data);
     },
-    getItemById(defineDepartmentId){  //根据部门id查询部门信息
+    getItemById(fid){  //根据部门id查询部门信息
         var params = {
-            defineDepartmentId:defineDepartmentId
+            fid:fid
         }
         return axios.post("/oblCtl/define/defineDepartment/queryOneById",qs.stringify(params)).then(res => res.data) ;
     },

@@ -26,9 +26,9 @@ export const ArticleCreateApi = {
         }
         return axios.post("/oblCtl/oblArticle/updateDraftByForm",qs.stringify(formObj)).then(res => res.data);
     },
-    getIDraftItemById(draftId){  //根据 文章草稿id 取得文章草稿
+    getIDraftItemById(fid){  //根据 文章草稿id 取得文章草稿
         var params = {
-            draftId:draftId
+            fid:fid
         }
         return axios.post("/oblCtl/oblArticle/queryOneById",qs.stringify(params)).then(res => res.data);
     },

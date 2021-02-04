@@ -19,9 +19,9 @@ export const ModuleManagerApi = {
         //查询所有模块信息
         return axios.post('/oblCtl/module/define_module/queryPage',qs.stringify(obj)).then(res => res.data);
     },
-    getItemById(defineModuleId){  //根据模块id查询模块信息
+    getItemById(fid){  //根据模块id查询模块信息
         var params = {
-            defineModuleId:defineModuleId
+            fid:fid
         }
         return axios.post("/oblCtl/module/define_module/queryOneById",qs.stringify(params)).then(res => res.data) ;
     },

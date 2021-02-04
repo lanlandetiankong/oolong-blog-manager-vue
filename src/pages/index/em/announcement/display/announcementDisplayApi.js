@@ -6,9 +6,9 @@ import qs from 'qs'
 /* 不要使用 // 进行注释！！！！！！！！！！！！！！！！！！！！！！！！   */
 
 export const AnnouncementDisplayApi = {
-    getItemById(announcementId){  //根据 公告草稿id 取得公告草稿
+    getItemById(fid){  //根据 公告草稿id 取得公告草稿
         var params = {
-            announcementId:announcementId
+            fid:fid
         }
         return axios.post("/oblCtl/announcement/queryOneById",qs.stringify(params)).then(res => res.data);
     }
