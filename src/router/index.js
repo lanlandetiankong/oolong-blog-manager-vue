@@ -12,6 +12,7 @@ import Layout from '@/layout/Layout'
 import EmployeeRouter from './main/em/employee/index'
 import PermissionRouter from './main/em/permission/index'
 import AnnouncementRouter from './main/em/announcement/index'
+import SysRouter from './main/em/sys/index'
 
 //obl
 import ArticleRouter from './main/obl/article/index'
@@ -55,6 +56,7 @@ export const constantRouterMap = [
                 }
             },
             AnnouncementRouter,
+            SysRouter,
             EmployeeRouter,
             PermissionRouter,
             ArticleRouter,

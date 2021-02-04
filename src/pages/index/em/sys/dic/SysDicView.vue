@@ -78,49 +78,43 @@
         </div>
         <!-- 弹窗dom-区域 -->
         <div>
-            <announcement-tag-create-form-comp
-                ref="announcementTagCreateFormRef"
+            <sys-dic-create-form-comp
+                ref="sysDicCreateFormRef"
                 :visible="dialogFormConf.visible"
                 :formObj="dialogFormObj"
                 :actionType="dialogFormConf.actionType"
                 @createFormCancel="handleCreateFormCancel"
                 @createFormSubmit="handleCreateFormSubmit"
             >
-            </announcement-tag-create-form-comp>
+            </sys-dic-create-form-comp>
             <row-detail-drawer-comp
-                :drawerConf="drawerConf.detail.announcementTag.conf"
-                :dataObj="drawerConf.detail.announcementTag.dataObj"
-                :visible="drawerConf.detail.announcementTag.visible"
-                :drawerFieldConf="drawerConf.detail.announcementTag.drawerFieldConf"
+                :drawerConf="drawerConf.detail.sysDic.conf"
+                :dataObj="drawerConf.detail.sysDic.dataObj"
+                :visible="drawerConf.detail.sysDic.visible"
+                :drawerFieldConf="drawerConf.detail.sysDic.drawerFieldConf"
                 @execClose="handleDetailDrawerClose"
             />
         </div>
     </div>
 </template>
 <script>
-    import {AnnouncementTagApi} from './announcementTagApi.js'
+    import {SysDicApi} from './SysDicApi.js'
     import {OblCommonMixin} from '~Layout/mixin/OblCommonMixin';
     import {FormItemTypeEnum, ConstantObj} from "~Components/constant_define";
-
     import QueryFormComp from '~Components/regular/query/QueryFormComp'
-    import AnnouncementTagCreateFormComp from "~Components/index/em/announcement/tag/AnnouncementTagCreateFormComp";
+    import SysDicCreateFormComp from "~Components/index/em/sys/dic/SysDicCreateFormComp";
     import RowDetailDrawerComp from '~Components/regular/common/drawer/RowDetailDrawerComp';
-
     export default {
-        name: "AnnouncementTagView",
-        components: {QueryFormComp, AnnouncementTagCreateFormComp, RowDetailDrawerComp},
+        name: "SysDicView",
+        components: {QueryFormComp, SysDicCreateFormComp, RowDetailDrawerComp},
         mixins: [OblCommonMixin],
         data() {
             const textAlignDefault = 'left';
             //字段配置(Query/Drawer)
             const fieldInfoConfObj = {
                 name: {
-                    fieldLabel: this.$t('langMap.table.fields.em.announcementTag.tagName'),
+                    fieldLabel: this.$t('langMap.table.fields.em.sysDic.name'),
                     fieldName: 'name'
-                },
-                description: {
-                    fieldLabel: this.$t('langMap.table.fields.em.announcementTag.description'),
-                    fieldName: 'description'
                 },
                 weights: {
                     fieldLabel: this.$t('langMap.table.fields.common.weights'),
@@ -142,14 +136,8 @@
                         name: {
                             key: 'name',
                             formType: FormItemTypeEnum.Input,
-                            label: this.$t('langMap.table.fields.common.tagName'),
+                            label: this.$t('langMap.table.fields.common.name'),
                             decorator: ["name", {rules: []}],
-                        },
-                        description: {
-                            key: 'description',
-                            formType: FormItemTypeEnum.Input,
-                            label: this.$t('langMap.table.fields.common.description'),
-                            decorator: ["description", {rules: []}],
                         },
                         remark: {
                             key: 'remark',
@@ -162,15 +150,20 @@
                 tableConf: {
                     data: [],
                     columns: [{
-                        title: this.$t('langMap.table.fields.em.announcementTag.tagName'),
+                        title: this.$t('langMap.table.fields.em.sysDic.name'),
                         align: textAlignDefault,
                         dataIndex: 'name',
                         key: 'name'
                     }, {
-                        title: this.$t('langMap.table.fields.em.announcementTag.description'),
+                        title: this.$t('langMap.table.fields.em.sysDic.key'),
                         align: textAlignDefault,
-                        dataIndex: 'description',
-                        key: 'description',
+                        dataIndex: 'key',
+                        key: 'key'
+                    }, {
+                        title: this.$t('langMap.table.fields.em.sysDic.value'),
+                        align: textAlignDefault,
+                        dataIndex: 'value',
+                        key: 'value'
                     }, {
                         title: this.$t('langMap.table.fields.common.weights'),
                         align: textAlignDefault,
@@ -206,14 +199,15 @@
                 },
                 dialogFormObj: {
                     name: '',
-                    description: '',
+                    key:'',
+                    value:'',
                     weights: 0
                 },
                 drawerConf: {
                     detail: {
-                        announcementTag: {
+                        sysDic: {
                             conf: {
-                                title: this.$t('langMap.drawer.em.title.detailForAnnouncementTag'),
+                                title: this.$t('langMap.drawer.em.title.detailForSysDic'),
                             },
                             visible: false,
                             dataObj: {},
@@ -240,7 +234,7 @@
         },
         methods: {
             dealGetDialogRefFormObj() {    //返回 弹窗表单 的form对象
-                return this.$refs.announcementTagCreateFormRef.createForm;
+                return this.$refs.sysDicCreateFormRef.createForm;
             },
             changeQueryLoading(loadingFlag) {   //修改[表格搜索]是否在 加载状态中
                 if (typeof loadingFlag == "undefined" || loadingFlag == null) {
@@ -251,7 +245,7 @@
             dealBatchDeleteByIds() {  //批量删除
                 var _this = this;
                 var delIds = _this.tableCheckIdList;
-                AnnouncementTagApi.batchDeleteByIds(delIds).then((res) => {
+                SysDicApi.batchDeleteByIds(delIds).then((res) => {
                     if (res.success) {  //已经有对错误进行预处理
                         this.$message.success(res.msg);
                         _this.mixin_invokeQuery(_this); //表格重新搜索
@@ -260,19 +254,19 @@
             },
             dealDelOneRowById(delId) {   //根据id 删除
                 var _this = this;
-                AnnouncementTagApi.deleteById(delId).then((res) => {
+                SysDicApi.deleteById(delId).then((res) => {
                     if (res.success) {  //已经有对错误进行预处理
                         _this.$message.success(res.msg);
                         _this.mixin_invokeQuery(_this); //表格重新搜索
                     }
                 })
             },
-            handleSearchFormQuery(e, values) {   //带查询条件 检索公告标签列表
+            handleSearchFormQuery(e, values) {   //带查询条件 检索【字典表】列表
                 var _this = this;
                 //取得 bean 形式 的查询条件数组
                 var searchFieldArr = _this.mixin_dealGetSearchFormQueryConf(_this.fieldInfoConf, values);
                 _this.changeQueryLoading(true);
-                AnnouncementTagApi.getPageQuery(searchFieldArr, _this.tableConf.pagination, _this.tableConf.sorter).then((res) => {
+                SysDicApi.getPageQuery(searchFieldArr, _this.tableConf.pagination, _this.tableConf.sorter).then((res) => {
                     this.tableConf.data = res.gridList;
                     this.tableConf.pagination.total = res.vpage.total;
                     //清空 已勾选
@@ -282,13 +276,13 @@
                     _this.changeQueryLoading(false);
                 })
             },
-            handleCreateByForm() {     //新增公告标签按钮-点击
+            handleCreateByForm() {     //新增按钮-点击
                 var _this = this;
                 _this.dialogFormConf.visible = true;   //显示弹窗
                 _this.dialogFormConf.actionType = "create";
                 _this.dialogFormObj = {};
             },
-            handleUpdateByForm() {  //更新公告标签按钮-点击
+            handleUpdateByForm() {  //更新按钮-点击
                 var _this = this;
                 if (_this.tableCheckIdList.length < 1) {
                     this.$message.warning(this.$t('langMap.message.warning.pleaseSelectTheOnlyRowOfDataForUpdate'));
@@ -297,7 +291,7 @@
                 } else {
                     var selectRowId = _this.tableCheckIdList[0];
                     if (selectRowId) {
-                        AnnouncementTagApi.getItemById(selectRowId).then((res) => {
+                        SysDicApi.getItemById(selectRowId).then((res) => {
                             var selectUserBean = res.bean;
                             if (selectUserBean) {
                                 _this.dialogFormConf.visible = true;   //显示弹窗
@@ -343,7 +337,7 @@
                     }
                     var closeDialogFlag = true;
                     if (_this.dialogFormConf.actionType == "create") {        //新建-提交
-                        AnnouncementTagApi.createByForm(values).then((res) => {
+                        SysDicApi.createByForm(values).then((res) => {
                             if (res.success) {  //异常已经有预处理了
                                 this.$message.success(res.msg);
                                 _this.mixin_invokeQuery(_this); //表格重新搜索
@@ -357,7 +351,7 @@
                         })
                     } else if (_this.dialogFormConf.actionType == "update") {   //更新-提交
                         values['fid'] = _this.dialogFormObj.fid;   //提交时，回填fid值
-                        AnnouncementTagApi.updateByForm(values).then((res) => {
+                        SysDicApi.updateByForm(values).then((res) => {
                             if (res.success) {  //异常已经有预处理了
                                 this.$message.success(res.msg);
                                 _this.mixin_invokeQuery(_this); //表格重新搜索
@@ -398,16 +392,16 @@
                 this.tableConf.sorter = sorter;
                 this.mixin_invokeQuery(this);
             },
-            handleDetailDrawerShow(e, record) {   //Drawer-公告标签 详情展示
+            handleDetailDrawerShow(e, record) {   //Drawer-详情展示
                 if (typeof record != "undefined") {
-                    this.drawerConf.detail.announcementTag.dataObj = record;
-                    this.drawerConf.detail.announcementTag.visible = true;
+                    this.drawerConf.detail.sysDic.dataObj = record;
+                    this.drawerConf.detail.sysDic.visible = true;
                 } else {
                     this.$message.error(this.$t('langMap.message.warning.openInvalidRowDetails'));
                 }
             },
-            handleDetailDrawerClose(e) { //Drawer-公告标签 详情关闭
-                this.drawerConf.detail.announcementTag.visible = false;
+            handleDetailDrawerClose(e) { //Drawer-详情关闭
+                this.drawerConf.detail.sysDic.visible = false;
             }
         },
         watch: {},
@@ -417,7 +411,7 @@
             this.mixin_invokeQuery(this);
         },
         destroyed() {
-            console.log("公告标签-页面销毁 ...")
+            console.log("【字典表】-页面销毁 ...")
         }
     }
 </script>
