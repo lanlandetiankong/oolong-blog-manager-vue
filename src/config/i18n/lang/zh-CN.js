@@ -256,10 +256,6 @@ export const langMap = {
             pleaseFillOutTwo:'{0}或{1}不能为空'
         },
         enums:{
-            lockStatus:{
-                locked:'已锁定',
-                unlock:'未锁定'
-            },
             publishStatus:{
                 published:'已发布',
                 unpublished:'未发布',
@@ -268,6 +264,46 @@ export const langMap = {
                 notApproved:'未审批',
                 approval:'审批中',
                 approved:'已审批',
+            },
+            jobType:{
+                simpleJob:'普通职务'
+            },
+            menuUrlJumpType:{
+                routerUrl:'Router地址跳转',
+                outUrl:'在当前页面打开外部链接',
+                outUrlBlank:'在新页面打开外部链接',
+            },
+            moduleType:{
+                defaultHas:'默认拥有',
+                authorizedDistribution:'授权分配',
+            },
+            roleType:{
+                simpleRole:'普通角色',
+                managerRole:'管理角色',
+            },
+            permissionType:{
+                pageButton:'页面操作按钮',
+                tableActionBtn:'表格内部按钮'
+            },
+            userSex:{
+                man:'男',
+                woman:'女',
+            },
+            userType:{
+                simpleUser:'普通用户',
+                root:'管理员',
+                superRoot:'超级管理员',
+                vip:'会员',
+                superVip:'超级会员',
+                generatedUser:'随机生成用户',
+            },
+            lockStatus:{
+                locked:'已锁定',
+                unlock:'未锁定'
+            },
+            switch:{
+                open:'启用',
+                close:'关闭'
             }
         },
         valueMap:{

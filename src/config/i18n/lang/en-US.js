@@ -268,6 +268,42 @@ export const langMap = {
                 notApproved:'Not approved',
                 approval:'Approval',
                 approved:'Approved'
+            },
+            jobType:{
+                simpleJob:'Simple job'
+            },
+            menuUrlJumpType:{
+                routerUrl:'Router jump',
+                outUrl:'Open external links',
+                outUrlBlank:'Open external link on new page',
+            },
+            moduleType:{
+                defaultHas:'Default has',
+                authorizedDistribution:'Authorized distribution',
+            },
+            roleType:{
+                simpleRole:'Simple role',
+                managerRole:'Manager role',
+            },
+            permissionType:{
+                pageButton:'Page button',
+                tableActionBtn:'Table action button'
+            },
+            userSex:{
+                man:'Man',
+                woman:'Woman',
+            },
+            userType:{
+                simpleUser:'Simple user',
+                root:'Root',
+                superRoot:'Super root',
+                vip:'Vip',
+                superVip:'Super vip',
+                generatedUser:'Generated user',
+            },
+            switch:{
+                open:'Open',
+                close:'Close'
             }
         },
         valueMap:{

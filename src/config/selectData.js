@@ -1,3 +1,4 @@
+import {i18nUtil} from "~Config/i18n/i18nUtil";
 /**
  * 职务类型
  * @type {{SimpleJob: {label: string, value: number}}}
@@ -5,7 +6,7 @@
 export const JobTypeEnum = {
     SimpleJob: {
         value: 1,
-        label: '普通职务'
+        label: i18nUtil.getKey('langMap.commons.enums.jobType.simpleJob')
     }
 };
 /**
@@ -15,15 +16,15 @@ export const JobTypeEnum = {
 export const MenuUrlJumpTypeEnum = {
     RouterUrl: {
         value: 1,
-        label: 'Router地址跳转'
+        label: i18nUtil.getKey('langMap.commons.enums.menuUrlJumpType.routerUrl')
     },
     OutUrl: {
         value: 2,
-        label: '在当前页面打开外部链接'
+        label: i18nUtil.getKey('langMap.commons.enums.menuUrlJumpType.outUrl')
     },
     OutUrlBlank: {
         value: 3,
-        label: '在新页面打开外部链接'
+        label: i18nUtil.getKey('langMap.commons.enums.menuUrlJumpType.outUrlBlank')
     }
 };
 /**
@@ -33,11 +34,11 @@ export const MenuUrlJumpTypeEnum = {
 export const ModuleTypeEnum = {
     DefaultHas:{
         value: 1,
-        label: '默认拥有'
+        label: i18nUtil.getKey('langMap.commons.enums.moduleType.defaultHas')
     },
     AuthorizedDistribution:{
         value: 100,
-        label: '授权分配'
+        label: i18nUtil.getKey('langMap.commons.enums.moduleType.authorizedDistribution')
     }
 };
 /**
@@ -47,11 +48,11 @@ export const ModuleTypeEnum = {
 export const RoleTypeEnum = {
     SimpleRole:{
         value: 1,
-        label: '普通角色'
+        label: i18nUtil.getKey('langMap.commons.enums.roleType.simpleRole')
     },
     ManagerRole:{
         value: 100,
-        label: '管理角色'
+        label: i18nUtil.getKey('langMap.commons.enums.roleType.managerRole')
     }
 };
 /**
@@ -61,11 +62,11 @@ export const RoleTypeEnum = {
 export const PermissionTypeEnum = {
     PageButton:{
         value: 1,
-        label: '页面操作按钮'
+        label: i18nUtil.getKey('langMap.commons.enums.permissionType.pageButton')
     },
     TableActionBtn:{
         value: 1,
-        label: '表格内部按钮'
+        label: i18nUtil.getKey('langMap.commons.enums.permissionType.tableActionBtn')
     }
 };
 /**
@@ -75,11 +76,11 @@ export const PermissionTypeEnum = {
 export const UserSexEnum = {
     Man:{
         value: 1,
-        label: '男'
+        label: i18nUtil.getKey('langMap.commons.enums.userSex.man')
     },
     Woman:{
         value: 0,
-        label: '女'
+        label: i18nUtil.getKey('langMap.commons.enums.userSex.woman')
     }
 };
 /**
@@ -89,27 +90,27 @@ export const UserSexEnum = {
 export const UserTypeEnum = {
     SimpleUser:{
         value: 0,
-        label: '普通用户'
+        label: i18nUtil.getKey('langMap.commons.enums.userType.simpleUser')
     },
     Root: {
         value: 10,
-        label: '管理员'
+        label: i18nUtil.getKey('langMap.commons.enums.userType.root')
     },
     SuperRoot:{
         value: 100,
-        label: '超级管理员'
+        label: i18nUtil.getKey('langMap.commons.enums.userType.superRoot')
     },
     Vip:{
         value: 110,
-        label: '会员'
+        label: i18nUtil.getKey('langMap.commons.enums.userType.vip')
     },
     SuperVip:{
         value: 190,
-        label: '超级会员'
+        label: i18nUtil.getKey('langMap.commons.enums.userType.superVip')
     },
     GeneratedUser:{
         value: -20,
-        label: '随机生成用户'
+        label: i18nUtil.getKey('langMap.commons.enums.userType.generatedUser')
     }
 };
 /**
@@ -119,11 +120,11 @@ export const UserTypeEnum = {
 export const LockStateEnum = {
     Unlocked:{
         value: 0,
-        label: '未锁定'
+        label: i18nUtil.getKey('langMap.commons.enums.lockStatus.locked')
     },
     Locked:{
         value: 1,
-        label: '已锁定'
+        label: i18nUtil.getKey('langMap.commons.enums.lockStatus.unlock')
     }
 };
 /**
@@ -133,11 +134,11 @@ export const LockStateEnum = {
 export const SwitchEnum = {
     Open:{
         value: 1,
-        label: '启动'
+        label: i18nUtil.getKey('langMap.commons.enums.switch.open')
     },
     Close:{
         value: 0,
-        label: '关闭'
+        label: i18nUtil.getKey('langMap.commons.enums.switch.close')
     }
 };
 /**
@@ -151,8 +152,41 @@ function toSelectData(obj) {
         return arr;
     }
     let keys = Object.keys(obj);
-    if (!keys || keys.length == 0) {
+    if (!keys || keys.length === 0) {
         return arr;
+    }
+    for (let idx in keys) {
+        let key = keys[idx] ;
+        let item = obj[key];
+        if (!item) {
+            console.info("key:【%s】为空", key);
+            continue;
+        }
+        if (typeof item.value == "undefined" || typeof item.label == "undefined") {
+            console.info("key:【%s】的value或label为空", key);
+            continue;
+        }
+        arr.push({
+            value: item.value,
+            label: item.label
+        });
+    }
+    return arr;
+}
+
+/**
+ * 枚举对象转map
+ * @param obj
+ * @returns {{}}
+ */
+function toValMap(obj) {
+    const valMap = {};
+    if (typeof obj != "object") {
+        return valMap;
+    }
+    let keys = Object.keys(obj);
+    if (!keys || keys.length === 0) {
+        return valMap;
     }
     for (let idx in keys) {
         debugger;
@@ -166,16 +200,13 @@ function toSelectData(obj) {
             console.info("key:【%s】的value或label为空", key);
             continue;
         }
-        arr.push({
-            value: item.value,
-            label: item.label
-        });
+        valMap[item.value] = item.label;
     }
-    console.log("arr",arr);
-    return arr;
+    console.log("valMap",valMap);
+    return valMap;
 }
 
-export const All = {
+export const AllEnum = {
     JobTypeEnum,
     MenuUrlJumpTypeEnum,
     ModuleTypeEnum,
@@ -188,5 +219,6 @@ export const All = {
 };
 
 export const EnumUtils = {
-    toSelectData
+    toSelectData,
+    toValMap
 };
