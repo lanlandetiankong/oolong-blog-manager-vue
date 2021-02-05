@@ -193,6 +193,11 @@ export const langMap = {
                 announcementTag:{
                     tagName:'标签名',
                     description:'描述'
+                },
+                sysDic:{
+                    name:'名称',
+                    key:'Key',
+                    value:'值'
                 }
             },
             obl:{
