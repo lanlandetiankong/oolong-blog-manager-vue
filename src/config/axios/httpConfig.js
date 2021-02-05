@@ -1,7 +1,7 @@
 import axios from 'axios'
 import store from '@/store' ;
 import baseURL from './baseUrl'
-import {message, Spin,notification} from 'ant-design-vue'
+import {message,notification} from 'ant-design-vue'
 import {i18nUtil} from "~Config/i18n/i18nUtil";
 import {TokenUtil} from '~Router/routeSecurityUtil';
 
@@ -15,6 +15,7 @@ var instance = axios.create({
     withCredentials: true,
     headers: {
         'Content-Type': 'application/x-www-form-urlencoded;charset=UTF-8'
+        //'Content-Type': 'application/json'
     },
     validateStatus(status) {
         switch (status) {

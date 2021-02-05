@@ -48,13 +48,6 @@ export const OblCommonMixin = {
             }
             return queryObj;
         },
-        mixin_defaultIfblank(val,defval){   //当blank时取默认值
-            if(typeof val == "undefined" || val == null || val == ""){
-                return defval ;
-            }   else {
-                return val ;
-            }
-        },
         mixin_defaultIfNull(val,defval){   //当null时取默认值
             if(typeof val == "undefined" || val == null){
                 return defval ;
