@@ -196,7 +196,8 @@ export const langMap = {
                 },
                 sysDic:{
                     name:'Dic name',
-                    key:'Key',
+                    type:'Type',
+                    code:'Code',
                     value:'Value'
                 }
             },

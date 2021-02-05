@@ -139,11 +139,23 @@
                             label: this.$t('langMap.table.fields.common.name'),
                             decorator: ["name", {rules: []}],
                         },
+                        type: {
+                            key: 'type',
+                            formType: FormItemTypeEnum.Input,
+                            label: this.$t('langMap.table.fields.common.type'),
+                            decorator: ["type", {rules: []}],
+                        },
+                        code: {
+                            key: 'code',
+                            formType: FormItemTypeEnum.Input,
+                            label: this.$t('langMap.table.fields.common.code'),
+                            decorator: ["code", {rules: []}],
+                        },
                         remark: {
                             key: 'remark',
                             formType: FormItemTypeEnum.Input,
                             label: this.$t('langMap.table.fields.common.remark'),
-                            decorator: ["title", {rules: []}],
+                            decorator: ["remark", {rules: []}],
                         }
                     },
                 },
@@ -155,10 +167,15 @@
                         dataIndex: 'name',
                         key: 'name'
                     }, {
-                        title: this.$t('langMap.table.fields.em.sysDic.key'),
+                        title: this.$t('langMap.table.fields.em.sysDic.type'),
                         align: textAlignDefault,
-                        dataIndex: 'key',
-                        key: 'key'
+                        dataIndex: 'type',
+                        key: 'type'
+                    }, {
+                        title: this.$t('langMap.table.fields.em.sysDic.code'),
+                        align: textAlignDefault,
+                        dataIndex: 'code',
+                        key: 'code'
                     }, {
                         title: this.$t('langMap.table.fields.em.sysDic.value'),
                         align: textAlignDefault,
@@ -169,6 +186,11 @@
                         align: textAlignDefault,
                         dataIndex: 'weights',
                         key: 'weights'
+                    }, {
+                        title: this.$t('langMap.table.fields.common.remark'),
+                        align: textAlignDefault,
+                        dataIndex: 'remark',
+                        key: 'remark'
                     }, {
                         title: this.$t('langMap.table.header.operation'),
                         align: textAlignDefault,

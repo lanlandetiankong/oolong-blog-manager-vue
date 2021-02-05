@@ -18,10 +18,15 @@
                 >
                     <a-input v-decorator="formFieldConf.name"/>
                 </a-form-item>
-                <a-form-item :label="$t('langMap.table.fields.em.sysDic.key')"
+                <a-form-item :label="$t('langMap.table.fields.em.sysDic.type')"
                              v-bind="FormBaseConfObj.formItemLayout"
                 >
-                    <a-input v-decorator="formFieldConf.key"/>
+                    <a-input v-decorator="formFieldConf.type"/>
+                </a-form-item>
+                <a-form-item :label="$t('langMap.table.fields.em.sysDic.code')"
+                             v-bind="FormBaseConfObj.formItemLayout"
+                >
+                    <a-input v-decorator="formFieldConf.code"/>
                 </a-form-item>
                 <a-form-item :label="$t('langMap.table.fields.em.sysDic.value')"
                              v-bind="FormBaseConfObj.formItemLayout"
@@ -64,10 +69,16 @@
                         message: this.$t('langMap.commons.forms.pleaseFillOut', [this.$t('langMap.table.fields.em.sysDic.name')])
                     }
                 ],
-                key: [
+                type: [
                     {
                         required: true,
-                        message: this.$t('langMap.commons.forms.pleaseFillOut', [this.$t('langMap.table.fields.em.sysDic.key')])
+                        message: this.$t('langMap.commons.forms.pleaseFillOut', [this.$t('langMap.table.fields.em.sysDic.type')])
+                    }
+                ],
+                code: [
+                    {
+                        required: true,
+                        message: this.$t('langMap.commons.forms.pleaseFillOut', [this.$t('langMap.table.fields.em.sysDic.code')])
                     }
                 ],
                 value: [
@@ -93,7 +104,8 @@
                 FormBaseConfObj,
                 formFieldConf: {
                     name: ["name", {rules: paramsRules.name}],
-                    key: ["key", {rules: paramsRules.key}],
+                    type: ["type", {rules: paramsRules.type}],
+                    code: ["code", {rules: paramsRules.code}],
                     value: ["value", {rules: paramsRules.value}],
                     weights: ["weights", {rules: paramsRules.weights}],
                     remark: ["remark", {rules: paramsRules.remark}]
@@ -111,9 +123,13 @@
                             ...formObj,
                             value: formObj.name,
                         }),
-                        key: _this.$form.createFormField({
+                        type: _this.$form.createFormField({
                             ...formObj,
-                            value: formObj.key,
+                            value: formObj.type,
+                        }),
+                        code: _this.$form.createFormField({
+                            ...formObj,
+                            value: formObj.code,
                         }),
                         value: _this.$form.createFormField({
                             ...formObj,
@@ -151,9 +167,13 @@
                             ..._this.formObj,
                             value: _this.formObj.name
                         }),
-                        key: _this.$form.createFormField({
+                        type: _this.$form.createFormField({
                             ..._this.formObj,
-                            value: _this.formObj.key,
+                            value: _this.formObj.type,
+                        }),
+                        code: _this.$form.createFormField({
+                            ..._this.formObj,
+                            value: _this.formObj.code,
                         }),
                         value: _this.$form.createFormField({
                             ..._this.formObj,
