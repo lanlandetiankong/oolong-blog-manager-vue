@@ -104,7 +104,7 @@
 
 <script>
     import {EmpJobApi} from './empJobApi'
-    import {UserCommonApis} from '~Apis/user/UserCommonApis.js'
+    import {JobTypeEnum,EnumUtils} from '~Config/selectData.js';
     import {OblCommonMixin} from '~Layout/mixin/OblCommonMixin';
     import {FormItemTypeEnum,ConstantObj} from "~Components/constant_define";
 
@@ -143,7 +143,7 @@
                 ConstantObj,
                 fieldInfoConf:fieldInfoConfObj,
                 binding:{
-                    types:[]
+                    types:EnumUtils.toSelectData(JobTypeEnum)
                 },
                 searchConf: {
                     showAble:false,
@@ -264,14 +264,6 @@
                     if (res.success) {  //已经有对错误进行预处理
                         _this.$message.success(res.msg);
                         _this.mixin_invokeQuery(_this); //表格重新搜索
-                    }
-                })
-            },
-            dealGetDefineJobTypeEnumList(){  //取得 职务类型-枚举列表
-                var _this = this ;
-                UserCommonApis.getAllDefineJobType().then((res) => {
-                    if(res.success){
-                        _this.binding.types = res.enumData.list ;
                     }
                 })
             },
@@ -451,9 +443,6 @@
                 deep: true,
                 immediate:true
             }
-        },
-        created(){
-            this.dealGetDefineJobTypeEnumList();
         },
         mounted() {
             this.mixin_invokeQuery(this);

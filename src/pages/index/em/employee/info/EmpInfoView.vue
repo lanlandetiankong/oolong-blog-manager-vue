@@ -192,8 +192,8 @@
 
     import {EmpInfoApi} from './empInfoApi'
     import {FormItemTypeEnum,ConstantObj} from "~Components/constant_define";
-    import {UserCommonApis} from '~Apis/user/UserCommonApis.js'
     import {OblCommonMixin} from '~Layout/mixin/OblCommonMixin';
+    import {UserTypeEnum,LockStateEnum,EnumUtils} from '~Config/selectData.js';
 
     import QueryFormComp from '~Components/regular/query/QueryFormComp'
 
@@ -205,7 +205,6 @@
 
     import ACol from "ant-design-vue/es/grid/Col";
     import AFormItem from "ant-design-vue/es/form/FormItem";
-
 
     export default {
         name: "EmpInfoView",
@@ -299,8 +298,8 @@
                 },
                 binding:{
                     belongDepartments:[],
-                    userTypes:[],
-                    lockStates:[]
+                    userTypes:EnumUtils.toSelectData(UserTypeEnum),
+                    lockStates:EnumUtils.toSelectData(LockStateEnum)
                 },
                 tableConf: {
                     data: [],
@@ -503,27 +502,11 @@
                     }
                 })
             },
-            dealGetUserTypeEnumList(){  //取得 用户类型-枚举列表
-                var _this = this ;
-                UserCommonApis.getAllUserType().then((res) => {
-                    if(res.success){
-                        _this.binding.userTypes = res.enumData.list ;
-                    }
-                })
-            },
             dealGetDefineDepartmentTreeData(){  //取得 所属部门-枚举列表
                 var _this = this ;
                 EmpInfoApi.getAllDefineDepartmentTrees().then((res) => {
                     if(res.success){
                         _this.binding.belongDepartments = res.gridList ;
-                    }
-                })
-            },
-            dealGetLockStateEnumList(){  //取得 用户锁定状态-枚举列表
-                var _this = this ;
-                UserCommonApis.getAllUserLockStateType().then((res) => {
-                    if(res.success){
-                        _this.binding.lockStates = res.enumData.list ;
                     }
                 })
             },
@@ -937,9 +920,7 @@
             },
         },
         created(){
-            this.dealGetUserTypeEnumList();
             this.dealGetDefineDepartmentTreeData();
-            this.dealGetLockStateEnumList();
         },
         mounted() {
             this.mixin_invokeQuery(this);

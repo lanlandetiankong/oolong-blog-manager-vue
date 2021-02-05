@@ -128,10 +128,10 @@
 <script>
     import AFormItem from "ant-design-vue/es/form/FormItem";
     import ACol from "ant-design-vue/es/grid/Col";
+    import {MenuUrlJumpTypeEnum,EnumUtils} from '~Config/selectData.js';
 
     import {OblCommonMixin} from '~Layout/mixin/OblCommonMixin';
     import {MenuManagerApi} from './menuManagerApi.js'
-    import {ModuleCommonApis} from '~Apis/module/ModuleCommonApis.js'
     import {FormItemTypeEnum,ConstantObj} from "~Components/constant_define";
 
     import QueryFormComp from '~Components/regular/query/QueryFormComp'
@@ -182,7 +182,7 @@
                 ConstantObj,
                 fieldInfoConf:fieldInfoConfObj,
                 binding:{
-                    urlJumpTypes:[],
+                    urlJumpTypes:EnumUtils.toSelectData(MenuUrlJumpTypeEnum),
                     pidList:[]
                 },
                 searchConf:{
@@ -383,14 +383,6 @@
             }
         },
         methods: {
-            dealGetMenuTypeEnumList(){  //取得 菜单url跳转类型-枚举列表
-                var _this = this ;
-                ModuleCommonApis.getAllMenuUrlJumpTypes().then((res) => {
-                    if(res.success){
-                        _this.binding.urlJumpTypes = res.enumData.list ;
-                    }
-                })
-            },
             dealGetPidTreeData(){  //取得 菜单定义-树形数据
                 var _this = this ;
                 MenuManagerApi.getTreeDataAll().then((res) => {
@@ -634,7 +626,6 @@
             }
         },
         created(){
-            this.dealGetMenuTypeEnumList();
             this.dealGetPidTreeData();
         },
         mounted() {

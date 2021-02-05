@@ -21,16 +21,7 @@
                 <a-form-item :label="$t('langMap.table.fields.common.code')"
                      v-bind="FormBaseConfObj.formItemLayout"
                 >
-                    <a-input v-decorator="formFieldConf.code" :readonly="formObj.ensure == 1">
-                        <a-select slot="addonBefore"
-                                  v-decorator="['codePrefix',{ initialValue: permissonCodePrefixDefaultChecks }]"
-                                  style="width:160px"
-                                  optionFilterProp="children"
-                                  :options="permissonCodePrefixs"
-                                  :filterOption="mixin_getFilterOption"
-                        >
-                        </a-select>
-                    </a-input>
+                    <a-input v-decorator="formFieldConf.code" :readonly="formObj.ensure == 1" />
                 </a-form-item>
                 <a-form-item :label="$t('langMap.table.fields.common.type')"
                      v-bind="FormBaseConfObj.formItemLayout"
@@ -68,15 +59,7 @@
             visible:Boolean,
             actionType:String,
             formObj:Object,
-            permissionTypes:Array,
-            permissonCodePrefixs:{  //code前缀枚举
-                type:Array,
-                default:[]
-            },
-            permissonCodePrefixDefaultChecks:{
-                type:Array,
-                default:[]
-            }
+            permissionTypes:Array
         },
         data(){
             var paramsRules ={

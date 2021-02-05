@@ -99,8 +99,6 @@
                 :formObj="dialogFormObj"
                 :actionType="dialogFormConf.actionType"
                 :permissionTypes="binding.permissionTypes"
-                :permissonCodePrefixs="binding.codePrefixList"
-                :permissonCodePrefixDefaultChecks="binding.codePrefixDefaultChecks"
                 @createFormCancel="handleCreateFormCancel"
                 @createFormSubmit="handleCreateFormSubmit"
             >
@@ -122,10 +120,8 @@
     import AFormItem from "ant-design-vue/es/form/FormItem";
     import ACol from "ant-design-vue/es/grid/Col";
 
+    import {PermissionTypeEnum,EnumUtils} from '~Config/selectData.js';
     import {PermissionManagerApi} from './permissionManagerApi.js'
-    import {PermissionCommonApis} from '~Apis/permission/PermissionCommonApis.js'
-    import {BindingCommonApis} from '~Apis/common/CommonApis.js'
-    import {DrawerFieldTypeEnum} from '~Components/regular/common/drawer/drawer_define.js'
     import {FormItemTypeEnum,ConstantObj} from "~Components/constant_define";
 
     import QueryFormComp from '~Components/regular/query/QueryFormComp'
@@ -163,10 +159,8 @@
                 ConstantObj,
                 fieldInfoConf:fieldInfoConfObj,
                 binding:{
-                    permissionTypes:[],
-                    codePrefixList:[],
-                    codePrefixDefaultChecks:[],
-                    switchEnums:[]
+                    permissionTypes:EnumUtils.toSelectData(PermissionTypeEnum),
+                    switchEnums:EnumUtils.toSelectData(SwitchEnum)
                 },
                 searchConf:{
                     showAble:false,
@@ -296,31 +290,6 @@
             ])
         },
         methods: {
-            dealGetPermissionTypeEnumList(){  //取得 用户类型-枚举列表
-                var _this = this ;
-                PermissionCommonApis.getAllPermissionTypes().then((res) => {
-                    if(res.success){
-                        _this.binding.permissionTypes = res.enumData.list ;
-                    }
-                })
-            },
-            dealGetPermissionCodePrefixEnumList(){  //取得 权限定义Code前缀-枚举列表
-                var _this = this ;
-                PermissionCommonApis.getAllPermissionCodePrefixs().then((res) => {
-                    if(res.success){
-                        _this.binding.codePrefixList = res.enumData.list ;
-                        _this.binding.codePrefixDefaultChecks = res.enumData.checkeds ;
-                    }
-                })
-            },
-            dealGetBindingSwitchEnumList(){  //取得 开关式取值-枚举列表
-                var _this = this ;
-                BindingCommonApis.getSwitchEnumList().then((res) => {
-                    if(res.success){
-                        _this.binding.switchEnums = res.enumData.list ;
-                    }
-                })
-            },
             dealGetDialogRefFormObj() {    //返回 弹窗表单 的form对象
                 return this.$refs.definePermissionCreateFormRef.createForm;
             },
@@ -545,11 +514,7 @@
                 immediate:true
             }
         },
-        created(){
-            this.dealGetPermissionTypeEnumList();
-            this.dealGetPermissionCodePrefixEnumList();
-            this.dealGetBindingSwitchEnumList();
-        },
+        created(){},
         mounted() {
             this.mixin_invokeQuery(this);
         },

@@ -42,8 +42,8 @@
 <script>
     import jquery from 'jquery';
     import {DrawerFieldTypeEnum} from "./drawer_define";
+    import {UserTypeEnum,LockStateEnum,EnumUtils} from '~Config/selectData.js';
     import {UserTableSelectCompApi} from './userTableSelectCompApi'
-    import {UserCommonApis} from '~Apis/user/UserCommonApis.js'
     import {FormItemTypeEnum} from "~Components/constant_define";
 
     import {OblCommonMixin} from '~Layout/mixin/OblCommonMixin';
@@ -151,8 +151,8 @@
                 fieldInfoConf:fieldInfoConfObj,
                 binding:{
                     belongDepartments:[],
-                    userTypes:[],
-                    lockStates:[]
+                    userTypes:EnumUtils.toSelectData(UserTypeEnum),
+                    lockStates:EnumUtils.toSelectData(LockStateEnum)
                 },
                 searchConf: {
                     showAble:false,
@@ -275,27 +275,11 @@
                     _this.changeQueryLoading(false);
                 })
             },
-            dealGetUserTypeEnumList(){  //取得 用户类型-枚举列表
-                var _this = this ;
-                UserCommonApis.getAllUserType().then((res) => {
-                    if(res.success){
-                        _this.searchConf.binding.userTypes = res.enumData.list ;
-                    }
-                })
-            },
             dealGetDefineDepartmentTreeData(){  //取得 所属部门-枚举列表
                 var _this = this ;
                 UserTableSelectCompApi.getAllDefineDepartmentTrees().then((res) => {
                     if(res.success){
                         _this.searchConf.treeSelectConf.belongDepartmentId.treeData = res.gridList ;
-                    }
-                })
-            },
-            dealGetLockStateEnumList(){  //取得 用户锁定状态-枚举列表
-                var _this = this ;
-                UserCommonApis.getAllUserLockStateType().then((res) => {
-                    if(res.success){
-                        _this.searchConf.binding.lockStates = res.enumData.list ;
                     }
                 })
             },
@@ -403,9 +387,7 @@
         },
         created() {
             this.dealGetAllUserAccounts();
-            this.dealGetUserTypeEnumList();
             this.dealGetDefineDepartmentTreeData();
-            this.dealGetLockStateEnumList();
         }
     };
 </script>

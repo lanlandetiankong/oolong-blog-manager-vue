@@ -32,7 +32,6 @@ module.exports = {
       '~Pages': resolve('src/pages'),
       '~Assets': resolve('src/assets'),
       '~Config': resolve('src/config'),
-      '~Apis': resolve('src/apis'),
       '~Layout': resolve('src/layout'),
       '~Router': resolve('src/router'),
       '~Utils': resolve('src/utils')

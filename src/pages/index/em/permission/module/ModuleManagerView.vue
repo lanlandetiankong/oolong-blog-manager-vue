@@ -108,14 +108,15 @@
     import AFormItem from "ant-design-vue/es/form/FormItem";
     import ACol from "ant-design-vue/es/grid/Col";
 
+    import {ModuleTypeEnum,EnumUtils} from '~Config/selectData.js';
     import {ModuleManagerApi} from './moduleManagerApi.js'
-    import {ModuleCommonApis} from '~Apis/module/ModuleCommonApis.js'
     import {FormItemTypeEnum,ConstantObj} from "~Components/constant_define";
     import {OblCommonMixin} from '~Layout/mixin/OblCommonMixin';
 
     import QueryFormComp from '~Components/regular/query/QueryFormComp'
     import DefineModuleCreateFormComp from "~Components/index/em/define/permission/module/DefineModuleCreateFormComp";
     import RowDetailDrawerComp from '~Components/regular/common/drawer/RowDetailDrawerComp';
+    import {MenuUrlJumpTypeEnum} from "~Config/selectData";
 
     export default {
         name: "ModuleManagerView",
@@ -150,7 +151,7 @@
                 ConstantObj,
                 fieldInfoConf:fieldInfoConfObj,
                 binding:{
-                    moduleTypes:[]
+                    moduleTypes:EnumUtils.toSelectData(MenuUrlJumpTypeEnum)
                 },
                 searchConf:{
                     showAble:false,
@@ -273,14 +274,6 @@
             }
         },
         methods: {
-            dealGetModuleTypeEnumList(){  //取得 用户类型-枚举列表
-                var _this = this ;
-                ModuleCommonApis.getAllModuleTypes().then((res) => {
-                    if(res.success){
-                        _this.binding.moduleTypes = res.enumData.list ;
-                    }
-                })
-            },
             dealGetDialogRefFormObj() {    //返回 弹窗表单 的form对象
                 return this.$refs.defineModuleCreateFormRef.createForm;
             },
@@ -462,9 +455,7 @@
                 immediate:true
             }
         },
-        created(){
-            this.dealGetModuleTypeEnumList();
-        },
+        created(){},
         mounted() {
             this.mixin_invokeQuery(this);
         },

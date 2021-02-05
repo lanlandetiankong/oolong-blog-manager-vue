@@ -140,8 +140,8 @@
 <script>
     import {OblCommonMixin} from '~Layout/mixin/OblCommonMixin';
     import {PermissionRoleManagerApi} from './permissionRoleManagerApi.js'
-    import {PermissionCommonApis} from '~Apis/permission/PermissionCommonApis.js'
     import {FormItemTypeEnum,ConstantObj} from "~Components/constant_define";
+    import {RoleTypeEnum,EnumUtils} from '~Config/selectData.js';
 
     import QueryFormComp from '~Components/regular/query/QueryFormComp'
     import DefineRoleCreateFormComp from '~Components/index/em/define/permission/role/DefineRoleCreateFormComp';
@@ -176,7 +176,7 @@
                 ConstantObj,
                 fieldInfoConf:fieldInfoConfObj,
                 binding:{
-                    roleTypes:[]
+                    roleTypes:EnumUtils.toSelectData(RoleTypeEnum)
                 },
                 searchConf:{
                     showAble:false,
@@ -300,14 +300,6 @@
                     loadingFlag = false ;
                 }
                 this.searchConf.loadingFlag = loadingFlag;
-            },
-            dealGetRoleTypeEnumList(){  //取得 用户类型-枚举列表
-                var _this = this ;
-                PermissionCommonApis.getAllRoleTypes().then((res) => {
-                    if(res.success){
-                        _this.binding.roleTypes = res.enumData.list ;
-                    }
-                })
             },
             dealGetAllPermissionList(){  //取得 所有的权限定义
                 var _this = this ;
@@ -653,9 +645,7 @@
                 immediate:true
             }
         },
-        created(){
-            this.dealGetRoleTypeEnumList();
-        },
+        created(){},
         mounted() {
             this.mixin_invokeQuery(this);
         },
