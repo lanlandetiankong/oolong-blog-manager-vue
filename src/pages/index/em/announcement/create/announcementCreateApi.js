@@ -2,6 +2,7 @@
 import axios from '~Config/axios/httpConfig'
 //包装param参数
 import qs from 'qs'
+import {HttpUtil} from "~Config/axios/httpUtil";
 
 /* 不要使用 // 进行注释！！！！！！！！！！！！！！！！！！！！！！！！   */
 
@@ -33,16 +34,9 @@ export const AnnouncementCreateApi = {
         return axios.post("/oblCtl/announcementDraft/queryOneById",qs.stringify(params)).then(res => res.data);
     },
     getAllAnnouncementTagEnums() {  //取得 公告标签 列表
-        const sortObj = {     //固定 order字段 排序
-            "weights":true
-        }
-        var obj = {
-            queryObj:JSON.stringify({}),
-            //paginationObj:JSON.stringify({}),
-            sortObj:JSON.stringify(sortObj),
-        }
+        let obj = HttpUtil.formatQueryPage({},{});
         //查询所有公告标签信息
-        return axios.post('/oblCtl/announcementTag/gainEnumSelect',qs.stringify(obj)).then(res => res.data);
+        return axios.post('/oblCtl/announcementTag/gainEnumSelect',obj).then(res => res.data);
     },
 
 }

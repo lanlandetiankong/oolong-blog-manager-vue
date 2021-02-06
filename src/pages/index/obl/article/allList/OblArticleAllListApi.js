@@ -8,16 +8,9 @@ import qs from 'qs'
 
 export const ArticleAllListApi = {
     getAllArticleTagEnums() {  //取得 文章标签 列表
-        const sortObj = {     //固定 order字段 排序
-            "weights":true
-        }
-        var obj = {
-            queryObj:JSON.stringify({}),
-            //paginationObj:JSON.stringify({}),
-            sortObj:JSON.stringify(sortObj),
-        }
+        let obj = HttpUtil.formatQueryPage({},{});
         //查询所有文章标签信息
-        return axios.post('/oblCtl/oblArticleTag/gainEnumSelect',qs.stringify(obj)).then(res => res.data);
+        return axios.post('/oblCtl/oblArticleTag/gainEnumSelect',obj).then(res => res.data);
     },
     getPageQuery(queryArr,tableConf) {
         let obj = HttpUtil.formatQueryPage(queryArr,tableConf);

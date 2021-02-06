@@ -8,14 +8,7 @@ import qs from 'qs'
 
 export const AnnouncementMyCreateListApi = {
     getAllAnnouncementTagEnums() {  //取得 公告标签 列表
-        const sortObj = {     //固定 order字段 排序
-            "weights":true
-        }
-        const obj = {
-            queryObj:JSON.stringify({}),
-            //paginationObj:JSON.stringify({}),
-            sortObj:JSON.stringify(sortObj),
-        }
+        let obj = HttpUtil.formatQueryPage({},{});
         //查询所有公告标签信息
         return axios.post('/oblCtl/announcementTag/gainEnumSelect',qs.stringify(obj)).then(res => res.data);
     },
@@ -35,7 +28,7 @@ export const AnnouncementMyCreateListApi = {
         var obj = {
             delId:delId
         }
-        return axios.post("/oblCtl/announcement/deleteById",qs.stringify(obj,{indices: false})).then(res => res.data) ;
+        return axios.post("/oblCtl/announcement/deleteById",obj).then(res => res.data) ;
     },
 
 }

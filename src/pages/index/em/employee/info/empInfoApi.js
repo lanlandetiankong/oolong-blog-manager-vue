@@ -16,14 +16,15 @@ export const EmpInfoApi = {
     getItemById(fid) {  //根据用户id查询用户信息
         var params = {
             fid: fid
-        }
+        };
         return axios.post("/oblCtl/user/userAccount/queryOneById", qs.stringify(params)).then(res => res.data);
     },
     createByForm(formObj, avatarUrl) {     //新增用户
         formObj['avatarUrl'] = avatarUrl;
         var obj = {
             formObj: JSON.stringify(formObj),
-        }
+        };
+        //TODO 非规范化接口
         return axios.post("/oblCtl/user/userAccount/createByForm", qs.stringify(obj)).then(res => res.data);;
     },
     updateByForm(formObj, avatarUrl) {  //更新用户
@@ -31,6 +32,7 @@ export const EmpInfoApi = {
         var obj = {
             formObj: JSON.stringify(formObj),
         }
+        //TODO 非规范化接口
         return axios.post("/oblCtl/user/userAccount/updateByForm", qs.stringify(obj)).then(res => res.data);
     },
     batchDeleteByIds(ids) {  //批量删除
@@ -121,7 +123,7 @@ export const EmpInfoApi = {
     exportAllToExcel(menuId) {     //导出所有为Excel
         var obj = {
             menuId: menuId,
-        }
+        };
         return axios.post("/oblCtl/excel/userAccount/exportAllList",
             qs.stringify(obj, {indices: false}),
             {

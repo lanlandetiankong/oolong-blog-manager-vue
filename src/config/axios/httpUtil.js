@@ -1,6 +1,12 @@
+/**
+ * 格式化参数-分页查询
+ * @param queryObj
+ * @param tableConf
+ * @returns {*}
+ */
 function formatQueryPage(queryObj,tableConf) {
     queryObj = (!queryObj) ? {} : queryObj ;
-    if(!tableConf || (JSON.stringify(JSON.parse(tableConf)) === "{}")){
+    if(!tableConf || (JSON.stringify(tableConf) === "{}")){
         return queryObj ;
     }
     let pagination = tableConf.pagination;
@@ -10,10 +16,30 @@ function formatQueryPage(queryObj,tableConf) {
         queryObj["pageSize"] = pagination["pageSize"];
     }
     if(typeof sorter == "object" && (typeof sorter.columnKey == "string") && (typeof sorter.order == "string")){
-        queryObj["sort@"+sorter.columnKey] = (sorter.sorter == "ascend") ? true : false;
+        //sort + 两个 _
+        queryObj["sort__"+sorter.columnKey] = (sorter.sorter == "ascend") ? true : false;
     }
     return queryObj ;
 }
+function addSortField(obj,sortField) {
+    obj = (typeof obj == "object") ? obj : {} ;
+    if(!sortField){
+        return obj;
+    }
+    if(typeof sortField == "object"){
+        let sortKeys = Object.keys(sortField);
+        if (!sortKeys || sortKeys.length === 0) {
+            return obj;
+        }
+        for (let idx in keys) {
+            let key = keys[idx] ;
+            let item = sortField[key];
+            obj["sort__"+key] = item ;
+        }
+    }
+    return obj ;
+}
 export const HttpUtil = {
-    formatQueryPage
+    formatQueryPage,
+    addSortField
 };

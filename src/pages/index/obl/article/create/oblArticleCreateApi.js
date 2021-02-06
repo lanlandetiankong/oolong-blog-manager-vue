@@ -2,6 +2,7 @@
 import axios from '~Config/axios/httpConfig'
 //包装param参数
 import qs from 'qs'
+import {HttpUtil} from "~Config/axios/httpUtil";
 
 /* 不要使用 // 进行注释！！！！！！！！！！！！！！！！！！！！！！！！   */
 
@@ -29,27 +30,18 @@ export const ArticleCreateApi = {
     getIDraftItemById(fid){  //根据 文章草稿id 取得文章草稿
         var params = {
             fid:fid
-        }
+        };
         return axios.post("/oblCtl/oblArticle/queryOneById",qs.stringify(params)).then(res => res.data);
     },
     getAllArticleTagEnums() {  //取得 文章标签 列表
-        const sortObj = {     //固定 order字段 排序
-            "weights":true
-        }
-        var obj = {
-            queryObj:JSON.stringify({}),
-            //paginationObj:JSON.stringify({}),
-            sortObj:JSON.stringify(sortObj),
-        }
+        let obj = HttpUtil.formatQueryPage({},{});
         //查询所有文章标签信息
-        return axios.post('/oblCtl/oblArticleTag/gainEnumSelect',qs.stringify(obj)).then(res => res.data);
+        return axios.post('/oblCtl/oblArticleTag/gainEnumSelect',obj).then(res => res.data);
     },
     getAllArticleCategoryTree() {  //取得 文章分类 树
-        var obj = {
-            queryObj:JSON.stringify({}),
-        }
+        let obj = HttpUtil.formatQueryPage({},{});
         //查询所有文章标签信息
-        return axios.post('/oblCtl/oblArticleCategory/queryTreeSelect',qs.stringify(obj)).then(res => res.data);
+        return axios.post('/oblCtl/oblArticleCategory/queryTreeSelect',obj).then(res => res.data);
     },
 
-}
+};

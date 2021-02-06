@@ -8,16 +8,9 @@ import qs from 'qs'
 
 export const AnnouncementMyDraftListApi = {
     getAllAnnouncementTagEnums() {  //取得 公告标签 列表
-        const sortObj = {     //固定 order字段 排序
-            "weights":true
-        }
-        const obj = {
-            queryObj:JSON.stringify({}),
-            //paginationObj:JSON.stringify({}),
-            sortObj:JSON.stringify(sortObj),
-        }
+        let obj = HttpUtil.formatQueryPage({},{});
         //查询所有公告标签信息
-        return axios.post('/oblCtl/announcementTag/gainEnumSelect',qs.stringify(obj)).then(res => res.data);
+        return axios.post('/oblCtl/announcementTag/gainEnumSelect',obj).then(res => res.data);
     },
     getPageQuery(queryArr,tableConf) {   //取得 所有公告
         let obj = HttpUtil.formatQueryPage(queryArr,tableConf);
