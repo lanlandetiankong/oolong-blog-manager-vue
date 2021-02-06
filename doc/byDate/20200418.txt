@@ -85,7 +85,6 @@ drawerAble
 vue 去除
  //取得 bean 形式 的查询条件数组
 searchFieldArr
-mixin_dealGetSearchFormQueryConf
 
 getPageQuery(searchFieldArr,_this.tableConf.pagination,_this.tableConf.sorter)
 getPageQuery(values,_this.tableConf)
@@ -96,10 +95,3 @@ getPageQuery(queryArr,tableConf)
 let obj = HttpUtil.formatQueryPage(queryArr,tableConf);
 
 import {HttpUtil} from '~Config/axios/httpUtil'
-
-pagination, sorter
-
-var obj = {
-            queryObj: {},
-            paginationObj: {}
-        }

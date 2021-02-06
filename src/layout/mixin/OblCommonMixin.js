@@ -42,12 +42,6 @@ export const OblCommonMixin = {
             }
             return menuId ;
         },
-        mixin_dealGetSearchFormQueryConf(queryConf,queryObj){
-            if(typeof queryObj != "object"){
-                return {} ;
-            }
-            return queryObj;
-        },
         mixin_defaultIfNull(val,defval){   //当null时取默认值
             if(typeof val == "undefined" || val == null){
                 return defval ;
