@@ -10,7 +10,7 @@ export const DashBoardApi = {
         var obj = {
             limitSize:limitSize,
             onlySelf:onlySelf
-        }
+        };
         //查询所有职务信息
         return axios.post('/oblCtl/announcement/queryFilteredPage',qs.stringify(obj)).then(res => res.data);
     }

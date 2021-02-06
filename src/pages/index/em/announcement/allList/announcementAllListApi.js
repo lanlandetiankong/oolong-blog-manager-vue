@@ -1,5 +1,6 @@
 //ajax远程调用
 import axios from '~Config/axios/httpConfig'
+import {HttpUtil} from '~Config/axios/httpUtil'
 //包装param参数
 import qs from 'qs'
 
@@ -16,20 +17,12 @@ export const AnnouncementAllListApi = {
             sortObj:JSON.stringify(sortObj),
         }
         //查询所有公告标签信息
-        return axios.post('/oblCtl/announcementTag/gainEnumSelect',qs.stringify(obj)).then(res => res.data);
+        return axios.post('/oblCtl/announcementTag/gainEnumSelect',qs.stringify()).then(res => res.data);
     },
-    getPageQuery(queryArr,pagination,sorter) {
-        var sortObj = {}
-        if(sorter){
-            sorter.field = sorter.order ;
-        }
-        var obj = {
-            queryObj:JSON.stringify(queryArr),
-            paginationObj:JSON.stringify(pagination),
-            sortObj:JSON.stringify(sortObj),
-        }
+    getPageQuery(queryArr,tableConf) {
+        let obj = HttpUtil.formatQueryPage(queryArr,tableConf);
         //查询所有公告信息
-        return axios.post('/oblCtl/announcement/queryPage',qs.stringify(obj)).then(res => res.data);
+        return axios.post('/oblCtl/announcement/queryPage',obj).then(res => res.data);
     },
     batchDeleteByIds(ids) {  //批量删除
         var obj = {

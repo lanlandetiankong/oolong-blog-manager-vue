@@ -1,23 +1,16 @@
 //ajax远程调用
 import axios from '~Config/axios/httpConfig'
+import {HttpUtil} from '~Config/axios/httpUtil'
 //包装param参数
 import qs from 'qs'
 
 /* 不要使用 // 进行注释！！！！！！！！！！！！！！！！！！！！！！！！   */
 
 export const ModuleManagerApi = {
-    getPageQuery(queryArr,pagination,sorter) {
-        var sortObj = {}
-        if(sorter){
-            sorter.field = sorter.order ;
-        }
-        var obj = {
-            queryObj:JSON.stringify(queryArr),
-            paginationObj:JSON.stringify(pagination),
-            sortObj:JSON.stringify(sortObj),
-        }
+    getPageQuery(queryArr,tableConf) {
+        let obj = HttpUtil.formatQueryPage(queryArr,tableConf);
         //查询所有模块信息
-        return axios.post('/oblCtl/module/define_module/queryPage',qs.stringify(obj)).then(res => res.data);
+        return axios.post('/oblCtl/module/define_module/queryPage',obj).then(res => res.data);
     },
     getItemById(fid){  //根据模块id查询模块信息
         var params = {

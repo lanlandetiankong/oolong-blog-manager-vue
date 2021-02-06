@@ -1,5 +1,6 @@
 //ajax远程调用
 import axios from '~Config/axios/httpConfig'
+import {HttpUtil} from '~Config/axios/httpUtil'
 //包装param参数
 import qs from 'qs'
 
@@ -10,18 +11,10 @@ export const DepartmentManagerApi = {
         //查询所有部门信息(树结构)
         return axios.post('/oblCtl/define/defineDepartment/queryTreeSelect').then(res => res.data);
     },
-    getPageQuery(queryArr,pagination,sorter) {
-        var sortObj = {}
-        if(sorter){
-            sorter.field = sorter.order ;
-        }
-        var obj = {
-            queryObj:JSON.stringify(queryArr),
-            paginationObj:JSON.stringify(pagination),
-            sortObj:JSON.stringify(sortObj),
-        }
+    getPageQuery(queryArr,tableConf) {
+        let obj = HttpUtil.formatQueryPage(queryArr,tableConf);
         //查询所有部门信息
-        return axios.post('/oblCtl/define/defineDepartment/queryPage',qs.stringify(obj)).then(res => res.data);
+        return axios.post('/oblCtl/define/defineDepartment/queryPage',obj).then(res => res.data);
     },
     getItemById(fid){  //根据部门id查询部门信息
         var params = {

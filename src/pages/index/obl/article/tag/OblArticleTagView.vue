@@ -270,10 +270,8 @@
             },
             handleSearchFormQuery(e, values) {   //带查询条件 检索列表
                 var _this = this;
-                //取得 bean 形式 的查询条件数组
-                var searchFieldArr = _this.mixin_dealGetSearchFormQueryConf(_this.fieldInfoConf, values);
                 _this.changeQueryLoading(true);
-                OblArticleTagApi.getPageQuery(searchFieldArr, _this.tableConf.pagination, _this.tableConf.sorter).then((res) => {
+                OblArticleTagApi.getPageQuery(values, _this.tableConf).then((res) => {
                     this.tableConf.data = res.gridList;
                     this.tableConf.pagination.total = res.vpage.total;
                     //清空 已勾选

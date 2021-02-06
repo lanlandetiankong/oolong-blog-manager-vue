@@ -1,5 +1,6 @@
 //ajax远程调用
 import axios from '~Config/axios/httpConfig'
+import {HttpUtil} from '~Config/axios/httpUtil'
 //包装param参数
 import qs from 'qs';
 import {pageUtil,axiosForExcelUtil} from '~Utils/axios/axiosUtils'
@@ -7,15 +8,10 @@ import {pageUtil,axiosForExcelUtil} from '~Utils/axios/axiosUtils'
 /* 不要使用 // 进行注释！！！！！！！！！！！！！！！！！！！！！！！！   */
 
 export const EmpInfoApi = {
-    getPageQuery(queryArr, pagination, sorter) {
-        var sortObj = pageUtil.parseSorterToObj(sorter);
-        var obj = {
-            queryObj: JSON.stringify(queryArr),
-            paginationObj: JSON.stringify(pagination),
-            sortObj: JSON.stringify(sortObj),
-        }
+    getPageQuery(queryArr, tableConf) {
+        let obj = HttpUtil.formatQueryPage(queryArr,tableConf);
         //查询所有用户信息
-        return axios.post('/oblCtl/user/userAccount/queryPage', qs.stringify(obj)).then(res => res.data);
+        return axios.post('/oblCtl/user/userAccount/queryPage', obj).then(res => res.data);
     },
     getItemById(fid) {  //根据用户id查询用户信息
         var params = {
@@ -77,11 +73,8 @@ export const EmpInfoApi = {
         return axios.post("/oblCtl/user/userAccount/gainGrantedRole", qs.stringify(params)).then(res => res.data);
     },
     getAllDefineRoles() {     //取得所有定义的角色
-        var obj = {
-            queryObj: {},
-            paginationObj: {}
-        }
-        return axios.post('/oblCtl/define/defineRole/queryPage', qs.stringify(obj)).then(res => res.data);
+        let obj = HttpUtil.formatQueryPage({},{});
+        return axios.post('/oblCtl/define/defineRole/queryPage', obj).then(res => res.data);
     },
     getAllJobByUserAccountId(userAccountId) {  //根据用户id查询用户所拥有的职务列表
         var params = {
@@ -90,10 +83,7 @@ export const EmpInfoApi = {
         return axios.post("/oblCtl/user/userAccount/gainGrantedJob", qs.stringify(params)).then(res => res.data);
     },
     getAllDefineJobs() {     //取得所有定义的职务
-        var obj = {
-            queryObj: {},
-            paginationObj: {}
-        }
+        let obj = HttpUtil.formatQueryPage({},{});
         return axios.post('/oblCtl/define/defineJob/queryPage', qs.stringify(obj)).then(res => res.data);
     },
     grantJobToUser(userAccountId, checkIds) {     //用户设置职务-提交

@@ -1,9 +1,8 @@
 function formatQueryPage(queryObj,tableConf) {
     queryObj = (!queryObj) ? {} : queryObj ;
-    if(!tableConf){
+    if(!tableConf || (JSON.stringify(JSON.parse(tableConf)) === "{}")){
         return queryObj ;
     }
-    debugger;
     let pagination = tableConf.pagination;
     let sorter = tableConf.sorter;
     if(typeof pagination == "object"){

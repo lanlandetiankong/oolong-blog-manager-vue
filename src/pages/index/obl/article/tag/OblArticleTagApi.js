@@ -1,19 +1,15 @@
 //ajax远程调用
 import axios from '~Config/axios/httpConfig'
+import {HttpUtil} from '~Config/axios/httpUtil'
 //包装param参数
 import qs from 'qs'
 
 /* 不要使用 // 进行注释！！！！！！！！！！！！！！！！！！！！！！！！   */
 
 export const OblArticleTagApi = {
-    getPageQuery(query,pagination,sorter) {
-        var sortObj = {}
-        const obj = {
-            queryObj:JSON.stringify(query),
-            paginationObj:JSON.stringify(pagination),
-            sortObj:JSON.stringify(sortObj)
-        };
-        return axios.post('/oblCtl/oblArticleTag/queryPage',qs.stringify(obj)).then(res => res.data);
+    getPageQuery(queryArr,tableConf) {
+        let obj = HttpUtil.formatQueryPage(queryArr,tableConf);
+        return axios.post('/oblCtl/oblArticleTag/queryPage',obj).then(res => res.data);
     },
     getItemById(fid){  //根据id查询item
         var params = {

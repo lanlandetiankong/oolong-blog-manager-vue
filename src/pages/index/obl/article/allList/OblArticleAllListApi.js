@@ -1,5 +1,6 @@
 //ajax远程调用
-import axios from '~Config/axios/httpConfig'
+import axios from '~Config/axios/httpConfig';
+import {HttpUtil} from '~Config/axios/httpUtil';
 //包装param参数
 import qs from 'qs'
 
@@ -18,18 +19,10 @@ export const ArticleAllListApi = {
         //查询所有文章标签信息
         return axios.post('/oblCtl/oblArticleTag/gainEnumSelect',qs.stringify(obj)).then(res => res.data);
     },
-    getPageQuery(queryArr,pagination,sorter) {
-        var sortObj = {}
-        if(sorter){
-            sorter.field = sorter.order ;
-        }
-        var obj = {
-            queryObj:JSON.stringify(queryArr),
-            paginationObj:JSON.stringify(pagination),
-            sortObj:JSON.stringify(sortObj),
-        }
+    getPageQuery(queryArr,tableConf) {
+        let obj = HttpUtil.formatQueryPage(queryArr,tableConf);
         //查询所有文章
-        return axios.post('/oblCtl/oblArticle/queryPage',qs.stringify(obj)).then(res => res.data);
+        return axios.post('/oblCtl/oblArticle/queryPage',obj).then(res => res.data);
     },
     batchDeleteByIds(ids) {  //批量删除
         var obj = {

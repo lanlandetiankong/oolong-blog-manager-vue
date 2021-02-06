@@ -284,10 +284,8 @@
             },
             handleSearchFormQuery(e,values) {
                 var _this = this ;
-                //取得 bean 形式 的查询条件数组
-                var searchFieldArr = _this.mixin_dealGetSearchFormQueryConf(_this.fieldInfoConf,values);
                 _this.changeQueryLoading(true);
-                AnnouncementMyCreateListApi.getPageQueryOfMyCreate(searchFieldArr,_this.tableConf.pagination,_this.tableConf.sorter).then((res) => {
+                AnnouncementMyCreateListApi.getPageQueryOfMyCreate(values,_this.tableConf).then((res) => {
                     _this.tableConf.data = res.gridList;
                     _this.tableConf.pagination.total = res.vpage.total ;
                     //清空 已勾选

@@ -1,23 +1,16 @@
 //ajax远程调用
 import axios from '~Config/axios/httpConfig'
+import {HttpUtil} from '~Config/axios/httpUtil'
 //包装param参数
 import qs from 'qs'
 
 /* 不要使用 // 进行注释！！！！！！！！！！！！！！！！！！！！！！！！   */
 
 export const PermissionRoleManagerApi = {
-    getPageQuery(queryArr,pagination,sorter) {
-        var sortObj = {}
-        if(sorter){
-            sorter.field = sorter.order ;
-        }
-        var obj = {
-            queryObj:JSON.stringify(queryArr),
-            paginationObj:JSON.stringify(pagination),
-            sortObj:JSON.stringify(sortObj),
-        }
+    getPageQuery(queryArr,tableConf) {
+        let obj = HttpUtil.formatQueryPage(queryArr,tableConf);
         //查询所有角色信息
-        return axios.post('/oblCtl/define/defineRole/queryPage',qs.stringify(obj)).then(res => res.data);
+        return axios.post('/oblCtl/define/defineRole/queryPage',obj).then(res => res.data);
     },
     getItemById(fid){  //根据角色id查询角色信息
         var params = {
@@ -32,12 +25,9 @@ export const PermissionRoleManagerApi = {
         return axios.post("/oblCtl/define/defineRole/gainAllPermissionByRoleId",qs.stringify(params)).then(res => res.data) ;
     },
     getAllDefinePermissions() {     //取得所有定义的权限
-        var obj = {
-            queryObj:{},
-            paginationObj:{}
-        }
+        let obj = HttpUtil.formatQueryPage({},{});
         //查询所有权限信息
-        return axios.post('/oblCtl/define/definePermission/queryPage',qs.stringify(obj)).then(res => res.data);
+        return axios.post('/oblCtl/define/definePermission/queryPage',obj).then(res => res.data);
     },
     getAllDefineMenuTree() {
         var obj = {

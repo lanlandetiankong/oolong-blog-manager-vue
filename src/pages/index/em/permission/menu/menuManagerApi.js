@@ -1,5 +1,6 @@
 //ajax远程调用
 import axios from '~Config/axios/httpConfig'
+import {HttpUtil} from '~Config/axios/httpUtil'
 //包装param参数
 import qs from 'qs'
 
@@ -13,18 +14,10 @@ export const MenuManagerApi = {
         //查询所有菜单信息(树结构)
         return axios.post('/oblCtl/define/defineMenu/queryTreeSelect',qs.stringify(obj)).then(res => res.data);
     },
-    getPageQuery(queryArr,pagination,sorter) {
-        var sortObj = {}
-        if(sorter){
-            sorter.field = sorter.order ;
-        }
-        var obj = {
-            queryObj:JSON.stringify(queryArr),
-            paginationObj:JSON.stringify(pagination),
-            sortObj:JSON.stringify(sortObj),
-        }
+    getPageQuery(queryArr,tableConf) {
+        let obj = HttpUtil.formatQueryPage(queryArr,tableConf);
         //查询所有菜单信息
-        return axios.post('/oblCtl/define/defineMenu/queryPage',qs.stringify(obj)).then(res => res.data);
+        return axios.post('/oblCtl/define/defineMenu/queryPage',obj).then(res => res.data);
     },
     getItemById(fid){  //根据菜单id查询菜单信息
         var params = {
