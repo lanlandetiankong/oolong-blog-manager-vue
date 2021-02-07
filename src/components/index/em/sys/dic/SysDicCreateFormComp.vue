@@ -115,7 +115,6 @@
         },
         methods: {
             dealUpdateFormValue(formObj) {
-                debugger;
                 var _this = this;
                 if (typeof _this.createForm.updateFields != "undefined") { //避免未初始化form的时候就调用了updatefield
                     _this.createForm.updateFields({
@@ -144,7 +143,6 @@
                             value: formObj.remark,
                         })
                     });
-                    debugger;
                 }
             }
         },

@@ -14,8 +14,8 @@ var instance = axios.create({
     baseURL,
     withCredentials: true,
     headers: {
-        'Content-Type': 'application/x-www-form-urlencoded;charset=UTF-8'
-        //'Content-Type': 'application/json'
+        //'Content-Type': 'application/x-www-form-urlencoded;charset=UTF-8'
+        'Content-Type': 'application/json'
     },
     validateStatus(status) {
         switch (status) {

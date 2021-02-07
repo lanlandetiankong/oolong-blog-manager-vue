@@ -189,7 +189,6 @@ function toValMap(obj) {
         return valMap;
     }
     for (let idx in keys) {
-        debugger;
         let key = keys[idx] ;
         let item = obj[key];
         if (!item) {
