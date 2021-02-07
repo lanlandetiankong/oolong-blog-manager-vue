@@ -88,20 +88,18 @@ export const EmpInfoApi = {
         return axios.post("/oblCtl/user/userAccount/grantJobToUser", obj).then(res => res.data);
     },
     getAllDefineDepartmentTrees() {  //取得[部门]列表
-        var obj = {};
+        let obj = {};
         return axios.post('/oblCtl/define/defineDepartment/queryTreeSelect', obj).then(res => res.data);
     },
     exportCheckToExcel(menuId, checkIds) {    //导出已勾选为Excel
-        var _this = this ;
-        var obj = {
+        let obj = {
             menuId: menuId,
             checkIds: checkIds,
-        }
-        return axios.post("/oblCtl/excel/userAccount/exportCheckList",
-            qs.stringify(obj, {indices: false}),{
-                responseType: "blob"
-            }
-        ).then((response) => {
+        };
+        let options = {
+            responseType: "blob"
+        };
+        return axios.post("/oblCtl/excel/userAccount/exportCheckList", obj,options).then((response) => {
             if(!response){
                 return;
             }
@@ -109,15 +107,13 @@ export const EmpInfoApi = {
         });
     },
     exportAllToExcel(menuId) {     //导出所有为Excel
-        var obj = {
-            menuId: menuId,
+        let obj = {
+            menuId: menuId
         };
-        return axios.post("/oblCtl/excel/userAccount/exportAllList",
-            qs.stringify(obj, {indices: false}),
-            {
-                responseType: "blob"
-            }
-        ).then(response => {
+        let options = {
+            responseType: "blob"
+        };
+        return axios.post("/oblCtl/excel/userAccount/exportAllList",obj,options).then(response => {
             if(!response){
                 return;
             }
@@ -125,10 +121,9 @@ export const EmpInfoApi = {
         });
     },
     importDataFromExcel(formData){    //[导入数据]
-        return axios.post("/oblCtl/excel/userAccount/importData",formData,
-            {
-                headers: {'Content-Type': 'multipart/form-data'}
-            }
-        ).then(res => res.data) ;
+        let options = {
+            headers: {'Content-Type': 'multipart/form-data'}
+        };
+        return axios.post("/oblCtl/excel/userAccount/importData",formData,options).then(res => res.data) ;
     }
 }
