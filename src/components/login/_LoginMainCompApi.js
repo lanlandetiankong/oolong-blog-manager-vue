@@ -11,6 +11,6 @@ export const LoginMainCompApi = {
             account:loginForm.userAccount,
             password:loginForm.password
         }
-        return axios.post('/oblCtl/user/login/loginByForm',qs.stringify(formObj)).then(res => res.data);
+        return axios.post('/oblCtl/user/login/loginByForm',formObj).then(res => res.data);
     }
 }
