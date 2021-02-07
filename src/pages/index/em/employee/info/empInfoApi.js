@@ -63,8 +63,8 @@ export const EmpInfoApi = {
     getAllRoleByUserAccountId(userAccountId) {  //根据用户id查询用户所拥有的角色列表
         var params = {
             userAccountId: userAccountId
-        }
-        return axios.post("/oblCtl/user/userAccount/gainGrantedRole", qs.stringify(params)).then(res => res.data);
+        };
+        return axios.post("/oblCtl/user/userAccount/gainGrantedRole", params).then(res => res.data);
     },
     getAllDefineRoles() {     //取得所有定义的角色
         let obj = HttpUtil.formatQueryPage({},{});
@@ -73,8 +73,8 @@ export const EmpInfoApi = {
     getAllJobByUserAccountId(userAccountId) {  //根据用户id查询用户所拥有的职务列表
         var params = {
             userAccountId: userAccountId
-        }
-        return axios.post("/oblCtl/user/userAccount/gainGrantedJob", qs.stringify(params)).then(res => res.data);
+        };
+        return axios.post("/oblCtl/user/userAccount/gainGrantedJob", params).then(res => res.data);
     },
     getAllDefineJobs() {     //取得所有定义的职务
         let obj = HttpUtil.formatQueryPage({},{});
