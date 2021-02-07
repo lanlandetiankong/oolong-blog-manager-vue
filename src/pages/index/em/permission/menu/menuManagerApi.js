@@ -1,10 +1,6 @@
 //ajax远程调用
 import axios from '~Config/axios/httpConfig'
 import {HttpUtil} from '~Config/axios/httpUtil'
-//包装param参数
-import qs from 'qs'
-
-/* 不要使用 // 进行注释！！！！！！！！！！！！！！！！！！！！！！！！   */
 
 export const MenuManagerApi = {
     getTreeDataAll() {
@@ -22,7 +18,7 @@ export const MenuManagerApi = {
     getItemById(fid){  //根据菜单id查询菜单信息
         var params = {
             fid:fid
-        }
+        };
         return axios.post("/oblCtl/define/defineMenu/queryOneById",params).then(res => res.data) ;
     },
     createByForm(formObj) {     //新增菜单
@@ -34,7 +30,7 @@ export const MenuManagerApi = {
     updateExcelModel(menuId,fileItem) {  //更新菜单的excel模板
         fileItem = (fileItem) ? fileItem : {} ;
         fileItem['menuId'] = menuId ;
-        return axios.post("/oblCtl/define/defineMenu/updateExcelModel",qs.stringify(fileItem)).then(res => res.data) ;
+        return axios.post("/oblCtl/define/defineMenu/updateExcelModel",fileItem).then(res => res.data) ;
     },
     batchDeleteByIds(ids) {  //批量删除
         var obj = {

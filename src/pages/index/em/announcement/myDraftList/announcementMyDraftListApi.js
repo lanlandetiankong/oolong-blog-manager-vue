@@ -21,27 +21,27 @@ export const AnnouncementMyDraftListApi = {
     batchDeleteByIds(ids) {  //批量删除
         var obj = {
             delIds:ids
-        }
+        };
         return axios.post("/oblCtl/announcementDraft/batchDeleteByIds",obj).then(res => res.data) ;
     },
     deleteById(delId) {  //删除
         var obj = {
             delId:delId
-        }
+        };
         return axios.post("/oblCtl/announcementDraft/deleteById",obj).then(res => res.data) ;
     },
     publishOneById(publishId) {  //草稿转发布
         var obj = {
             draftId:publishId
-        }
-        return axios.post("/oblCtl/announcementDraft/publishDraft",qs.stringify(obj,{indices: false})).then(res => res.data) ;
+        };
+        return axios.post("/oblCtl/announcementDraft/publishDraft",obj).then(res => res.data) ;
     },
     batchPublishByIds(ids) {  //批量发布
         var obj = {
             draftIds:ids
-        }
-        return axios.post("/oblCtl/announcementDraft/batchPublishDraft",qs.stringify(obj,{indices: false})).then(res => res.data) ;
-    },
+        };
+        return axios.post("/oblCtl/announcementDraft/batchPublishDraft",obj).then(res => res.data) ;
+    }
 
-}
+};
 

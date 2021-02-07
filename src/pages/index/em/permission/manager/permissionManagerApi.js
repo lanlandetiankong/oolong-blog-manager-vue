@@ -44,7 +44,7 @@ export const PermissionManagerApi = {
     batchEnsureByIds(ids) {  //批量启用
         var obj = {
             ensureIds:ids
-        }
-        return axios.post("/oblCtl/define/definePermission/batchEnsureByIds",qs.stringify(obj,{indices: false})).then(res => res.data) ;
+        };
+        return axios.post("/oblCtl/define/definePermission/batchEnsureByIds",obj).then(res => res.data) ;
     },
-}
+};

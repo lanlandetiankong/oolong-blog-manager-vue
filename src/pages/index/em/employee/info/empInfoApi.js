@@ -43,15 +43,15 @@ export const EmpInfoApi = {
         var obj = {
             lockIds: ids,
             lockFlag: lockFlag
-        }
-        return axios.post("/oblCtl/user/userAccount/batchUpdateLockByIds", qs.stringify(obj, {indices: false})).then(res => res.data);
+        };
+        return axios.post("/oblCtl/user/userAccount/batchUpdateLockByIds",obj).then(res => res.data);
     },
     lockById(lockId, lockFlag) {  //锁定
         var obj = {
             lockId: lockId,
             lockFlag: lockFlag
         }
-        return axios.post("/oblCtl/user/userAccount/updateLockById", qs.stringify(obj, {indices: false})).then(res => res.data);
+        return axios.post("/oblCtl/user/userAccount/updateLockById", obj).then(res => res.data);
     },
     grantRoleToUser(userAccountId, checkIds) {     //用户分配角色-提交
         var obj = {
@@ -78,7 +78,7 @@ export const EmpInfoApi = {
     },
     getAllDefineJobs() {     //取得所有定义的职务
         let obj = HttpUtil.formatQueryPage({},{});
-        return axios.post('/oblCtl/define/defineJob/queryPage', qs.stringify(obj)).then(res => res.data);
+        return axios.post('/oblCtl/define/defineJob/queryPage', obj).then(res => res.data);
     },
     grantJobToUser(userAccountId, checkIds) {     //用户设置职务-提交
         var obj = {
