@@ -27,7 +27,7 @@ export const OblArticleCollectCategoryApi = {
         return axios.post("/oblCtl/oblArticleCollectCategory/createByForm",qs.stringify(formObj)).then(res => res.data);;
     },
     updateByForm(formObj) {  //更新
-        return axios.post("/oblCtl/oblArticleCollectCategory/updateByForm",qs.stringify(formObj)).then(res => res.data) ;
+        return axios.post("/oblCtl/oblArticleCollectCategory/updateByForm",formObj).then(res => res.data) ;
     },
     batchDeleteByIds(ids) {  //批量删除
         var obj = {

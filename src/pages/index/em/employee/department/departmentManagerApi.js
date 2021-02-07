@@ -26,7 +26,7 @@ export const DepartmentManagerApi = {
         return axios.post("/oblCtl/define/defineDepartment/createByForm",qs.stringify(formObj)).then(res => res.data);;
     },
     updateByForm(formObj) {  //更新部门
-        return axios.post("/oblCtl/define/defineDepartment/updateByForm",qs.stringify(formObj)).then(res => res.data) ;
+        return axios.post("/oblCtl/define/defineDepartment/updateByForm",formObj).then(res => res.data) ;
     },
     batchDeleteByIds(ids) {  //批量删除
         var obj = {

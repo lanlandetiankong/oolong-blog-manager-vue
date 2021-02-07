@@ -22,7 +22,7 @@ export const SysDicApi = {
         return axios.post("/oblCtl/emSysDic/createByForm", qs.stringify(formObj)).then(res => res.data);
     },
     updateByForm(formObj) {  //更新
-        return axios.post("/oblCtl/emSysDic/updateByForm", qs.stringify(formObj)).then(res => res.data);
+        return axios.post("/oblCtl/emSysDic/updateByForm",formObj).then(res => res.data);
     },
     batchDeleteByIds(ids) {  //批量删除
         var obj = {

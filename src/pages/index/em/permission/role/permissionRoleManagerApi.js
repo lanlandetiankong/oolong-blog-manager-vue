@@ -47,7 +47,7 @@ export const PermissionRoleManagerApi = {
         return axios.post("/oblCtl/define/defineRole/createByForm",qs.stringify(formObj)).then(res => res.data);;
     },
     updateByForm(formObj) {  //更新角色
-        return axios.post("/oblCtl/define/defineRole/updateByForm",qs.stringify(formObj)).then(res => res.data) ;
+        return axios.post("/oblCtl/define/defineRole/updateByForm",formObj).then(res => res.data) ;
     },
     batchDeleteByIds(ids) {  //批量删除
         var obj = {

@@ -29,7 +29,7 @@ export const MenuManagerApi = {
         return axios.post("/oblCtl/define/defineMenu/createByForm",qs.stringify(formObj)).then(res => res.data);;
     },
     updateByForm(formObj) {  //更新菜单
-        return axios.post("/oblCtl/define/defineMenu/updateByForm",qs.stringify(formObj)).then(res => res.data) ;
+        return axios.post("/oblCtl/define/defineMenu/updateByForm",formObj).then(res => res.data) ;
     },
     updateExcelModel(menuId,fileItem) {  //更新菜单的excel模板
         fileItem = (fileItem) ? fileItem : {} ;

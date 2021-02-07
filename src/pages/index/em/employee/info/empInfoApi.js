@@ -25,7 +25,7 @@ export const EmpInfoApi = {
     },
     updateByForm(formObj, avatarUrl) {  //更新用户
         formObj['avatarUrl'] = avatarUrl;
-        return axios.post("/oblCtl/user/userAccount/updateByForm", qs.stringify(formObj)).then(res => res.data);
+        return axios.post("/oblCtl/user/userAccount/updateByForm",formObj).then(res => res.data);
     },
     batchDeleteByIds(ids) {  //批量删除
         var obj = {

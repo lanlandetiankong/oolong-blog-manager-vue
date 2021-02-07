@@ -22,7 +22,7 @@ export const ModuleManagerApi = {
         return axios.post("/oblCtl/module/define_module/createByForm",qs.stringify(formObj)).then(res => res.data);;
     },
     updateByForm(formObj) {  //更新模块
-        return axios.post("/oblCtl/module/define_module/updateByForm",qs.stringify(formObj)).then(res => res.data) ;
+        return axios.post("/oblCtl/module/define_module/updateByForm",formObj).then(res => res.data) ;
     },
     batchDeleteByIds(ids) {  //批量删除
         var obj = {

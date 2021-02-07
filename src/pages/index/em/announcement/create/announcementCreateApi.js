@@ -25,7 +25,7 @@ export const AnnouncementCreateApi = {
             formObj["createTime"] = undefined;
             formObj["updateTime"] = undefined;
         }
-        return axios.post("/oblCtl/announcementDraft/updateByForm",qs.stringify(formObj)).then(res => res.data);
+        return axios.post("/oblCtl/announcementDraft/updateByForm",formObj).then(res => res.data);
     },
     getIDraftItemById(fid){  //根据 公告草稿id 取得公告草稿
         var params = {
