@@ -65,15 +65,15 @@ export const PermissionRoleManagerApi = {
         var obj = {
             roleId:roleId,
             checkIds:checkIds
-        }
-        return axios.post("/oblCtl/define/defineRole/grantPermissionToRole",qs.stringify(obj,{indices: false})).then(res => res.data) ;
+        };
+        return axios.post("/oblCtl/define/defineRole/grantPermissionToRole",obj).then(res => res.data) ;
     },
     grantMenusToRole(roleId,checkIds,halfCheckIds){     //[菜单授权]提交
         var obj = {
             roleId:roleId,
             checkIds:checkIds,
             halfCheckIds:halfCheckIds
-        }
-        return axios.post("/oblCtl/define/defineRole/grantMenusToRole",qs.stringify(obj,{indices: false})).then(res => res.data) ;
+        };
+        return axios.post("/oblCtl/define/defineRole/grantMenusToRole",obj).then(res => res.data) ;
     }
 }

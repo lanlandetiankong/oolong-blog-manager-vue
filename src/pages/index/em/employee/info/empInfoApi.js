@@ -57,8 +57,8 @@ export const EmpInfoApi = {
         var obj = {
             userAccountId: userAccountId,
             checkIds: checkIds
-        }
-        return axios.post("/oblCtl/user/userAccount/grantRoleToUser", qs.stringify(obj, {indices: false})).then(res => res.data);
+        };
+        return axios.post("/oblCtl/user/userAccount/grantRoleToUser", obj).then(res => res.data);
     },
     getAllRoleByUserAccountId(userAccountId) {  //根据用户id查询用户所拥有的角色列表
         var params = {
@@ -84,8 +84,8 @@ export const EmpInfoApi = {
         var obj = {
             userAccountId: userAccountId,
             checkIds: checkIds
-        }
-        return axios.post("/oblCtl/user/userAccount/grantJobToUser", qs.stringify(obj, {indices: false})).then(res => res.data);
+        };
+        return axios.post("/oblCtl/user/userAccount/grantJobToUser", obj).then(res => res.data);
     },
     getAllDefineDepartmentTrees() {  //取得[部门]列表
         var obj = {};
