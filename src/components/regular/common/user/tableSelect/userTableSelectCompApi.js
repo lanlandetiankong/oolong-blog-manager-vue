@@ -1,10 +1,5 @@
-//ajax远程调用
 import axios from '~Config/axios/httpConfig'
 import {HttpUtil} from '~Config/axios/httpUtil'
-//包装param参数
-import qs from 'qs';
-
-/* 不要使用 // 进行注释！！！！！！！！！！！！！！！！！！！！！！！！   */
 
 export const UserTableSelectCompApi = {
     getPageQuery(queryArr, tableConf) {
@@ -25,4 +20,4 @@ export const UserTableSelectCompApi = {
         //查询所有[部门]信息
         return axios.post('/oblCtl/define/defineDepartment/queryTreeSelect', obj).then(res => res.data);
     }
-}
+};

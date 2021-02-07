@@ -1,11 +1,6 @@
-//ajax远程调用
 import axios from '~Config/axios/httpConfig'
 import {HttpUtil} from '~Config/axios/httpUtil'
-//包装param参数
-import qs from 'qs';
-import {pageUtil,axiosForExcelUtil} from '~Utils/axios/axiosUtils'
-
-/* 不要使用 // 进行注释！！！！！！！！！！！！！！！！！！！！！！！！   */
+import {axiosForExcelUtil} from '~Utils/axios/axiosUtils'
 
 export const EmpInfoApi = {
     getPageQuery(queryArr, tableConf) {
@@ -30,13 +25,13 @@ export const EmpInfoApi = {
     batchDeleteByIds(ids) {  //批量删除
         var obj = {
             delIds: ids
-        }
+        };
         return axios.post("/oblCtl/user/userAccount/batchDeleteByIds", obj).then(res => res.data);
     },
     deleteById(delId) {  //删除
         var obj = {
             delId: delId
-        }
+        };
         return axios.post("/oblCtl/user/userAccount/deleteById", obj).then(res => res.data);
     },
     batchLockByIds(ids, lockFlag) {  //批量锁定
@@ -50,7 +45,7 @@ export const EmpInfoApi = {
         var obj = {
             lockId: lockId,
             lockFlag: lockFlag
-        }
+        };
         return axios.post("/oblCtl/user/userAccount/updateLockById", obj).then(res => res.data);
     },
     grantRoleToUser(userAccountId, checkIds) {     //用户分配角色-提交
@@ -126,4 +121,4 @@ export const EmpInfoApi = {
         };
         return axios.post("/oblCtl/excel/userAccount/importData",formData,options).then(res => res.data) ;
     }
-}
+};

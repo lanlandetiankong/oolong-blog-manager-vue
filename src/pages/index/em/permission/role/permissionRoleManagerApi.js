@@ -1,10 +1,5 @@
-//ajax远程调用
 import axios from '~Config/axios/httpConfig'
 import {HttpUtil} from '~Config/axios/httpUtil'
-//包装param参数
-import qs from 'qs'
-
-/* 不要使用 // 进行注释！！！！！！！！！！！！！！！！！！！！！！！！   */
 
 export const PermissionRoleManagerApi = {
     getPageQuery(queryArr,tableConf) {
@@ -15,13 +10,13 @@ export const PermissionRoleManagerApi = {
     getItemById(fid){  //根据角色id查询角色信息
         var params = {
             fid:fid
-        }
+        };
         return axios.post("/oblCtl/define/defineRole/queryOneById",params).then(res => res.data) ;
     },
     getAllPermissionByRoleId(defineRoleId){  //根据角色id查询角色所拥有的[权限定义]列表
         var params = {
             defineRoleId:defineRoleId
-        }
+        };
         return axios.post("/oblCtl/define/defineRole/gainAllPermissionByRoleId",params).then(res => res.data) ;
     },
     getAllDefinePermissions() {     //取得所有定义的权限
@@ -32,7 +27,7 @@ export const PermissionRoleManagerApi = {
     getAllDefineMenuTree() {
         var obj = {
             withRoot:false  ,   //是否包含根节点
-        }
+        };
         //查询所有菜单信息(树结构)
         return axios.post('/oblCtl/define/defineMenu/queryTreeSelect',obj).then(res => res.data);
     },
@@ -40,7 +35,7 @@ export const PermissionRoleManagerApi = {
         var params = {
             defineRoleId:defineRoleId,
             filterParentNode:true,  //是否过滤掉 有子节点的 [菜单节点]
-        }
+        };
         return axios.post("/oblCtl/define/defineRole/gainAllMenuByRoleId",params).then(res => res.data) ;
     },
     createByForm(formObj) {     //新增角色
@@ -52,13 +47,13 @@ export const PermissionRoleManagerApi = {
     batchDeleteByIds(ids) {  //批量删除
         var obj = {
             delIds:ids
-        }
+        };
         return axios.post("/oblCtl/define/defineRole/batchDeleteByIds",obj).then(res => res.data) ;
     },
     deleteById(delId) {  //删除
         var obj = {
             delId:delId
-        }
+        };
         return axios.post("/oblCtl/define/defineRole/deleteById",obj).then(res => res.data) ;
     },
     grantPermissionToRole(roleId,checkIds){     //角色授权提交
@@ -76,4 +71,4 @@ export const PermissionRoleManagerApi = {
         };
         return axios.post("/oblCtl/define/defineRole/grantMenusToRole",obj).then(res => res.data) ;
     }
-}
+};

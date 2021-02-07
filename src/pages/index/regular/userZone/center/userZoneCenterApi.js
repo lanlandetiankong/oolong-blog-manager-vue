@@ -1,4 +1,3 @@
-//ajax远程调用
 import axios from '~Config/axios/httpConfig'
 
 export const UserZoneCenterApi = {
@@ -20,4 +19,4 @@ export const UserZoneCenterApi = {
         };
         return axios.post("/oblCtl/user/userAccount/gainGrantedJob",params).then(res => res.data) ;
     },
-}
+};

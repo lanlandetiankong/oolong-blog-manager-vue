@@ -1,10 +1,5 @@
-//ajax远程调用
 import axios from '~Config/axios/httpConfig'
 import {HttpUtil} from '~Config/axios/httpUtil'
-//包装param参数
-import qs from 'qs'
-
-/* 不要使用 // 进行注释！！！！！！！！！！！！！！！！！！！！！！！！   */
 
 export const OblArticleCategoryApi = {
     getTreeDataAll() {
@@ -20,7 +15,7 @@ export const OblArticleCategoryApi = {
     getItemById(fid){  //根据id查询item
         var params = {
             fid:fid
-        }
+        };
         return axios.post("/oblCtl/oblArticleCategory/queryOneById",params).then(res => res.data) ;
     },
     createByForm(formObj) {     //新增
@@ -41,4 +36,4 @@ export const OblArticleCategoryApi = {
         };
         return axios.post("/oblCtl/oblArticleCategory/deleteById",obj).then(res => res.data) ;
     }
-}
+};

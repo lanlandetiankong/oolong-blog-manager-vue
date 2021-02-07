@@ -1,4 +1,3 @@
-//ajax远程调用
 import axios from '~Config/axios/httpConfig'
 import {HttpUtil} from "~Config/axios/httpUtil";
 
@@ -26,7 +25,7 @@ export const AnnouncementCreateApi = {
     getIDraftItemById(fid){  //根据 公告草稿id 取得公告草稿
         var params = {
             fid:fid
-        }
+        };
         return axios.post("/oblCtl/announcementDraft/queryOneById",params).then(res => res.data);
     },
     getAllAnnouncementTagEnums() {  //取得 公告标签 列表
@@ -35,4 +34,4 @@ export const AnnouncementCreateApi = {
         return axios.post('/oblCtl/announcementTag/gainEnumSelect',obj).then(res => res.data);
     },
 
-}
+};

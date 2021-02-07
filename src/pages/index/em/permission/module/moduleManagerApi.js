@@ -1,10 +1,5 @@
-//ajax远程调用
 import axios from '~Config/axios/httpConfig'
 import {HttpUtil} from '~Config/axios/httpUtil'
-//包装param参数
-import qs from 'qs'
-
-/* 不要使用 // 进行注释！！！！！！！！！！！！！！！！！！！！！！！！   */
 
 export const ModuleManagerApi = {
     getPageQuery(queryArr,tableConf) {
@@ -15,7 +10,7 @@ export const ModuleManagerApi = {
     getItemById(fid){  //根据模块id查询模块信息
         var params = {
             fid:fid
-        }
+        };
         return axios.post("/oblCtl/module/define_module/queryOneById",params).then(res => res.data) ;
     },
     createByForm(formObj) {     //新增模块
@@ -27,13 +22,13 @@ export const ModuleManagerApi = {
     batchDeleteByIds(ids) {  //批量删除
         var obj = {
             delIds:ids
-        }
+        };
         return axios.post("/oblCtl/module/define_module/batchDeleteByIds",obj).then(res => res.data) ;
     },
     deleteById(delId) {  //删除
         var obj = {
             delId:delId
-        }
+        };
         return axios.post("/oblCtl/module/define_module/deleteById",obj).then(res => res.data) ;
     }
-}
+};

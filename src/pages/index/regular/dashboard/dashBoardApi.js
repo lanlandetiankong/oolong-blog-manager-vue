@@ -1,4 +1,3 @@
-//ajax远程调用
 import axios from '~Config/axios/httpConfig'
 
 export const DashBoardApi = {

@@ -1,4 +1,3 @@
-//ajax远程调用
 import axios from '~Config/axios/httpConfig'
 import {HttpUtil} from '~Config/axios/httpUtil'
 
@@ -35,13 +34,13 @@ export const MenuManagerApi = {
     batchDeleteByIds(ids) {  //批量删除
         var obj = {
             delIds:ids
-        }
+        };
         return axios.post("/oblCtl/define/defineMenu/batchDeleteByIds",obj).then(res => res.data) ;
     },
     deleteById(delId) {  //删除
         var obj = {
             delId:delId
-        }
+        };
         return axios.post("/oblCtl/define/defineMenu/deleteById",obj).then(res => res.data) ;
     }
-}
+};
