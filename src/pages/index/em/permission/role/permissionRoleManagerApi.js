@@ -16,7 +16,7 @@ export const PermissionRoleManagerApi = {
         var params = {
             fid:fid
         }
-        return axios.post("/oblCtl/define/defineRole/queryOneById",qs.stringify(params)).then(res => res.data) ;
+        return axios.post("/oblCtl/define/defineRole/queryOneById",params).then(res => res.data) ;
     },
     getAllPermissionByRoleId(defineRoleId){  //根据角色id查询角色所拥有的[权限定义]列表
         var params = {

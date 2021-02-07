@@ -16,7 +16,7 @@ export const ModuleManagerApi = {
         var params = {
             fid:fid
         }
-        return axios.post("/oblCtl/module/define_module/queryOneById",qs.stringify(params)).then(res => res.data) ;
+        return axios.post("/oblCtl/module/define_module/queryOneById",params).then(res => res.data) ;
     },
     createByForm(formObj) {     //新增模块
         return axios.post("/oblCtl/module/define_module/createByForm",qs.stringify(formObj)).then(res => res.data);;

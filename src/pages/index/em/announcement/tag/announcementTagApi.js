@@ -16,7 +16,7 @@ export const AnnouncementTagApi = {
         var params = {
             fid:fid
         }
-        return axios.post("/oblCtl/announcementTag/queryOneById",qs.stringify(params)).then(res => res.data) ;
+        return axios.post("/oblCtl/announcementTag/queryOneById",params).then(res => res.data) ;
     },
     createByForm(formObj) {     //新增公告标签
         return axios.post("/oblCtl/announcementTag/createByForm",qs.stringify(formObj)).then(res => res.data);;

@@ -20,7 +20,7 @@ export const DepartmentManagerApi = {
         var params = {
             fid:fid
         }
-        return axios.post("/oblCtl/define/defineDepartment/queryOneById",qs.stringify(params)).then(res => res.data) ;
+        return axios.post("/oblCtl/define/defineDepartment/queryOneById",params).then(res => res.data) ;
     },
     createByForm(formObj) {     //新增部门
         return axios.post("/oblCtl/define/defineDepartment/createByForm",qs.stringify(formObj)).then(res => res.data);;

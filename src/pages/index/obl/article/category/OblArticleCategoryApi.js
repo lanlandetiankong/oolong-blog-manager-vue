@@ -21,7 +21,7 @@ export const OblArticleCategoryApi = {
         var params = {
             fid:fid
         }
-        return axios.post("/oblCtl/oblArticleCategory/queryOneById",qs.stringify(params)).then(res => res.data) ;
+        return axios.post("/oblCtl/oblArticleCategory/queryOneById",params).then(res => res.data) ;
     },
     createByForm(formObj) {     //新增
         return axios.post("/oblCtl/oblArticleCategory/createByForm",qs.stringify(formObj)).then(res => res.data);;

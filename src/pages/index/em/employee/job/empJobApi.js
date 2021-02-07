@@ -16,7 +16,7 @@ export const EmpJobApi = {
         var params = {
             fid:fid
         }
-        return axios.post("/oblCtl/define/defineJob/queryOneById",qs.stringify(params)).then(res => res.data) ;
+        return axios.post("/oblCtl/define/defineJob/queryOneById",params).then(res => res.data) ;
     },
     createByForm(formObj) {     //新增职务
         return axios.post("/oblCtl/define/defineJob/createByForm",qs.stringify(formObj)).then(res => res.data);;

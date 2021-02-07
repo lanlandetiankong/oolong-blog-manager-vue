@@ -31,7 +31,7 @@ export const AnnouncementCreateApi = {
         var params = {
             fid:fid
         }
-        return axios.post("/oblCtl/announcementDraft/queryOneById",qs.stringify(params)).then(res => res.data);
+        return axios.post("/oblCtl/announcementDraft/queryOneById",params).then(res => res.data);
     },
     getAllAnnouncementTagEnums() {  //取得 公告标签 列表
         let obj = HttpUtil.formatQueryPage({},{});

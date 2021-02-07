@@ -10,7 +10,7 @@ export const OblArticleDisplayApi = {
         var params = {
             fid:fid
         }
-        return axios.post("/oblCtl/oblArticle/queryOneById",qs.stringify(params)).then(res => res.data);
+        return axios.post("/oblCtl/oblArticle/queryOneById",params).then(res => res.data);
     }
 
 }

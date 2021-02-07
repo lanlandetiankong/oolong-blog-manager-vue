@@ -17,7 +17,7 @@ export const EmpInfoApi = {
         var params = {
             fid: fid
         };
-        return axios.post("/oblCtl/user/userAccount/queryOneById", qs.stringify(params)).then(res => res.data);
+        return axios.post("/oblCtl/user/userAccount/queryOneById",params).then(res => res.data);
     },
     createByForm(formObj, avatarUrl) {     //新增用户
         formObj['avatarUrl'] = avatarUrl;

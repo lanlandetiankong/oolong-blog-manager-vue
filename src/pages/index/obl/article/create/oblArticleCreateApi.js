@@ -31,7 +31,7 @@ export const ArticleCreateApi = {
         var params = {
             fid:fid
         };
-        return axios.post("/oblCtl/oblArticle/queryOneById",qs.stringify(params)).then(res => res.data);
+        return axios.post("/oblCtl/oblArticle/queryOneById",params).then(res => res.data);
     },
     getAllArticleTagEnums() {  //取得 文章标签 列表
         let obj = HttpUtil.formatQueryPage({},{});

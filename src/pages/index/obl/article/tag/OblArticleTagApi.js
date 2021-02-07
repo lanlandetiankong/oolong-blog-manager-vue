@@ -15,7 +15,7 @@ export const OblArticleTagApi = {
         var params = {
             fid:fid
         }
-        return axios.post("/oblCtl/oblArticleTag/queryOneById",qs.stringify(params)).then(res => res.data) ;
+        return axios.post("/oblCtl/oblArticleTag/queryOneById",params).then(res => res.data) ;
     },
     createByForm(formObj) {     //新增
         return axios.post("/oblCtl/oblArticleTag/createByForm",qs.stringify(formObj)).then(res => res.data);;

@@ -16,7 +16,7 @@ export const PermissionManagerApi = {
         var params = {
             fid:fid
         }
-        return axios.post("/oblCtl/define/definePermission/queryOneById",qs.stringify(params)).then(res => res.data) ;
+        return axios.post("/oblCtl/define/definePermission/queryOneById",params).then(res => res.data) ;
     },
     createByForm(formObj) {     //新增权限
         if(formObj){

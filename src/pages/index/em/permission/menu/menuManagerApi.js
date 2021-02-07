@@ -23,7 +23,7 @@ export const MenuManagerApi = {
         var params = {
             fid:fid
         }
-        return axios.post("/oblCtl/define/defineMenu/queryOneById",qs.stringify(params)).then(res => res.data) ;
+        return axios.post("/oblCtl/define/defineMenu/queryOneById",params).then(res => res.data) ;
     },
     createByForm(formObj) {     //新增菜单
         return axios.post("/oblCtl/define/defineMenu/createByForm",qs.stringify(formObj)).then(res => res.data);;
