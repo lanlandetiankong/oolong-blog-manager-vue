@@ -34,7 +34,7 @@ export const AnnouncementTagApi = {
         var obj = {
             delId:delId
         }
-        return axios.post("/oblCtl/announcementTag/deleteById",qs.stringify(obj,{indices: false})).then(res => res.data) ;
+        return axios.post("/oblCtl/announcementTag/deleteById",obj).then(res => res.data) ;
     }
 }
 

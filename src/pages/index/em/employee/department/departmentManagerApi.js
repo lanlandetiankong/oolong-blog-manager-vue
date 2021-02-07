@@ -38,6 +38,6 @@ export const DepartmentManagerApi = {
         var obj = {
             delId:delId
         }
-        return axios.post("/oblCtl/define/defineDepartment/deleteById",qs.stringify(obj,{indices: false})).then(res => res.data) ;
+        return axios.post("/oblCtl/define/defineDepartment/deleteById",obj).then(res => res.data) ;
     }
 }

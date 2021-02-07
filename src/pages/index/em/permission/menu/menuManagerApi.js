@@ -46,6 +46,6 @@ export const MenuManagerApi = {
         var obj = {
             delId:delId
         }
-        return axios.post("/oblCtl/define/defineMenu/deleteById",qs.stringify(obj,{indices: false})).then(res => res.data) ;
+        return axios.post("/oblCtl/define/defineMenu/deleteById",obj).then(res => res.data) ;
     }
 }

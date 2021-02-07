@@ -59,7 +59,7 @@ export const PermissionRoleManagerApi = {
         var obj = {
             delId:delId
         }
-        return axios.post("/oblCtl/define/defineRole/deleteById",qs.stringify(obj,{indices: false})).then(res => res.data) ;
+        return axios.post("/oblCtl/define/defineRole/deleteById",obj).then(res => res.data) ;
     },
     grantPermissionToRole(roleId,checkIds){     //角色授权提交
         var obj = {

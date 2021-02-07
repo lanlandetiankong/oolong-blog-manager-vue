@@ -34,6 +34,6 @@ export const ModuleManagerApi = {
         var obj = {
             delId:delId
         }
-        return axios.post("/oblCtl/module/define_module/deleteById",qs.stringify(obj,{indices: false})).then(res => res.data) ;
+        return axios.post("/oblCtl/module/define_module/deleteById",obj).then(res => res.data) ;
     }
 }

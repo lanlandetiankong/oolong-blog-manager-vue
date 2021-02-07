@@ -28,7 +28,7 @@ export const AnnouncementMyDraftListApi = {
         var obj = {
             delId:delId
         }
-        return axios.post("/oblCtl/announcementDraft/deleteById",qs.stringify(obj,{indices: false})).then(res => res.data) ;
+        return axios.post("/oblCtl/announcementDraft/deleteById",obj).then(res => res.data) ;
     },
     publishOneById(publishId) {  //草稿转发布
         var obj = {

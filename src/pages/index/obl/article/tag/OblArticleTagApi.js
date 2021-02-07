@@ -33,7 +33,7 @@ export const OblArticleTagApi = {
         var obj = {
             delId:delId
         }
-        return axios.post("/oblCtl/oblArticleTag/deleteById",qs.stringify(obj,{indices: false})).then(res => res.data) ;
+        return axios.post("/oblCtl/oblArticleTag/deleteById",obj).then(res => res.data) ;
     }
 }
 

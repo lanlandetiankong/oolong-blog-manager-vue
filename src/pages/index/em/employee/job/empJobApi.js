@@ -34,6 +34,6 @@ export const EmpJobApi = {
         var obj = {
             delId:delId
         }
-        return axios.post("/oblCtl/define/defineJob/deleteById",qs.stringify(obj,{indices: false})).then(res => res.data) ;
+        return axios.post("/oblCtl/define/defineJob/deleteById",obj).then(res => res.data) ;
     }
 }

@@ -27,7 +27,7 @@ export const ArticleAllListApi = {
         var obj = {
             delId:delId
         }
-        return axios.post("/oblCtl/oblArticle/deleteById",qs.stringify(obj,{indices: false})).then(res => res.data) ;
+        return axios.post("/oblCtl/oblArticle/deleteById",obj).then(res => res.data) ;
     },
 
 }
