@@ -22,7 +22,7 @@ export const PermissionRoleManagerApi = {
         var params = {
             defineRoleId:defineRoleId
         }
-        return axios.post("/oblCtl/define/defineRole/gainAllPermissionByRoleId",qs.stringify(params)).then(res => res.data) ;
+        return axios.post("/oblCtl/define/defineRole/gainAllPermissionByRoleId",params).then(res => res.data) ;
     },
     getAllDefinePermissions() {     //取得所有定义的权限
         let obj = HttpUtil.formatQueryPage({},{});
@@ -41,7 +41,7 @@ export const PermissionRoleManagerApi = {
             defineRoleId:defineRoleId,
             filterParentNode:true,  //是否过滤掉 有子节点的 [菜单节点]
         }
-        return axios.post("/oblCtl/define/defineRole/gainAllMenuByRoleId",qs.stringify(params)).then(res => res.data) ;
+        return axios.post("/oblCtl/define/defineRole/gainAllMenuByRoleId",params).then(res => res.data) ;
     },
     createByForm(formObj) {     //新增角色
         return axios.post("/oblCtl/define/defineRole/createByForm",formObj).then(res => res.data);;
