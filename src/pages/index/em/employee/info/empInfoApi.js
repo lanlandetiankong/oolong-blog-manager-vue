@@ -31,13 +31,13 @@ export const EmpInfoApi = {
         var obj = {
             delIds: ids
         }
-        return axios.post("/oblCtl/user/userAccount/batchDeleteByIds", qs.stringify(obj, {indices: false})).then(res => res.data);
+        return axios.post("/oblCtl/user/userAccount/batchDeleteByIds", obj).then(res => res.data);
     },
     deleteById(delId) {  //删除
         var obj = {
             delId: delId
         }
-        return axios.post("/oblCtl/user/userAccount/deleteById", qs.stringify(obj, {indices: false})).then(res => res.data);
+        return axios.post("/oblCtl/user/userAccount/deleteById", obj).then(res => res.data);
     },
     batchLockByIds(ids, lockFlag) {  //批量锁定
         var obj = {
