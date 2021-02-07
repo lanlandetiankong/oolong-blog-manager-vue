@@ -10,8 +10,8 @@ export const OblArticleCategoryApi = {
     getTreeDataAll() {
         var obj = {
             withRoot:true  ,   //是否包含根节点
-        }
-        return axios.post('/oblCtl/oblArticleCategory/queryTreeSelect',qs.stringify(obj)).then(res => res.data);
+        };
+        return axios.post('/oblCtl/oblArticleCategory/queryTreeSelect',obj).then(res => res.data);
     },
     getPageQuery(queryArr,tableConf) {
         let obj = HttpUtil.formatQueryPage(queryArr,tableConf);

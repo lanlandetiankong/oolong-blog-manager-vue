@@ -8,8 +8,9 @@ import qs from 'qs'
 
 export const DepartmentManagerApi = {
     getAllDefineDepartmentTree() {
+        let obj = {} ;
         //查询所有部门信息(树结构)
-        return axios.post('/oblCtl/define/defineDepartment/queryTreeSelect').then(res => res.data);
+        return axios.post('/oblCtl/define/defineDepartment/queryTreeSelect',obj).then(res => res.data);
     },
     getPageQuery(queryArr,tableConf) {
         let obj = HttpUtil.formatQueryPage(queryArr,tableConf);

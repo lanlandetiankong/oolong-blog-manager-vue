@@ -10,9 +10,9 @@ export const MenuManagerApi = {
     getTreeDataAll() {
         var obj = {
             withRoot:true  ,   //是否包含根节点
-        }
+        };
         //查询所有菜单信息(树结构)
-        return axios.post('/oblCtl/define/defineMenu/queryTreeSelect',qs.stringify(obj)).then(res => res.data);
+        return axios.post('/oblCtl/define/defineMenu/queryTreeSelect',obj).then(res => res.data);
     },
     getPageQuery(queryArr,tableConf) {
         let obj = HttpUtil.formatQueryPage(queryArr,tableConf);

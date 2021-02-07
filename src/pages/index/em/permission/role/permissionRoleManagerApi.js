@@ -34,7 +34,7 @@ export const PermissionRoleManagerApi = {
             withRoot:false  ,   //是否包含根节点
         }
         //查询所有菜单信息(树结构)
-        return axios.post('/oblCtl/define/defineMenu/queryTreeSelect',qs.stringify(obj)).then(res => res.data);
+        return axios.post('/oblCtl/define/defineMenu/queryTreeSelect',obj).then(res => res.data);
     },
     getAllMenuByRoleId(defineRoleId){  //根据角色id查询角色所拥有的[菜单定义]列表
         var params = {
