@@ -8,7 +8,7 @@ import {HttpUtil} from "~Config/axios/httpUtil";
 
 export const AnnouncementCreateApi = {
     createByForm(formObj) {     //发布公告
-        return axios.post("/oblCtl/announcement/createByForm",qs.stringify(formObj)).then(res => res.data);
+        return axios.post("/oblCtl/announcement/createByForm",formObj).then(res => res.data);
     },
     createFromDraft(formObj) {     //发布 更新后的公告草稿
         if(formObj){
@@ -18,7 +18,7 @@ export const AnnouncementCreateApi = {
         return axios.post("/oblCtl/announcement/createFromDraft",qs.stringify(formObj)).then(res => res.data);
     },
     createDraftByForm(formObj) {     //提交公告到草稿箱
-        return axios.post("/oblCtl/announcementDraft/createByForm",qs.stringify(formObj)).then(res => res.data);
+        return axios.post("/oblCtl/announcementDraft/createByForm",formObj).then(res => res.data);
     },
     updateDraftByForm(formObj) {     //更新公告草稿
         if(formObj){

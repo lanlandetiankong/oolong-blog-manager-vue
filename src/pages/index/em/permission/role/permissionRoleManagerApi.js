@@ -44,7 +44,7 @@ export const PermissionRoleManagerApi = {
         return axios.post("/oblCtl/define/defineRole/gainAllMenuByRoleId",qs.stringify(params)).then(res => res.data) ;
     },
     createByForm(formObj) {     //新增角色
-        return axios.post("/oblCtl/define/defineRole/createByForm",qs.stringify(formObj)).then(res => res.data);;
+        return axios.post("/oblCtl/define/defineRole/createByForm",formObj).then(res => res.data);;
     },
     updateByForm(formObj) {  //更新角色
         return axios.post("/oblCtl/define/defineRole/updateByForm",formObj).then(res => res.data) ;

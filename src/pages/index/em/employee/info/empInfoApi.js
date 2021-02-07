@@ -21,7 +21,7 @@ export const EmpInfoApi = {
     },
     createByForm(formObj, avatarUrl) {     //新增用户
         formObj['avatarUrl'] = avatarUrl;
-        return axios.post("/oblCtl/user/userAccount/createByForm", qs.stringify(formObj)).then(res => res.data);;
+        return axios.post("/oblCtl/user/userAccount/createByForm", formObj).then(res => res.data);
     },
     updateByForm(formObj, avatarUrl) {  //更新用户
         formObj['avatarUrl'] = avatarUrl;

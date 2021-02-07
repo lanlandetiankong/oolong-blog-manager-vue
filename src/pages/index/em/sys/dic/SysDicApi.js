@@ -19,7 +19,7 @@ export const SysDicApi = {
         return axios.post("/oblCtl/emSysDic/queryOneById", params).then(res => res.data);
     },
     createByForm(formObj) {     //新增
-        return axios.post("/oblCtl/emSysDic/createByForm", qs.stringify(formObj)).then(res => res.data);
+        return axios.post("/oblCtl/emSysDic/createByForm", formObj).then(res => res.data);
     },
     updateByForm(formObj) {  //更新
         return axios.post("/oblCtl/emSysDic/updateByForm",formObj).then(res => res.data);

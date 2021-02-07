@@ -8,7 +8,7 @@ import {HttpUtil} from "~Config/axios/httpUtil";
 
 export const ArticleCreateApi = {
     createByForm(formObj) {     //发布文章
-        return axios.post("/oblCtl/oblArticle/createByForm",qs.stringify(formObj)).then(res => res.data);
+        return axios.post("/oblCtl/oblArticle/createByForm",formObj).then(res => res.data);
     },
     createFromDraft(formObj) {     //发布 更新后的文章草稿
         if(formObj){

@@ -19,7 +19,7 @@ export const EmpJobApi = {
         return axios.post("/oblCtl/define/defineJob/queryOneById",params).then(res => res.data) ;
     },
     createByForm(formObj) {     //新增职务
-        return axios.post("/oblCtl/define/defineJob/createByForm",qs.stringify(formObj)).then(res => res.data);;
+        return axios.post("/oblCtl/define/defineJob/createByForm",formObj).then(res => res.data);;
     },
     updateByForm(formObj) {  //更新职务
         return axios.post("/oblCtl/define/defineJob/updateByForm",formObj).then(res => res.data) ;

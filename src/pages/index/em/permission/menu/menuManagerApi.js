@@ -26,7 +26,7 @@ export const MenuManagerApi = {
         return axios.post("/oblCtl/define/defineMenu/queryOneById",params).then(res => res.data) ;
     },
     createByForm(formObj) {     //新增菜单
-        return axios.post("/oblCtl/define/defineMenu/createByForm",qs.stringify(formObj)).then(res => res.data);;
+        return axios.post("/oblCtl/define/defineMenu/createByForm",formObj).then(res => res.data);;
     },
     updateByForm(formObj) {  //更新菜单
         return axios.post("/oblCtl/define/defineMenu/updateByForm",formObj).then(res => res.data) ;

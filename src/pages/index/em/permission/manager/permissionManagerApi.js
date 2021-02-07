@@ -24,7 +24,7 @@ export const PermissionManagerApi = {
                 formObj.code = formObj.codePrefix[0] + formObj.code ;
             }
         }
-        return axios.post("/oblCtl/define/definePermission/createByForm",qs.stringify(formObj)).then(res => res.data);;
+        return axios.post("/oblCtl/define/definePermission/createByForm",formObj).then(res => res.data);;
     },
     updateByForm(formObj) {  //更新权限
         return axios.post("/oblCtl/define/definePermission/updateByForm",formObj).then(res => res.data) ;

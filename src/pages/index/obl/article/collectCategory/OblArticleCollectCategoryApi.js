@@ -24,7 +24,7 @@ export const OblArticleCollectCategoryApi = {
         return axios.post("/oblCtl/oblArticleCollectCategory/queryOneById",params).then(res => res.data) ;
     },
     createByForm(formObj) {     //新增
-        return axios.post("/oblCtl/oblArticleCollectCategory/createByForm",qs.stringify(formObj)).then(res => res.data);;
+        return axios.post("/oblCtl/oblArticleCollectCategory/createByForm",formObj).then(res => res.data);;
     },
     updateByForm(formObj) {  //更新
         return axios.post("/oblCtl/oblArticleCollectCategory/updateByForm",formObj).then(res => res.data) ;

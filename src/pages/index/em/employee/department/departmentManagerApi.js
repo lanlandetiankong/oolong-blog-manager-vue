@@ -23,7 +23,7 @@ export const DepartmentManagerApi = {
         return axios.post("/oblCtl/define/defineDepartment/queryOneById",params).then(res => res.data) ;
     },
     createByForm(formObj) {     //新增部门
-        return axios.post("/oblCtl/define/defineDepartment/createByForm",qs.stringify(formObj)).then(res => res.data);;
+        return axios.post("/oblCtl/define/defineDepartment/createByForm",formObj).then(res => res.data);;
     },
     updateByForm(formObj) {  //更新部门
         return axios.post("/oblCtl/define/defineDepartment/updateByForm",formObj).then(res => res.data) ;

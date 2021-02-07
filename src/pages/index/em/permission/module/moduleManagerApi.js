@@ -19,7 +19,7 @@ export const ModuleManagerApi = {
         return axios.post("/oblCtl/module/define_module/queryOneById",params).then(res => res.data) ;
     },
     createByForm(formObj) {     //新增模块
-        return axios.post("/oblCtl/module/define_module/createByForm",qs.stringify(formObj)).then(res => res.data);;
+        return axios.post("/oblCtl/module/define_module/createByForm",formObj).then(res => res.data);;
     },
     updateByForm(formObj) {  //更新模块
         return axios.post("/oblCtl/module/define_module/updateByForm",formObj).then(res => res.data) ;
