@@ -300,7 +300,7 @@
                 var _this = this;
                 ArticleCreateApi.getAllArticleTagEnums().then((res) => {
                     if (res.success) {
-                        _this.bindData.articleTagList = res.enumData.list;
+                        _this.bindData.articleTagList = res.gridList;
                     }
                 })
             },

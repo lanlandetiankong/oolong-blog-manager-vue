@@ -352,7 +352,7 @@
                 var _this = this ;
                 ArticleAllListApi.getAllArticleTagEnums().then((res) =>{
                     if(res.success){
-                        _this.binding.articleTagList = res.enumData.list ;
+                        _this.binding.articleTagList = res.gridList ;
                     }
                 })
             },

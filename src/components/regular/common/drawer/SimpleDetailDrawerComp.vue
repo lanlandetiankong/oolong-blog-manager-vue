@@ -61,7 +61,6 @@
             },
             dealGetFieldConfValue(obj,fieldConfObj){    //根据配置取得字段的值
                 var _this = this ;
-                console.log("fieldConfObj",fieldConfObj);
                 var fieldVal = obj[fieldConfObj.fieldName];
                 //是否需要拆分fieldKey字段数组并遍历取值,如未设置则为否
                 var isNeedSplitTemp = _this.dealEmptyToDefaultVal(fieldConfObj.isNeedSplit,false);

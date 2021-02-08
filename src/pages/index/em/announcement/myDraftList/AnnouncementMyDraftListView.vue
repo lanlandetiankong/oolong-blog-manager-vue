@@ -281,7 +281,7 @@
                 var _this = this ;
                 AnnouncementMyDraftListApi.getAllAnnouncementTagEnums().then((res) =>{
                     if(res.success){
-                        _this.binding.announcementTagList = res.enumData.list ;
+                        _this.binding.announcementTagList = res.gridList;
                     }
                 })
             },

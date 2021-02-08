@@ -263,7 +263,7 @@
                 var _this = this ;
                 AnnouncementAllListApi.getAllAnnouncementTagEnums().then((res) =>{
                     if(res.success){
-                        _this.binding.announcementTagList = res.enumData.list ;
+                        _this.binding.announcementTagList = res.gridList ;
                     }
                 })
             },
