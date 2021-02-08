@@ -145,42 +145,61 @@
         data() {
             const textAlignDefault = 'left';
             //字段配置(Query/Drawer)
-            const fieldInfoConfObj = {
+            const fieldBaseConf = {
                 menuName:{
-                    fieldLabel:this.$t('langMap.table.fields.em.menu.menuName'),
-                    fieldName:'menuName'
+                    key:'menuName',
+                    formType:FormItemTypeEnum.Input,
+                    label:this.$t('langMap.table.fields.em.menu.menuName'),
+                    decorator:["menuName", {rules: []}],
                 },
                 pid:{
-                    fieldName:'pid'
+                    key:'pid',
+                    formType:FormItemTypeEnum.TreeSelect,
+                    label:this.$t('langMap.table.fields.em.menu.parentMenuName'),
+                    decorator:["pid", {rules: []}],
+                    treeDefaultExpandAll:false,
+                    treeNodeFilterProp:"title",
+                    treeData:[],
+                    drawerAble:false
                 },
                 parentMenuName:{
-                    fieldLabel:this.$t('langMap.table.fields.em.menu.parentMenuName'),
-                    fieldName:'parentMenuName',searchAble:false
+                    label:this.$t('langMap.table.fields.em.menu.parentMenuName'),
+                    key:'parentMenuName',searchAble:false
                 },
                 label:{
-                    fieldLabel:this.$t('langMap.table.fields.common.label'),
-                    fieldName:'label'
+                    key:'label',
+                    formType:FormItemTypeEnum.Input,
+                    label:this.$t('langMap.table.fields.common.label'),
+                    decorator:["label", {rules: []}],
                 },
                 routerUrl:{
-                    fieldLabel:this.$t('langMap.table.fields.em.menu.routerUrl'),
-                    fieldName:'routerUrl'
+                    key:'routerUrl',
+                    formType:FormItemTypeEnum.Input,
+                    label:this.$t('langMap.table.fields.em.menu.routerUrl'),
+                    decorator:["routerUrl", {rules: []}],
                 },
                 hrefUrl:{
-                    fieldLabel:this.$t('langMap.table.fields.em.menu.hrefUrl'),
-                    fieldName:'name'
+                    key:'hrefUrl',
+                    formType:FormItemTypeEnum.Input,
+                    label:this.$t('langMap.table.fields.em.menu.hrefUrl'),
+                    decorator:["hrefUrl", {rules: []}],
                 },
                 urlJumpType:{
-                    fieldLabel:this.$t('langMap.table.fields.em.menu.urlJumpType'),
-                    fieldName:'urlJumpType'
+                    key:'urlJumpType',
+                    formType:FormItemTypeEnum.Select,
+                    label:this.$t('langMap.table.fields.em.menu.urlJumpType'),
+                    decorator:["urlJumpType", {rules: []}],
+                    options:[]
                 },
                 remark:{
-                    fieldLabel:this.$t('langMap.table.fields.common.remark'),
-                    fieldName:'remark'
+                    key:'remark',
+                    formType:FormItemTypeEnum.Input,
+                    label:this.$t('langMap.table.fields.common.remark'),
+                    decorator:["remark", {rules: []}],
                 }
             };
             return {
                 ConstantObj,
-                fieldInfoConf:fieldInfoConfObj,
                 binding:{
                     urlJumpTypes:EnumUtils.toSelectData(MenuUrlJumpTypeEnum),
                     pidList:[]
@@ -188,54 +207,7 @@
                 searchConf:{
                     showAble:false,
                     loadingFlag:false,
-                    formItemConf:{
-                        menuName:{
-                            key:'menuName',
-                            formType:FormItemTypeEnum.Input,
-                            label:this.$t('langMap.table.fields.em.menu.menuName'),
-                            decorator:["menuName", {rules: []}],
-                        },
-                        pid:{
-                            key:'pid',
-                            formType:FormItemTypeEnum.TreeSelect,
-                            label:this.$t('langMap.table.fields.em.menu.parentMenuName'),
-                            decorator:["pid", {rules: []}],
-                            treeDefaultExpandAll:false,
-                            treeNodeFilterProp:"title",
-                            treeData:[]
-                        },
-                        label:{
-                            key:'label',
-                            formType:FormItemTypeEnum.Input,
-                            label:this.$t('langMap.table.fields.common.label'),
-                            decorator:["label", {rules: []}],
-                        },
-                        routerUrl:{
-                            key:'routerUrl',
-                            formType:FormItemTypeEnum.Input,
-                            label:this.$t('langMap.table.fields.em.menu.routerUrl'),
-                            decorator:["routerUrl", {rules: []}],
-                        },
-                        hrefUrl:{
-                            key:'hrefUrl',
-                            formType:FormItemTypeEnum.Input,
-                            label:this.$t('langMap.table.fields.em.menu.hrefUrl'),
-                            decorator:["hrefUrl", {rules: []}],
-                        },
-                        urlJumpType:{
-                            key:'urlJumpType',
-                            formType:FormItemTypeEnum.Select,
-                            label:this.$t('langMap.table.fields.em.menu.urlJumpType'),
-                            decorator:["urlJumpType", {rules: []}],
-                            options:[]
-                        },
-                        remark:{
-                            key:'remark',
-                            formType:FormItemTypeEnum.Input,
-                            label:this.$t('langMap.table.fields.common.remark'),
-                            decorator:["remark", {rules: []}],
-                        }
-                    }
+                    formItemConf:fieldBaseConf
                 },
                 tableConf: {
                     data: [],
@@ -350,7 +322,7 @@
                             },
                             visible:false,
                             dataObj:{},
-                            drawerFieldConf:fieldInfoConfObj
+                            drawerFieldConf:fieldBaseConf
                         },
                     },
                 },

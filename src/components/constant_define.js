@@ -5,11 +5,11 @@ export const FormItemTypeEnum = {
     Select:'Select',
     TreeSelect:'TreeSelect'
 
-}
+};
 
 export const ConstantObj = {
     queryFormCompRef:'queryFormCompRef'
-}
+};
 
 export const FormBaseConfObj = {
     formItemLayout: {
@@ -22,9 +22,9 @@ export const FormBaseConfObj = {
             sm: { span: 20 },
         },
     },
-}
+};
 
 export const SupportI18nLocale = {
     zhCn:'zh-CN',
     enUs:'en-US'
-}
+};

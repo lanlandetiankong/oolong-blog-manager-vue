@@ -99,55 +99,43 @@
         data() {
             const textAlignDefault = 'left';
             //字段配置(Query/Drawer)
-            const fieldInfoConfObj = {
+            const fieldBaseConf = {
                 name: {
-                    fieldLabel: this.$t('langMap.table.fields.obl.articleCollectCategory.name'),
-                    fieldName: 'name'
+                    key: 'name',
+                    formType: FormItemTypeEnum.Input,
+                    label: this.$t('langMap.table.fields.obl.articleCollectCategory.name'),
+                    decorator: ["name", {rules: []}],
                 },
                 pid: {
-                    fieldName: 'pid', drawerAble: false
+                    key: 'pid',
+                    formType: FormItemTypeEnum.Input,
+                    label: this.$t('langMap.table.fields.obl.articleCollectCategory.parentName'),
+                    decorator: ["pid", {rules: []}],
+                    treeDefaultExpandAll: false,
+                    treeNodeFilterProp: "title",
+                    treeData: [],
+                    drawerAble: false
                 },
                 parentName: {
-                    fieldLabel: this.$t('langMap.table.fields.obl.articleCollectCategory.parentName'),
-                    fieldName: 'parentName', searchAble: false
+                    label: this.$t('langMap.table.fields.obl.articleCollectCategory.parentName'),
+                    key: 'parentName', searchAble: false
                 },
                 remark: {
-                    fieldLabel: this.$t('langMap.table.fields.common.remark'),
-                    fieldName: 'remark'
+                    key: 'remark',
+                    formType: FormItemTypeEnum.Input,
+                    label: this.$t('langMap.table.fields.common.remark'),
+                    decorator: ["remark", {rules: []}],
                 }
             };
             return {
                 ConstantObj,
-                fieldInfoConf: fieldInfoConfObj,
                 binding: {
                     pidList: []
                 },
                 searchConf: {
                     showAble: false,
                     loadingFlag: false,
-                    formItemConf: {
-                        name: {
-                            key: 'name',
-                            formType: FormItemTypeEnum.Input,
-                            label: this.$t('langMap.table.fields.obl.articleCollectCategory.name'),
-                            decorator: ["name", {rules: []}],
-                        },
-                        pid: {
-                            key: 'pid',
-                            formType: FormItemTypeEnum.Input,
-                            label: this.$t('langMap.table.fields.obl.articleCollectCategory.parentName'),
-                            decorator: ["pid", {rules: []}],
-                            treeDefaultExpandAll: false,
-                            treeNodeFilterProp: "title",
-                            treeData: []
-                        },
-                        remark: {
-                            key: 'remark',
-                            formType: FormItemTypeEnum.Input,
-                            label: this.$t('langMap.table.fields.common.remark'),
-                            decorator: ["remark", {rules: []}],
-                        }
-                    }
+                    formItemConf: fieldBaseConf
                 },
                 tableConf: {
                     data: [],
@@ -233,7 +221,7 @@
                             },
                             visible: false,
                             dataObj: {},
-                            drawerFieldConf: fieldInfoConfObj
+                            drawerFieldConf: fieldBaseConf
                         },
                     },
                 }

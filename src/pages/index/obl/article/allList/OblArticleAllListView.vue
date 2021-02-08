@@ -113,7 +113,7 @@
                     :drawerConf="drawerConf.detail.article.conf"
                     :dataObj="drawerConf.detail.article.dataObj"
                     :visible="drawerConf.detail.article.visible"
-                    :drawerFieldConf="drawerConf.detail.article.drawerFieldConf"
+                    :drawerFieldConf="searchConf.formItemConf"
                     @execClose="handleDetailDrawerClose"
                 />
             </div>
@@ -121,13 +121,14 @@
     </div>
 </template>
 <script>
-    import BeeUtil from '~Assets/js/util/bee/BeeUtil.js' ;
+    import BeeUtil from '~Assets/js/util/bee/BeeUtil.js';
     import {ArticleAllListApi} from './OblArticleAllListApi'
     import {DrawerFieldTypeEnum} from '~Components/regular/common/drawer/drawer_define.js'
     import {OblCommonMixin} from '~Layout/mixin/OblCommonMixin';
-    import {FormItemTypeEnum,ConstantObj} from "~Components/constant_define";
+    import {ConstantObj, FormItemTypeEnum} from "~Components/constant_define";
     import QueryFormComp from '~Components/regular/query/QueryFormComp'
     import RowDetailDrawerComp from '~Components/regular/common/drawer/RowDetailDrawerComp';
+
     export default {
         name: "OblArticleAllListView",
         components:{QueryFormComp,RowDetailDrawerComp},
@@ -135,24 +136,40 @@
         data() {
             const textAlignDefault = 'left' ;
             //字段配置(Query/Drawer)
-            const fieldInfoConfObj = {
-                title:{
-                    fieldLabel:this.$t('langMap.table.fields.obl.article.title')
-                },
-                keyWord:{
-                    fieldLabel:this.$t('langMap.table.fields.obl.article.content'),
-                },
-                summary:{
-                    fieldLabel:this.$t('langMap.table.fields.obl.article.summary'),
-                },
-                tagIds:{
-                    fieldName:'tagIds',drawerAble:false,
-                },
-                content:{
-                    fieldLabel:this.$t('langMap.table.fields.obl.article.content'),
-                    type:DrawerFieldTypeEnum.HtmlDom
-                }
-            };
+            const fieldBaseConf = {
+                    title: {
+                        key:'title',
+                        formType:FormItemTypeEnum.Input,
+                        label:this.$t('langMap.table.fields.obl.article.title'),
+                        decorator:["title", {rules: []}],
+                    },
+                    content: {
+                        key:'content',
+                        formType:FormItemTypeEnum.Input,
+                        label:this.$t('langMap.table.fields.obl.article.content'),
+                        decorator:["content", {rules: []}],
+                        type:DrawerFieldTypeEnum.HtmlDom
+                    },
+                    summary: {
+                        key:'summary',
+                        formType:FormItemTypeEnum.Input,
+                        label:this.$t('langMap.table.fields.obl.article.summary'),
+                        decorator:["summary", {rules: []}],
+                    },
+                    tagIds: {
+                        key:'tagIds',
+                        formType:FormItemTypeEnum.Select,
+                        label:this.$t('langMap.table.fields.obl.article.tagName'),
+                        decorator:["tagIds", {rules: []}],
+                        options:[]
+                    },
+                    content:{
+                        key:'content',
+                        formType:FormItemTypeEnum.Input,
+                        label:this.$t('langMap.table.fields.obl.article.content'),
+                        decorator:["content", {rules: []}],
+                    }
+                };
             return {
                 ConstantObj,
                 binding:{
@@ -161,40 +178,7 @@
                 searchConf:{
                     showAble:false,
                     loadingFlag:false,
-                    formItemConf:{
-                        title: {
-                            key:'title',
-                            formType:FormItemTypeEnum.Input,
-                            label:this.$t('langMap.table.fields.obl.article.title'),
-                            decorator:["title", {rules: []}],
-                        },
-                        content: {
-                            key:'content',
-                            formType:FormItemTypeEnum.Input,
-                            label:this.$t('langMap.table.fields.obl.article.content'),
-                            decorator:["content", {rules: []}],
-                        },
-                        summary: {
-                            key:'summary',
-                            formType:FormItemTypeEnum.Input,
-                            label:this.$t('langMap.table.fields.obl.article.summary'),
-                            decorator:["summary", {rules: []}],
-                        },
-                        tagIds: {
-                            key:'tagIds',
-                            formType:FormItemTypeEnum.Select,
-                            label:this.$t('langMap.table.fields.obl.article.tagName'),
-                            decorator:["tagIds", {rules: []}],
-                            options:[]
-                        },
-                        content:{
-                            key:'content',
-                            formType:FormItemTypeEnum.Input,
-                            label:this.$t('langMap.table.fields.obl.article.content'),
-                            decorator:["content", {rules: []}],
-                        }
-                    },
-
+                    formItemConf:fieldBaseConf
                 },
                 tableConf: {
                     data: [],
@@ -320,7 +304,7 @@
                             },
                             visible:false,
                             dataObj:{},
-                            drawerFieldConf:fieldInfoConfObj
+                            drawerFieldConf:fieldBaseConf
                         },
                     },
                 },

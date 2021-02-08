@@ -134,30 +134,42 @@
         data() {
             const textAlignDefault = 'left';
             //字段配置(Query/Drawer)
-            const fieldInfoConfObj = {
+            const fieldBaseConf = {
                 name:{
-                    fieldLabel:this.$t('langMap.table.fields.em.permission.permissionName'),
-                    fieldName:'name'
+                    key:'name',
+                    formType:FormItemTypeEnum.Input,
+                    label:this.$t('langMap.table.fields.em.permission.permissionName'),
+                    decorator:["name", {rules: []}],
                 },
-                code:{
-                    fieldLabel:this.$t('langMap.table.fields.common.code'),
-                    fieldName:'code'},
+                code: {
+                    key:'code',
+                    formType:FormItemTypeEnum.Input,
+                    label:this.$t('langMap.table.fields.common.code'),
+                    decorator:["code", {rules: []}],
+                },
                 type:{
-                    fieldLabel:this.$t('langMap.table.fields.common.type'),
-                    fieldName:'type'
+                    key:'type',
+                    formType:FormItemTypeEnum.Select,
+                    label:this.$t('langMap.table.fields.common.type'),
+                    decorator:["type", {rules: []}],
+                    options:[]
                 },
                 ensure:{
-                    fieldLabel:this.$t('langMap.table.fields.common.startUsingStatus'),
-                    fieldName:'ensure'
+                    key:'ensure',
+                    formType:FormItemTypeEnum.Select,
+                    label:this.$t('langMap.table.fields.common.startUsingStatus'),
+                    decorator:["ensure", {rules: []}],
+                    options:[]
                 },
                 remark:{
-                    fieldLabel:this.$t('langMap.table.fields.common.remark'),
-                    fieldName:'remark'
+                    key:'remark',
+                    formType:FormItemTypeEnum.Input,
+                    label:this.$t('langMap.table.fields.common.remark'),
+                    decorator:["remark", {rules: []}],
                 }
             };
             return {
                 ConstantObj,
-                fieldInfoConf:fieldInfoConfObj,
                 binding:{
                     permissionTypes:EnumUtils.toSelectData(PermissionTypeEnum),
                     switchEnums:EnumUtils.toSelectData(SwitchEnum)
@@ -165,40 +177,7 @@
                 searchConf:{
                     showAble:false,
                     loadingFlag:false,
-                    formItemConf:{
-                        name:{
-                            key:'name',
-                            formType:FormItemTypeEnum.Input,
-                            label:this.$t('langMap.table.fields.em.permission.permissionName'),
-                            decorator:["name", {rules: []}],
-                        },
-                        code: {
-                            key:'code',
-                            formType:FormItemTypeEnum.Input,
-                            label:this.$t('langMap.table.fields.common.code'),
-                            decorator:["code", {rules: []}],
-                        },
-                        type:{
-                            key:'type',
-                            formType:FormItemTypeEnum.Select,
-                            label:this.$t('langMap.table.fields.common.type'),
-                            decorator:["type", {rules: []}],
-                            options:[]
-                        },
-                        ensure:{
-                            key:'ensure',
-                            formType:FormItemTypeEnum.Select,
-                            label:this.$t('langMap.table.fields.common.startUsingStatus'),
-                            decorator:["ensure", {rules: []}],
-                            options:[]
-                        },
-                        remark:{
-                            key:'remark',
-                            formType:FormItemTypeEnum.Input,
-                            label:this.$t('langMap.table.fields.common.remark'),
-                            decorator:["remark", {rules: []}],
-                        }
-                    },
+                    formItemConf:fieldBaseConf
                 },
                 tableConf: {
                     data: [],
@@ -264,7 +243,7 @@
                             },
                             visible:false,
                             dataObj:{},
-                            drawerFieldConf:fieldInfoConfObj
+                            drawerFieldConf:fieldBaseConf
                         },
                     },
                 },

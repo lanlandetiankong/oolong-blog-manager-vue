@@ -112,85 +112,61 @@
         data() {
             const textAlignDefault = 'left' ;
             //字段配置(Query/Drawer)
-            const fieldInfoConfObj = {
-                name:{
-                    fieldLabel:this.$t('langMap.table.fields.em.department.departmentName'),
-                    fieldName:'name',
+            const fieldBaseConf = {
+                pid: {
+                    key:'pid',
+                    formType:FormItemTypeEnum.TreeSelect,
+                    label:this.$t('langMap.table.fields.common.superiorName'),
+                    decorator:["pid", {rules: []}],
+                    treeDefaultExpandAll:false,
+                    treeNodeFilterProp:"title",
+                    treeData:[],
+                    drawerAble:false
                 },
-                pid:{
-                    fieldName:'pid', drawerAble:false
+                name: {
+                    key:'name',
+                    formType:FormItemTypeEnum.Input,
+                    label:this.$t('langMap.table.fields.common.name'),
+                    decorator:["name", {rules: []}],
                 },
                 parentDepartmentName:{
-                    fieldLabel:this.$t('langMap.table.fields.em.department.parentDepartmentName'),
-                    fieldName:'parentDepartmentName',searchAble:false
+                    label:this.$t('langMap.table.fields.em.department.parentDepartmentName'),
+                    key:'parentDepartmentName',searchAble:false
                 },
-                code:{
-                    fieldLabel:this.$t('langMap.table.fields.common.code'),
-                    fieldName:'code',
+                code: {
+                    key:'code',
+                    formType:FormItemTypeEnum.Input,
+                    label:this.$t('langMap.table.fields.common.code'),
+                    decorator:["code", {rules: []}],
                 },
-                level:{
-                    fieldLabel:this.$t('langMap.table.fields.common.level'),
-                    fieldName:'level',value:0
+                level: {
+                    key:'level',
+                    formType:FormItemTypeEnum.InputNumber,
+                    label:this.$t('langMap.table.fields.common.level'),
+                    decorator:["level", {rules: []}],
                 },
-                description:{
-                    fieldLabel:this.$t('langMap.table.fields.common.description'),
-                    fieldName:'description',
+                description: {
+                    key:'description',
+                    formType:FormItemTypeEnum.Input,
+                    label:this.$t('langMap.table.fields.common.description'),
+                    decorator:["description", {rules: []}],
                 },
                 remark:{
-                    fieldLabel:this.$t('langMap.table.fields.common.remark'),
-                    fieldName:'remark',
+                    key:'remark',
+                    formType:FormItemTypeEnum.Input,
+                    label:this.$t('langMap.table.fields.common.remark'),
+                    decorator:["remark", {rules: []}],
                 }
             };
             return {
                 ConstantObj,
-                fieldInfoConf:fieldInfoConfObj,
                 binding:{
                     pidList:[]
                 },
                 searchConf:{
                     showAble:false,
                     loadingFlag:false,
-                    formItemConf:{
-                        pid: {
-                            key:'pid',
-                            formType:FormItemTypeEnum.TreeSelect,
-                            label:this.$t('langMap.table.fields.common.superiorName'),
-                            decorator:["pid", {rules: []}],
-                            treeDefaultExpandAll:false,
-                            treeNodeFilterProp:"title",
-                            treeData:[]
-                        },
-                        name: {
-                            key:'name',
-                            formType:FormItemTypeEnum.Input,
-                            label:this.$t('langMap.table.fields.common.name'),
-                            decorator:["name", {rules: []}],
-                        },
-                        code: {
-                            key:'code',
-                            formType:FormItemTypeEnum.Input,
-                            label:this.$t('langMap.table.fields.common.code'),
-                            decorator:["code", {rules: []}],
-                        },
-                        level: {
-                            key:'level',
-                            formType:FormItemTypeEnum.InputNumber,
-                            label:this.$t('langMap.table.fields.common.level'),
-                            decorator:["level", {rules: []}],
-                        },
-                        description: {
-                            key:'description',
-                            formType:FormItemTypeEnum.Input,
-                            label:this.$t('langMap.table.fields.common.description'),
-                            decorator:["description", {rules: []}],
-                        },
-                        remark:{
-                            key:'remark',
-                            formType:FormItemTypeEnum.Input,
-                            label:this.$t('langMap.table.fields.common.remark'),
-                            decorator:["remark", {rules: []}],
-                        }
-                    }
+                    formItemConf:fieldBaseConf
                 },
                 tableConf: {
                     data: [],
@@ -271,7 +247,7 @@
                             },
                             visible:false,
                             dataObj:{},
-                            drawerFieldConf:fieldInfoConfObj
+                            drawerFieldConf:fieldBaseConf
                         },
                     },
                 },

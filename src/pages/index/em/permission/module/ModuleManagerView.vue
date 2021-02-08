@@ -61,8 +61,8 @@
                 >
                     <span slot="iconRender" slot-scope="text,record">
                             <span :key="record.fid"
-                                  v-show="typeof record.iconVal != 'undefined' && record.iconVal != null && record.iconVal.length > 0">
-                                 <a-icon :type="record.iconVal" />
+                                  v-show="typeof record.icon != 'undefined' && record.icon != null && record.icon.length > 0">
+                                 <a-icon :type="record.icon" />
                             </span>
                     </span>
                     <span slot="typeStr" slot-scope="text,record">
@@ -125,64 +125,46 @@
         data() {
             const textAlignDefault = 'left' ;
             //字段配置(Query/Drawer)
-            const fieldInfoConfObj = {
+            const fieldBaseConf = {
                 name:{
-                    fieldLabel:this.$t('langMap.table.fields.em.module.moduleName'),
-                    fieldName:'name',
+                    key:'name',
+                    formType:FormItemTypeEnum.Input,
+                    label:this.$t('langMap.table.fields.em.module.moduleName'),
+                    decorator:["name", {rules: []}],
                 },
                 code:{
-                    fieldLabel:this.$t('langMap.table.fields.common.code'),
-                    fieldName:'code'
-                },
-                iconVal:{
-                    fieldLabel:this.$t('langMap.table.fields.em.module.iconName'),
-                    searchAble:false, fieldName:'iconVal'
+                    key:'code',
+                    formType:FormItemTypeEnum.Input,
+                    label:this.$t('langMap.table.fields.common.code'),
+                    decorator:["code", {rules: []}],
                 },
                 type:{
-                    fieldLabel:this.$t('langMap.table.fields.common.type'),
-                    fieldName:'type',
+                    key:'type',
+                    formType:FormItemTypeEnum.Select,
+                    label:this.$t('langMap.table.fields.common.type'),
+                    decorator:["type", {rules: []}],
+                    options:[]
+                },
+                icon:{
+                    label:this.$t('langMap.table.fields.em.module.iconName'),
+                    searchAble:false, key:'icon'
                 },
                 remark:{
-                    fieldLabel:this.$t('langMap.table.fields.common.remark'),
-                    fieldName:'remark',
+                    key:'remark',
+                    formType:FormItemTypeEnum.Input,
+                    label:this.$t('langMap.table.fields.common.remark'),
+                    decorator:["remark", {rules: []}],
                 }
             };
             return {
                 ConstantObj,
-                fieldInfoConf:fieldInfoConfObj,
                 binding:{
                     moduleTypes:EnumUtils.toSelectData(MenuUrlJumpTypeEnum)
                 },
                 searchConf:{
                     showAble:false,
                     loadingFlag:false,
-                    formItemConf:{
-                        name:{
-                            key:'name',
-                            formType:FormItemTypeEnum.Input,
-                            label:this.$t('langMap.table.fields.em.module.moduleName'),
-                            decorator:["name", {rules: []}],
-                        },
-                        code:{
-                            key:'code',
-                            formType:FormItemTypeEnum.Input,
-                            label:this.$t('langMap.table.fields.common.code'),
-                            decorator:["code", {rules: []}],
-                        },
-                        type:{
-                            key:'type',
-                            formType:FormItemTypeEnum.Select,
-                            label:this.$t('langMap.table.fields.common.type'),
-                            decorator:["type", {rules: []}],
-                            options:[]
-                        },
-                        remark:{
-                            key:'remark',
-                            formType:FormItemTypeEnum.Input,
-                            label:this.$t('langMap.table.fields.common.remark'),
-                            decorator:["remark", {rules: []}],
-                        }
-                    }
+                    formItemConf:fieldBaseConf
                 },
                 tableConf: {
                     data: [],
@@ -199,8 +181,8 @@
                     }, {
                         title: this.$t('langMap.table.fields.em.module.iconName'),
                         align:textAlignDefault,
-                        dataIndex: 'iconVal',
-                        key: 'iconVal',
+                        dataIndex: 'icon',
+                        key: 'icon',
                         scopedSlots:{
                             customRender:'iconRender'
                         }
@@ -240,7 +222,7 @@
                 dialogFormObj: {
                     name: '',
                     code: '',
-                    iconVal:'',
+                    icon:'',
                     styleVal:'',
                     typeVal: ''
                 },
@@ -252,7 +234,7 @@
                             },
                             visible:false,
                             dataObj:{},
-                            drawerFieldConf:fieldInfoConfObj
+                            drawerFieldConf:fieldBaseConf
                         },
                     },
                 },

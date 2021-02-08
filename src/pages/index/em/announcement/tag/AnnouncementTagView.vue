@@ -113,51 +113,37 @@
         data() {
             const textAlignDefault = 'left';
             //字段配置(Query/Drawer)
-            const fieldInfoConfObj = {
+            const fieldBaseConf = {
                 name: {
-                    fieldLabel: this.$t('langMap.table.fields.em.announcementTag.tagName'),
-                    fieldName: 'name'
+                    key: 'name',
+                    formType: FormItemTypeEnum.Input,
+                    label: this.$t('langMap.table.fields.common.tagName'),
+                    decorator: ["name", {rules: []}],
                 },
                 description: {
-                    fieldLabel: this.$t('langMap.table.fields.em.announcementTag.description'),
-                    fieldName: 'description'
+                    key: 'description',
+                    formType: FormItemTypeEnum.Input,
+                    label: this.$t('langMap.table.fields.common.description'),
+                    decorator: ["description", {rules: []}],
                 },
                 weights: {
-                    fieldLabel: this.$t('langMap.table.fields.common.weights'),
-                    fieldName: 'weights'
+                    label: this.$t('langMap.table.fields.common.weights'),
+                    key: 'weights',searchAble:false
                 },
                 remark: {
-                    fieldLabel: this.$t('langMap.table.fields.common.remark'),
-                    fieldName: 'remark'
+                    key: 'remark',
+                    formType: FormItemTypeEnum.Input,
+                    label: this.$t('langMap.table.fields.common.remark'),
+                    decorator: ["title", {rules: []}],
                 }
             };
             return {
                 ConstantObj,
-                fieldInfoConf: fieldInfoConfObj,
                 binding: {},
                 searchConf: {
                     showAble: false,
                     loadingFlag: false,
-                    formItemConf: {
-                        name: {
-                            key: 'name',
-                            formType: FormItemTypeEnum.Input,
-                            label: this.$t('langMap.table.fields.common.tagName'),
-                            decorator: ["name", {rules: []}],
-                        },
-                        description: {
-                            key: 'description',
-                            formType: FormItemTypeEnum.Input,
-                            label: this.$t('langMap.table.fields.common.description'),
-                            decorator: ["description", {rules: []}],
-                        },
-                        remark: {
-                            key: 'remark',
-                            formType: FormItemTypeEnum.Input,
-                            label: this.$t('langMap.table.fields.common.remark'),
-                            decorator: ["title", {rules: []}],
-                        }
-                    },
+                    formItemConf: fieldBaseConf
                 },
                 tableConf: {
                     data: [],
@@ -217,7 +203,7 @@
                             },
                             visible: false,
                             dataObj: {},
-                            drawerFieldConf: fieldInfoConfObj
+                            drawerFieldConf: fieldBaseConf
                         },
                     },
                 },

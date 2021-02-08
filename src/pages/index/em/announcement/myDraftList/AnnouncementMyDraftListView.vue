@@ -114,67 +114,44 @@
         data() {
             const textAlignDefault = 'left' ;
             //字段配置(Query/Drawer)
-            const fieldInfoConfObj = {
-                title:{
-                    fieldLabel:this.$t('langMap.table.fields.em.announcement.title'),
-                    fieldName:'title',
+            const fieldBaseConf = {
+                title: {
+                    key:'title',
+                    formType:FormItemTypeEnum.Input,
+                    label:this.$t('langMap.table.fields.em.announcement.title'),
+                    decorator:["title", {rules: []}],
                 },
-                keyWord:{
-                    fieldLabel:this.$t('langMap.table.fields.em.announcement.keyWord'),
-                    fieldName:'keyWord',
+                keyWord: {
+                    key:'keyWord',
+                    formType:FormItemTypeEnum.Input,
+                    label:this.$t('langMap.table.fields.em.announcement.keyWord'),
+                    decorator:["keyWord", {rules: []}],
                 },
-                tagIds:{
-                    fieldName:'tagIds',drawerAble:false,
-                },
-                tagNameOfStr:{
-                    fieldLabel:this.$t('langMap.table.fields.em.announcement.tagNameOfStr'),
-                    fieldName:'tagNameOfStr',searchAble:false,
+                tagIds: {
+                    key:'tagIds',
+                    formType:FormItemTypeEnum.Select,
+                    label:this.$t('langMap.table.fields.em.announcement.tagNameOfStr'),
+                    decorator:["tagIds", {rules: []}],
+                    options:[],
+                    drawerAble:false
                 },
                 content:{
-                    fieldLabel:this.$t('langMap.table.fields.em.announcement.content'),
-                    fieldName:'content',type:DrawerFieldTypeEnum.HtmlDom
-                },
-                remark:{
-                    fieldLabel:this.$t('langMap.table.fields.common.remark'),
-                    fieldName:'remark',
+                    key:'content',
+                    formType:FormItemTypeEnum.Input,
+                    label:this.$t('langMap.table.fields.em.announcement.content'),
+                    decorator:["content", {rules: []}],
+                    fieldType:DrawerFieldTypeEnum.HtmlDom
                 }
             };
             return {
                 ConstantObj,
-                fieldInfoConf:fieldInfoConfObj,
                 binding:{
                     announcementTagList:[]
                 },
                 searchConf:{
                     showAble:false,
                     loadingFlag:false,
-                    formItemConf:{
-                        title: {
-                            key:'title',
-                            formType:FormItemTypeEnum.Input,
-                            label:this.$t('langMap.table.fields.em.announcement.title'),
-                            decorator:["title", {rules: []}],
-                        },
-                        keyWord: {
-                            key:'keyWord',
-                            formType:FormItemTypeEnum.Input,
-                            label:this.$t('langMap.table.fields.em.announcement.keyWord'),
-                            decorator:["keyWord", {rules: []}],
-                        },
-                        tagIds: {
-                            key:'tagIds',
-                            formType:FormItemTypeEnum.Select,
-                            label:this.$t('langMap.table.fields.em.announcement.tagNameOfStr'),
-                            decorator:["tagIds", {rules: []}],
-                            options:[]
-                        },
-                        content:{
-                            key:'content',
-                            formType:FormItemTypeEnum.Input,
-                            label:this.$t('langMap.table.fields.em.announcement.content'),
-                            decorator:["content", {rules: []}],
-                        }
-                    },
+                    formItemConf:fieldBaseConf
                 },
                 tableConf: {
                     data: [],
@@ -249,7 +226,7 @@
                             },
                             visible:false,
                             dataObj:{},
-                            drawerFieldConf:fieldInfoConfObj
+                            drawerFieldConf:fieldBaseConf
                         },
                     },
                 },

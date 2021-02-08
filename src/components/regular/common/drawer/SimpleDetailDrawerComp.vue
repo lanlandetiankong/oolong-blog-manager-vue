@@ -89,7 +89,7 @@
                 if(fieldConfObj.drawerAble != true){
                     return null ;
                 }
-                fieldConfObj.fieldLabel = (fieldConfObj.fieldLabel) ? fieldConfObj.fieldLabel : '';
+                fieldConfObj.fieldLabel = (fieldConfObj.fieldLabel) ? fieldConfObj.fieldLabel : fieldConfObj.label;
                 fieldConfObj.type = (fieldConfObj.type) ? fieldConfObj.type : DrawerFieldTypeEnum.String;
                 var fieldResObj = {     //默认的返回对象
                     fieldName:fieldConfObj.fieldName,
@@ -105,6 +105,7 @@
                 var fieldType = fieldConfObj.type;
                 if(typeof fieldType != "undefined" && fieldType != null){
                     if(DrawerFieldTypeEnum.Enum == fieldType){    //枚举类型
+                        debugger;
                         var enumValMap = fieldConfObj.enumValMap ;
                         if(typeof enumValMap != "undefined" && enumValMap != null){
                             fieldValTemp = enumValMap[fieldVal] ;

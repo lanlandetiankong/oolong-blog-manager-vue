@@ -95,3 +95,22 @@ getPageQuery(queryArr,tableConf)
 let obj = HttpUtil.formatQueryPage(queryArr,tableConf);
 
 import {HttpUtil} from '~Config/axios/httpUtil'
+
+
+
+去除 fieldInfoConfObj -> fieldBaseConf
+fieldInfoConf
+fieldLabel-> label
+fieldName->key
+
+fieldType:DrawerFieldTypeEnum.HtmlDom
+
+enumValMap
+
+textAlignDefault
+
+
+FormItemTypeEnum.Input
+
+
+pagination

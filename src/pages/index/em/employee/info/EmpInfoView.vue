@@ -215,86 +215,66 @@
         data() {
             const textAlignDefault = 'left' ;
             //字段配置(Query/Drawer)
-            const fieldInfoConfObj = {
-                account:{
-                    fieldLabel:this.$t('langMap.table.fields.em.user.userAccount'),
-                },
-                userName:{
-                    fieldLabel:this.$t('langMap.table.fields.em.user.userName'),
+            const fieldBaseConf = {
+                belongDepartmentId:{
+                    key:'belongDepartmentId',
+                    formType:FormItemTypeEnum.TreeSelect,
+                    label:this.$t('langMap.table.fields.em.department.belongDepartment'),
+                    decorator:["belongDepartmentId", {rules: []}],
+                    treeDefaultExpandAll:false,
+                    treeNodeFilterProp:"title",
+                    treeData:[],
+                    drawerAble:false
                 },
                 belongDepartmentName:{
-                    fieldLabel:this.$t('langMap.table.fields.em.department.belongDepartment')
-                },
-                email:{
-                    fieldLabel:this.$t('langMap.table.fields.em.user.email'),
-                },
-                userType:{
-                    fieldLabel:this.$t('langMap.table.fields.em.user.userType'),drawerAble:false
-                },
-                userTypeStr:{
-                    fieldLabel:this.$t('langMap.table.fields.em.user.userType'),
+                    label:this.$t('langMap.table.fields.em.department.belongDepartment'),
                     searchAble:false
                 },
-                belongDepartmentId:{
-                    fieldName:'defineDepartmentId',drawerAble:false,
+                account:{
+                    key:'account',
+                    formType:FormItemTypeEnum.Input,
+                    label:this.$t('langMap.table.fields.em.user.userAccount'),
+                    decorator:["account", {rules: []}],
+                },
+                userName:{
+                    key:'userName',
+                    formType:FormItemTypeEnum.Input,
+                    label:this.$t('langMap.table.fields.em.user.userName'),
+                    decorator:["userName", {rules: []}],
+                },
+                email:{
+                    key:'email',
+                    formType:FormItemTypeEnum.Input,
+                    label:this.$t('langMap.table.fields.em.user.email'),
+                    decorator:["email", {rules: []}],
+                },
+                userType:{
+                    key:'userType',
+                    formType:FormItemTypeEnum.Select,
+                    label:this.$t('langMap.table.fields.common.type'),
+                    decorator:["userType", {rules: []}],
+                    options:[],
+                    drawerAble:false
+                },
+                userTypeStr:{
+                    label:this.$t('langMap.table.fields.em.user.userType'),
+                    searchAble:false
                 },
                 locked:{
-                    fieldLabel:this.$t('langMap.table.fields.common.lockedStatus'),
+                    key:'locked',
+                    formType:FormItemTypeEnum.Select,
+                    label:this.$t('langMap.table.fields.common.lockedStatus'),
+                    decorator:["locked", {rules: []}],
+                    options:[],
                     enumValMap:{"1":"已锁定", "0":"未锁定"}
-                },
-                remark:{
-                    fieldLabel:this.$t('langMap.table.fields.common.remark'),
                 }
             };
             return {
                 ConstantObj,
-                fieldInfoConf:fieldInfoConfObj,
                 searchConf: {
                     showAble:false,
                     loadingFlag: false,
-                    formItemConf:{
-                        belongDepartmentId:{
-                            key:'belongDepartmentId',
-                            formType:FormItemTypeEnum.TreeSelect,
-                            label:this.$t('langMap.table.fields.em.department.belongDepartment'),
-                            decorator:["belongDepartmentId", {rules: []}],
-                            treeDefaultExpandAll:false,
-                            treeNodeFilterProp:"title",
-                            treeData:[]
-                        },
-                        account:{
-                            key:'account',
-                            formType:FormItemTypeEnum.Input,
-                            label:this.$t('langMap.table.fields.em.user.userAccount'),
-                            decorator:["account", {rules: []}],
-                        },
-                        userName:{
-                            key:'userName',
-                            formType:FormItemTypeEnum.Input,
-                            label:this.$t('langMap.table.fields.em.user.userName'),
-                            decorator:["userName", {rules: []}],
-                        },
-                        email:{
-                            key:'email',
-                            formType:FormItemTypeEnum.Input,
-                            label:this.$t('langMap.table.fields.em.user.email'),
-                            decorator:["email", {rules: []}],
-                        },
-                        userType:{
-                            key:'userType',
-                            formType:FormItemTypeEnum.Select,
-                            label:this.$t('langMap.table.fields.common.type'),
-                            decorator:["userType", {rules: []}],
-                            options:[]
-                        },
-                        locked:{
-                            key:'locked',
-                            formType:FormItemTypeEnum.Select,
-                            label:this.$t('langMap.table.fields.common.lockedStatus'),
-                            decorator:["locked", {rules: []}],
-                            options:[]
-                        }
-                    }
+                    formItemConf:fieldBaseConf
                 },
                 binding:{
                     belongDepartments:[],
@@ -439,7 +419,7 @@
                            },
                            visible:false,
                            dataObj:{},
-                           drawerFieldConf:fieldInfoConfObj
+                           drawerFieldConf:fieldBaseConf
                        },
                     },
                 },
