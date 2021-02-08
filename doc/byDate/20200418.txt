@@ -114,3 +114,8 @@ FormItemTypeEnum.Input
 
 
 pagination
+
+
+<table-head-info :checked-size="tableCheckIdList.length"/>
+import TableHeadInfo from '~Components/regular/common/table/TableHeadInfo'
+TableHeadInfo,

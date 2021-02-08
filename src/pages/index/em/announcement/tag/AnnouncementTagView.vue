@@ -49,6 +49,7 @@
             <a-divider/>
             <!-- 表格-区域 -->
             <div>
+                <table-head-info :checked-size="tableCheckIdList.length"/>
                 <a-table
                     :locale="{emptyText:$t('langMap.table.config.emptyData')}"
                     :pagination="tableConf.pagination"
@@ -103,12 +104,13 @@
     import {FormItemTypeEnum, ConstantObj} from "~Components/constant_define";
 
     import QueryFormComp from '~Components/regular/query/QueryFormComp'
+    import TableHeadInfo from '~Components/regular/common/table/TableHeadInfo'
     import AnnouncementTagCreateFormComp from "~Components/index/em/announcement/tag/AnnouncementTagCreateFormComp";
     import RowDetailDrawerComp from '~Components/regular/common/drawer/RowDetailDrawerComp';
 
     export default {
         name: "AnnouncementTagView",
-        components: {QueryFormComp, AnnouncementTagCreateFormComp, RowDetailDrawerComp},
+        components: {QueryFormComp,TableHeadInfo, AnnouncementTagCreateFormComp, RowDetailDrawerComp},
         mixins: [OblCommonMixin],
         data() {
             const textAlignDefault = 'left';

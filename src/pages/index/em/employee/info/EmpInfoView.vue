@@ -88,6 +88,7 @@
         </div>
         <a-divider/>
         <div>
+            <table-head-info :checked-size="tableCheckIdList.length"/>
             <a-table
                 :locale="{emptyText:$t('langMap.table.config.emptyData')}"
                 :pagination="tableConf.pagination"
@@ -196,7 +197,7 @@
     import {UserTypeEnum,LockStateEnum,EnumUtils} from '~Config/selectData.js';
 
     import QueryFormComp from '~Components/regular/query/QueryFormComp'
-
+    import TableHeadInfo from '~Components/regular/common/table/TableHeadInfo'
     import EmployeeInfoCreateFormComp from '~Components/index/em/user/employee/info/EmployeeInfoCreateFormComp'
     import UserGrantRoleFormComp from '~Components/index/em/user/employee/info/UserGrantRoleFormComp';
     import UserGrantJobFormComp from '~Components/index/em/user/employee/info/UserGrantJobFormComp';
@@ -208,7 +209,7 @@
 
     export default {
         name: "EmpInfoView",
-        components: {QueryFormComp,
+        components: {QueryFormComp,TableHeadInfo,
             RowDetailDrawerComp,ExcelImportDataComp,
             UserGrantJobFormComp, UserGrantRoleFormComp, AFormItem, ACol, EmployeeInfoCreateFormComp},
         mixins:[OblCommonMixin],

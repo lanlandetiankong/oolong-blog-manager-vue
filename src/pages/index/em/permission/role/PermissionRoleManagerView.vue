@@ -60,6 +60,7 @@
             </div>
             <a-divider/>
             <div>
+                <table-head-info :checked-size="tableCheckIdList.length"/>
                 <a-table
                     :locale="{emptyText:$t('langMap.table.config.emptyData')}"
                     :pagination="tableConf.pagination"
@@ -144,13 +145,14 @@
     import {RoleTypeEnum,EnumUtils} from '~Config/selectData.js';
 
     import QueryFormComp from '~Components/regular/query/QueryFormComp'
+    import TableHeadInfo from '~Components/regular/common/table/TableHeadInfo'
     import DefineRoleCreateFormComp from '~Components/index/em/define/permission/role/DefineRoleCreateFormComp';
     import RoleGrantPermissionFormComp from '~Components/index/em/define/permission/role/RoleGrantPermissionFormComp';
     import RoleGrantMenusFormComp from '~Components/index/em/define/permission/role/RoleGrantMenusFormComp';
     import RowDetailDrawerComp from '~Components/regular/common/drawer/RowDetailDrawerComp';
     export default {
         name: "PermissionRoleManagerView",
-        components: {QueryFormComp,RoleGrantPermissionFormComp, DefineRoleCreateFormComp,RowDetailDrawerComp,RoleGrantMenusFormComp},
+        components: {QueryFormComp,TableHeadInfo,RoleGrantPermissionFormComp, DefineRoleCreateFormComp,RowDetailDrawerComp,RoleGrantMenusFormComp},
         mixins:[OblCommonMixin],
         data(){
             const textAlignDefault = 'left';

@@ -389,6 +389,7 @@ export const langMap = {
             actionOfCancelLock:'操作:取消锁定',
             actionOfCancelStartUsing:'操作:取消启用',
             actionOfCancelPublish:'操作:取消发布',
+            tableCheckedSize:"已选择:{0} 。"
         }
     },
     http:{

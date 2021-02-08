@@ -49,6 +49,7 @@
         </div>
         <a-divider/>
         <div>
+            <table-head-info :checked-size="tableCheckIdList.length"/>
             <a-table
                 :locale="{emptyText:$t('langMap.table.config.emptyData')}"
                 :pagination="tableConf.pagination"
@@ -109,6 +110,7 @@
     import {FormItemTypeEnum,ConstantObj} from "~Components/constant_define";
 
     import QueryFormComp from '~Components/regular/query/QueryFormComp'
+    import TableHeadInfo from '~Components/regular/common/table/TableHeadInfo'
     import EmployeeJobCreateFormComp from '~Components/index/em/user/employee/job/EmployeeJobCreateFormComp'
     import RowDetailDrawerComp from '~Components/regular/common/drawer/RowDetailDrawerComp';
 
@@ -116,7 +118,7 @@
     import AFormItem from "ant-design-vue/es/form/FormItem";
     export default {
         name: "EmpJobManagerView",
-        components: {QueryFormComp, AFormItem, ACol, EmployeeJobCreateFormComp,RowDetailDrawerComp},
+        components: {QueryFormComp,TableHeadInfo, AFormItem, ACol, EmployeeJobCreateFormComp,RowDetailDrawerComp},
         mixins:[OblCommonMixin],
         data() {
             const textAlignDefault = 'left' ;

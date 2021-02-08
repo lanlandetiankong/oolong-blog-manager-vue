@@ -49,6 +49,7 @@
             <a-divider/>
             <!-- 表格-区域 -->
             <div>
+                <table-head-info :checked-size="tableCheckIdList.length"/>
                 <a-table
                     :locale="{emptyText:$t('langMap.table.config.emptyData')}"
                     :pagination="tableConf.pagination"
@@ -102,11 +103,12 @@
     import {OblCommonMixin} from '~Layout/mixin/OblCommonMixin';
     import {FormItemTypeEnum, ConstantObj} from "~Components/constant_define";
     import QueryFormComp from '~Components/regular/query/QueryFormComp'
+    import TableHeadInfo from '~Components/regular/common/table/TableHeadInfo'
     import SysDicCreateFormComp from "~Components/index/em/sys/dic/SysDicCreateFormComp";
     import RowDetailDrawerComp from '~Components/regular/common/drawer/RowDetailDrawerComp';
     export default {
         name: "SysDicView",
-        components: {QueryFormComp, SysDicCreateFormComp, RowDetailDrawerComp},
+        components: {QueryFormComp, TableHeadInfo,SysDicCreateFormComp, RowDetailDrawerComp},
         mixins: [OblCommonMixin],
         data() {
             const textAlignDefault = 'left';

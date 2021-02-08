@@ -56,6 +56,7 @@
             <a-divider/>
             <!-- 表格-区域 -->
             <div>
+                <table-head-info :checked-size="tableCheckIdList.length"/>
                 <a-table
                     :locale="{emptyText:$t('langMap.table.config.emptyData')}"
                     :pagination="tableConf.pagination"
@@ -135,12 +136,13 @@
     import {FormItemTypeEnum,ConstantObj} from "~Components/constant_define";
 
     import QueryFormComp from '~Components/regular/query/QueryFormComp'
+    import TableHeadInfo from '~Components/regular/common/table/TableHeadInfo'
     import DefineMenuCreateFormComp from "~Components/index/em/define/permission/menu/DefineMenuCreateFormComp";
     import RowDetailDrawerComp from '~Components/regular/common/drawer/RowDetailDrawerComp';
     import ExcelTempletUploadComp from '~Components/regular/common/excel/ExcelTempletUploadComp';
     export default {
         name: "MenuManagerView",
-        components: {QueryFormComp,DefineMenuCreateFormComp,RowDetailDrawerComp,ExcelTempletUploadComp, ACol, AFormItem},
+        components: {QueryFormComp,DefineMenuCreateFormComp,TableHeadInfo,RowDetailDrawerComp,ExcelTempletUploadComp, ACol, AFormItem},
         mixins:[OblCommonMixin],
         data() {
             const textAlignDefault = 'left';

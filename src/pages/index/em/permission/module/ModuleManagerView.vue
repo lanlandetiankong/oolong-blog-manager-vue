@@ -49,6 +49,7 @@
             <a-divider/>
             <!-- 表格-区域 -->
             <div>
+                <table-head-info :checked-size="tableCheckIdList.length"/>
                 <a-table
                     :locale="{emptyText:$t('langMap.table.config.emptyData')}"
                     :pagination="tableConf.pagination"
@@ -114,13 +115,14 @@
     import {OblCommonMixin} from '~Layout/mixin/OblCommonMixin';
 
     import QueryFormComp from '~Components/regular/query/QueryFormComp'
+    import TableHeadInfo from '~Components/regular/common/table/TableHeadInfo'
     import DefineModuleCreateFormComp from "~Components/index/em/define/permission/module/DefineModuleCreateFormComp";
     import RowDetailDrawerComp from '~Components/regular/common/drawer/RowDetailDrawerComp';
     import {MenuUrlJumpTypeEnum} from "~Config/selectData";
 
     export default {
         name: "ModuleManagerView",
-        components: {QueryFormComp,DefineModuleCreateFormComp,RowDetailDrawerComp, ACol, AFormItem},
+        components: {QueryFormComp,TableHeadInfo,DefineModuleCreateFormComp,RowDetailDrawerComp, ACol, AFormItem},
         mixins:[OblCommonMixin],
         data() {
             const textAlignDefault = 'left' ;
