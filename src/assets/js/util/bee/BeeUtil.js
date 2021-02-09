@@ -315,7 +315,29 @@ const BeeUtil = {
         }
     },
     //ObjectUtils命名空间
-    ObjectUtils: {},
+    ObjectUtils: {
+        //取得object的前n个属性并返回新object
+        getTopNItem(obj,size){
+            if(typeof obj != "object"){
+                return {} ;
+            }
+            if(typeof size != "number"){
+                return obj ;
+            }
+            if(size <= 0){
+                return {} ;
+            }
+            const nobj = {} ;
+            let keys = Object.keys(obj);
+            for(let i=0;i<keys.length;i++){
+                if(i<size){
+                    let key = keys[i];
+                    nobj[key] = obj[key] ;
+                }
+            }
+            return nobj ;
+        }
+    },
     //IdCardUtils命名空间
     IdCardUtils: {
         idCardRegex: {

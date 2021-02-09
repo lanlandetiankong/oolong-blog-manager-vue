@@ -4,7 +4,6 @@
             <!-- 搜索区域 -->
             <query-form-comp
                 :ref="ConstantObj.queryFormCompRef"
-                :showAble="searchConf.showAble"
                 :loadingFlag="searchConf.loadingFlag"
                 :formItemConf="searchConf.formItemConf"
                 @execQuery="handleSearchFormQuery"
@@ -42,15 +41,6 @@
                                   @click="handleBatchEnusreByIds">
                             {{$t('langMap.button.actions.startUsing')}}
                         </a-button>
-                    </a-col>
-                    <a-col>
-                        <a-switch
-                            size="large"
-                            v-model="searchConf.showAble"
-                        >
-                            <a-icon slot="checkedChildren" type="filter" />
-                            <a-icon slot="unCheckedChildren" type="eye-invisible" />
-                        </a-switch>
                     </a-col>
                 </a-row>
             </div>
@@ -177,7 +167,6 @@
                     switchEnums:EnumUtils.toSelectData(SwitchEnum)
                 },
                 searchConf:{
-                    showAble:false,
                     loadingFlag:false,
                     formItemConf:fieldBaseConf
                 },

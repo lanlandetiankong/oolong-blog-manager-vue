@@ -119,3 +119,11 @@ pagination
 <table-head-info :checked-size="tableCheckIdList.length"/>
 import TableHeadInfo from '~Components/regular/common/table/TableHeadInfo'
 TableHeadInfo,
+
+showAble
+
+checkedChildren
+unCheckedChildren
+eye-invisible
+a-switch
+

@@ -1,7 +1,7 @@
 <template>
     <div>
         <!-- 复合搜索-区域 -->
-        <div v-show="showAble">
+        <div>
             <div>
                 <a-form ref="searchFormRef"
                         layout="inline"
@@ -9,7 +9,7 @@
                         @submit="handleSearchFormSubmit"
                 >
                     <a-row :gutter="6">
-                        <template v-for="(item,idx) in formItemConf">
+                        <template v-for="(item,idx) in theFormItemConf">
                             <a-col v-if="item.formType==formItemTypeEnum.Input"
                                 :span="searchConf.defaultColSpan">
                                 <a-form-item :label="item.label">
@@ -56,18 +56,23 @@
                                 </a-form-item>
                             </a-col>
                         </template>
-                    </a-row>
-                    <a-row>
-                        <a-col :span="24" :style="{ textAlign: 'right' }">
+                        <a-col :span="6" :style="{ }">
                             <a-button type="primary" html-type="submit" icon="search"
                                       :loading="loadingFlag"
                             >
                                 {{$t('langMap.button.actions.query')}}
                             </a-button>
-                            <a-button :style="{ marginLeft: '8px' }" icon="close-square"
+                            <a-button :style="{  }" icon="close-square"
                                       @click="handleSearchFormReset">
                                 {{$t('langMap.button.actions.reset')}}
                             </a-button>
+                            <a-switch
+                                size="large"
+                                v-model="searchConf.showAll"
+                            >
+                                <a-icon slot="checkedChildren" type="filter"/>
+                                <a-icon slot="unCheckedChildren" type="eye-invisible"/>
+                            </a-switch>
                         </a-col>
                     </a-row>
                 </a-form>
@@ -78,6 +83,7 @@
 </template>
 
 <script>
+    import BeeUtil from '~Assets/js/util/bee/BeeUtil.js' ;
     import {OblCommonMixin} from '~Layout/mixin/OblCommonMixin';
     import {FormItemTypeEnum,ConstantObj} from '~Components/constant_define';
     export default {
@@ -91,10 +97,6 @@
             loadingFlag:{
                 type:Boolean,
                 default:false
-            },
-            showAble:{
-                type:Boolean,
-                default:false
             }
         },
         data(){
@@ -105,8 +107,27 @@
                     defaultColSpan: 8,
                     binding:{
                         announcementTagList:[]
-                    }
+                    },
+                    showAll:false
                 },
+            }
+        },
+        computed:{
+            theFormItemConf(){
+                if(!this.formItemConf){
+                    return {} ;
+                }
+                //object的自定义属性的数量小于2,则返回当前所有
+                if(Object.getOwnPropertyNames(this.formItemConf).length <= 2){
+                    return this.formItemConf ;
+                }
+                //超过2个，flag允许展示所有
+                if(this.searchConf.showAll == true){
+                    return this.formItemConf ;
+                }   else {
+                    //超过两个，flag不允许展示所有，取前两个。
+                    return BeeUtil.ObjectUtils.getTopNItem(this.formItemConf,2) ;
+                }
             }
         },
         methods:{

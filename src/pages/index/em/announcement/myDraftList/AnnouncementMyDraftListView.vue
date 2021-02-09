@@ -4,7 +4,6 @@
             <!-- 搜索区域 -->
             <query-form-comp
                 :ref="ConstantObj.queryFormCompRef"
-                :showAble="searchConf.showAble"
                 :loadingFlag="searchConf.loadingFlag"
                 :formItemConf="searchConf.formItemConf"
                 @execQuery="handleSearchFormQuery"
@@ -34,15 +33,6 @@
                                   @click="handleDraftBatchDeleteByIds">
                             {{$t('langMap.button.actions.batchDelByIds')}}
                         </a-button>
-                    </a-col>
-                    <a-col>
-                        <a-switch
-                            size="large"
-                            v-model="searchConf.showAble"
-                        >
-                            <a-icon slot="checkedChildren" type="filter" />
-                            <a-icon slot="unCheckedChildren" type="eye-invisible" />
-                        </a-switch>
                     </a-col>
                 </a-row>
             </div>
@@ -151,7 +141,6 @@
                     announcementTagList:[]
                 },
                 searchConf:{
-                    showAble:false,
                     loadingFlag:false,
                     formItemConf:fieldBaseConf
                 },

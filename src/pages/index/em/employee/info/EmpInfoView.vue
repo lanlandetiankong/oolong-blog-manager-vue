@@ -4,7 +4,6 @@
             <!-- 搜索区域 -->
             <query-form-comp
                 :ref="ConstantObj.queryFormCompRef"
-                :showAble="searchConf.showAble"
                 :loadingFlag="searchConf.loadingFlag"
                 :formItemConf="searchConf.formItemConf"
                 @execQuery="handleSearchFormQuery"
@@ -73,15 +72,6 @@
                                   @click="() =>{uploadExcelModelconf.visible = true}">
                             {{$t('langMap.button.actions.importData')}}
                         </a-button>
-                    </a-col>
-                    <a-col>
-                        <a-switch
-                            size="large"
-                            v-model="searchConf.showAble"
-                        >
-                            <a-icon slot="checkedChildren" type="filter" />
-                            <a-icon slot="unCheckedChildren" type="eye-invisible" />
-                        </a-switch>
                     </a-col>
                 </a-row>
             </div>
@@ -273,7 +263,6 @@
             return {
                 ConstantObj,
                 searchConf: {
-                    showAble:false,
                     loadingFlag: false,
                     formItemConf:fieldBaseConf
                 },
