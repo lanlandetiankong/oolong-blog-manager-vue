@@ -1,24 +1,25 @@
 <template>
-    <div>
+    <page-header-wrapper>
         <!-- 复合搜索-区域 -->
-        <div>
-            <div>
+        <a-card :bordered="false">
+            <div class="table-page-search-wrapper">
                 <a-form ref="searchFormRef"
                         layout="inline"
                         :form="searchForm"
                         @submit="handleSearchFormSubmit"
                 >
-                    <a-row :gutter="6">
+                    <a-row :gutter="48">
                         <template v-for="(item,idx) in theFormItemConf">
                             <a-col v-if="item.formType==formItemTypeEnum.Input"
-                                :span="searchConf.defaultColSpan">
+                                   :md="8" :sm="24">
                                 <a-form-item :label="item.label">
                                     <a-input allowClear
                                         v-decorator="item.decorator"/>
                                 </a-form-item>
                             </a-col>
                             <a-col v-else-if="item.formType==formItemTypeEnum.InputNumber"
-                                   :span="searchConf.defaultColSpan">
+                                   :md="8" :sm="24"
+                            >
                                 <a-form-item :label="item.label">
                                     <a-input-number allowClear
                                                     :style="{width:'130px'}"
@@ -26,7 +27,7 @@
                                 </a-form-item>
                             </a-col>
                             <a-col v-else-if="item.formType==formItemTypeEnum.Select"
-                                   :span="searchConf.defaultColSpan">
+                                   :md="8" :sm="24">
                                 <a-form-item :label="item.label">
                                     <a-select showSearch allowClear
                                               :placeholder="(typeof item.placeholder == 'undefined' || item.placeholder == null) ? $t('langMap.commons.forms.pleaseChoose') : item.placeholder "
@@ -41,7 +42,7 @@
                                 </a-form-item>
                             </a-col>
                             <a-col v-else-if="item.formType==formItemTypeEnum.TreeSelect"
-                                   :span="searchConf.defaultColSpan">
+                                   :md="8" :sm="24">
                                 <a-form-item :label="item.label">
                                     <a-tree-select
                                         style="width: 150px"
@@ -78,8 +79,8 @@
                 </a-form>
             </div>
             <a-divider/>
-        </div>
-    </div>
+        </a-card>
+    </page-header-wrapper>
 </template>
 
 <script>
