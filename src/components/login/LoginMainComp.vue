@@ -97,10 +97,10 @@
             </a-form>
             <a-row type="flex" align="middle" justify="end">
                 <a-col :span=9>
-                    <router-link :to="othersRouters.register.to">{{$t('langMap.button.member.registerAnAccount')}}</router-link>
+                    <router-link :to="RouteConst.register">{{$t('langMap.button.member.registerAnAccount')}}</router-link>
                 </a-col>
                 <a-col :span=9>
-                    <router-link :to="othersRouters.forgetPassword.to">{{$t('langMap.button.member.forgetPassword')}}</router-link>
+                    <router-link :to="RouteConst.forgetPassword">{{$t('langMap.button.member.forgetPassword')}}</router-link>
                 </a-col>
             </a-row>
         </div>
@@ -108,11 +108,13 @@
 </template>
 
 <script>
+    import {TokenUtil,RouteConst} from '~Router/routeSecurityUtil';
+    import {OblCommonMixin} from '~Layout/mixin/OblCommonMixin';
+    import {LoginMainCompApi} from './_LoginMainCompApi'
     import AFormItem from "ant-design-vue/es/form/FormItem";
     import ARow from "ant-design-vue/es/grid/Row";
     import ACol from "ant-design-vue/es/grid/Col";
-    import {OblCommonMixin} from '~Layout/mixin/OblCommonMixin';
-    import {LoginMainCompApi} from './_LoginMainCompApi'
+
 
     import Verify from 'vue2-verify'
     import I18nChangeComp from "~Components/regular/i18n/I18nChangeComp";
@@ -121,23 +123,9 @@
         name: "LoginMainComp",
         components: {I18nChangeComp, ACol, ARow, AFormItem,Verify},
         mixins:[OblCommonMixin],
-        props:{
-            othersRouters:{
-                type:Object,
-                default:function () {
-                    return {
-                        register:{
-                            to:'/member/register'
-                        },
-                        forgetPassword:{
-                            to:'/member/password/forget'
-                        }
-                    }
-                }
-            }
-        },
         data() {
             return {
+                RouteConst,
                 loadingFlag:false,
                 loginForm: {
                     userAccount: 'SuperRoot',

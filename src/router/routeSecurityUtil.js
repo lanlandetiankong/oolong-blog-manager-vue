@@ -1,15 +1,22 @@
 import router from '@/router/index';
 import {message} from 'ant-design-vue';
 import {i18nUtil} from "~Config/i18n/i18nUtil";
+
+
+
 /**
  * routeSecurityUtil 路由安全工具
  */
-
 const RoutePageConst = {
-    login:{
-        path:'/member/login'
-    }
-}
+    login:'/member/login',
+    register:'/member/register',
+    forgetPassword:'/member/password/forget'
+};
+const whiteUrlList = [
+    RoutePageConst.login,
+    RoutePageConst.register,
+    RoutePageConst.forgetPassword,
+];
 
 function removeTokenSession(){
     window.sessionStorage.removeItem("userToken");
@@ -29,7 +36,7 @@ function jumpToLoginPage() {
         //当前已经是登录界面
     }   else {
         //跳转到登录界面
-        router.push(RoutePageConst.login.path);
+        router.push(RoutePageConst.login);
     }
 }
 
@@ -77,7 +84,7 @@ export const TokenUtil = {
     isRouteCarryOn(to,from){
         if(isTokenValid() == false){
             removeTokenSession();
-            if(to.path == RoutePageConst.login.path){
+            if(whiteUrlList.includes(to.path)){
                 return true ;
             }
             return false ;
@@ -88,4 +95,4 @@ export const TokenUtil = {
         return getUserToken();
     }
 }
-export const RouteObjConst = RoutePageConst;
+export const RouteConst = RoutePageConst;

@@ -2,19 +2,15 @@
     <div class="login-page-root">
         <a-layout id="login-top-layout" class="login-page-layout">
             <login-main-comp
-                :otherRouter="othersRouters"
                 @login-form-submit="handleLoginFormSubmit"
             >
             </login-main-comp>
         </a-layout>
     </div>
 </template>
-
 <script>
     import { mapGetters } from 'vuex'
-
     import {CacheMixin} from '~Layout/mixin/CacheMixin';
-
     import LoginMainComp from '~Components/login/LoginMainComp.vue'
 
     export default {
@@ -25,14 +21,7 @@
         mixins:[CacheMixin],
         data() {
             return {
-                othersRouters:{
-                    register:{
-                        to:'/member/register'
-                    },
-                    forgetPassword:{
-                        to:'/member/password/forget'
-                    }
-                }
+
             }
         },
         computed: {
