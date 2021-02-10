@@ -38,7 +38,9 @@ export const langMap = {
             clearCache:'Clear cache',
             refreshMenuCache:'Refresh menu cache',
             goNextStep:'Next step',
-            goPreviousStep:'Previous step'
+            goPreviousStep:'Previous step',
+            unfold:'Unfold',
+            packUp:'Pack up'
         },
         member:{
             account:'Account',

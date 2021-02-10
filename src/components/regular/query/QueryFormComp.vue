@@ -1,5 +1,5 @@
 <template>
-    <page-header-wrapper>
+    <a-page-header style="border: 1px solid rgb(235, 237, 240)">
         <!-- 复合搜索-区域 -->
         <a-card :bordered="false">
             <div class="table-page-search-wrapper">
@@ -67,20 +67,22 @@
                                       @click="handleSearchFormReset">
                                 {{$t('langMap.button.actions.reset')}}
                             </a-button>
-                            <a-switch
-                                size="large"
-                                v-model="searchConf.showAll"
-                            >
-                                <a-icon slot="checkedChildren" type="filter"/>
-                                <a-icon slot="unCheckedChildren" type="eye-invisible"/>
-                            </a-switch>
+
+                            <a-button type="link" v-show="searchConf.showAll"
+                                      @click="triggerUnfold">
+                                {{$t('langMap.button.actions.packUp')}} <a-icon type="up"/>
+                            </a-button>
+                            <a-button type="link" v-show="!searchConf.showAll"
+                                      @click="triggerUnfold">
+                                {{$t('langMap.button.actions.unfold')}} <a-icon type="down"/>
+                            </a-button>
                         </a-col>
                     </a-row>
                 </a-form>
             </div>
             <a-divider/>
         </a-card>
-    </page-header-wrapper>
+    </a-page-header>
 </template>
 
 <script>
@@ -132,6 +134,9 @@
             }
         },
         methods:{
+            triggerUnfold(){
+                this.searchConf.showAll = !this.searchConf.showAll ;
+            },
             triggerQuery(){ //触发 查询表单的提交，配合mixin使用，请勿随意改方法名
                 this.$refs.searchFormRef.$emit('submit');
             },

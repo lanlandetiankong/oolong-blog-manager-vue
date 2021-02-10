@@ -39,6 +39,8 @@ export const langMap = {
             refreshMenuCache:'刷新菜单缓存',
             goNextStep:'下一步',
             goPreviousStep:'上一步',
+            unfold:'展开',
+            packUp:'收起'
         },
         member:{
             account:'账号',
