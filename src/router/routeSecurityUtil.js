@@ -32,7 +32,7 @@ function removeTokenSession(){
  */
 function jumpToLoginPage() {
     removeTokenSession();
-    if("/member/login" == router.app._route.fullPath){
+    if(RoutePageConst.login == router.app._route.fullPath){
         //当前已经是登录界面
     }   else {
         //跳转到登录界面

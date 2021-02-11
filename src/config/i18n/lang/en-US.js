@@ -51,7 +51,8 @@ export const langMap = {
             ersonalCenter:'Personal Center',
             registerAnAccount:'Register an account',
             forgetPassword:'Forget password',
-            verificationCode:'Captcha'
+            verificationCode:'Captcha',
+            loginForManager:'Log in to the management page'
         },
         placeholder:{
             pleaseEnterUserAccount:'Please enter user account',

@@ -1,14 +1,28 @@
 <template>
     <div class="login-page-root">
+        <a-page-header
+            style="border: 1px solid rgb(235, 237, 240)"
+            :subTitle="$t('langMap.button.member.loginForManager')"
+            :title="$t('langMap.button.member.login')"
+        >
+            <template slot="extra">
+                <a-button type="link" size="large" @click="() => $router.push(RouteConst.register)">
+                    {{$t('langMap.button.member.registerAnAccount')}}
+                </a-button>
+                <a-button type="link" size="large" @click="() => $router.push(RouteConst.forgetPassword)">
+                    {{$t('langMap.button.member.forgetPassword')}}
+                </a-button>
+            </template>
+        </a-page-header>
         <a-layout id="login-top-layout" class="login-page-layout">
             <login-main-comp
                 @login-form-submit="handleLoginFormSubmit"
-            >
-            </login-main-comp>
+            />
         </a-layout>
     </div>
 </template>
 <script>
+    import {RouteConst} from '~Router/routeSecurityUtil';
     import { mapGetters } from 'vuex'
     import {CacheMixin} from '~Layout/mixin/CacheMixin';
     import LoginMainComp from '~Components/login/LoginMainComp.vue'
@@ -21,7 +35,7 @@
         mixins:[CacheMixin],
         data() {
             return {
-
+                RouteConst,
             }
         },
         computed: {

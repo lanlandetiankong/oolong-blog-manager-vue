@@ -51,7 +51,8 @@ export const langMap = {
             ersonalCenter:'个人中心',
             registerAnAccount:'注册账号',
             forgetPassword:'忘记密码',
-            verificationCode:'验证码'
+            verificationCode:'验证码',
+            loginForManager:'登录到后台管理'
         },
         placeholder:{
             pleaseEnterUserAccount:'请输入用户账号',

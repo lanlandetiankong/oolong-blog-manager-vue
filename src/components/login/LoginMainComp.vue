@@ -95,20 +95,12 @@
                     </a-row>
                 </a-form-item>
             </a-form>
-            <a-row type="flex" align="middle" justify="end">
-                <a-col :span=9>
-                    <router-link :to="RouteConst.register">{{$t('langMap.button.member.registerAnAccount')}}</router-link>
-                </a-col>
-                <a-col :span=9>
-                    <router-link :to="RouteConst.forgetPassword">{{$t('langMap.button.member.forgetPassword')}}</router-link>
-                </a-col>
-            </a-row>
         </div>
     </div>
 </template>
 
 <script>
-    import {TokenUtil,RouteConst} from '~Router/routeSecurityUtil';
+    import {RouteConst} from '~Router/routeSecurityUtil';
     import {OblCommonMixin} from '~Layout/mixin/OblCommonMixin';
     import {LoginMainCompApi} from './_LoginMainCompApi'
     import AFormItem from "ant-design-vue/es/form/FormItem";
