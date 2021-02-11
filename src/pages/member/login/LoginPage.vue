@@ -6,6 +6,7 @@
             :title="$t('langMap.button.member.login')"
         >
             <template slot="extra">
+                <i18n-change-comp />
                 <a-button type="link" size="large" @click="() => $router.push(RouteConst.register)">
                     {{$t('langMap.button.member.registerAnAccount')}}
                 </a-button>
@@ -25,12 +26,13 @@
     import {RouteConst} from '~Router/routeSecurityUtil';
     import { mapGetters } from 'vuex'
     import {CacheMixin} from '~Layout/mixin/CacheMixin';
+    import I18nChangeComp from "~Components/regular/i18n/I18nChangeComp";
     import LoginMainComp from '~Components/login/LoginMainComp.vue'
 
     export default {
         name: "LoginPage",
         components: {
-            LoginMainComp
+            LoginMainComp,I18nChangeComp
         },
         mixins:[CacheMixin],
         data() {

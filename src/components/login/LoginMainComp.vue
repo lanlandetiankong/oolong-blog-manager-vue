@@ -71,9 +71,6 @@
                     :wrapper-col="loginFormConf.wrapperCol"
                 >
                     <a-row>
-                        <a-col :span=5>
-                            <i18n-change-comp />
-                        </a-col>
                         <a-col :span=7>
                             <a-switch
                                 :checkedChildren="$t('langMap.button.member.rememberMe')"
@@ -109,11 +106,10 @@
 
 
     import Verify from 'vue2-verify'
-    import I18nChangeComp from "~Components/regular/i18n/I18nChangeComp";
 
     export default {
         name: "LoginMainComp",
-        components: {I18nChangeComp, ACol, ARow, AFormItem,Verify},
+        components: {ACol, ARow, AFormItem,Verify},
         mixins:[OblCommonMixin],
         data() {
             return {
