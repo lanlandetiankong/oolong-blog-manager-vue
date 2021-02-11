@@ -27,7 +27,7 @@
         data(){
             var _this = this ;
             //上传图片的路径
-            var uploadFieleUrl = "/commonApi/file/imgUpload/headImgUpload" ;
+            var uploadFieleUrl = "/oblCtl/commonApi/file/imgUpload/headImgUpload" ;
             return {
                 contentVal:'',
                 quillEditorConfig:{

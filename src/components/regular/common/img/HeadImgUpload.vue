@@ -38,7 +38,7 @@
         },
         data(){
             //上传图片的路径
-            var uploadFieleUrl = "/commonApi/file/imgUpload/headImgUpload";
+            var uploadFieleUrl = "/oblCtl/commonApi/file/imgUpload/headImgUpload";
             var cfgAuthorization = window.sessionStorage.getItem("authorization");
             cfgAuthorization = typeof cfgAuthorization == "undefined" ? "" : cfgAuthorization ;
             return {
