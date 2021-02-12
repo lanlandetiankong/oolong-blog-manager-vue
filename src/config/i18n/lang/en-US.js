@@ -392,7 +392,8 @@ export const langMap = {
             actionOfCancelLock:'Action:Cancel Lock',
             actionOfCancelStartUsing:'Action:Cancel start using',
             actionOfCancelPublish:'Action:Cancel publish',
-            tableCheckedSize:"Quantity selected:{0} ."
+            tableCheckedSize:"Quantity selected:{0} .",
+            registerOkAndGo:"Registered successfully!About to jump to the login page."
         }
     },
     http:{

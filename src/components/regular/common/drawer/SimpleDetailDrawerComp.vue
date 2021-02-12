@@ -105,7 +105,6 @@
                 var fieldType = fieldConfObj.type;
                 if(typeof fieldType != "undefined" && fieldType != null){
                     if(DrawerFieldTypeEnum.Enum == fieldType){    //枚举类型
-                        debugger;
                         var enumValMap = fieldConfObj.enumValMap ;
                         if(typeof enumValMap != "undefined" && enumValMap != null){
                             fieldValTemp = enumValMap[fieldVal] ;
