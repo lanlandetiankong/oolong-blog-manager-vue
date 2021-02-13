@@ -1,21 +1,20 @@
 <template>
     <div>
-        <a-row type="flex" align="middle" justify="end">
-            <a-col :span=2>
+        <a-page-header
+            :backIcon="false"
+            :ghost="false"
+        >
+            <span slot="title" @click="goToIndex">Oolong Blog Manager</span>
+            <obl-breadcrumb slot="subTitle" />
+            <template slot="extra">
                 <i18n-change-comp />
-            </a-col>
-            <a-col :span=3>
-                <template>
-                    <a-tag color="blue">
-                        {{loginUserName}}
-                    </a-tag>
-                    <a-avatar
-                        :src="loginUserAvatarUrl"
-                        :alt="$t('langMap.commons.valueMap.uploader.popover.altInfo')"
-                    />
-                </template>
-            </a-col>
-            <a-col :span=1>
+                <a-button type="primary" ghost>
+                    {{loginUserName}}
+                </a-button>
+                <a-avatar
+                    :src="loginUserAvatarUrl"
+                    :alt="$t('langMap.commons.valueMap.uploader.popover.altInfo')"
+                />
                 <a-dropdown
                     :trigger="['click']"
                     placement="bottomCenter"
@@ -32,8 +31,6 @@
                     </a-menu>
                     <a-icon slot="icon" type="rest" />
                 </a-dropdown>
-            </a-col>
-            <a-col :span=1 >
                 <a-dropdown
                     :trigger="['click']"
                     placement="bottomCenter"
@@ -54,11 +51,8 @@
                         </a-menu-item>
                     </a-menu>
                 </a-dropdown>
-            </a-col>
-        </a-row>
-        <a-row>
-            <obl-breadcrumb />
-        </a-row>
+            </template>
+        </a-page-header>
     </div>
 </template>
 
@@ -102,6 +96,16 @@
 
         },
         methods:{
+            goToIndex(){
+                var _currentRoute = this.$route;
+                if(_currentRoute){
+                    if(_currentRoute.fullPath == "" || _currentRoute.fullPath == "/index"){
+                        //当前已经在 index页面了，无需再跳转
+                    }   else {
+                        this.$router.push('/index');
+                    }
+                }
+            },
             handleClearCacheClick(e){  //清理缓存-点击事件
                 var _this = this ;
                 if(e.key == "refreshMenuCache"){   //退出登录

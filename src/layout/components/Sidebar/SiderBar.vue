@@ -1,8 +1,5 @@
 <template>
     <div id="sider-bar-root">
-        <div :class="sideBarLogoCls" >
-            <span @click="dealGotoIndex">Oolong Blog Manager</span>
-        </div>
         <a-menu
             mode="inline"
             theme="dark"
@@ -41,9 +38,6 @@
             }
         },
         computed: {
-            sideBarLogoCls(){
-                return this.siderCollapsed ? "logo-collapsed" : "logo"
-            }
         },
         methods: {
             dealMenuClick(obj) {

@@ -14,7 +14,7 @@
             </a-layout-sider>
             <a-layout>
                 <a-layout-header
-                    style="background: #fff; padding: 0;height:70px;line-height:50px;margin-top: 0px;margin-bottom: 0px;"
+                    style="background: #fff; padding: 0;height:60px;line-height:50px;margin-top: 0px;margin-bottom: 0px;"
                 >
                     <nav-bar
                         :userInfo="navBarConf.userInfo"
