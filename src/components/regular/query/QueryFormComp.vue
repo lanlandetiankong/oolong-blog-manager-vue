@@ -57,7 +57,7 @@
                                 </a-form-item>
                             </a-col>
                         </template>
-                        <a-col :span="6" :style="{ }">
+                        <a-col :md="8" :sm="24">
                             <a-button type="primary" html-type="submit" icon="search"
                                       :loading="loadingFlag"
                             >
@@ -159,5 +159,15 @@
 </script>
 
 <style scoped>
-
+.ant-page-header{
+    padding: 0 0 ;
+}
+.ant-page-header-content{
+    padding: 0 0;
+    margin: 0 0;
+}
+.ant-card-body{
+    padding: 0 0;
+    margin: 0 0;
+}
 </style>
