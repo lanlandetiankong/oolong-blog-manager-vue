@@ -1,9 +1,8 @@
 <template>
     <div class="login-page-root">
         <a-page-header
-            style="border: 1px solid rgb(235, 237, 240)"
-            :subTitle="$t('langMap.button.member.loginForManager')"
             :title="$t('langMap.button.member.login')"
+            :subTitle="$t('langMap.button.member.loginForManager')"
         >
             <template slot="extra">
                 <i18n-change-comp />

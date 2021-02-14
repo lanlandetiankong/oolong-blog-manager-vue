@@ -150,7 +150,9 @@ export const langMap = {
                     phone:'手机号',
                     userType:'用户类型',
                     sex:'性别',
-                    address:'地址'
+                    address:'地址',
+                    oldPwd:'原密码',
+                    newPwd:'新密码'
                 },
                 module:{
                     iconName:'图标值',
@@ -433,6 +435,18 @@ export const langMap = {
                     description:'提交文章'
                 }
             }
+        },
+        forgetPwd:{
+            verifyOldPwd:{
+                key:'verifyOldPwd',
+                title:'验证',
+                description:'验证旧密码'
+            },
+            setNewPwd:{
+                key:'setNewPwd',
+                title:'修改密码',
+                description:'填写新密码'
+            },
         }
     },
     results:{

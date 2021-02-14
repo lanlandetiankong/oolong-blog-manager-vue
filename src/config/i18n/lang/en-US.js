@@ -150,7 +150,9 @@ export const langMap = {
                     phone:'Phone Number',
                     userType:'User type',
                     sex:'Sex',
-                    address:'Address'
+                    address:'Address',
+                    oldPwd:'Old password',
+                    newPwd:'New password'
                 },
                 module:{
                     iconName:'Icon Value',
@@ -433,6 +435,18 @@ export const langMap = {
                     description:'Submit an article'
                 }
             }
+        },
+        forgetPwd:{
+            verifyOldPwd:{
+                key:'verifyOldPwd',
+                title:'Verification',
+                description:'Verify old password'
+            },
+            setNewPwd:{
+                key:'setNewPwd',
+                title:'Change Password',
+                description:'Set new password'
+            },
         }
     },
     results:{
