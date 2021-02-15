@@ -6,11 +6,12 @@
             @back="goBack"
         >
             <template slot="extra">
+                <i18n-change-comp />
                 <a-button type="primary"
                           @click="goLogin">
                     {{$t('langMap.button.member.login')}}
                 </a-button>
-                <a-button type="link" size="large" @click="goRegister()">
+                <a-button  @click="goRegister()">
                     {{$t('langMap.button.member.registerAnAccount')}}
                 </a-button>
             </template>
@@ -92,9 +93,13 @@
 <script>
     import {ForgetPwdApi} from './ForgetPwdApi'
     import {RouteConst} from "~Router/routeSecurityUtil";
+    import I18nChangeComp from "~Components/regular/i18n/I18nChangeComp";
 
     export default {
         name: "ForgetPwdPage",
+        comments:{
+            I18nChangeComp,
+        },
         data(){
             var paramsRules ={
                 account:[
@@ -174,7 +179,7 @@
                 this.$router.push(RouteConst.login);
             },
             goRegister(){
-                //跳转到-修改密码
+                //跳转到-注册页面
                 this.$router.push(RouteConst.register);
             },
             handleSubmit (e) {

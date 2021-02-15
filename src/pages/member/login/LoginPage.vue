@@ -6,10 +6,10 @@
         >
             <template slot="extra">
                 <i18n-change-comp />
-                <a-button type="link" size="large" @click="() => $router.push(RouteConst.register)">
+                <a-button @click="goRegister()">
                     {{$t('langMap.button.member.registerAnAccount')}}
                 </a-button>
-                <a-button type="link" size="large" @click="() => $router.push(RouteConst.forgetPassword)">
+                <a-button @click="goForgetPwd">
                     {{$t('langMap.button.member.forgetPassword')}}
                 </a-button>
             </template>
@@ -36,7 +36,6 @@
         mixins:[CacheMixin],
         data() {
             return {
-                RouteConst,
             }
         },
         computed: {
@@ -49,6 +48,14 @@
             ])
         },
         methods:{
+            goRegister(){
+                //跳转到-注册页面
+                this.$router.push(RouteConst.register);
+            },
+            goForgetPwd(){
+                //跳转到-修改密码
+                this.$router.push(RouteConst.forgetPassword);
+            },
             handleLoginFormSubmit(e,loginForm,submitRes){
                 var _this = this ;
                 if(submitRes.success){ //后台登录验证成功

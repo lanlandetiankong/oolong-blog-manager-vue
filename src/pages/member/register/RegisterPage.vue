@@ -6,6 +6,7 @@
             @back="goBack"
         >
             <template slot="extra">
+                <i18n-change-comp />
                 <a-button type="primary"
                     @click="goLogin">
                     {{$t('langMap.button.member.login')}}
@@ -61,6 +62,7 @@
     import {RegisterApi} from './RegisterApi.js'
     import {RouteConst} from '~Router/routeSecurityUtil';
     import {FormBaseConfObj} from "~Components/constant_define";
+    import I18nChangeComp from "~Components/regular/i18n/I18nChangeComp";
     import {OblCommonMixin} from '~Layout/mixin/OblCommonMixin';
     import AFormItem from "ant-design-vue/es/form/FormItem";
     import HeadImgUpload from "~Components/regular/common/img/HeadImgUpload";
@@ -68,7 +70,7 @@
     export default {
         name: "RegisterPage",
         components: {
-            HeadImgUpload,AFormItem
+            I18nChangeComp,HeadImgUpload,AFormItem
         },
         mixins:[OblCommonMixin],
         props:{},
