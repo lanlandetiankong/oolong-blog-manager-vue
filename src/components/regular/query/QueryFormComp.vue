@@ -158,7 +158,7 @@
     }
 </script>
 
-<style scoped>
+<style lang="css">
 .ant-page-header{
     padding: 0 0 ;
 }
@@ -167,7 +167,22 @@
     margin: 0 0;
 }
 .ant-card-body{
-    padding: 0 0;
+    padding: 0px 0px;
     margin: 0 0;
+}
+.ant-form-item-control-wrapper {
+    flex: 1 1;
+    display: inline-block;
+    vertical-align: middle;
+}
+
+> .ant-form-item-label {
+    line-height: 32px;
+    padding-right: 8px;
+    width: auto;
+}
+.ant-form-item-control {
+    height: 32px;
+    line-height: 32px;
 }
 </style>
