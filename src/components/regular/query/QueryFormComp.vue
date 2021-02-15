@@ -1,88 +1,90 @@
 <template>
-    <a-page-header style="border: 1px solid rgb(235, 237, 240)">
-        <!-- 复合搜索-区域 -->
-        <a-card :bordered="false">
-            <div class="table-page-search-wrapper">
-                <a-form ref="searchFormRef"
-                        layout="inline"
-                        :form="searchForm"
-                        @submit="handleSearchFormSubmit"
-                >
-                    <a-row :gutter="48">
-                        <template v-for="(item,idx) in theFormItemConf">
-                            <a-col v-if="item.formType==formItemTypeEnum.Input"
-                                   :md="8" :sm="24">
-                                <a-form-item :label="item.label">
-                                    <a-input allowClear
-                                        v-decorator="item.decorator"/>
-                                </a-form-item>
-                            </a-col>
-                            <a-col v-else-if="item.formType==formItemTypeEnum.InputNumber"
-                                   :md="8" :sm="24"
-                            >
-                                <a-form-item :label="item.label">
-                                    <a-input-number allowClear
-                                                    :style="{width:'130px'}"
-                                                    v-decorator="item.decorator"/>
-                                </a-form-item>
-                            </a-col>
-                            <a-col v-else-if="item.formType==formItemTypeEnum.Select"
-                                   :md="8" :sm="24">
-                                <a-form-item :label="item.label">
-                                    <a-select showSearch allowClear
-                                              :placeholder="(typeof item.placeholder == 'undefined' || item.placeholder == null) ? $t('langMap.commons.forms.pleaseChoose') : item.placeholder "
-                                              style="width: 180px"
-                                              optionFilterProp="children"
-                                              :disabled="item.disabled"
-                                              :options="item.options"
-                                              :filterOption="mixin_getFilterOption"
-                                              v-decorator="item.decorator"
-                                    >
-                                    </a-select>
-                                </a-form-item>
-                            </a-col>
-                            <a-col v-else-if="item.formType==formItemTypeEnum.TreeSelect"
-                                   :md="8" :sm="24">
-                                <a-form-item :label="item.label">
-                                    <a-tree-select
-                                        style="width: 150px"
-                                        :placeholder="(typeof item.placeholder == 'undefined' || item.placeholder == null) ? $t('langMap.commons.forms.pleaseChoose') : item.placeholder"
-                                        showSearch allowClear
-                                        :treeNodeFilterProp="item.treeNodeFilterProp"
-                                        :treeDefaultExpandAll="item.treeDefaultExpandAll"
-                                        v-decorator="item.decorator"
-                                        :treeData="item.treeData"
-                                    >
-                                    </a-tree-select>
-                                </a-form-item>
-                            </a-col>
-                        </template>
-                        <a-col :md="8" :sm="24">
-                            <a-button type="primary" html-type="submit" icon="search"
-                                      :loading="loadingFlag"
-                            >
-                                {{$t('langMap.button.actions.query')}}
-                            </a-button>
-                            <a-button :style="{  }" icon="close-square"
-                                      @click="handleSearchFormReset">
-                                {{$t('langMap.button.actions.reset')}}
-                            </a-button>
+    <div class="queryFormCompCls">
+        <a-page-header  tyle="border: 1px solid rgb(235, 237, 240)">
+            <!-- 复合搜索-区域 -->
+            <a-card :bordered="false">
+                <div>
+                    <a-form ref="searchFormRef"
+                            layout="inline"
+                            :form="searchForm"
+                            @submit="handleSearchFormSubmit"
+                    >
+                        <a-row :gutter="48">
+                            <template v-for="(item,idx) in theFormItemConf">
+                                <a-col v-if="item.formType==formItemTypeEnum.Input"
+                                       :md="8" :sm="24">
+                                    <a-form-item :label="item.label">
+                                        <a-input allowClear
+                                                 v-decorator="item.decorator"/>
+                                    </a-form-item>
+                                </a-col>
+                                <a-col v-else-if="item.formType==formItemTypeEnum.InputNumber"
+                                       :md="8" :sm="24"
+                                >
+                                    <a-form-item :label="item.label">
+                                        <a-input-number allowClear
+                                                        :style="{width:'130px'}"
+                                                        v-decorator="item.decorator"/>
+                                    </a-form-item>
+                                </a-col>
+                                <a-col v-else-if="item.formType==formItemTypeEnum.Select"
+                                       :md="8" :sm="24">
+                                    <a-form-item :label="item.label">
+                                        <a-select showSearch allowClear
+                                                  :placeholder="(typeof item.placeholder == 'undefined' || item.placeholder == null) ? $t('langMap.commons.forms.pleaseChoose') : item.placeholder "
+                                                  style="width: 180px"
+                                                  optionFilterProp="children"
+                                                  :disabled="item.disabled"
+                                                  :options="item.options"
+                                                  :filterOption="mixin_getFilterOption"
+                                                  v-decorator="item.decorator"
+                                        >
+                                        </a-select>
+                                    </a-form-item>
+                                </a-col>
+                                <a-col v-else-if="item.formType==formItemTypeEnum.TreeSelect"
+                                       :md="8" :sm="24">
+                                    <a-form-item :label="item.label">
+                                        <a-tree-select
+                                            style="width: 150px"
+                                            :placeholder="(typeof item.placeholder == 'undefined' || item.placeholder == null) ? $t('langMap.commons.forms.pleaseChoose') : item.placeholder"
+                                            showSearch allowClear
+                                            :treeNodeFilterProp="item.treeNodeFilterProp"
+                                            :treeDefaultExpandAll="item.treeDefaultExpandAll"
+                                            v-decorator="item.decorator"
+                                            :treeData="item.treeData"
+                                        >
+                                        </a-tree-select>
+                                    </a-form-item>
+                                </a-col>
+                            </template>
+                            <a-col :md="8" :sm="24">
+                                <a-button type="primary" html-type="submit" icon="search"
+                                          :loading="loadingFlag"
+                                >
+                                    {{$t('langMap.button.actions.query')}}
+                                </a-button>
+                                <a-button :style="{  }" icon="close-square"
+                                          @click="handleSearchFormReset">
+                                    {{$t('langMap.button.actions.reset')}}
+                                </a-button>
 
-                            <a-button type="link" v-show="searchConf.showAll"
-                                      @click="triggerUnfold">
-                                {{$t('langMap.button.actions.packUp')}} <a-icon type="up"/>
-                            </a-button>
-                            <a-button type="link" v-show="!searchConf.showAll"
-                                      @click="triggerUnfold">
-                                {{$t('langMap.button.actions.unfold')}} <a-icon type="down"/>
-                            </a-button>
-                        </a-col>
-                    </a-row>
-                </a-form>
-            </div>
-            <a-divider/>
-        </a-card>
-    </a-page-header>
+                                <a-button type="link" v-show="searchConf.showAll"
+                                          @click="triggerUnfold">
+                                    {{$t('langMap.button.actions.packUp')}} <a-icon type="up"/>
+                                </a-button>
+                                <a-button type="link" v-show="!searchConf.showAll"
+                                          @click="triggerUnfold">
+                                    {{$t('langMap.button.actions.unfold')}} <a-icon type="down"/>
+                                </a-button>
+                            </a-col>
+                        </a-row>
+                    </a-form>
+                </div>
+                <a-divider/>
+            </a-card>
+        </a-page-header>
+    </div>
 </template>
 
 <script>
@@ -158,31 +160,51 @@
     }
 </script>
 
-<style lang="css">
-.ant-page-header{
-    padding: 0 0 ;
-}
-.ant-page-header-content{
-    padding: 0 0;
-    margin: 0 0;
-}
-.ant-card-body{
-    padding: 0px 0px;
-    margin: 0 0;
-}
-.ant-form-item-control-wrapper {
-    flex: 1 1;
-    display: inline-block;
-    vertical-align: middle;
-}
+<style scoped lang="less">
+    // 数据列表 搜索条件
+    .queryFormCompCls {
+        .ant-page-header {
+            padding: 0px;
+            margin: 0px;
+            .ant-page-header-content {
+                .ant-card {
+                    .ant-card-body {
+                        padding: 0px;
+                        margin: 0px;
+                    }
+                }
+            }
+        }
 
-> .ant-form-item-label {
-    line-height: 32px;
-    padding-right: 8px;
-    width: auto;
-}
-.ant-form-item-control {
-    height: 32px;
-    line-height: 32px;
-}
+
+
+        .ant-form-inline {
+            .ant-form-item {
+                display: flex;
+                margin-bottom: 0px;
+                margin-right: 0;
+
+                .ant-form-item-control-wrapper {
+                    flex: 1 1;
+                    display: inline-block;
+                    vertical-align: middle;
+                }
+                > .ant-form-item-label {
+                    line-height: 32px;
+                    padding-right: 8px;
+                    width: auto;
+                }
+                .ant-form-item-control {
+                    height: 32px;
+                    line-height: 32px;
+                }
+            }
+        }
+
+        .table-page-search-submitButtons {
+            display: block;
+            margin-bottom: 0px;
+            white-space: nowrap;
+        }
+    }
 </style>
