@@ -129,6 +129,7 @@
 </template>
 
 <script>
+    import jquery from 'jquery' ;
     import {OblCommonMixin} from '~Layout/mixin/OblCommonMixin';
     import {PermissionRoleManagerApi} from './permissionRoleManagerApi.js'
     import {FormItemTypeEnum,ConstantObj} from "~Components/constant_define";
