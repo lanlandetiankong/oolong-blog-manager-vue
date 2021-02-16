@@ -94,12 +94,12 @@
                         {{record.userTypeStr}}
                     </a-tag>
                 </span>
-                <span slot="locked" slot-scope="record">
+                <span slot="lockedStr" slot-scope="record">
                     <a-tag v-if="record.locked == 1" color="red" :key="record.fid">
-                        {{$t('langMap.commons.enums.lockStatus.locked')}}
+                        {{record.lockedStr}}
                     </a-tag>
                     <a-tag v-else-if="record.locked == 0" color="blue" :key="record.fid">
-                        {{$t('langMap.commons.enums.lockStatus.unlock')}}
+                        {{record.lockedStr}}
                     </a-tag>
                 </span>
                 <span slot="sexRender" slot-scope="text,record,index">
@@ -184,7 +184,7 @@
     import {EmpInfoApi} from './empInfoApi'
     import {FormItemTypeEnum,ConstantObj} from "~Components/constant_define";
     import {OblCommonMixin} from '~Layout/mixin/OblCommonMixin';
-    import {UserTypeEnum,LockStateEnum,EnumUtils} from '~Config/selectData.js';
+    import {AllEnum,EnumUtils} from '~Config/selectData.js';
 
     import QueryFormComp from '~Components/regular/query/QueryFormComp'
     import TableHeadInfo from '~Components/regular/common/table/TableHeadInfo'
@@ -268,8 +268,8 @@
                 },
                 binding:{
                     belongDepartments:[],
-                    userTypes:EnumUtils.toSelectData(UserTypeEnum),
-                    lockStates:EnumUtils.toSelectData(LockStateEnum)
+                    userTypes:EnumUtils.toSelectData(AllEnum.UserTypeEnum),
+                    lockStates:EnumUtils.toSelectData(AllEnum.LockStateEnum)
                 },
                 tableConf: {
                     data: [],
@@ -317,7 +317,7 @@
                         title: this.$t('langMap.table.fields.common.lockedStatus'),
                         align:textAlignDefault,
                         key: 'locked',
-                        scopedSlots: { customRender: 'locked' },
+                        scopedSlots: { customRender: 'lockedStr' },
                     }, {
                         title: this.$t('langMap.table.fields.em.user.address'),
                         align:textAlignDefault,
@@ -585,6 +585,20 @@
                     this.$message.warning(this.$t('langMap.message.error.failedDueToNotGettingId'));
                 }
             },
+            handleTransformData(){//数据转化
+                const data = this.tableConf.data;
+                if(!data){
+                    return ;
+                }
+                //Map-模块类型
+                let userTypeMap = EnumUtils.toValMap(AllEnum.UserTypeEnum);
+                let lockedStateMap = EnumUtils.toValMap(AllEnum.LockStateEnum);
+                for (let idx in data){
+                    let item = data[idx] ;
+                    item['userTypeStr'] = userTypeMap[item.userType];
+                    item['lockedStr'] = lockedStateMap[item.locked];
+                }
+            },
             handleSearchFormQuery(e,values) {   //带查询条件 检索用户列表
                 const _this = this;
                 _this.changeQueryLoading(true);
@@ -593,6 +607,7 @@
                     this.tableConf.pagination.total = res.vpage.total ;
                     //清空 已勾选
                     _this.tableCheckIdList = [] ;
+                    _this.handleTransformData();
                     _this.changeQueryLoading(false);
                 }).catch((e) =>{
                     _this.changeQueryLoading(false);

@@ -95,7 +95,7 @@
 
 <script>
     import {EmpJobApi} from './empJobApi'
-    import {JobTypeEnum,EnumUtils} from '~Config/selectData.js';
+    import {AllEnum,EnumUtils} from '~Config/selectData.js';
     import {OblCommonMixin} from '~Layout/mixin/OblCommonMixin';
     import {FormItemTypeEnum,ConstantObj} from "~Components/constant_define";
 
@@ -143,7 +143,7 @@
             return {
                 ConstantObj,
                 binding:{
-                    types:EnumUtils.toSelectData(JobTypeEnum)
+                    types:EnumUtils.toSelectData(AllEnum.JobTypeEnum)
                 },
                 searchConf: {
                     loadingFlag: false,
@@ -240,6 +240,18 @@
                     }
                 })
             },
+            handleTransformData(){//数据转化
+                const data = this.tableConf.data;
+                if(!data){
+                    return ;
+                }
+                //Map-模块类型
+                let jobTypeMap = EnumUtils.toValMap(AllEnum.JobTypeEnum);
+                for (let idx in data){
+                    let item = data[idx] ;
+                    item['typeStr'] = jobTypeMap[item.type];
+                }
+            },
             handleSearchFormQuery(e,values) {   //带查询条件 检索职务列表
                 var _this = this ;
                 _this.changeQueryLoading(true);
@@ -248,6 +260,7 @@
                     this.tableConf.pagination.total = res.vpage.total ;
                     //清空 已勾选
                     _this.tableCheckIdList = [] ;
+                    _this.handleTransformData();
                     _this.changeQueryLoading(false);
                 }).catch((e) =>{
                     _this.changeQueryLoading(false);

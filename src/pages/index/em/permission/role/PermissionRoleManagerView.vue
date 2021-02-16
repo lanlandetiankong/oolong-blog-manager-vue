@@ -132,7 +132,7 @@
     import {OblCommonMixin} from '~Layout/mixin/OblCommonMixin';
     import {PermissionRoleManagerApi} from './permissionRoleManagerApi.js'
     import {FormItemTypeEnum,ConstantObj} from "~Components/constant_define";
-    import {RoleTypeEnum,EnumUtils} from '~Config/selectData.js';
+    import {AllEnum,EnumUtils} from '~Config/selectData.js';
 
     import QueryFormComp from '~Components/regular/query/QueryFormComp'
     import TableHeadInfo from '~Components/regular/common/table/TableHeadInfo'
@@ -176,7 +176,7 @@
             return {
                 ConstantObj,
                 binding:{
-                    roleTypes:EnumUtils.toSelectData(RoleTypeEnum)
+                    roleTypes:EnumUtils.toSelectData(AllEnum.RoleTypeEnum)
                 },
                 searchConf:{
                     loadingFlag:false,
@@ -382,6 +382,18 @@
                     this.$message.warning(this.$t('langMap.message.error.failedDueToNotGettingId'));
                 }
             },
+            handleTransformData(){//数据转化
+                const data = this.tableConf.data;
+                if(!data){
+                    return ;
+                }
+                //Map-角色类型
+                let roleTypeMap = EnumUtils.toValMap(AllEnum.RoleTypeEnum);
+                for (let idx in data){
+                    let item = data[idx] ;
+                    item['typeStr'] = roleTypeMap[item.type];
+                }
+            },
             handleSearchFormQuery(e,values) {   //带查询条件 检索角色列表
                 var _this = this ;
                 _this.changeQueryLoading(true);
@@ -390,6 +402,7 @@
                     this.tableConf.pagination.total = res.vpage.total ;
                     //清空 已勾选
                     _this.tableCheckIdList = [] ;
+                    _this.handleTransformData();
                     _this.changeQueryLoading(false);
                 }).catch((e) =>{
                     _this.changeQueryLoading(false);

@@ -28,16 +28,16 @@
                 >
                     <span>
                         <a target="_blank" href="https://www.antdv.com/components/icon-cn/">{{$t('langMap.commons.forms.tips.lookUpIcon')}}</a>
-                        <span v-show="typeof formValObj.iconVal != 'undefined' && formValObj.iconVal.length > 0">
-                            ( {{$t('langMap.commons.forms.tips.selectedIcon')}} :&nbsp;&nbsp; <a-icon :type="formValObj.iconVal"/> &nbsp;&nbsp;)
+                        <span v-show="typeof formValObj.icon != 'undefined' && formValObj.icon.length > 0">
+                            ( {{$t('langMap.commons.forms.tips.selectedIcon')}} :&nbsp;&nbsp; <a-icon :type="formValObj.icon"/> &nbsp;&nbsp;)
                         </span>
                     </span>
-                    <a-input v-decorator="formFieldConf.iconVal"/>
+                    <a-input v-decorator="formFieldConf.icon"/>
                 </a-form-item>
-                <a-form-item :label="$t('langMap.table.fields.common.styleVal')"
+                <a-form-item :label="$t('langMap.table.fields.common.style')"
                              v-bind="FormBaseConfObj.formItemLayout"
                 >
-                    <a-input v-decorator="formFieldConf.styleVal"/>
+                    <a-input v-decorator="formFieldConf.style"/>
                 </a-form-item>
                 <a-form-item :label="$t('langMap.table.fields.common.type')"
                      v-bind="FormBaseConfObj.formItemLayout"
@@ -47,7 +47,7 @@
                               optionFilterProp="children"
                               :options="moduleTypes"
                               :filterOption="mixin_getFilterOption"
-                              v-decorator="formFieldConf.typeVal"
+                              v-decorator="formFieldConf.type"
                     >
                     </a-select>
                 </a-form-item>
@@ -84,13 +84,13 @@
                 code:[
                     {required:true,message:this.$t('langMap.commons.forms.pleaseFillOut',[this.$t('langMap.table.fields.common.code')])}
                 ],
-                iconVal:[
+                icon:[
                     {required:true,message:this.$t('langMap.commons.forms.pleaseFillOut',[this.$t('langMap.table.fields.em.module.iconName')])}
                 ],
-                styleVal:[
-                    {required:false,message:this.$t('langMap.commons.forms.pleaseFillOut',[this.$t('langMap.table.fields.common.styleVal')])}
+                style:[
+                    {required:false,message:this.$t('langMap.commons.forms.pleaseFillOut',[this.$t('langMap.table.fields.common.style')])}
                 ],
-                typeVal:[
+                type:[
                     {required:true,message:this.$t('langMap.commons.forms.pleaseFillOut',[this.$t('langMap.table.fields.common.type')])},
                 ],
                 remark:[
@@ -102,9 +102,9 @@
                 formFieldConf:{
                     name:["name",{rules:paramsRules.name}],
                     code:["code",{rules:paramsRules.code}],
-                    iconVal:["iconVal",{rules:paramsRules.iconVal}],
-                    styleVal:["styleVal",{rules:paramsRules.styleVal}],
-                    typeVal:["typeVal",{rules:paramsRules.typeVal}],
+                    icon:["icon",{rules:paramsRules.icon}],
+                    style:["style",{rules:paramsRules.style}],
+                    type:["type",{rules:paramsRules.type}],
                     remark:["remark",{rules:paramsRules.remark}]
                 },
                 createForm:{},
@@ -125,17 +125,17 @@
                            ...formObj,
                            value: formObj.code,
                        }),
-                       iconVal: _this.$form.createFormField({
+                       icon: _this.$form.createFormField({
                            ...formObj,
-                           value: formObj.iconVal,
+                           value: formObj.icon,
                        }),
-                       styleVal: _this.$form.createFormField({
+                       style: _this.$form.createFormField({
                            ...formObj,
-                           value: formObj.styleVal,
+                           value: formObj.style,
                        }),
-                       typeVal: _this.$form.createFormField({
+                       type: _this.$form.createFormField({
                            ...formObj,
-                           value: formObj.typeVal,
+                           value: formObj.type,
                        }),
                        remark: _this.$form.createFormField({
                            ...formObj,
@@ -184,17 +184,17 @@
                             ..._this.formObj,
                             value: _this.formObj.code
                         }),
-                        iconVal: this.$form.createFormField({
+                        icon: this.$form.createFormField({
                             ..._this.formObj,
-                            value: _this.formObj.iconVal
+                            value: _this.formObj.icon
                         }),
-                        styleVal: this.$form.createFormField({
+                        style: this.$form.createFormField({
                             ..._this.formObj,
-                            value: _this.formObj.styleVal
+                            value: _this.formObj.style
                         }),
-                        typeVal: this.$form.createFormField({
+                        type: this.$form.createFormField({
                             ..._this.formObj,
-                            value: _this.formObj.typeVal
+                            value: _this.formObj.type
                         }),
                         remark: this.$form.createFormField({
                             ..._this.formObj,

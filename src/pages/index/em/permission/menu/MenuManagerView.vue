@@ -119,7 +119,7 @@
 <script>
     import AFormItem from "ant-design-vue/es/form/FormItem";
     import ACol from "ant-design-vue/es/grid/Col";
-    import {MenuUrlJumpTypeEnum,EnumUtils} from '~Config/selectData.js';
+    import {AllEnum,EnumUtils} from '~Config/selectData.js';
 
     import {OblCommonMixin} from '~Layout/mixin/OblCommonMixin';
     import {MenuManagerApi} from './menuManagerApi.js'
@@ -193,7 +193,7 @@
             return {
                 ConstantObj,
                 binding:{
-                    urlJumpTypes:EnumUtils.toSelectData(MenuUrlJumpTypeEnum),
+                    urlJumpTypes:EnumUtils.toSelectData(AllEnum.MenuUrlJumpTypeEnum),
                     pidList:[]
                 },
                 searchConf:{
@@ -302,8 +302,8 @@
                     label: '',
                     weights:0,
                     iconName:'',
-                    styleVal:'',
-                    typeVal: '',
+                    style:'',
+                    type: '',
                 },
                 drawerConf:{
                     detail:{
@@ -382,6 +382,18 @@
                     }
                 })
             },
+            handleTransformData(){//数据转化
+                const data = this.tableConf.data;
+                if(!data){
+                    return ;
+                }
+                //Map-权限类型
+                let permissionTypeMap = EnumUtils.toValMap(AllEnum.PermissionTypeEnum);
+                for (let idx in data){
+                    let item = data[idx] ;
+                    item['urlJumpTypeStr'] = permissionTypeMap[item.urlJumpType];
+                }
+            },
             handleSearchFormQuery(e,values) {   //带查询条件 检索菜单列表
                 var _this = this ;
                 _this.changeQueryLoading(true);
@@ -391,6 +403,7 @@
                     //清空 已勾选
                     _this.tableCheckIdList = [] ;
                     _this.tableCheckRowList = [] ;
+                    _this.handleTransformData();
                     _this.changeQueryLoading(false);
                 }).catch((e) =>{
                     _this.changeQueryLoading(false);

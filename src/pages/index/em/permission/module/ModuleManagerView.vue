@@ -99,7 +99,7 @@
     import AFormItem from "ant-design-vue/es/form/FormItem";
     import ACol from "ant-design-vue/es/grid/Col";
 
-    import {ModuleTypeEnum,EnumUtils} from '~Config/selectData.js';
+    import {AllEnum,EnumUtils} from '~Config/selectData.js';
     import {ModuleManagerApi} from './moduleManagerApi.js'
     import {FormItemTypeEnum,ConstantObj} from "~Components/constant_define";
     import {OblCommonMixin} from '~Layout/mixin/OblCommonMixin';
@@ -108,7 +108,7 @@
     import TableHeadInfo from '~Components/regular/common/table/TableHeadInfo'
     import DefineModuleCreateFormComp from "~Components/index/em/define/permission/module/DefineModuleCreateFormComp";
     import RowDetailDrawerComp from '~Components/regular/common/drawer/RowDetailDrawerComp';
-    import {MenuUrlJumpTypeEnum} from "~Config/selectData";
+    import {ModuleTypeEnum} from "~Config/selectData";
 
     export default {
         name: "ModuleManagerView",
@@ -151,7 +151,7 @@
             return {
                 ConstantObj,
                 binding:{
-                    moduleTypes:EnumUtils.toSelectData(MenuUrlJumpTypeEnum)
+                    moduleTypes:EnumUtils.toSelectData(AllEnum.ModuleTypeEnum)
                 },
                 searchConf:{
                     loadingFlag:false,
@@ -214,8 +214,8 @@
                     name: '',
                     code: '',
                     icon:'',
-                    styleVal:'',
-                    typeVal: ''
+                    style:'',
+                    type: ''
                 },
                 drawerConf:{
                     detail:{
@@ -275,6 +275,18 @@
                     }
                 })
             },
+            handleTransformData(){//数据转化
+                const data = this.tableConf.data;
+                if(!data){
+                    return ;
+                }
+                //Map-模块类型
+                let moduleTypeMap = EnumUtils.toValMap(AllEnum.ModuleTypeEnum);
+                for (let idx in data){
+                    let item = data[idx] ;
+                    item['typeStr'] = moduleTypeMap[item.type];
+                }
+            },
             handleSearchFormQuery(e,values) {   //带查询条件 检索模块列表
                 var _this = this ;
                 _this.changeQueryLoading(true);
@@ -283,6 +295,7 @@
                     this.tableConf.pagination.total = res.vpage.total ;
                     //清空 已勾选
                     _this.tableCheckIdList = [] ;
+                    _this.handleTransformData();
                     _this.changeQueryLoading(false);
                 }).catch((e) =>{
                     _this.changeQueryLoading(false);

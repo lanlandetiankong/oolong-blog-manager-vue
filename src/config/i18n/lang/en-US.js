@@ -132,7 +132,7 @@ export const langMap = {
                 lockStatus:'Lock Status',
                 startUsingStatus:'Start Using Status',
                 label:'Label',
-                styleVal:'Style',
+                style:'Style',
                 tag:'Tag',
                 tagName:'Tag name',
                 category:'Category',

@@ -61,7 +61,7 @@ export const RoleTypeEnum = {
  */
 export const PermissionTypeEnum = {
     PageButton:{
-        value: 1,
+        value: 0,
         label: i18nUtil.getKey('langMap.commons.enums.permissionType.pageButton')
     },
     TableActionBtn:{
@@ -120,11 +120,11 @@ export const UserTypeEnum = {
 export const LockStateEnum = {
     Unlocked:{
         value: 0,
-        label: i18nUtil.getKey('langMap.commons.enums.lockStatus.locked')
+        label: i18nUtil.getKey('langMap.commons.enums.lockStatus.unlock')
     },
     Locked:{
         value: 1,
-        label: i18nUtil.getKey('langMap.commons.enums.lockStatus.unlock')
+        label: i18nUtil.getKey('langMap.commons.enums.lockStatus.locked')
     }
 };
 /**
@@ -191,17 +191,20 @@ function toValMap(obj) {
     for (let idx in keys) {
         let key = keys[idx] ;
         let item = obj[key];
-        if (!item) {
+        if (typeof item == "undefined" || item == null) {
             console.info("key:【%s】为空", key);
             continue;
         }
-        if (!item.value || !item.label) {
-            console.info("key:【%s】的value或label为空", key);
+        if ((typeof item.value == "undefined" || item.value == null)) {
+            console.info("key:【%s】的value为空", key);
+            continue;
+        }
+        if ((typeof item.label == "undefined" || item.label == null)) {
+            console.info("key:【%s】的label为空", key);
             continue;
         }
         valMap[item.value] = item.label;
     }
-    console.log("valMap",valMap);
     return valMap;
 }
 

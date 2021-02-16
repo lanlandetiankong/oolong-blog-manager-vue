@@ -230,7 +230,7 @@
                     pid: '',
                     weights: 0,
                     iconName: '',
-                    styleVal: '',
+                    style: '',
                 },
                 drawerConf: {
                     detail: {

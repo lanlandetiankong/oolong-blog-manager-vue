@@ -132,7 +132,7 @@ export const langMap = {
                 lockStatus:'锁定状态',
                 startUsingStatus:'启用状态',
                 label:'标注',
-                styleVal:'样式',
+                style:'样式',
                 tag:'标签',
                 tagName:'标签名',
                 category:'分类',

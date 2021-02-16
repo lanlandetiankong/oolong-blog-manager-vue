@@ -111,7 +111,7 @@
     import AFormItem from "ant-design-vue/es/form/FormItem";
     import ACol from "ant-design-vue/es/grid/Col";
 
-    import {PermissionTypeEnum,EnumUtils,SwitchEnum} from '~Config/selectData.js';
+    import {EnumUtils,AllEnum} from '~Config/selectData.js';
     import {PermissionManagerApi} from './permissionManagerApi.js'
     import {FormItemTypeEnum,ConstantObj} from "~Components/constant_define";
 
@@ -163,8 +163,8 @@
             return {
                 ConstantObj,
                 binding:{
-                    permissionTypes:EnumUtils.toSelectData(PermissionTypeEnum),
-                    switchEnums:EnumUtils.toSelectData(SwitchEnum)
+                    permissionTypes:EnumUtils.toSelectData(AllEnum.PermissionTypeEnum),
+                    switchEnums:EnumUtils.toSelectData(AllEnum.SwitchEnum)
                 },
                 searchConf:{
                     loadingFlag:false,
@@ -298,6 +298,21 @@
                     }
                 })
             },
+            handleTransformData(){//数据转化
+                const data = this.tableConf.data;
+                if(!data){
+                    return ;
+                }
+                //Map-权限类型
+                let permissionTypeMap = EnumUtils.toValMap(AllEnum.PermissionTypeEnum);
+                //Map-开关式
+                let switchMap = EnumUtils.toValMap(AllEnum.SwitchEnum);
+                for (let idx in data){
+                    let item = data[idx] ;
+                    item['typeStr'] = permissionTypeMap[item.type];
+                    item['ensureStr'] = switchMap[item.ensure];
+                }
+            },
             handleSearchFormQuery(e,values) {   //带查询条件 检索权限列表
                 var _this = this ;
                 _this.changeQueryLoading(true);
@@ -305,9 +320,10 @@
                     this.tableConf.data = res.gridList;
                     this.tableConf.pagination.total = res.vpage.total ;
                     //清空 已勾选
-                    _this.tableCheckIdList = [] ;
-                    _this.tableCheckRowList = [] ;
-                    _this.changeQueryLoading(false);
+                    this.tableCheckIdList = [] ;
+                    this.tableCheckRowList = [] ;
+                    this.handleTransformData();
+                    this.changeQueryLoading(false);
                 }).catch((e) =>{
                     _this.changeQueryLoading(false);
                 })

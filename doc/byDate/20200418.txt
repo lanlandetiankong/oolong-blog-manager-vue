@@ -127,3 +127,4 @@ unCheckedChildren
 eye-invisible
 a-switch
 
+_this.handleTransformData();
