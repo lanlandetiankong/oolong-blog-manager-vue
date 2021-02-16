@@ -1,3 +1,4 @@
+import {StringUtil} from '~Assets/js/util/bee/BeeUtil.js' ;
 /**
  * 格式化参数-分页查询
  * @param queryObj
@@ -39,7 +40,15 @@ function addSortField(obj,sortField) {
     }
     return obj ;
 }
+
+function strToList(str) {
+    if(StringUtil.isBlank(str)){
+        return [] ;
+    }
+    return str.split(",") ;
+}
 export const HttpUtil = {
     formatQueryPage,
-    addSortField
+    addSortField,
+    strToList
 };

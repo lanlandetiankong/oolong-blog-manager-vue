@@ -3,6 +3,7 @@ import {HttpUtil} from "~Config/axios/httpUtil";
 
 export const ArticleCreateApi = {
     createByForm(formObj) {     //发布文章
+        formObj['categoryIdList'] = HttpUtil.strToList(formObj['categoryIdList']);
         return axios.post("/oblCtl/oblArticle/createByForm",formObj).then(res => res.data);
     },
     createFromDraft(formObj) {     //发布 更新后的文章草稿
@@ -10,6 +11,7 @@ export const ArticleCreateApi = {
             formObj["createTime"] = undefined;
             formObj["updateTime"] = undefined;
         }
+        formObj['categoryIdList'] = HttpUtil.strToList(formObj['categoryIdList']);
         return axios.post("/oblCtl/oblArticle/createFromDraft",formObj).then(res => res.data);
     },
     createDraftByForm(formObj) {     //提交文章到草稿箱

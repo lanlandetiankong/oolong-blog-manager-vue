@@ -4537,3 +4537,4 @@ var BEE_AREAS = {
 }
 
 export default BeeUtil ;
+export const StringUtil  = BeeUtil.StringUtils ;

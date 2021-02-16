@@ -121,7 +121,7 @@
                           :title="$t('langMap.results.universal.failure.title')"
                           :sub-title="$t('langMap.results.universal.failure.extra.serverError')">
                     <template #extra>
-                        <a-button type="primary">
+                        <a-button type="primary" @click="changeRstStatusToDefault">
                             {{$t('langMap.results.article.create.failure.extra.retry')}}
                         </a-button>
                     </template>
@@ -160,7 +160,7 @@
                     {
                         required: true,
                         message: this.$t('langMap.commons.forms.pleaseSelect', [this.$t('langMap.table.fields.common.category')])
-                    },
+                    }
                 ]
             };
             //A-Result(
@@ -264,6 +264,9 @@
                     //最终步骤，next不会到这里，不拦截
                 }
                 this.stepConf.current++;
+            },
+            changeRstStatusToDefault(){
+                this.rstConf.current = this.rstConf.status.theDefault;
             },
             changeRstStatus(val) {
                 //修改结果状态
