@@ -10,17 +10,19 @@
 </template>
 
 <script>
+    import BeeUtil from "~Assets/js/util/bee/BeeUtil";
     export default {
         name: "OblBreadcrumb",
         computed:{
             matchedArr(){
                 let arr = [],nameTemp = [];
+                debugger;
                 this.$route.matched.filter((item,index,self) => {
                     let metaFlag = (item && item.meta) ;
                     if(metaFlag == false){
                         return ;
                     }
-                    if((item.meta.title) == false){
+                    if(BeeUtil.StringUtils.isBlank(item.meta.title)){
                         return ;
                     }
                     let title = (metaFlag && item.meta.title) ? item.meta.title : '' ;
