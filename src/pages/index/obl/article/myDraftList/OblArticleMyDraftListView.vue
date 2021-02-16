@@ -84,13 +84,16 @@
                     </span>
                     <template slot="action" slot-scope="text,record">
                         <span>
-                            <a @click="handleDetailDrawerShow($event,record)">
-                                {{$t('langMap.drawer.actions.detail')}}
+                             <a @click="goToCreateView($event,record)">
+                                {{$t('langMap.button.actions.edit')}}
                             </a>
                             <a-divider type="vertical" />
                             <a @click="goToViewDetail($event,record)">
                                 {{$t('langMap.results.article.create.success.extra.viewDetail')}}
                             </a>
+                             <!--<a @click="handleDetailDrawerShow($event,record)">
+                                {{$t('langMap.drawer.actions.detail')}}
+                            </a>-->
                             <a-divider type="vertical" />
                             <a-button type="danger" size="small" @click="handleDeleteOneById(record.fid)">{{$t('langMap.button.actions.delById')}}</a-button>
                         </span>
@@ -265,7 +268,7 @@
                         dataIndex:"operation",
                         key:'operation',
                         fixed:'right',
-                        width:220,
+                        width:260,
                         scopedSlots: { customRender: 'action' }
                     }],
                     pagination: {
@@ -424,6 +427,13 @@
                 }   else {
                     this.$message.error(this.$t('langMap.message.warning.openInvalidRowDetails'));
                 }
+            },
+            goToCreateView(e,item){   //跳转到 [新建文章] 页面 处理
+                var routeParam = {
+                    fid: item.fid,
+                    action:"update"
+                };
+                this.$router.push({ path: '/index/article/create', query: routeParam});
             },
             handleDetailDrawerClose(e){ //Drawer-文章 详情关闭
                 this.drawerConf.detail.article.visible = false ;

@@ -41,11 +41,14 @@ function addSortField(obj,sortField) {
     return obj ;
 }
 
-function strToList(str) {
-    if(StringUtil.isBlank(str)){
+function strToList(obj) {
+    if(typeof obj != "string"){
+        return obj ;
+    }
+    if(StringUtil.isBlank(obj)){
         return [] ;
     }
-    return str.split(",") ;
+    return obj.split(",") ;
 }
 export const HttpUtil = {
     formatQueryPage,
