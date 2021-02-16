@@ -152,12 +152,23 @@
                         label:this.$t('langMap.table.fields.obl.article.tagName'),
                         decorator:["tagIds", {rules: []}],
                         options:[]
+                    },
+                    categoryIdList: {
+                        key:'categoryIdList',
+                        formType:FormItemTypeEnum.TreeSelect,
+                        label:this.$t('langMap.table.fields.obl.article.categoryNames'),
+                        decorator:["categoryIdList", {rules: []}],
+                        treeDefaultExpandAll:false,
+                        treeNodeFilterProp:"title",
+                        treeData:[],
+                        drawerAble:false
                     }
                 };
             return {
                 ConstantObj,
                 binding:{
-                    articleTagList:[]
+                    articleTagList:[],
+                    categoryIdList:[]
                 },
                 searchConf:{
                     loadingFlag:false,
@@ -315,11 +326,19 @@
                 }
                 this.searchConf.loadingFlag = loadingFlag;
             },
-            dealQueryAllArticleTag(){    //取得所有的 文章标签
+            dealGetAllTagList(){    //取得所有的 文章标签
                 var _this = this ;
                 ArticleAllListApi.getAllArticleTagEnums().then((res) =>{
                     if(res.success){
                         _this.binding.articleTagList = res.gridList ;
+                    }
+                })
+            },
+            dealGetAllCategoryTree() {    //取得所有的 文章分类
+                var _this = this;
+                ArticleAllListApi.getAllArticleCategoryTree().then((res) => {
+                    if (res.success) {
+                        _this.binding.categoryIdList = res.gridList;
                     }
                 })
             },
@@ -423,13 +442,15 @@
                 handler (val, oval) {
                     //绑定枚举值变化监听并处理
                     this.searchConf.formItemConf.tagIds.options = this.binding.articleTagList ;
+                    this.searchConf.formItemConf.categoryIdList.treeData = this.binding.categoryIdList ;
                 },
                 deep: true,
                 immediate:true
             }
         },
         created(){
-            this.dealQueryAllArticleTag();
+            this.dealGetAllTagList();
+            this.dealGetAllCategoryTree();
         },
         mounted() {
             this.mixin_invokeQuery(this);
