@@ -1,3 +1,3 @@
-const baseUrl = process.env.NODE_ENV === 'production' ? 'http://47.99.160.215:20100/oolong_blog' : 'http://localhost:20100/oolong_blog'
-//const baseUrl = process.env.NODE_ENV === 'production' ? 'http://localhost:20100/oolong_blog' : 'http://localhost:20100/oolong_blog'
+const contextPath = '1.0.1-SNAPSHOT' ;
+const baseUrl = process.env.NODE_ENV === 'production' ? 'http://47.99.160.215:20100/'+contextPath : 'http://localhost:20100/'+contextPath ;
 export default baseUrl
