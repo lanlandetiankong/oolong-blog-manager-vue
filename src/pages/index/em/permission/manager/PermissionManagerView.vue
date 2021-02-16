@@ -111,7 +111,7 @@
     import AFormItem from "ant-design-vue/es/form/FormItem";
     import ACol from "ant-design-vue/es/grid/Col";
 
-    import {EnumUtils,AllEnum} from '~Config/selectData.js';
+    import {AllEnum,EnumUtils} from '~Config/selectData.js';
     import {PermissionManagerApi} from './permissionManagerApi.js'
     import {FormItemTypeEnum,ConstantObj} from "~Components/constant_define";
 
