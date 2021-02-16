@@ -142,6 +142,39 @@ export const SwitchEnum = {
     }
 };
 /**
+ * 枚举-是否发布
+ * @type {{Unpublished: {label: string, value: number}, Published: {label: string, value: number}}}
+ */
+export const PublishStatusEnum = {
+    Published:{
+        value: 1,
+        label: i18nUtil.getKey('langMap.commons.enums.publishStatus.published')
+    },
+    Unpublished:{
+        value: 0,
+        label: i18nUtil.getKey('langMap.commons.enums.publishStatus.unpublished')
+    }
+};
+
+/**
+ * 枚举-文章审核状态
+ * @type {{NotApproved: {label: string, value: number}, Approved: {label: string, value: number}, Approval: {label: string, value: number}}}
+ */
+export const ArticleAuditStateEnum = {
+    NotApproved:{
+        value: 0,
+        label: i18nUtil.getKey('langMap.commons.enums.auditStatus.notApproved')
+    },
+    Approval:{
+        value: 1,
+        label: i18nUtil.getKey('langMap.commons.enums.auditStatus.approval')
+    },
+    Approved:{
+        value: 2,
+        label: i18nUtil.getKey('langMap.commons.enums.auditStatus.approved')
+    }
+};
+/**
  * 对象转Select的data
  * @param obj
  * @returns {[]}
@@ -217,7 +250,9 @@ export const AllEnum = {
     UserSexEnum,
     UserTypeEnum,
     LockStateEnum,
-    SwitchEnum
+    SwitchEnum,
+    PublishStatusEnum,
+    ArticleAuditStateEnum
 };
 
 export const EnumUtils = {
