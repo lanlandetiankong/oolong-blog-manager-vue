@@ -6,7 +6,6 @@ import router from './router'
 import store from '@/store/index'
 import VueI18n from 'vue-i18n'
 import DataFilter from './filter/DataFilter'
-import ConstFilter from './filter/ConstFilter'
 
 import Antd from 'ant-design-vue'
 import 'ant-design-vue/dist/antd.css'

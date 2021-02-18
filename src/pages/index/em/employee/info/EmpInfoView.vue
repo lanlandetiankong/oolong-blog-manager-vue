@@ -102,9 +102,6 @@
                         {{record.lockedStr}}
                     </a-tag>
                 </span>
-                <span slot="sexRender" slot-scope="text,record,index">
-                        {{record.sex | formatConstOfSex}}
-                    </span>
                 <template slot="action" slot-scope="text,record">
                     <span>
                         <a @click="handleDetailDrawerShow($event,record)">
@@ -306,8 +303,8 @@
                     },{
                         title: this.$t('langMap.table.fields.em.user.sex'),
                         align:textAlignDefault,
+                        dataIndex: 'sexStr',
                         key: 'sex',
-                        scopedSlots: { customRender: 'sexRender' },
                     }, {
                         title: this.$t('langMap.table.fields.em.user.userType'),
                         align:textAlignDefault,
@@ -591,10 +588,12 @@
                     return ;
                 }
                 //Map-模块类型
+                let userSexMap = EnumUtils.toValMap(AllEnum.UserSexEnum);
                 let userTypeMap = EnumUtils.toValMap(AllEnum.UserTypeEnum);
                 let lockedStateMap = EnumUtils.toValMap(AllEnum.LockStateEnum);
                 for (let idx in data){
                     let item = data[idx] ;
+                    item['sexStr'] = userSexMap[item.sex];
                     item['userTypeStr'] = userTypeMap[item.userType];
                     item['lockedStr'] = lockedStateMap[item.locked];
                 }
