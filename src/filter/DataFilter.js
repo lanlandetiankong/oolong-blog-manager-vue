@@ -2,10 +2,7 @@ import Vue from 'vue'
 import moment from 'moment'
 import 'moment/locale/zh-cn';
 moment.locale('zh-cn');
-/**
- * 全局定义-时间过滤器
- */
-
+import BeeUtil from "~Assets/js/util/bee/BeeUtil";
 
 /**
  * 常规日期格式化
@@ -36,7 +33,18 @@ Vue.filter('formatDayOfWeek', function(value) {
 });
 
 
+/**
+ * 数据转化-集合/字符串
+ */
+Vue.filter('formatArrayToStr', function(value) {
+    if(!value){
+        return '' ;
+    }
+    return BeeUtil.ArrayUtils.toStr(value,",");
+});
 
 
-const DateFilter = Vue ;
-export default DateFilter ;
+
+
+const DataFilter = Vue ;
+export default DataFilter ;

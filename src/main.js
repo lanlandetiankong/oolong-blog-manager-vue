@@ -5,7 +5,7 @@ import App from './App'
 import router from './router'
 import store from '@/store/index'
 import VueI18n from 'vue-i18n'
-import DateFilter from './filter/DateFilter'
+import DataFilter from './filter/DataFilter'
 import ConstFilter from './filter/ConstFilter'
 
 import Antd from 'ant-design-vue'
@@ -66,7 +66,7 @@ new Vue({
   router,
   store,
   i18n,
-  DateFilter,
+  DataFilter,
   components: { App },
   template: '<App/>'
 })

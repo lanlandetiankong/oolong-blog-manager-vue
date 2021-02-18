@@ -475,5 +475,26 @@ export const langMap = {
                 }
             }
         }
+    },
+    descriptions:{
+        userInfo:{
+            title:'用户信息',
+            labels:{
+                account:'账号',
+                userName:'用户名',
+                phone:'手机号码',
+                email:'邮箱地址',
+                sex:'性别',
+                address:'地址',
+                userType:'用户类型',
+                locked:'是否被锁定',
+                state:'状态',
+                createTime:'注册时间',
+                hasRoles:'已有角色',
+                hasPermissions:'已拥有的权限',
+                hasJobs:'所属职务'
+            }
+        }
     }
+
 }

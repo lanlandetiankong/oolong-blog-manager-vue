@@ -16,7 +16,6 @@
         computed:{
             matchedArr(){
                 let arr = [],nameTemp = [];
-                debugger;
                 this.$route.matched.filter((item,index,self) => {
                     let metaFlag = (item && item.meta) ;
                     if(metaFlag == false){

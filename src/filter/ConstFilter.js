@@ -1,6 +1,5 @@
 import Vue from 'vue'
 import {i18nUtil} from "~Config/i18n/i18nUtil";
-import {AllEnum,EnumUtils} from '~Config/selectData.js';
 
 /**
  * 常量格式化-性别
@@ -29,5 +28,5 @@ Vue.filter('formatConstOfSex', function(value) {
 
 
 
-const DateFilter = Vue ;
-export default DateFilter ;
+const ConstFilter = Vue ;
+export default ConstFilter ;

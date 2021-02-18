@@ -19,4 +19,10 @@ export const UserZoneCenterApi = {
         };
         return axios.post("/oblCtl/user/userAccount/gainGrantedJob",params).then(res => res.data) ;
     },
+    getMyBaseInfo(userAccountId){  //根据用户id查询指定用户的基本信息
+        var params = {
+            userAccountId:userAccountId
+        };
+        return axios.post("/oblCtl/user/userAccount/getMyBaseInfo",params).then(res => res.data) ;
+    },
 };

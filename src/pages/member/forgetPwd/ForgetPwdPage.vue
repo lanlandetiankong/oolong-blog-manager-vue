@@ -208,7 +208,6 @@
                 let currentKey = this.currentStepKey;
                 //验证
                 if (currentKey == _this.stepConf.steps.verifyOldPwd.key) {
-                    debugger;
                     this.form.validateFields((err, values) => {
                         if (!err) {
                             //验证旧密码

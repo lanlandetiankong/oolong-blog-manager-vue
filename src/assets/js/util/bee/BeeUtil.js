@@ -421,6 +421,13 @@ const BeeUtil = {
                 }
             }
             return false;
+        },
+        toStr(arr,separator){
+            if(typeof arr != "object" || arr == null || (!Array.isArray(arr))){
+                return '' ;
+            }
+            separator = separator ? separator : "," ;
+            return arr.join(separator);
         }
     },
     //DateUtils命名空间
