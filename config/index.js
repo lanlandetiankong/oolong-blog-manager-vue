@@ -11,13 +11,13 @@ module.exports = {
     assetsSubDirectory: 'static',
     assetsPublicPath: '/',
       proxyTable: {
-          '/1.0.1-SNAPSHOT': {
+          '/1.0.2-SNAPSHOT': {
               // 测试环境
               target: 'http://www.localhost:20100',  // 接口域名
               changeOrigin: true,  //是否跨域
               pathRewrite: {
                   //需要rewrite重写的,
-                  '^/1.0.1-SNAPSHOT': ''
+                  '^/1.0.2-SNAPSHOT': ''
               }
           }
       },
