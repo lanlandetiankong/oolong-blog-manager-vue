@@ -38,7 +38,7 @@
         },
         data(){
             //上传图片的路径
-            var uploadFieleUrl = "/oblCtl/commonApi/file/imgUpload/headImgUpload";
+            var uploadFieleUrl = "/oblCtl/commonApi/file/imgUpload/ossUploadUserAvatar";
             var cfgAuthorization = window.sessionStorage.getItem("authorization");
             cfgAuthorization = typeof cfgAuthorization == "undefined" ? "" : cfgAuthorization ;
             return {
@@ -60,11 +60,8 @@
                         maxHeight:"100px"
                     },
                     uploadImgObj:{
-                        fileLocation:"",
                         fileName:"",
-                        fileOldName:"",
-                        fileUri:"",
-                        http:""
+                        url:"",
                     }
                 }
             }
@@ -95,7 +92,7 @@
                     var resp = info.fileList[fileListLen-1].response ;
                     if(resp.success){
                         var fileResObj = resp.bean ;
-                        this.uploadConf.imageUri =  fileResObj.fileUri ;
+                        this.uploadConf.imageUri =  fileResObj.url ;
                         this.uploadConf.uploadImgObj = fileResObj ;
                         this.dealImgUriToReal() ;
                     }   else {
@@ -114,7 +111,6 @@
             },
             dealImgUriToReal(){ //设置真正展示的图片地址
                 var _this = this ;
-                var urlPrefix = constantParams.props.upload.url.prefix ;
                 var imgUri = "" ;
                 var showImgFlag = true ;
                 if(BeeUtil.StringUtils.isBlank(_this.uploadConf.imageUri)){
@@ -126,7 +122,7 @@
                 }   else {
                     imgUri = _this.uploadConf.imageUri ;
                 }
-                _this.uploadConf.headImgRealUri =  showImgFlag ? urlPrefix + imgUri : "" ;
+                _this.uploadConf.headImgRealUri =  showImgFlag ? imgUri : "" ;
             }
         },
         computed:{

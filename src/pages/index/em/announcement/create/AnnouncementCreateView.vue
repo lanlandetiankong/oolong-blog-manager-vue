@@ -57,7 +57,7 @@
                                       optionFilterProp="children"
                                       :options="bindData.announcementTagList"
                                       :filterOption="mixin_getFilterOption"
-                                      v-decorator="formFieldConf.tagIds"
+                                      v-decorator="formFieldConf.tagIdList"
                             >
                             </a-select>
                         </a-form-item>
@@ -89,7 +89,7 @@
                 publishDepartment:[
                     {required:false,message:this.$t('langMap.commons.forms.pleaseSelect',[this.$t('langMap.table.fields.em.department.publishDepartment')])},
                 ],
-                tagIds:[
+                tagIdList:[
                     {required:true,message:this.$t('langMap.commons.forms.pleaseSelect',[this.$t('langMap.table.fields.common.tag')])},
                     {type:'array'}
                 ]
@@ -111,14 +111,14 @@
                 formFieldConf:{
                     keyWord:["keyWord",{rules:paramsRules.keyWord}],
                     publishDepartment:["publishDepartment",{rules:paramsRules.publishDepartment}],
-                    tagIds:["tagIds",{rules:paramsRules.tagIds}]
+                    tagIdList:["tagIdList",{rules:paramsRules.tagIdList}]
                 },
                 formObj:{
                     title:'',
                     content:'',
                     keyWord:'',
                     publishDepartment:'',
-                    tagIds:undefined
+                    tagIdList:[]
                 },
                 bindData:{
                     announcementTagList:[]
@@ -146,9 +146,9 @@
                             ...formObj,
                             value: formObj.publishDepartment,
                         }),
-                        tagIds: _this.$form.createFormField({
+                        tagIdList: _this.$form.createFormField({
                             ...formObj,
-                            value: formObj.tagIds,
+                            value: formObj.tagIdList,
                         })
                     });
                 }
@@ -181,7 +181,7 @@
                 if(values){
                     formObjTemp['keyWord'] = values.keyWord;
                     formObjTemp['publishDepartment'] = values.publishDepartment;
-                    formObjTemp['tagIds'] = values.tagIds;
+                    formObjTemp['tagIdList'] = values.tagIdList;
                 }
                 return formObjTemp ;
             },
@@ -291,9 +291,9 @@
                             ..._this.formObj,
                             value: _this.formObj.publishDepartment
                         }),
-                        tagIds: this.$form.createFormField({
+                        tagIdList: this.$form.createFormField({
                             ..._this.formObj,
-                            value: _this.formObj.tagIds
+                            value: _this.formObj.tagIdList
                         }),
                     }
                 }

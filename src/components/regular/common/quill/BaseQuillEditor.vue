@@ -27,7 +27,7 @@
         data(){
             var _this = this ;
             //上传图片的路径
-            var uploadFieleUrl = "/oblCtl/commonApi/file/imgUpload/headImgUpload" ;
+            var uploadFieleUrl = "/oblCtl/commonApi/file/imgUpload/ossUploadAnnouncementImg" ;
             return {
                 contentVal:'',
                 quillEditorConfig:{
@@ -71,7 +71,8 @@
             dealQuillImgExtendResponse(res){    //quill 图片上传回调
                 if(res.success){
                     var fileResObj = res.bean ;
-                    return fileResObj.filePrefix + fileResObj.fileUri
+                    //return fileResObj.filePrefix + fileResObj.fileUri
+                    return fileResObj.url ;
                 }   else {
                     this.$message.error(res.msg) ;
                 }
