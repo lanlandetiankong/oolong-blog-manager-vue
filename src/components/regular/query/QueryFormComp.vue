@@ -81,7 +81,6 @@
                         </a-row>
                     </a-form>
                 </div>
-                <a-divider/>
             </a-card>
         </a-page-header>
     </div>
@@ -169,8 +168,8 @@
             .ant-page-header-content {
                 .ant-card {
                     .ant-card-body {
-                        padding: 0px;
-                        margin: 0px;
+                        padding: 10px 0;
+                        margin: 10px 0;
                     }
                 }
             }
