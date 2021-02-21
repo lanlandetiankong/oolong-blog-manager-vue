@@ -94,9 +94,9 @@
                     let fileListLen = info.fileList.length ;
                     var resp = info.fileList[fileListLen-1].response ;
                     if(resp.success){
-                        var fileResBeanTemp  = resp.fileResBean ;
-                        this.uploadConf.imageUri =  fileResBeanTemp.fileUri ;
-                        this.uploadConf.uploadImgObj = fileResBeanTemp ;
+                        var fileResObj = resp.bean ;
+                        this.uploadConf.imageUri =  fileResObj.fileUri ;
+                        this.uploadConf.uploadImgObj = fileResObj ;
                         this.dealImgUriToReal() ;
                     }   else {
                         this.$message.error(resp.msg);

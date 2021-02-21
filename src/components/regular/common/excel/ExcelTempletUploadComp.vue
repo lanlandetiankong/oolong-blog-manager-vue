@@ -108,15 +108,14 @@
                 this.uploading = true;
                 CommonExcelCompApi.uploadExcelModels(formData,this.uploadConf.processData).then((res) => {
                     if(res.success){
-                        var fileUploaderBeanList = [...res.fileUploaderBeanList] ;
-                        if(typeof fileUploaderBeanList != "undefined" && fileUploaderBeanList != null){
-
-                            fileUploaderBeanList = [...fileUploaderBeanList,..._this.fileList] ;
+                        var beanList = [...res.gridList] ;
+                        if(typeof beanList != "undefined" && beanList != null){
+                            beanList = [...beanList,..._this.fileList] ;
                             //确保文件列表是最新的
-                            fileUploaderBeanList = fileUploaderBeanList.filter(file => {
+                            beanList = beanList.filter(file => {
                                 return file instanceof File == false;
                             });
-                            _this.fileList = fileUploaderBeanList;
+                            _this.fileList = beanList;
                         }
                         _this.uploadedFileList = _this.fileList ;
                     }

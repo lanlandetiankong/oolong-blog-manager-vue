@@ -70,8 +70,8 @@
             },
             dealQuillImgExtendResponse(res){    //quill 图片上传回调
                 if(res.success){
-                    var fileResBean = res.fileResBean ;
-                    return fileResBean.filePrefix + fileResBean.fileUri
+                    var fileResObj = res.bean ;
+                    return fileResObj.filePrefix + fileResObj.fileUri
                 }   else {
                     this.$message.error(res.msg) ;
                 }
