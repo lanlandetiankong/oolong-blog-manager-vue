@@ -30,6 +30,7 @@ var instance = axios.create({
                     message:i18nUtil.getKey('langMap.http.notify.message.warning'),
                     description:i18nUtil.getKey('langMap.http.notify.description.grantFailed')
                 });
+                TokenUtil.loginOut();
                 return;
             case 403:
                 notification.warning({
@@ -108,6 +109,7 @@ instance.interceptors.response.use(
                     // 未登录则跳转登录页面，并携带当前页面的路径
                     // 在登录成功后返回当前页面，这一步需要在登录页操作。
                     case 401:
+                        TokenUtil.loginOut();
                         break;
                     // 登录过期对用户进行提示
                     // 清除本地token和清空vuex中token对象
@@ -223,13 +225,6 @@ http.post = function (url, data, options) {
                         let respMsg = respData.msg ? respData.msg : "操作出现异常！";
                         if (typeof(respMsg) != "undefined" && respMsg != null && respMsg.replace(/(^s*)|(s*$)/g, "").length != 0) {
                             message.error(respMsg);
-                        }
-                        let actionType = respData.actionType;
-                        if(actionType){     //如果发生异常时，后端明确指明有操作要求
-                            //请求明确要求需要重新登录
-                            if("AuthenticationExpired" == actionType){
-                                TokenUtil.loginOut();
-                            }
                         }
                         resolve(response);
                     }
