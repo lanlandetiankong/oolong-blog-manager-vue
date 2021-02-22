@@ -61,6 +61,9 @@
 
                     <template slot="action" slot-scope="text,record">
                         <span>
+                            <a-button type="link" size="small" @click="handleEditDraft($event,record)">
+                                编辑
+                            </a-button>
                              <a-button type="link" size="small" @click="handlePublishOneById($event,record)">
                                 发布
                             </a-button>
@@ -416,6 +419,13 @@
             },
             handleDetailDrawerClose(e){ //Drawer-公告草稿 详情关闭
                 this.drawerConf.detail.announcementDraft.visible = false ;
+            },
+            handleEditDraft(e,item){    //更新公告
+                let params = {
+                    fid:item.fid,
+                    action:"update"
+                };
+                this.$router.push({ path: '/index/announcement/create', query: params});
             }
         },
         watch:{

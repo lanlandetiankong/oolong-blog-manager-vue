@@ -66,6 +66,7 @@
             </a-form>
             <a-divider />
             <base-quill-editor
+                :content="formObj.content"
                 @textChange="handleContentChange"
             />
         </div>
@@ -258,18 +259,19 @@
             },
             dealRenderDraftToForm(fid){
                 var _this = this ;
-                if(fid){
-                    AnnouncementCreateApi.getIDraftItemById(fid).then((res) =>{
-                        if(res.success){
-                            var resBean = res.bean ;
-                            if(resBean){
-                                _this.formObj = resBean ;
-                                console.log("_this.formObj");
-                                console.log(_this.formObj);
-                            }
-                        }
-                    })
+                if(!fid){
+                    return ;
                 }
+                AnnouncementCreateApi.getIDraftItemById(fid).then((res) =>{
+                    if(res.success){
+                        var resBean = res.bean ;
+                        if(resBean){
+                            _this.formObj = resBean ;
+                            console.log("_this.formObj");
+                            console.log(_this.formObj);
+                        }
+                    }
+                })
             }
         },
         created(){
@@ -301,6 +303,7 @@
         },
         mounted(){
             var _this = this ;
+            debugger;
             var routeQuery = this.$route.query ;
             if(routeQuery){
                 _this.updateForm.fid = routeQuery.fid ;

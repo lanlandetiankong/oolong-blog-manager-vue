@@ -67,9 +67,9 @@ const AnnouncementRouter = {
                 title:'公告展示',icon:"book",keepAliveFlag:true,
                 visitLimit:false ,
                 parentRouterCompName,
-                selfCompName:'AnnouncementTagView'
+                selfCompName:'AnnouncementDisplayView'
             }
-        },
+        }
     ]
 };
 export default AnnouncementRouter ;
