@@ -40,7 +40,8 @@ export const langMap = {
             goNextStep:'Next step',
             goPreviousStep:'Previous step',
             unfold:'Unfold',
-            packUp:'Pack up'
+            packUp:'Pack up',
+            setAsRecommended:'Set as recommended'
         },
         member:{
             account:'Account',
@@ -237,10 +238,12 @@ export const langMap = {
                     articleTitle:'Article title',
                     authorId:'Author',
                     summary:'Summary',
+                    rangeTime:'Time range',
                     startTime:'Starting time',
                     endTime:'End Time',
                     reason:'Recommended reason',
-                    recommendUser:'Recommend user'
+                    recommendUser:'Recommend user',
+                    selectArticles:'Selected articles'
                 },
                 articleCollectCategory:{
                     name:'Name',
@@ -274,7 +277,8 @@ export const langMap = {
             pleaseFillOut:'Please fill out {0}',
             pleaseSelect:'Please tick {0}',
             fillInValid:'Please fill in valid{0}',
-            pleaseFillOutTwo:'{0} or {1} cannot be empty'
+            pleaseFillOutTwo:'{0} or {1} cannot be empty',
+            pleaseSelectRangeTime:'Please select {0}'
         },
         enums:{
             lockStatus:{
@@ -475,7 +479,7 @@ export const langMap = {
             create:{
                 success:{
                     extra:{
-                        viewDetail:'View article'
+                        viewDetail:'View'
                     }
                 },
                 failure:{

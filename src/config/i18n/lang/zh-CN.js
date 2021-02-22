@@ -40,7 +40,8 @@ export const langMap = {
             goNextStep:'下一步',
             goPreviousStep:'上一步',
             unfold:'展开',
-            packUp:'收起'
+            packUp:'收起',
+            setAsRecommended:'设为推荐'
         },
         member:{
             account:'账号',
@@ -237,10 +238,12 @@ export const langMap = {
                     articleTitle:'文章标题',
                     authorId:'作者',
                     summary:'简介',
+                    rangeTime:'时间范围',
                     startTime:'开始时间',
                     endTime:'结束时间',
                     reason:'推荐原因',
-                    recommendUser:'推荐人'
+                    recommendUser:'推荐人',
+                    selectArticles:'已选文章'
                 },
                 articleCollectCategory:{
                     name:'名称',
@@ -274,7 +277,8 @@ export const langMap = {
             pleaseFillOut:'请填写{0}',
             pleaseSelect:'请勾选{0}',
             fillInValid:'请填写有效的{0}',
-            pleaseFillOutTwo:'{0}或{1}不能为空'
+            pleaseFillOutTwo:'{0}或{1}不能为空',
+            pleaseSelectRangeTime:'请选择{0}'
         },
         enums:{
             publishStatus:{
@@ -475,7 +479,7 @@ export const langMap = {
             create:{
                 success:{
                     extra:{
-                        viewDetail:'查看文章'
+                        viewDetail:'查看'
                     }
                 },
                 failure:{

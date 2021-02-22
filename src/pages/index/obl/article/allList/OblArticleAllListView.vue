@@ -84,21 +84,29 @@
                     </span>
                     <template slot="action" slot-scope="text,record">
                         <span>
-                            <a @click="handleDetailDrawerShow($event,record)">
-                                {{$t('langMap.drawer.actions.detail')}}
+                            <a @click="handleSetAsRecommended($event,record)">
+                                {{$t('langMap.button.actions.setAsRecommended')}}
                             </a>
                             <a-divider type="vertical" />
+                            <!--<a @click="handleDetailDrawerShow($event,record)">
+                                {{$t('langMap.drawer.actions.detail')}}
+                            </a>-->
                             <a @click="goToViewDetail($event,record)">
                                 {{$t('langMap.results.article.create.success.extra.viewDetail')}}
                             </a>
                             <a-divider type="vertical" />
-                            <a-button type="danger" size="small" @click="handleDeleteOneById(record.fid)">{{$t('langMap.button.actions.delById')}}</a-button>
+                            <a style="color:red;" @click="handleDeleteOneById(record.fid)">{{$t('langMap.button.actions.delById')}}</a>
                         </span>
                     </template>
                 </a-table>
             </div>
             <!-- 弹窗dom-区域 -->
             <div>
+                <obl-article-set-recommend-comp
+                    v-bind="dialog.setRecommend"
+                    @cancel="handleCloseSetRecommend"
+                    @submit="handleSubmitSetRecommend"
+                />
                 <row-detail-drawer-comp
                     :drawerConf="drawerConf.detail.article.conf"
                     :dataObj="drawerConf.detail.article.dataObj"
@@ -117,11 +125,12 @@
     import {OblCommonMixin} from '~Layout/mixin/OblCommonMixin';
     import {ConstantObj, FormItemTypeEnum} from "~Components/constant_define";
     import QueryFormComp from '~Components/regular/query/QueryFormComp'
+    import OblArticleSetRecommendComp from '~Components/index/obl/article/recommend/OblArticleSetRecommendComp'
     import RowDetailDrawerComp from '~Components/regular/common/drawer/RowDetailDrawerComp';
 
     export default {
         name: "OblArticleAllListView",
-        components:{QueryFormComp,RowDetailDrawerComp},
+        components:{QueryFormComp,OblArticleSetRecommendComp,RowDetailDrawerComp},
         mixins:[OblCommonMixin],
         data() {
             const textAlignDefault = 'left' ;
@@ -265,7 +274,7 @@
                         dataIndex:"operation",
                         key:'operation',
                         fixed:'right',
-                        width:220,
+                        width:260,
                         scopedSlots: { customRender: 'action' }
                     }],
                     pagination: {
@@ -286,9 +295,11 @@
                     }
                 },
                 tableCheckIdList: [],
-                dialogFormConf: {
-                    visible: false,
-                    actionType: "create"
+                dialog:{
+                    setRecommend:{
+                        visible: false,
+                        articleList:[]
+                    }
                 },
                 drawerConf:{
                     detail:{
@@ -436,6 +447,18 @@
                 var url = BeeUtil.UrlUtils.objToUrl(this.mixinData.routerConst.article.display,params);
                 this.mixin_jump(url);
             },
+            handleSetAsRecommended(e,record){
+                this.dialog.setRecommend.articleList = [record];
+                this.dialog.setRecommend.visible = true ;
+            },
+            handleCloseSetRecommend(e){
+                this.dialog.setRecommend.articleList = [];
+                this.dialog.setRecommend.visible = false ;
+            },
+            handleSubmitSetRecommend(e){
+                this.dialog.setRecommend.articleList = [];
+                this.dialog.setRecommend.visible = false ;
+            }
         },
         watch:{
             binding:{
