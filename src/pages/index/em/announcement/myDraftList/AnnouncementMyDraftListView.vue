@@ -61,17 +61,17 @@
 
                     <template slot="action" slot-scope="text,record">
                         <span>
+                             <a-button type="link" size="small" @click="handlePublishOneById($event,record)">
+                                发布
+                            </a-button>
+                            <a-divider type="vertical" />
+                            <a-button type="danger" ghost size="small" @click="handleDeleteOneById($event,record)">
+                                {{$t('langMap.button.actions.delById')}}
+                            </a-button>
+                            <a-divider type="vertical" />
                             <a @click="handleDraftDetailDrawerShow($event,record)">
                                 {{$t('langMap.drawer.actions.detail')}}
                             </a>
-                            <a-divider type="vertical" />
-                            <a-dropdown>
-                                <a-menu slot="overlay" @click="handleTableActionGroupClick($event,record)">
-                                    <a-menu-item key="recordDel">{{$t('langMap.button.actions.delById')}}</a-menu-item>
-                                    <a-menu-item key="publish">发布</a-menu-item>
-                                </a-menu>
-                                <a-button> 操作 <a-icon type="down" /> </a-button>
-                            </a-dropdown>
                         </span>
                     </template>
                 </a-table>
@@ -318,28 +318,28 @@
                             _this.dealBatchDeleteByIds();
                         },
                         onCancel() {
-                            _this.$message.info(_this.$t('langMap.message.account.actionOfCancelDelete'));
+                            _this.$message.info(_this.$t('langMap.message.info.actionOfCancelDelete'));
                         }
                     })
                 }
             },
-            handleDeleteOneById(delId) {     //删除指定行
+            handleDeleteOneById(e,item) {     //删除指定行
                 var _this = this;
-                if (delId) {
-                    _this.$confirm({
-                        content: this.$t('langMap.message.confirm.isConfirmDeleteSelectedRow'),
-                        okText: _this.$t('langMap.button.actions.confirm'),
-                        cancelText: _this.$t('langMap.button.actions.cancel'),
-                        onOk() {
-                            _this.dealDelOneRowById(delId);
-                        },
-                        onCancel() {
-                            _this.$message.info(_this.$t('langMap.message.account.actionOfCancelDelete'));
-                        }
-                    })
-                } else {
+                if(!item || !item.fid){
                     _this.$message.warning(_this.$t('langMap.message.warning.invalidDeleteOperation'));
                 }
+                let delId = item.fid ;
+                _this.$confirm({
+                    content: this.$t('langMap.message.confirm.isConfirmDeleteSelectedRow'),
+                    okText: _this.$t('langMap.button.actions.confirm'),
+                    cancelText: _this.$t('langMap.button.actions.cancel'),
+                    onOk() {
+                        _this.dealDelOneRowById(delId);
+                    },
+                    onCancel() {
+                        _this.$message.info(_this.$t('langMap.message.account.actionOfCancelDelete'));
+                    }
+                })
             },
             handleDraftBatchPublishByIds(e) {     // 批量发布
                 var _this = this;
@@ -360,37 +360,29 @@
                     })
                 }
             },
-            handlePublishOneById(delId) {     //发布指定公告
+            handlePublishOneById(e,item) {     //发布指定公告
                 var _this = this;
-                if (delId) {
-                    _this.$confirm({
-                        content: _this.$t('langMap.message.confirm.isConfirmPublishSelectedRow'),
-                        okText: _this.$t('langMap.button.actions.confirm'),
-                        cancelText: _this.$t('langMap.button.actions.cancel'),
-                        onOk() {
-                            _this.dealPublishOneRowById(delId);
-                        },
-                        onCancel() {
-                            _this.$message.info(_this.$t('langMap.message.account.actionOfCancelPublish'));
-                        }
-                    })
-                } else {
+                if(!item || !item.fid){
                     _this.$message.warning(_this.$t('langMap.message.warning.invalidPublishOperation'));
                 }
+                let delId = item.fid;
+                _this.$confirm({
+                    content: _this.$t('langMap.message.confirm.isConfirmPublishSelectedRow'),
+                    okText: _this.$t('langMap.button.actions.confirm'),
+                    cancelText: _this.$t('langMap.button.actions.cancel'),
+                    onOk() {
+                        _this.dealPublishOneRowById(delId);
+                    },
+                    onCancel() {
+                        _this.$message.info(_this.$t('langMap.message.account.actionOfCancelPublish'));
+                    }
+                })
             },
             handleTableChange(pagination, filters, sorter) {    //表格变动-页码跳转/排序/筛选
                 this.tableConf.pagination = pagination ;
                 this.tableConf.filters = filters ;
                 this.tableConf.sorter = sorter ;
                 this.mixin_invokeQuery(this);
-            },
-            handleTableActionGroupClick(e,record){  //表格-更多操作：按key区分操作类型
-                var _this = this ;
-                if(e.key == "recordDel"){   //行删除
-                    _this.handleDeleteOneById(record.fid);
-                }   else if(e.key == "publish"){ //行锁定
-                    _this.handlePublishOneById(record.fid);
-                }
             },
             handleGoToAnnouncementCreateView(){     //跳转到 [新建公告] 页面
                 var _this = this;
