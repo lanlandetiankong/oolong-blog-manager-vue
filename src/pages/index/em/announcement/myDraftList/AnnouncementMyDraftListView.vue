@@ -62,10 +62,10 @@
                     <template slot="action" slot-scope="text,record">
                         <span>
                             <a-button type="link" size="small" @click="handleEditDraft($event,record)">
-                                编辑
+                                {{$t('langMap.button.actions.edit')}}
                             </a-button>
                              <a-button type="link" size="small" @click="handlePublishOneById($event,record)">
-                                发布
+                                {{$t('langMap.button.actions.publish')}}
                             </a-button>
                             <a-divider type="vertical" />
                             <a-button type="danger" ghost size="small" @click="handleDeleteOneById($event,record)">

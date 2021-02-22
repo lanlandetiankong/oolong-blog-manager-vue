@@ -475,5 +475,25 @@ export const langMap = {
                 }
             }
         }
+    },
+    descriptions:{
+        userInfo:{
+            title:'User info',
+            labels:{
+                account:'Account',
+                userName:'User name',
+                phone:'Phone',
+                email:'Email',
+                sex:'Sex',
+                address:'Address',
+                userType:'User type',
+                locked:'Lock status',
+                state:'State',
+                createTime:'Register time',
+                hasRoles:'Own roles',
+                hasPermissions:'Own permissions',
+                hasJobs:'Own jobs'
+            }
+        }
     }
 }
