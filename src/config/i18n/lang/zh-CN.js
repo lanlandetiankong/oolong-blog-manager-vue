@@ -97,6 +97,7 @@ export const langMap = {
                 detailForOblArticleCategory:'文章类别详情',
                 detailForOblArticleTag:'文章标签详情',
                 detailForArticleCollectCategory:'文章收藏类别详情',
+                detailForArticleRecommend:'文章推荐详情',
             }
         }
     },
@@ -231,6 +232,15 @@ export const langMap = {
                 },
                 articleTag:{
                     name:'名称'
+                },
+                articleRecommend:{
+                    articleTitle:'文章标题',
+                    authorId:'作者',
+                    summary:'简介',
+                    startTime:'开始时间',
+                    endTime:'结束时间',
+                    reason:'推荐原因',
+                    recommendUser:'推荐人'
                 },
                 articleCollectCategory:{
                     name:'名称',

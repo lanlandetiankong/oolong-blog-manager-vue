@@ -97,6 +97,7 @@ export const langMap = {
                 detailForOblArticleCategory:'Detail for article category',
                 detailForOblArticleTag:'Detail for article tag',
                 detailForArticleCollectCategory:'Detail for article collect category',
+                detailForArticleRecommend:'Detail for article recommend category'
             }
         }
     },
@@ -231,6 +232,15 @@ export const langMap = {
                 },
                 articleTag:{
                     name:'Name'
+                },
+                articleRecommend:{
+                    articleTitle:'Article title',
+                    authorId:'Author',
+                    summary:'Summary',
+                    startTime:'Starting time',
+                    endTime:'End Time',
+                    reason:'Recommended reason',
+                    recommendUser:'Recommend user'
                 },
                 articleCollectCategory:{
                     name:'Name',
