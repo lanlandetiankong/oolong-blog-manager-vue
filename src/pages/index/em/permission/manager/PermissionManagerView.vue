@@ -380,7 +380,7 @@
                                 _this.dealBatchDeleteByIds();
                             },
                             onCancel() {
-                                _this.$message.info(_this.$t('langMap.message.account.actionOfCancelDelete'));
+                                _this.$message.info(_this.$t('langMap.message.info.actionOfCancelDelete'));
                             }
                         })
                     }   else {
@@ -402,7 +402,7 @@
                             _this.dealBatchEnusreDefinePermission();
                         },
                         onCancel() {
-                            _this.$message.info(_this.$t('langMap.message.account.actionOfCancelStartUsing'));
+                            _this.$message.info(_this.$t('langMap.message.info.actionOfCancelStartUsing'));
                         }
                     })
                 }
@@ -462,7 +462,7 @@
                             _this.dealDelOneRowById(delId);
                         },
                         onCancel() {
-                            _this.$message.info(_this.$t('langMap.message.account.actionOfCancelDelete'));
+                            _this.$message.info(_this.$t('langMap.message.info.actionOfCancelDelete'));
                         }
                     })
                 } else {

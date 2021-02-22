@@ -337,7 +337,7 @@
                         _this.dealDelOneRowById(delId);
                     },
                     onCancel() {
-                        _this.$message.info(_this.$t('langMap.message.account.actionOfCancelDelete'));
+                        _this.$message.info(_this.$t('langMap.message.info.actionOfCancelDelete'));
                     }
                 })
             },
@@ -355,7 +355,7 @@
                             _this.dealBatchPublishAnnouncementDraft();
                         },
                         onCancel() {
-                            _this.$message.info(_this.$t('langMap.message.account.actionOfCancelPublish'));
+                            _this.$message.info(_this.$t('langMap.message.info.actionOfCancelPublish'));
                         }
                     })
                 }
@@ -374,7 +374,7 @@
                         _this.dealPublishOneRowById(delId);
                     },
                     onCancel() {
-                        _this.$message.info(_this.$t('langMap.message.account.actionOfCancelPublish'));
+                        _this.$message.info(_this.$t('langMap.message.info.actionOfCancelPublish'));
                     }
                 })
             },

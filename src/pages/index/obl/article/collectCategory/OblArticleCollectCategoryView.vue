@@ -327,7 +327,7 @@
                             _this.dealBatchDeleteByIds();
                         },
                         onCancel() {
-                            _this.$message.info(_this.$t('langMap.message.account.actionOfCancelDelete'));
+                            _this.$message.info(_this.$t('langMap.message.info.actionOfCancelDelete'));
                         }
                     })
                 }
@@ -343,7 +343,7 @@
                             _this.dealDelOneRowById(delId);
                         },
                         onCancel() {
-                            _this.$message.info(_this.$t('langMap.message.account.actionOfCancelDelete'));
+                            _this.$message.info(_this.$t('langMap.message.info.actionOfCancelDelete'));
                         }
                     })
                 } else {
