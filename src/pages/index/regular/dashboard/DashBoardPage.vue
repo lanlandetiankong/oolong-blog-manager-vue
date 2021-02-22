@@ -101,7 +101,7 @@
             dealGoToShowAnnouncementView(fid){   //处理-跳转到 [公告] 展示页面
                 var routeParam = {
                     fid: fid
-                }
+                };
                 this.$router.push({ path: '/index/announcement/display', query: routeParam});
             },
             handleTabChange(tabKey){

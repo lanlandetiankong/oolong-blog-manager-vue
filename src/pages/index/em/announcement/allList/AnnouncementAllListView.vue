@@ -51,6 +51,9 @@
                             <a @click="handleDetailDrawerShow($event,record)">
                                 {{$t('langMap.drawer.actions.detail')}}
                             </a>
+                            <a-button type="link" @click="handleAnnouncementViewItemClick($event,record)">
+                                {{$t('langMap.button.actions.lookOver')}}
+                            </a-button>
                             <a-divider type="vertical" />
                             <a-button type="danger" size="small" @click="handleDeleteOneById(record.fid)">{{$t('langMap.button.actions.delById')}}</a-button>
                         </span>
@@ -327,6 +330,12 @@
             },
             handleDetailDrawerClose(e){ //Drawer-公告 详情关闭
                 this.drawerConf.detail.announcement.visible = false ;
+            },
+            handleAnnouncementViewItemClick(e,item){    //查看公告
+                let params = {
+                    fid:item.fid
+                };
+                this.$router.push({ path: '/index/announcement/display', query: params});
             }
         },
         watch:{
