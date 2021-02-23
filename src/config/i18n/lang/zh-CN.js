@@ -380,6 +380,7 @@ export const langMap = {
             pleaseSelectTheOnlyRowOfDataForAuthorizationMenu:'请选择唯一待授权菜单的行！',
             pleaseSelectTheOnlyRowOfDataForUploadExcelTemplate:'请选择唯一待上传Excel模板的行！',
             pleaseSelectTheOnlyRowOfDataForExport:'请选择唯一待导出的行！',
+            pleaseSelectTheLeastRowOfDataForOperate:'请选择至少一条待处理的行！',
             invalidDeleteOperation:'无效删除操作！',
             invalidLockOperation:'无效加锁操作！',
             invalidPublishOperation:'无效发布操作！',

@@ -60,6 +60,9 @@
                             <a-descriptions-item :label="$t('langMap.table.fields.obl.articleRecommend.summary')">
                                 {{ record.summary }}
                             </a-descriptions-item>
+                            <a-descriptions-item :label="$t('langMap.table.fields.common.createTime')">
+                                {{ record.createTime | formatBaseDateTime }}
+                            </a-descriptions-item>
                         </a-descriptions>
                     </div>
                 </a-table>

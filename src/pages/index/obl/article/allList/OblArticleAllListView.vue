@@ -17,6 +17,12 @@
                     align="middle"
                 >
                     <a-col>
+                        <a-button type="primary" icon="check-square"
+                                  @click="handleBatchSetAsRecommended">
+                            {{$t('langMap.button.actions.setAsRecommended')}}
+                        </a-button>
+                    </a-col>
+                    <a-col>
                         <a-button type="danger" icon="delete"
                                   @click="handleBatchDeleteByIds">
                             {{$t('langMap.button.actions.batchDelByIds')}}
@@ -295,6 +301,7 @@
                     }
                 },
                 tableCheckIdList: [],
+                tableCheckList: [],
                 dialog:{
                     setRecommend:{
                         visible: false,
@@ -321,6 +328,7 @@
                     selectedRowKeys: this.tableCheckIdList,
                     onChange: (selectedRowKeys, selectedRows) => {  //勾选 修改事件
                         this.tableCheckIdList = selectedRowKeys;
+                        this.tableCheckList = selectedRows;
                     },
                     getCheckboxProps: record => ({  //选择框的默认属性配置
                         props: {
@@ -450,6 +458,17 @@
             handleSetAsRecommended(e,record){
                 this.dialog.setRecommend.articleList = [record];
                 this.dialog.setRecommend.visible = true ;
+            },
+            handleBatchSetAsRecommended(e){ //批量设为推荐
+                var _this = this;
+                var selectList = _this.tableCheckList;
+                if (selectList.length < 1) {
+                    _this.$message.warning(this.$t('langMap.message.warning.pleaseSelectTheLeastRowOfDataForOperate'));
+                } else {
+                    debugger;
+                    this.dialog.setRecommend.articleList = selectList;
+                    this.dialog.setRecommend.visible = true ;
+                }
             },
             handleCloseSetRecommend(e){
                 this.dialog.setRecommend.articleList = [];
