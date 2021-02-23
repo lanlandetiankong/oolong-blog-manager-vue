@@ -3,8 +3,8 @@ export const FormItemTypeEnum = {
     InputNumber:'InputNumber',
     Textarea:'Textarea',
     Select:'Select',
-    TreeSelect:'TreeSelect'
-
+    TreeSelect:'TreeSelect',
+    DateTimeRange:'DateTimeRange'
 };
 
 export const ConstantObj = {

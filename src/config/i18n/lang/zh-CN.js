@@ -236,13 +236,13 @@ export const langMap = {
                 },
                 articleRecommend:{
                     articleTitle:'文章标题',
-                    authorId:'作者',
+                    authorName:'作者',
                     summary:'简介',
                     rangeTime:'时间范围',
                     startTime:'开始时间',
                     endTime:'结束时间',
                     reason:'推荐原因',
-                    recommendUser:'推荐人',
+                    recommendUserName:'推荐人',
                     selectArticles:'已选文章'
                 },
                 articleCollectCategory:{

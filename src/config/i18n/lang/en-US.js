@@ -236,13 +236,13 @@ export const langMap = {
                 },
                 articleRecommend:{
                     articleTitle:'Article title',
-                    authorId:'Author',
+                    authorName:'Author name',
                     summary:'Summary',
                     rangeTime:'Time range',
                     startTime:'Starting time',
                     endTime:'End Time',
                     reason:'Recommended reason',
-                    recommendUser:'Recommend user',
+                    recommendUserName:'Recommend user',
                     selectArticles:'Selected articles'
                 },
                 articleCollectCategory:{

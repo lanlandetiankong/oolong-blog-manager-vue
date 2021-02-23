@@ -54,7 +54,7 @@ const ArticleRouter = {
             component:_import('index/obl/article/category/OblArticleCategoryView'),
             name:'articleCategory',
             meta:{
-                title:'文章分类',icon:"reconciliation",keepAliveFlag:true,
+                title:'文章分类',icon:"reconciliation",keepAlOblArticleRecommendViewiveFlag:true,
                 parentRouterCompName,
                 selfCompName:'ArticleCategoryView'
             }
@@ -78,6 +78,16 @@ const ArticleRouter = {
                 visitLimit:false ,
                 parentRouterCompName,
                 selfCompName:'ArticleTagView'
+            }
+        },
+        {
+            path:'recommend',
+            component:_import('index/obl/article/recommend/OblArticleRecommendView'),
+            name:'articleRecommendView',
+            meta:{
+                title:'文章推荐',icon:"check-square",keepAliveFlag:true,
+                parentRouterCompName,
+                selfCompName:'OblArticleRecommendView'
             }
         },
     ]

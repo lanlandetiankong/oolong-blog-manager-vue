@@ -35,12 +35,14 @@
                     :dataSource="tableConf.data"
                     :loading="searchConf.loadingFlag"
                     :rowSelection="rowSelection"
+                    :scroll="tableConf.scroll"
                     @change="handleTableChange"
                 >
-                    <span slot="typeStr" slot-scope="record">
-                        <a-tag color="blue" :key="record.typeStr">
-                            {{record.typeStr}}
-                        </a-tag>
+                    <span slot="startTimeRender" slot-scope="text,record">
+                        {{record.startTime | formatBaseDateTime}}
+                    </span>
+                    <span slot="endTimeRender" slot-scope="text,record">
+                        {{record.endTime | formatBaseDateTime}}
                     </span>
                     <template slot="action" slot-scope="text,record">
                         <span>
@@ -51,6 +53,16 @@
                             <a-button type="danger" size="small" @click="handleDeleteOneById(record.fid)">{{$t('langMap.button.actions.delById')}}</a-button>
                         </span>
                     </template>
+                    <div slot="expandedRowRender" slot-scope="record" style="margin: 0">
+                        <a-descriptions>
+                            <a-descriptions-item :label="$t('langMap.table.fields.common.remark')">
+                                {{ record.remark }}
+                            </a-descriptions-item>
+                            <a-descriptions-item :label="$t('langMap.table.fields.obl.articleRecommend.summary')">
+                                {{ record.summary }}
+                            </a-descriptions-item>
+                        </a-descriptions>
+                    </div>
                 </a-table>
             </div>
         </div>
@@ -93,30 +105,27 @@
                     formType: FormItemTypeEnum.Input,
                     label: this.$t('langMap.table.fields.obl.articleRecommend.summary'),
                     decorator: ["summary", {rules: []}],
+                    ellipsis: true
                 },
                 reason: {
                     key: 'reason',
                     formType: FormItemTypeEnum.Input,
                     label: this.$t('langMap.table.fields.obl.articleRecommend.reason'),
                     decorator: ["reason", {rules: []}],
+                    ellipsis: true
                 },
-                startTime: {
-                    key: 'startTime',
-                    formType: FormItemTypeEnum.Input,
-                    label: this.$t('langMap.table.fields.obl.articleRecommend.startTime'),
-                    decorator: ["startTime", {rules: []}],
-                },
-                endTime: {
-                    key: 'endTime',
-                    formType: FormItemTypeEnum.Input,
-                    label: this.$t('langMap.table.fields.obl.articleRecommend.endTime'),
-                    decorator: ["endTime", {rules: []}],
+                rangeTime: {
+                    key: 'rangeTime',
+                    formType: FormItemTypeEnum.DateTimeRange,
+                    label: this.$t('langMap.table.fields.obl.articleRecommend.rangeTime'),
+                    decorator: ["rangeTime", {rules: []}],
                 },
                 remark: {
                     key: 'remark',
                     formType: FormItemTypeEnum.Input,
                     label: this.$t('langMap.table.fields.common.remark'),
                     decorator: ["remark", {rules: []}],
+                    ellipsis: true
                 }
             };
             return {
@@ -134,32 +143,44 @@
                         dataIndex: 'articleTitle',
                         key: 'articleTitle'
                     }, {
-                        title: this.$t('langMap.table.fields.common.reason'),
+                        title: this.$t('langMap.table.fields.obl.articleRecommend.authorName'),
+                        align: textAlignDefault,
+                        dataIndex: 'authorName',
+                        key: 'authorName',
+                    }, {
+                        title: this.$t('langMap.table.fields.obl.articleRecommend.reason'),
                         align: textAlignDefault,
                         dataIndex: 'reason',
                         key: 'reason',
-                    },  {
-                        title: this.$t('langMap.table.fields.common.summary'),
+                    }, {
+                        title: this.$t('langMap.table.fields.obl.articleRecommend.recommendUserName'),
                         align: textAlignDefault,
-                        dataIndex: 'summary',
-                        key: 'summary',
-                    },  {
-                        title: this.$t('langMap.table.fields.common.startTime'),
+                        dataIndex: 'recommendUserName',
+                        key: 'recommendUserName',
+                    }, {
+                        title: this.$t('langMap.table.fields.obl.articleRecommend.startTime'),
                         align: textAlignDefault,
                         dataIndex: 'startTime',
                         key: 'startTime',
+                        scopedSlots: {customRender: 'startTimeRender'}
+                    },  {
+                        title: this.$t('langMap.table.fields.obl.articleRecommend.endTime'),
+                        align: textAlignDefault,
+                        dataIndex: 'endTime',
+                        key: 'endTime',
+                        scopedSlots: {customRender: 'endTimeRender'}
                     }, {
                         title: this.$t('langMap.table.fields.common.weights'),
                         align: textAlignDefault,
                         dataIndex: 'weights',
                         key: 'weights'
-                    }, {
+                    },{
                         title: this.$t('langMap.table.header.operation'),
                         align: textAlignDefault,
                         dataIndex: "operation",
                         key: 'operation',
                         fixed: 'right',
-                        width: 220,
+                        width: 180,
                         scopedSlots: {customRender: 'action'}
                     }],
                     pagination: {
@@ -174,7 +195,10 @@
                         }
                     },
                     filters: {},
-                    sorter: {}
+                    sorter: {},
+                    scroll:{
+                        x: 850
+                    }
                 },
                 tableCheckIdList: [],
                 drawerConf: {
