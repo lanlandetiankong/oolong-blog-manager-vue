@@ -29,6 +29,12 @@ export const OblArticleRecommendApi = {
             delId:delId
         };
         return axios.post("/oblCtl/oblArticleRecommend/deleteById",obj).then(res => res.data) ;
-    }
+    },
+    updateToConfirmed(ids) {  //批量确认推荐
+        let obj = {
+           idList:ids
+        };
+        return axios.post("/oblCtl/oblArticleRecommend/updateToConfirmed",obj).then(res => res.data) ;
+    },
 };
 

@@ -41,7 +41,8 @@ export const langMap = {
             goPreviousStep:'上一步',
             unfold:'展开',
             packUp:'收起',
-            setAsRecommended:'设为推荐'
+            setAsRecommended:'设为推荐',
+            confirmData:'数据确认'
         },
         member:{
             account:'账号',
@@ -244,7 +245,8 @@ export const langMap = {
                     endTime:'结束时间',
                     reason:'推荐原因',
                     recommendUserName:'推荐人',
-                    selectArticles:'已选文章'
+                    selectArticles:'已选文章',
+                    isConfirmed:'已确认',
                 },
                 articleCollectCategory:{
                     name:'名称',
@@ -330,6 +332,10 @@ export const langMap = {
             switch:{
                 open:'启用',
                 close:'关闭'
+            },
+            switchFlag:{
+                open:'是',
+                close:'否'
             }
         },
         valueMap:{
@@ -404,12 +410,14 @@ export const langMap = {
             isConfirmLockSelectedRow:'是否确认锁定所选数据？',
             isConfirmLockWhatSelectedRow:'是否确认锁定所选的{0}条数据？',
             isConfirmStartUsingWhatSelectedRow:'一旦启用后将无法禁用！请再次确认是否启用所选的{0}条数据？',
+            isConfirmDataWhatSelectedRow:'确认数据后将无法修改！是否确认所选的{0}条数据？',
         },
         info:{
             actionOfCancelDelete:'操作:取消删除',
             actionOfCancelLock:'操作:取消锁定',
             actionOfCancelStartUsing:'操作:取消启用',
             actionOfCancelPublish:'操作:取消发布',
+            actionOfCancelConfirmData:'操作:取消数据确认',
             tableCheckedSize:"已选择:{0} 。",
             registerOkAndGo:"注册成功!即将跳转到登录页面。"
         }

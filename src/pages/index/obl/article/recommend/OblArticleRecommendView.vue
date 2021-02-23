@@ -22,6 +22,12 @@
                             {{$t('langMap.button.actions.batchDelByIds')}}
                         </a-button>
                     </a-col>
+                    <a-col>
+                        <a-button type="primary" icon="check"
+                                  @click="handleBatchConfirmedByIds">
+                            {{$t('langMap.button.actions.confirmData')}}
+                        </a-button>
+                    </a-col>
                 </a-row>
             </div>
             <a-divider/>
@@ -84,6 +90,7 @@
     import {OblArticleRecommendApi} from './OblArticleRecommendApi.js'
     import {OblCommonMixin} from '~Layout/mixin/OblCommonMixin';
     import {FormItemTypeEnum, ConstantObj} from "~Components/constant_define";
+    import {AllEnum,EnumUtils} from '~Config/selectData.js';
 
     import QueryFormComp from '~Components/regular/query/QueryFormComp'
     import RowDetailDrawerComp from '~Components/regular/common/drawer/RowDetailDrawerComp';
@@ -106,7 +113,14 @@
                     key: 'summary',
                     formType: FormItemTypeEnum.Input,
                     label: this.$t('langMap.table.fields.obl.articleRecommend.summary'),
-                    decorator: ["summary", {rules: []}]
+                    decorator: ["summary", {rules: []}],
+                    options:[],
+                },
+                isConfirmed: {
+                    key: 'isConfirmed',
+                    formType: FormItemTypeEnum.Select,
+                    label: this.$t('langMap.table.fields.obl.articleRecommend.isConfirmed'),
+                    decorator: ["isConfirmed", {rules: []}]
                 },
                 reason: {
                     key: 'reason',
@@ -135,7 +149,9 @@
             };
             return {
                 ConstantObj,
-                binding: {},
+                binding: {
+                    switchEnums:EnumUtils.toSelectData(AllEnum.SwitchEnum)
+                },
                 searchConf: {
                     loadingFlag: false,
                     formItemConf: fieldBaseConf
@@ -143,6 +159,11 @@
                 tableConf: {
                     data: [],
                     columns: [{
+                        title: this.$t('langMap.table.fields.obl.articleRecommend.isConfirmed'),
+                        align: textAlignDefault,
+                        dataIndex: 'isConfirmedStr',
+                        key: 'isConfirmedStr'
+                    },{
                         title: this.$t('langMap.table.fields.obl.articleRecommend.articleTitle'),
                         align: textAlignDefault,
                         dataIndex: 'articleTitle',
@@ -246,7 +267,6 @@
                 var _this = this;
                 var delIds = _this.tableCheckIdList;
                 OblArticleRecommendApi.batchDeleteByIds(delIds).then((res) => {
-
                     if (res.success) {  //已经有对错误进行预处理
                         this.$message.success(res.msg);
                         _this.mixin_invokeQuery(_this); //表格重新搜索
@@ -262,6 +282,17 @@
                     }
                 })
             },
+            handleTransformData(){//数据转化
+                const data = this.tableConf.data;
+                if(!data){
+                    return ;
+                }
+                let flagSwitchValMap = EnumUtils.toValMap(AllEnum.FlagSwitchEnum);
+                for (let idx in data){
+                    let item = data[idx] ;
+                    item['isConfirmedStr'] = flagSwitchValMap[item.isConfirmed];
+                }
+            },
             handleSearchFormQuery(e, values) {   //带查询条件 检索列表
                 var _this = this;
                 _this.changeQueryLoading(true);
@@ -270,6 +301,7 @@
                     this.tableConf.pagination.total = res.vpage.total;
                     //清空 已勾选
                     _this.tableCheckIdList = [];
+                    _this.handleTransformData();
                     _this.changeQueryLoading(false);
                 }).catch((e) => {
                     _this.changeQueryLoading(false);
@@ -328,9 +360,42 @@
             },
             handleDetailDrawerClose(e) { //Drawer 详情关闭
                 this.drawerConf.detail.articleRecommend.visible = false;
+            },
+            handleBatchConfirmedByIds(e) {     // 批量确认
+                var _this = this;
+                var checkIdList = _this.tableCheckIdList;
+                if (checkIdList.length < 1) {
+                    _this.$message.warning(this.$t('langMap.message.warning.pleaseSelectTheLeastRowOfDataForOperate'));
+                } else {
+                    _this.$confirm({
+                        content: _this.$t('langMap.message.confirm.isConfirmDataWhatSelectedRow', [checkIdList.length]),
+                        okText: _this.$t('langMap.button.actions.confirm'),
+                        cancelText: _this.$t('langMap.button.actions.cancel'),
+                        onOk() {
+                            OblArticleRecommendApi.updateToConfirmed(checkIdList).then((res) => {
+                                if (res.success) {
+                                    _this.$message.success(res.msg);
+                                    _this.mixin_invokeQuery(_this); //表格重新搜索
+                                }
+                            })
+                        },
+                        onCancel() {
+                            _this.$message.info(_this.$t('langMap.message.info.actionOfCancelDelete'));
+                        }
+                    })
+                }
+            },
+        },
+        watch: {
+            binding:{
+                handler (val, oval) {
+                    //绑定枚举值变化监听并处理
+                    this.searchConf.formItemConf.isConfirmed.options = this.binding.switchEnums ;
+                },
+                deep: true,
+                immediate:true
             }
         },
-        watch: {},
         created() {
         },
         mounted() {

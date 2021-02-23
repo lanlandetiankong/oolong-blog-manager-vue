@@ -141,6 +141,21 @@ export const SwitchEnum = {
         label: i18nUtil.getKey('langMap.commons.enums.switch.close')
     }
 };
+
+/**
+ * 枚举-开关状态
+ * @type {{Close: {label: string, value: number}, Open: {label: string, value: number}}}
+ */
+export const FlagSwitchEnum = {
+    Open:{
+        value: 1,
+        label: i18nUtil.getKey('langMap.commons.enums.switchFlag.open')
+    },
+    Close:{
+        value: 0,
+        label: i18nUtil.getKey('langMap.commons.enums.switchFlag.close')
+    }
+};
 /**
  * 枚举-是否发布
  * @type {{Unpublished: {label: string, value: number}, Published: {label: string, value: number}}}
@@ -251,6 +266,7 @@ export const AllEnum = {
     UserTypeEnum,
     LockStateEnum,
     SwitchEnum,
+    FlagSwitchEnum,
     PublishStatusEnum,
     ArticleAuditStateEnum
 };

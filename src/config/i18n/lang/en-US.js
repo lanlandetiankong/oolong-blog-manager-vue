@@ -41,7 +41,8 @@ export const langMap = {
             goPreviousStep:'Previous step',
             unfold:'Unfold',
             packUp:'Pack up',
-            setAsRecommended:'Set as recommended'
+            setAsRecommended:'Set as recommended',
+            confirmData:'Confirm data'
         },
         member:{
             account:'Account',
@@ -243,7 +244,8 @@ export const langMap = {
                     endTime:'End Time',
                     reason:'Recommended reason',
                     recommendUserName:'Recommend user',
-                    selectArticles:'Selected articles'
+                    selectArticles:'Selected articles',
+                    isConfirmed:'Is confirmed',
                 },
                 articleCollectCategory:{
                     name:'Name',
@@ -402,12 +404,14 @@ export const langMap = {
             isConfirmLockSelectedRow:'Are you confirm lock selected row？',
             isConfirmLockWhatSelectedRow:'Are you sure to lock the selected {0} row？',
             isConfirmStartUsingWhatSelectedRow:'Once enabled, it cannot be disabled! Please confirm again whether to enable the selected {0} row?',
+            isConfirmDataWhatSelectedRow:'After confirming the data, it cannot be modified! Confirm the selected {0} data?',
         },
         info:{
             actionOfCancelDelete:'Action:Cancel delete',
             actionOfCancelLock:'Action:Cancel Lock',
             actionOfCancelStartUsing:'Action:Cancel start using',
             actionOfCancelPublish:'Action:Cancel publish',
+            actionOfCancelConfirmData:'Action:Cancel data confirmed',
             tableCheckedSize:"Quantity selected:{0} .",
             registerOkAndGo:"Registered successfully!About to jump to the login page."
         }
