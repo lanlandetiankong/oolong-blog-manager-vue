@@ -35,7 +35,6 @@
                     :dataSource="tableConf.data"
                     :loading="searchConf.loadingFlag"
                     :rowSelection="rowSelection"
-                    :scroll="tableConf.scroll"
                     @change="handleTableChange"
                 >
                     <span slot="startTimeRender" slot-scope="text,record">
@@ -104,28 +103,31 @@
                     key: 'summary',
                     formType: FormItemTypeEnum.Input,
                     label: this.$t('langMap.table.fields.obl.articleRecommend.summary'),
-                    decorator: ["summary", {rules: []}],
-                    ellipsis: true
+                    decorator: ["summary", {rules: []}]
                 },
                 reason: {
                     key: 'reason',
                     formType: FormItemTypeEnum.Input,
                     label: this.$t('langMap.table.fields.obl.articleRecommend.reason'),
-                    decorator: ["reason", {rules: []}],
-                    ellipsis: true
+                    decorator: ["reason", {rules: []}]
                 },
-                rangeTime: {
-                    key: 'rangeTime',
-                    formType: FormItemTypeEnum.DateTimeRange,
-                    label: this.$t('langMap.table.fields.obl.articleRecommend.rangeTime'),
-                    decorator: ["rangeTime", {rules: []}],
+                startTime: {
+                    key: 'startTime',
+                    formType: FormItemTypeEnum.DateTime,
+                    label: this.$t('langMap.table.fields.obl.articleRecommend.startTime'),
+                    decorator: ["startTime", {rules: []}],
+                },
+                endTime: {
+                    key: 'endTime',
+                    formType: FormItemTypeEnum.DateTime,
+                    label: this.$t('langMap.table.fields.obl.articleRecommend.endTime'),
+                    decorator: ["endTime", {rules: []}],
                 },
                 remark: {
                     key: 'remark',
                     formType: FormItemTypeEnum.Input,
                     label: this.$t('langMap.table.fields.common.remark'),
-                    decorator: ["remark", {rules: []}],
-                    ellipsis: true
+                    decorator: ["remark", {rules: []}]
                 }
             };
             return {
@@ -195,10 +197,7 @@
                         }
                     },
                     filters: {},
-                    sorter: {},
-                    scroll:{
-                        x: 850
-                    }
+                    sorter: {}
                 },
                 tableCheckIdList: [],
                 drawerConf: {

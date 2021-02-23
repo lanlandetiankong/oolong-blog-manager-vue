@@ -57,6 +57,25 @@
                                         </a-tree-select>
                                     </a-form-item>
                                 </a-col>
+                                <a-col v-else-if="item.formType==formItemTypeEnum.DateTime"
+                                       :md="8" :sm="24"
+                                >
+                                    <a-form-item :label="item.label">
+                                        <a-date-picker show-time
+                                                       v-decorator="item.decorator"/>
+                                    </a-form-item>
+                                </a-col>
+                                <a-col v-else-if="item.formType==formItemTypeEnum.DateTimeRange"
+                                       :md="8" :sm="24"
+                                >
+                                    <a-form-item :label="item.label">
+                                        <a-range-picker
+                                            v-decorator="item.decorator"
+                                            :show-time="{ format: 'HH:mm' }"
+                                            format="YYYY-MM-DD HH:mm"
+                                        />
+                                    </a-form-item>
+                                </a-col>
                             </template>
                             <a-col :md="8" :sm="24">
                                 <a-button type="primary" html-type="submit" icon="search"
@@ -89,7 +108,7 @@
 <script>
     import BeeUtil from '~Assets/js/util/bee/BeeUtil.js' ;
     import {OblCommonMixin} from '~Layout/mixin/OblCommonMixin';
-    import {FormItemTypeEnum,ConstantObj} from '~Components/constant_define';
+    import {FormItemTypeEnum} from '~Components/constant_define';
     export default {
         name: "QueryFormComp",
         mixins:[OblCommonMixin],
@@ -174,9 +193,6 @@
                 }
             }
         }
-
-
-
         .ant-form-inline {
             .ant-form-item {
                 display: flex;
