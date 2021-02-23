@@ -90,6 +90,16 @@ const ArticleRouter = {
                 selfCompName:'OblArticleRecommendView'
             }
         },
+        {
+            path:'recommend_delay_record',
+            component:_import('index/obl/article/recommendDelay/OblArticleRecommendDelayRecordView'),
+            name:'articleRecommendDelayRecordView',
+            meta:{
+                title:'文章推荐延迟记录',icon:"log",keepAliveFlag:true,
+                parentRouterCompName,
+                selfCompName:'OblArticleRecommendDelayRecordView'
+            }
+        },
     ]
 };
 export default ArticleRouter ;

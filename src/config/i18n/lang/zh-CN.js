@@ -99,6 +99,7 @@ export const langMap = {
                 detailForOblArticleTag:'文章标签详情',
                 detailForArticleCollectCategory:'文章收藏类别详情',
                 detailForArticleRecommend:'文章推荐详情',
+                detailForOblArticleRecommendDelayRecord:'文章推荐延迟记录详情',
             }
         }
     },
