@@ -85,6 +85,12 @@
                     {required:false,message:this.$t('langMap.commons.forms.pleaseFillOut',[this.$t('langMap.table.fields.common.remark')])}
                 ]
             };
+            //默认的form对象
+            let defaultFormObj = {
+                reason:'',
+                weights:undefined,
+                remark:''
+            };
             return {
                 FormBaseConfObj,
                 formFieldConf:{
@@ -93,11 +99,8 @@
                     weights:["weights",{rules:paramsRules.weights}],
                     remark:["remark",{rules:paramsRules.remark}]
                 },
-                formObj:{
-                    reason:'',
-                    weights:undefined,
-                    remark:''
-                },
+                defaultFormObj,
+                formObj:defaultFormObj,
                 createForm:{}
             }
         },
@@ -142,12 +145,13 @@
                     }
                     OblArticleSetRecommendCompApi.setAsRecommended(values,this.articleIdList).then((res) => {
                         if(res.success){
-                            this.handleSubmit();
+                            this.$message.success(res.msg);
+                            this.emitSubmit();
                         }
                     }) ;
                 })
             },
-            handleSubmit(){
+            emitSubmit(){
                 this.$emit('submit');
             }
         },
@@ -183,6 +187,14 @@
                 handler (val, oval) {
                     var _this = this ;
                     _this.dealUpdateFormValue(val);
+                },
+                deep: true,
+                immediate:true
+            },
+            visible:{
+                handler(val,oval){  //隐藏与展示弹窗时监听
+                    this.formObj = this.defaultFormObj;
+                    this.dealUpdateFormValue(val);
                 },
                 deep: true,
                 immediate:true

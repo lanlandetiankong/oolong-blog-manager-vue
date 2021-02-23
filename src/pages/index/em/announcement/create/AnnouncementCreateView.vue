@@ -303,7 +303,6 @@
         },
         mounted(){
             var _this = this ;
-            debugger;
             var routeQuery = this.$route.query ;
             if(routeQuery){
                 _this.updateForm.fid = routeQuery.fid ;
