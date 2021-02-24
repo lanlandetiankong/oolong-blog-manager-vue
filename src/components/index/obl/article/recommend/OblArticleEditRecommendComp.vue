@@ -119,12 +119,17 @@
                     }
                 });
                 return idArr;
+            },
+            isSingleUpdate(){
+                //是否单个更新
+                return this.itemList.length == 1 ;
             }
         },
         methods:{
             dealUpdateFormValue(){
                 var _this = this ;
-                _this.formValObj = _this.formObj ;
+                debugger;
+                _this.formValObj = _this.isSingleUpdate ? _this.itemList[0] :  _this.formObj ;
                 let formValObj = _this.formValObj ;
                 if(typeof _this.createForm.updateFields != "undefined"){ //避免未初始化form的时候就调用了updatefield
                     _this.createForm.updateFields({
