@@ -133,6 +133,7 @@
     import {ConstantObj, FormItemTypeEnum} from "~Components/constant_define";
     import QueryFormComp from '~Components/regular/query/QueryFormComp'
     import OblArticleSetRecommendComp from '~Components/index/obl/article/recommend/OblArticleSetRecommendComp'
+
     import RowDetailDrawerComp from '~Components/regular/common/drawer/RowDetailDrawerComp';
 
     export default {
@@ -367,7 +368,7 @@
                 var delIds = _this.tableCheckIdList;
                 ArticleAllListApi.batchDeleteByIds(delIds).then((res) => {
                     if (res.success) {  //已经有对错误进行预处理
-                        this.$message.success(res.msg);
+                        _this.$message.success(res.msg);
                         _this.mixin_invokeQuery(_this); //表格重新搜索
                     }
                 })
@@ -466,7 +467,6 @@
                 if (selectList.length < 1) {
                     _this.$message.warning(this.$t('langMap.message.warning.pleaseSelectTheLeastRowOfDataForOperate'));
                 } else {
-                    debugger;
                     this.dialog.setRecommend.articleList = selectList;
                     this.dialog.setRecommend.visible = true ;
                 }
@@ -478,6 +478,7 @@
             handleSubmitSetRecommend(e){
                 this.dialog.setRecommend.articleList = [];
                 this.dialog.setRecommend.visible = false ;
+                this.mixin_invokeQuery(this); //表格重新搜索
             }
         },
         watch:{

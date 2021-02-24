@@ -8,7 +8,6 @@ export const OblArticleSetRecommendCompApi = {
         obj['endTime'] = rangeTimeArr[1];
         obj['articleIdList'] = idList ;
         obj['rangeTime'] = undefined ;
-        //查询所有文章标签信息
         return axios.post('/oblCtl/oblArticleRecommend/createByForm',obj).then(res => res.data);
     },
 };

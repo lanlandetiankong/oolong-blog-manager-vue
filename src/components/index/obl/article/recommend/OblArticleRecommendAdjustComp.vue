@@ -15,27 +15,13 @@
                     layout="vertical"
                     :form="createForm"
                 >
-                    <a-form-item :label="$t('langMap.table.fields.obl.articleRecommend.rangeTime')">
-                        <a-range-picker
-                            v-decorator="formFieldConf.rangeTime"
-                            :show-time="{ format: 'HH:mm' }"
-                            format="YYYY-MM-DD HH:mm"
-                        />
+                    <a-form-item :label="$t('langMap.table.fields.obl.articleRecommend.startDays')">
+                        <a-input-number v-decorator="formFieldConf.startDays"/>
                     </a-form-item>
-                    <a-form-item :label="$t('langMap.table.fields.obl.articleRecommend.reason')"
+                    <a-form-item :label="$t('langMap.table.fields.obl.articleRecommend.endDays')"
                                  v-bind="FormBaseConfObj.formItemLayout"
                     >
-                        <a-textarea v-decorator="formFieldConf.reason"/>
-                    </a-form-item>
-                    <a-form-item :label="$t('langMap.table.fields.common.weights')"
-                                 v-bind="FormBaseConfObj.formItemLayout"
-                    >
-                        <a-input-number v-decorator="formFieldConf.weights"/>
-                    </a-form-item>
-                    <a-form-item :label="$t('langMap.table.fields.common.remark')"
-                                 v-bind="FormBaseConfObj.formItemLayout"
-                    >
-                        <a-textarea v-decorator="formFieldConf.remark"/>
+                        <a-input-number v-decorator="formFieldConf.endDays"/>
                     </a-form-item>
                 </a-form>
                 <div class="list-infinite-container">
@@ -43,10 +29,10 @@
                         {{$t('langMap.table.fields.obl.articleRecommend.selectArticles')}}
                     </a-tag>
                     <a-list :split=true
-                            :data-source="articleList"
+                            :data-source="itemList"
                     >
                         <a-list-item slot="renderItem" slot-scope="item,index">
-                            {{ item.title }}
+                            {{ item.articleTitle }}
                         </a-list-item>
                     </a-list>
                 </div>
@@ -55,17 +41,17 @@
     </div>
 </template>
 <script>
-    import {OblArticleSetRecommendCompApi} from './oblArticleSetRecommendCompApi'
+    import {OblArticleRecommendAdjustCompApi} from './oblArticleRecommendAdjustCompApi'
     import {FormBaseConfObj} from "~Components/constant_define";
     import AFormItem from "ant-design-vue/es/form/FormItem";
     import ATextarea from "ant-design-vue/es/input/TextArea";
 
     export default {
-        name: "OblArticleSetRecommendComp",
+        name: "OblArticleRecommendAdjustComp",
         components: {ATextarea, AFormItem},
         props:{
             visible:Boolean,
-            articleList:{
+            itemList:{
                 type:Array,
                 required:true
             },
@@ -73,47 +59,38 @@
                 type:Object,
                 default(){
                     return {
-                        reason:'',
-                        weights:undefined,
-                        remark:''
+                        startDays:0,
+                        endDays:0
                     };
                 }
             }
         },
         data(){
             var paramsRules ={
-                rangeTime:[
-                    {type:'array',required:true,message:this.$t('langMap.commons.forms.pleaseSelectRangeTime',[this.$t('langMap.table.fields.obl.articleRecommend.rangeTime')])}
+                startDays:[
+                    {required:true,message:this.$t('langMap.commons.forms.pleaseFillOut',[this.$t('langMap.table.fields.obl.articleRecommend.delayStartDays')])}
                 ],
-                reason:[
-                    {required:true,message:this.$t('langMap.commons.forms.pleaseFillOut',[this.$t('langMap.table.fields.obl.articleRecommend.reason')])}
+                endDays:[
+                    {required:true,message:this.$t('langMap.commons.forms.pleaseFillOut',[this.$t('langMap.table.fields.obl.articleRecommend.delayEndDays')])}
                 ],
-                weights:[
-                    {required:true,message:this.$t('langMap.commons.forms.pleaseFillOut',[this.$t('langMap.table.fields.common.weights')])},
-                ],
-                remark:[
-                    {required:false,message:this.$t('langMap.commons.forms.pleaseFillOut',[this.$t('langMap.table.fields.common.remark')])}
-                ]
             };
             return {
                 FormBaseConfObj,
                 formFieldConf:{
-                    rangeTime:["rangeTime",{rules:paramsRules.rangeTime}],
-                    reason:["reason",{rules:paramsRules.reason}],
-                    weights:["weights",{rules:paramsRules.weights}],
-                    remark:["remark",{rules:paramsRules.remark}]
+                    startDays:["startDays",{rules:paramsRules.startDays}],
+                    endDays:["endDays",{rules:paramsRules.endDays}]
                 },
                 formValObj:{},
                 createForm:{}
             }
         },
         computed:{
-            articleIdList(){
+            itemIdList(){
                 let idArr = [] ;
-                if(!this.articleList){
+                if(!this.itemList){
                     return idArr ;
                 }
-                this.articleList.forEach((item) =>{
+                this.itemList.forEach((item) =>{
                     if(item){
                         idArr.push(item.fid) ;
                     }
@@ -128,21 +105,13 @@
                 let formValObj = _this.formValObj ;
                 if(typeof _this.createForm.updateFields != "undefined"){ //避免未初始化form的时候就调用了updatefield
                     _this.createForm.updateFields({
-                        rangeTime: _this.$form.createFormField({
+                        startDays: _this.$form.createFormField({
                             ...formValObj,
-                            value: formValObj.rangeTime,
+                            value: formValObj.startDays,
                         }),
-                        reason: _this.$form.createFormField({
+                        endDays: _this.$form.createFormField({
                             ...formValObj,
-                            value: formValObj.reason,
-                        }),
-                        weights: _this.$form.createFormField({
-                            ...formValObj,
-                            value: formValObj.weights,
-                        }),
-                        remark: _this.$form.createFormField({
-                            ...formValObj,
-                            value: formValObj.remark,
+                            value: formValObj.endDays,
                         })
                     });
                 }
@@ -152,7 +121,7 @@
                     if (err) {
                         return ;
                     }
-                    OblArticleSetRecommendCompApi.setAsRecommended(values,this.articleIdList).then((res) => {
+                    OblArticleRecommendAdjustCompApi.adjustTime(values,this.itemIdList).then((res) => {
                         if(res.success){
                             this.$message.success(res.msg);
                             this.emitSubmit();
@@ -164,7 +133,7 @@
                 this.$emit('submit');
             }
         },
-        mounted(){
+        created(){
             var _this = this ;
             _this.createForm = this.$form.createForm(_this,{
                 name:'createForm',
@@ -189,22 +158,14 @@
                 },
                 mapPropsToFields:() =>{
                     return {
-                        rangeTime: this.$form.createFormField({
+                        startDays: this.$form.createFormField({
                             ..._this.formValObj,
-                            value: _this.formValObj.rangeTime
+                            value: _this.formValObj.startDays
                         }),
-                        reason: this.$form.createFormField({
+                        endDays: this.$form.createFormField({
                             ..._this.formValObj,
-                            value: _this.formValObj.reason
-                        }),
-                        weights: this.$form.createFormField({
-                            ..._this.formValObj,
-                            value: _this.formValObj.weights
-                        }),
-                        remark: this.$form.createFormField({
-                            ..._this.formValObj,
-                            value: _this.formValObj.remark
-                        }),
+                            value: _this.formValObj.endDays
+                        })
                     }
                 }
             });
@@ -220,7 +181,6 @@
             },
             visible:{
                 handler(val,oval){  //隐藏与展示弹窗时监听
-
                     if(val === true){
                         this.dealUpdateFormValue(val);
                     }   else {  //弹窗关闭

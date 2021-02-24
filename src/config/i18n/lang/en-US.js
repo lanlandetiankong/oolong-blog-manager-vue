@@ -42,6 +42,7 @@ export const langMap = {
             unfold:'Unfold',
             packUp:'Pack up',
             setAsRecommended:'Set as recommended',
+            adjustTime:'Adjust time',
             confirmData:'Confirm data',
             delayTime:'Delay time'
         },
@@ -247,6 +248,8 @@ export const langMap = {
                     recommendUserName:'Recommend user',
                     selectArticles:'Selected articles',
                     isConfirmed:'Is confirmed',
+                    delayStartDays:'Start delay days',
+                    delayEndDays:'End delay days',
                 },
                 articleCollectCategory:{
                     name:'Name',

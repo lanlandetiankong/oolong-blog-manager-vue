@@ -42,6 +42,7 @@ export const langMap = {
             unfold:'展开',
             packUp:'收起',
             setAsRecommended:'设为推荐',
+            adjustTime:'调整时间',
             confirmData:'数据确认',
             delayTime:'延迟时间',
         },
@@ -248,6 +249,8 @@ export const langMap = {
                     recommendUserName:'推荐人',
                     selectArticles:'已选文章',
                     isConfirmed:'已确认',
+                    delayStartDays:'开始延迟天数',
+                    delayEndDays:'结束延迟天数',
                 },
                 articleCollectCategory:{
                     name:'名称',

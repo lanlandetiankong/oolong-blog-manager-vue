@@ -17,15 +17,21 @@
                     align="middle"
                 >
                     <a-col>
-                        <a-button type="danger" icon="delete"
-                                  @click="handleBatchDeleteByIds">
-                            {{$t('langMap.button.actions.batchDelByIds')}}
-                        </a-button>
-                    </a-col>
-                    <a-col>
                         <a-button type="primary" icon="check"
                                   @click="handleBatchConfirmedByIds">
                             {{$t('langMap.button.actions.confirmData')}}
+                        </a-button>
+                    </a-col>
+                    <a-col>
+                        <a-button type="primary" icon="sliders"
+                                  @click="handleBatchAdjustTime">
+                            {{$t('langMap.button.actions.delayTime')}}
+                        </a-button>
+                    </a-col>
+                    <a-col>
+                        <a-button type="danger" icon="delete"
+                                  @click="handleBatchDeleteByIds">
+                            {{$t('langMap.button.actions.batchDelByIds')}}
                         </a-button>
                     </a-col>
                 </a-row>
@@ -51,6 +57,10 @@
                     </span>
                     <template slot="action" slot-scope="text,record">
                         <span>
+                             <a @click="handleAdjust($event,record)">
+                                {{$t('langMap.button.actions.adjustTime')}}
+                            </a>
+                            <a-divider type="vertical"/>
                             <a @click="handleDetailDrawerShow($event,record)">
                                 {{$t('langMap.drawer.actions.detail')}}
                             </a>
@@ -76,6 +86,12 @@
         </div>
         <!-- 弹窗dom-区域 -->
         <div>
+            <obl-article-recommend-adjust-comp
+                v-if="dialog.adjust.visible"
+                v-bind="dialog.adjust"
+                @cancel="handleCloseAdjustTime"
+                @submit="handleSubmitAdjustTime"
+            />
             <row-detail-drawer-comp
                 :drawerConf="drawerConf.detail.articleRecommend.conf"
                 :dataObj="drawerConf.detail.articleRecommend.dataObj"
@@ -94,10 +110,11 @@
 
     import QueryFormComp from '~Components/regular/query/QueryFormComp'
     import RowDetailDrawerComp from '~Components/regular/common/drawer/RowDetailDrawerComp';
+    import OblArticleRecommendAdjustComp from '~Components/index/obl/article/recommend/OblArticleRecommendAdjustComp'
 
     export default {
         name: "OblArticleRecommendView",
-        components: {QueryFormComp, RowDetailDrawerComp},
+        components: {QueryFormComp,OblArticleRecommendAdjustComp, RowDetailDrawerComp},
         mixins: [OblCommonMixin],
         data() {
             const textAlignDefault = 'left';
@@ -206,7 +223,7 @@
                         dataIndex: "operation",
                         key: 'operation',
                         fixed: 'right',
-                        width: 180,
+                        width: 230,
                         scopedSlots: {customRender: 'action'}
                     }],
                     pagination: {
@@ -224,6 +241,13 @@
                     sorter: {}
                 },
                 tableCheckIdList: [],
+                tableCheckList: [],
+                dialog:{
+                    adjust:{
+                        visible: false,
+                        itemList:[]
+                    }
+                },
                 drawerConf: {
                     detail: {
                         articleRecommend: {
@@ -244,6 +268,7 @@
                     selectedRowKeys: this.tableCheckIdList,
                     onChange: (selectedRowKeys, selectedRows) => {  //勾选 修改事件
                         this.tableCheckIdList = selectedRowKeys;
+                        this.tableCheckList = selectedRows;
                     },
                     getCheckboxProps: record => ({  //选择框的默认属性配置
                         props: {
@@ -380,9 +405,32 @@
                             })
                         },
                         onCancel() {
-                            _this.$message.info(_this.$t('langMap.message.info.actionOfCancelDelete'));
+                            _this.$message.info(_this.$t('langMap.message.info.actionOfCancelConfirmData'));
                         }
                     })
+                }
+            },
+            handleAdjust(e,record){
+                this.dialog.adjust.itemList = [record];
+                this.dialog.adjust.visible = true ;
+            },
+            handleCloseAdjustTime(e){
+                this.dialog.adjust.itemList = [];
+                this.dialog.adjust.visible = false ;
+            },
+            handleSubmitAdjustTime(e){
+                this.dialog.adjust.itemList = [];
+                this.dialog.adjust.visible = false ;
+                this.mixin_invokeQuery(this); //表格重新搜索
+            },
+            handleBatchAdjustTime(e){ //批量调整时间
+                var _this = this;
+                var selectList = _this.tableCheckList;
+                if (selectList.length < 1) {
+                    _this.$message.warning(this.$t('langMap.message.warning.pleaseSelectTheLeastRowOfDataForOperate'));
+                } else {
+                    this.dialog.adjust.itemList = selectList;
+                    this.dialog.adjust.visible = true ;
                 }
             },
         },
