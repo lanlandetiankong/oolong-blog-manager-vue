@@ -42,7 +42,8 @@ export const langMap = {
             unfold:'Unfold',
             packUp:'Pack up',
             setAsRecommended:'Set as recommended',
-            confirmData:'Confirm data'
+            confirmData:'Confirm data',
+            delayTime:'Delay time'
         },
         member:{
             account:'Account',

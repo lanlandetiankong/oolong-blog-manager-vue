@@ -109,6 +109,7 @@
             <!-- 弹窗dom-区域 -->
             <div>
                 <obl-article-set-recommend-comp
+                    v-if="dialog.setRecommend.visible"
                     v-bind="dialog.setRecommend"
                     @cancel="handleCloseSetRecommend"
                     @submit="handleSubmitSetRecommend"

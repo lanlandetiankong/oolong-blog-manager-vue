@@ -42,7 +42,8 @@ export const langMap = {
             unfold:'展开',
             packUp:'收起',
             setAsRecommended:'设为推荐',
-            confirmData:'数据确认'
+            confirmData:'数据确认',
+            delayTime:'延迟时间',
         },
         member:{
             account:'账号',

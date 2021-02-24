@@ -68,6 +68,16 @@
             articleList:{
                 type:Array,
                 required:true
+            },
+            formObj:{
+                type:Object,
+                default(){
+                    return {
+                        reason:'',
+                        weights:undefined,
+                        remark:''
+                    };
+                }
             }
         },
         data(){
@@ -85,12 +95,6 @@
                     {required:false,message:this.$t('langMap.commons.forms.pleaseFillOut',[this.$t('langMap.table.fields.common.remark')])}
                 ]
             };
-            //默认的form对象
-            let defaultFormObj = {
-                reason:'',
-                weights:undefined,
-                remark:''
-            };
             return {
                 FormBaseConfObj,
                 formFieldConf:{
@@ -99,8 +103,7 @@
                     weights:["weights",{rules:paramsRules.weights}],
                     remark:["remark",{rules:paramsRules.remark}]
                 },
-                defaultFormObj,
-                formObj:defaultFormObj,
+                formValObj:{},
                 createForm:{}
             }
         },
@@ -119,21 +122,27 @@
             }
         },
         methods:{
-            dealUpdateFormValue(formObj){
+            dealUpdateFormValue(){
                 var _this = this ;
+                _this.formValObj = _this.formObj ;
+                let formValObj = _this.formValObj ;
                 if(typeof _this.createForm.updateFields != "undefined"){ //避免未初始化form的时候就调用了updatefield
                     _this.createForm.updateFields({
+                        rangeTime: _this.$form.createFormField({
+                            ...formValObj,
+                            value: formValObj.rangeTime,
+                        }),
                         reason: _this.$form.createFormField({
-                            ...formObj,
-                            value: formObj.reason,
+                            ...formValObj,
+                            value: formValObj.reason,
                         }),
                         weights: _this.$form.createFormField({
-                            ...formObj,
-                            value: formObj.weights,
+                            ...formValObj,
+                            value: formValObj.weights,
                         }),
                         remark: _this.$form.createFormField({
-                            ...formObj,
-                            value: formObj.remark,
+                            ...formValObj,
+                            value: formValObj.remark,
                         })
                     });
                 }
@@ -155,28 +164,47 @@
                 this.$emit('submit');
             }
         },
-        created(){
+        mounted(){
+            debugger;
             var _this = this ;
             _this.createForm = this.$form.createForm(_this,{
                 name:'createForm',
                 onFieldsChange: (_, changedFields) => {
-                    //console.log(changedFields);
+                    if(changedFields){
+                        var formValObjTemp = _this.formValObj ;
+                        const changeFieldNames = Object.keys(changedFields) ;
+                        if(changeFieldNames && changeFieldNames.length > 0){
+                            for(var i=0;i<changeFieldNames.length;i++){
+                                //当前修改的字段名
+                                var changeFieldNameTemp = changeFieldNames[i] ;
+                                var fieldChangeObj = changedFields[changeFieldNameTemp];
+                                if(fieldChangeObj){
+                                    formValObjTemp[changeFieldNameTemp] = fieldChangeObj.value;
+                                }
+                            }
+                        }
+                        _this.formValObj = formValObjTemp ;
+                    }
+                    //通知给父组件
                     this.$emit('change', changedFields);
                 },
                 mapPropsToFields:() =>{
-                    //console.log(_this.formObj);
                     return {
+                        rangeTime: this.$form.createFormField({
+                            ..._this.formValObj,
+                            value: _this.formValObj.rangeTime
+                        }),
                         reason: this.$form.createFormField({
-                            ..._this.formObj,
-                            value: _this.formObj.reason
+                            ..._this.formValObj,
+                            value: _this.formValObj.reason
                         }),
                         weights: this.$form.createFormField({
-                            ..._this.formObj,
-                            value: _this.formObj.weights
+                            ..._this.formValObj,
+                            value: _this.formValObj.weights
                         }),
                         remark: this.$form.createFormField({
-                            ..._this.formObj,
-                            value: _this.formObj.remark
+                            ..._this.formValObj,
+                            value: _this.formValObj.remark
                         }),
                     }
                 }
@@ -193,8 +221,12 @@
             },
             visible:{
                 handler(val,oval){  //隐藏与展示弹窗时监听
-                    this.formObj = this.defaultFormObj;
-                    this.dealUpdateFormValue(val);
+                    debugger;
+                    if(val === true){
+                        this.dealUpdateFormValue(val);
+                    }   else {  //弹窗关闭
+                        this.formValObj = {} ;
+                    }
                 },
                 deep: true,
                 immediate:true
