@@ -17,6 +17,12 @@
                     align="middle"
                 >
                     <a-col>
+                        <a-button type="primary" icon="edit"
+                                  @click="handleBatchEditRecommended">
+                            {{$t('langMap.button.actions.batchEdit')}}
+                        </a-button>
+                    </a-col>
+                    <a-col>
                         <a-button type="primary" icon="check"
                                   @click="handleBatchConfirmedByIds">
                             {{$t('langMap.button.actions.confirmData')}}
@@ -25,7 +31,7 @@
                     <a-col>
                         <a-button type="primary" icon="sliders"
                                   @click="handleBatchAdjustTime">
-                            {{$t('langMap.button.actions.delayTime')}}
+                            {{$t('langMap.button.actions.adjustTime')}}
                         </a-button>
                     </a-col>
                     <a-col>
@@ -57,6 +63,12 @@
                     </span>
                     <template slot="action" slot-scope="text,record">
                         <span>
+                            <template v-if="record.isConfirmed == 0">
+                                <a @click="handleEditRecommend($event,record)">
+                                    {{$t('langMap.button.actions.edit')}}
+                                </a>
+                            </template>
+
                              <a @click="handleAdjust($event,record)">
                                 {{$t('langMap.button.actions.adjustTime')}}
                             </a>
@@ -86,6 +98,12 @@
         </div>
         <!-- 弹窗dom-区域 -->
         <div>
+            <obl-article-edit-recommend-comp
+                v-if="dialog.editRecommend.visible"
+                v-bind="dialog.editRecommend"
+                @cancel="handleCloseEditRecommend"
+                @submit="handleSubmitEditRecommend"
+            />
             <obl-article-recommend-adjust-comp
                 v-if="dialog.adjust.visible"
                 v-bind="dialog.adjust"
@@ -111,10 +129,11 @@
     import QueryFormComp from '~Components/regular/query/QueryFormComp'
     import RowDetailDrawerComp from '~Components/regular/common/drawer/RowDetailDrawerComp';
     import OblArticleRecommendAdjustComp from '~Components/index/obl/article/recommend/OblArticleRecommendAdjustComp'
+    import OblArticleEditRecommendComp from '~Components/index/obl/article/recommend/OblArticleEditRecommendComp'
 
     export default {
         name: "OblArticleRecommendView",
-        components: {QueryFormComp,OblArticleRecommendAdjustComp, RowDetailDrawerComp},
+        components: {QueryFormComp,OblArticleRecommendAdjustComp,OblArticleEditRecommendComp,RowDetailDrawerComp},
         mixins: [OblCommonMixin],
         data() {
             const textAlignDefault = 'left';
@@ -244,6 +263,10 @@
                 tableCheckList: [],
                 dialog:{
                     adjust:{
+                        visible: false,
+                        itemList:[]
+                    },
+                    editRecommend:{
                         visible: false,
                         itemList:[]
                     }
@@ -433,6 +456,35 @@
                     this.dialog.adjust.visible = true ;
                 }
             },
+            handleEditRecommend(e,record){
+                this.dialog.editRecommend.itemList = record;
+                this.dialog.editRecommend.visible = true ;
+            },
+            handleBatchEditRecommended(e){ //批量更新推荐
+                var _this = this;
+                let selectList = _this.tableCheckList;
+                if (selectList.length < 1) {
+                    _this.$message.warning(this.$t('langMap.message.warning.pleaseSelectTheLeastRowOfDataForOperate'));
+                } else {
+                    //只能选择[未确认]的数据
+                    let editAbleList = selectList.filter(item => item.isConfirmed == 0) ;
+                    if(editAbleList.length < selectList.length){
+                        _this.$message.warning(this.$t('langMap.message.warning.doNotAllowSelectionOfConfirmed'));
+                        return false;
+                    }
+                    this.dialog.editRecommend.itemList = editAbleList;
+                    this.dialog.editRecommend.visible = true ;
+                }
+            },
+            handleCloseEditRecommend(e){
+                this.dialog.editRecommend.itemList = [];
+                this.dialog.editRecommend.visible = false ;
+            },
+            handleSubmitEditRecommend(e){
+                this.dialog.editRecommend.itemList = [];
+                this.dialog.editRecommend.visible = false ;
+                this.mixin_invokeQuery(this); //表格重新搜索
+            }
         },
         watch: {
             binding:{

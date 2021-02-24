@@ -11,6 +11,7 @@ export const langMap = {
             addByForm:'Create',
             updateByForm:'Update',
             edit:'Edit',
+            batchEdit:'Batch edit',
             batchDelByIds:'Batch Delete',
             delById:'Delete',
             authorize:'Authorize',
@@ -386,11 +387,13 @@ export const langMap = {
             pleaseSelectTheOnlyRowOfDataForAuthorizationMenu:'Please select the only row of data for authorization menu!',
             pleaseSelectTheOnlyRowOfDataForUploadExcelTemplate:'Please select the only row of data for upload excel template!',
             pleaseSelectTheOnlyRowOfDataForExport:'Please select the only row of data for export!',
+            pleaseSelectTheLeastRowOfDataForOperate:'Please select at least one pending row!',
             invalidDeleteOperation:'Invalid delete operation!',
             invalidLockOperation:'Invalid lock operation!',
             invalidPublishOperation:'Invalid publish operation!',
             openInvalidRowDetails:'Open invalid row details!',
             doNotAllowSelectionOfStartUsing:'The selected item contains enabled items. Please uncheck all enabled items and try again!',
+            doNotAllowSelectionOfConfirmed:'The selected item contains confirmed items, please uncheck all confirmed items and try again!'
         },
         error:{
             failedDueToNotGettingId:'Failed due to not getting id !',

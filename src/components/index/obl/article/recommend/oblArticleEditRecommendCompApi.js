@@ -1,13 +1,13 @@
 import axios from '~Config/axios/httpConfig'
 
-export const OblArticleSetRecommendCompApi = {
-    setAsRecommended(values,idList) {  //设置文章为 推荐
+export const OblArticleEditRecommendCompApi = {
+    editRecommended(values,idList) {  //更新文章推荐
         let obj = values ;
         let rangeTimeArr = values['rangeTime'];
         obj['startTime'] = rangeTimeArr[0];
         obj['endTime'] = rangeTimeArr[1];
-        obj['articleIdList'] = idList ;
+        obj['recommendIdList'] = idList ;
         obj['rangeTime'] = undefined ;
-        return axios.post('/oblCtl/oblArticleRecommend/batchCreateByForm',obj).then(res => res.data);
+        return axios.post('/oblCtl/oblArticleRecommend/batchUpdateByForm',obj).then(res => res.data);
     },
 };

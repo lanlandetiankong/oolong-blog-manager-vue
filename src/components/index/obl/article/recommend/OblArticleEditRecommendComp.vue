@@ -4,7 +4,7 @@
             class="modal-big-cls"
             :visible="visible"
             :maskClosable=false
-            :title="$t('langMap.button.actions.setAsRecommended')"
+            :title="$t('langMap.button.actions.batchEdit')"
             :okText="$t('langMap.button.actions.confirmSubmit')"
             :cancelText="$t('langMap.button.actions.cancel')"
             @cancel="() => { $emit('cancel')}"
@@ -43,10 +43,10 @@
                         {{$t('langMap.table.fields.obl.articleRecommend.selectArticles')}}
                     </a-tag>
                     <a-list :split=true
-                            :data-source="articleList"
+                            :data-source="itemList"
                     >
                         <a-list-item slot="renderItem" slot-scope="item,index">
-                            {{ item.title }}
+                            {{ item.articleTitle }}
                         </a-list-item>
                     </a-list>
                 </div>
@@ -55,17 +55,17 @@
     </div>
 </template>
 <script>
-    import {OblArticleSetRecommendCompApi} from './oblArticleSetRecommendCompApi'
+    import {OblArticleEditRecommendCompApi} from './oblArticleEditRecommendCompApi'
     import {FormBaseConfObj} from "~Components/constant_define";
     import AFormItem from "ant-design-vue/es/form/FormItem";
     import ATextarea from "ant-design-vue/es/input/TextArea";
 
     export default {
-        name: "OblArticleSetRecommendComp",
+        name: "OblArticleEditRecommendComp",
         components: {ATextarea, AFormItem},
         props:{
             visible:Boolean,
-            articleList:{
+            itemList:{
                 type:Array,
                 required:true
             },
@@ -108,12 +108,12 @@
             }
         },
         computed:{
-            articleIdList(){
+            itemIdList(){
                 let idArr = [] ;
-                if(!this.articleList){
+                if(!this.itemList){
                     return idArr ;
                 }
-                this.articleList.forEach((item) =>{
+                this.itemList.forEach((item) =>{
                     if(item){
                         idArr.push(item.fid) ;
                     }
@@ -152,7 +152,7 @@
                     if (err) {
                         return ;
                     }
-                    OblArticleSetRecommendCompApi.setAsRecommended(values,this.articleIdList).then((res) => {
+                    OblArticleEditRecommendCompApi.editRecommended(values,this.itemIdList).then((res) => {
                         if(res.success){
                             this.$message.success(res.msg);
                             this.emitSubmit();
@@ -212,6 +212,7 @@
         watch:{
             formObj: {
                 handler (val, oval) {
+                    debugger;
                     var _this = this ;
                     _this.dealUpdateFormValue(val);
                 },
@@ -220,6 +221,7 @@
             },
             visible:{
                 handler(val,oval){  //隐藏与展示弹窗时监听
+                    debugger;
                     if(val === true){
                         this.dealUpdateFormValue(val);
                     }   else {  //弹窗关闭

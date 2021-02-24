@@ -12,12 +12,6 @@ export const OblArticleRecommendApi = {
         };
         return axios.post("/oblCtl/oblArticleRecommend/queryOneById",params).then(res => res.data) ;
     },
-    createByForm(formObj) {     //新增
-        return axios.post("/oblCtl/oblArticleRecommend/createByForm",formObj).then(res => res.data);
-    },
-    updateByForm(formObj) {  //更新
-        return axios.post("/oblCtl/oblArticleRecommend/updateByForm",formObj).then(res => res.data) ;
-    },
     batchDeleteByIds(ids) {  //批量删除
         var obj = {
             delIds:ids

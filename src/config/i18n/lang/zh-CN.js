@@ -11,6 +11,7 @@ export const langMap = {
             addByForm:'新增',
             updateByForm:'更新',
             edit:'编辑',
+            batchEdit:'批量编辑',
             batchDelByIds:'批量删除',
             delById:'删除',
             authorize:'授权',
@@ -397,6 +398,7 @@ export const langMap = {
             invalidPublishOperation:'无效发布操作！',
             openInvalidRowDetails:'打开无效的行详情！',
             doNotAllowSelectionOfStartUsing:'所选项中包含已启用的项，请取消勾选所有已启用的项后重试！',
+            doNotAllowSelectionOfConfirmed:'所选项中包含已确认的项，请取消勾选所有已确认的项后重试！',
         },
         error:{
             failedDueToNotGettingId:'操作失败！未取得有效的id！',
