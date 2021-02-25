@@ -17,6 +17,7 @@
                 >
                     <a-form-item :label="$t('langMap.table.fields.obl.articleRecommend.rangeTime')">
                         <a-range-picker
+                            :defaultValue="{}"
                             v-decorator="formFieldConf.rangeTime"
                             :show-time="{ format: 'HH:mm' }"
                             format="YYYY-MM-DD HH:mm"
@@ -55,6 +56,7 @@
     </div>
 </template>
 <script>
+    import moment from 'moment';
     import {OblArticleEditRecommendCompApi} from './oblArticleEditRecommendCompApi'
     import {FormBaseConfObj} from "~Components/constant_define";
     import AFormItem from "ant-design-vue/es/form/FormItem";
@@ -73,6 +75,9 @@
                 type:Object,
                 default(){
                     return {
+                        rangeTime:[],
+                        startTime:undefined,
+                        endTime:undefined,
                         reason:'',
                         weights:undefined,
                         remark:''
@@ -126,10 +131,22 @@
             }
         },
         methods:{
+            moment,
             dealUpdateFormValue(){
                 var _this = this ;
                 debugger;
-                _this.formValObj = _this.isSingleUpdate ? _this.itemList[0] :  _this.formObj ;
+                if(_this.isSingleUpdate == true){
+                    _this.formValObj = _this.itemList[0] ;
+                    //日期范围
+                    let rangeTimeArr = [];
+                    let startTime = new Date(_this.formValObj['startTime']);
+                    let endTime = new Date(_this.formValObj['endTime']);
+                    rangeTimeArr.push(moment(startTime,'YYYY-MM-DD HH:mm:ss'));
+                    rangeTimeArr.push(moment(endTime,'YYYY-MM-DD HH:mm:ss'));
+                    _this.formValObj['rangeTime'] = rangeTimeArr ;
+                }   else {
+                    _this.formValObj =  _this.formObj ;
+                }
                 let formValObj = _this.formValObj ;
                 if(typeof _this.createForm.updateFields != "undefined"){ //避免未初始化form的时候就调用了updatefield
                     _this.createForm.updateFields({
@@ -154,13 +171,14 @@
             },
             handleSubmit(){
                 this.createForm.validateFields((err, values) => {
+                    var _this = this;
                     if (err) {
                         return ;
                     }
                     OblArticleEditRecommendCompApi.editRecommended(values,this.itemIdList).then((res) => {
                         if(res.success){
-                            this.$message.success(res.msg);
-                            this.emitSubmit();
+                            _this.$message.success(res.msg);
+                            _this.emitSubmit();
                         }
                     }) ;
                 })
@@ -217,7 +235,6 @@
         watch:{
             formObj: {
                 handler (val, oval) {
-                    debugger;
                     var _this = this ;
                     _this.dealUpdateFormValue(val);
                 },
@@ -226,7 +243,6 @@
             },
             visible:{
                 handler(val,oval){  //隐藏与展示弹窗时监听
-                    debugger;
                     if(val === true){
                         this.dealUpdateFormValue(val);
                     }   else {  //弹窗关闭
