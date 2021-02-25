@@ -184,10 +184,14 @@ export const ArticleAuditStateEnum = {
         value: 1,
         label: i18nUtil.getKey('langMap.commons.enums.auditStatus.approval')
     },
+    ApprovalFailed:{
+        value: 8,
+        label: i18nUtil.getKey('langMap.commons.enums.auditStatus.approvalFailed')
+    },
     Approved:{
-        value: 2,
+        value: 9,
         label: i18nUtil.getKey('langMap.commons.enums.auditStatus.approved')
-    }
+    },
 };
 /**
  * 对象转Select的data
