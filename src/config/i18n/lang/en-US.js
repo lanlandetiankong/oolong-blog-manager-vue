@@ -252,6 +252,18 @@ export const langMap = {
                     delayStartDays:'Start delay days',
                     delayEndDays:'End delay days',
                 },
+                articleRecommendDelayRecord: {
+                    recommendId:'Recommended id',
+                    articleTitle:'Article title',
+                    recommendReason:'Recommended reason',
+                    recommendUserName:'Recommend user',
+                    beforeStartTime:'Before starting time',
+                    beforeEndTime:'Before ending time',
+                    afterStartTime:'After starting time',
+                    afterEndTime:'After ending time',
+                    beforeTimeRange:'Before time range',
+                    afterTimeRange:'After time range'
+                },
                 articleCollectCategory:{
                     name:'Name',
                     iconName:'Icon name',

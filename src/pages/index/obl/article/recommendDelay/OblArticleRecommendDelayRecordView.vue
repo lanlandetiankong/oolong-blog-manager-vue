@@ -16,24 +16,6 @@
                     type="flex"
                     align="middle"
                 >
-                    <a-col>
-                        <a-button type="primary" icon="plus"
-                                  @click="handleCreateByForm">
-                            {{$t('langMap.button.actions.addByForm')}}
-                        </a-button>
-                    </a-col>
-                    <a-col>
-                        <a-button type="primary" icon="edit"
-                                  @click="handleUpdateByForm">
-                            {{$t('langMap.button.actions.updateByForm')}}
-                        </a-button>
-                    </a-col>
-                    <a-col>
-                        <a-button type="danger" icon="delete"
-                                  @click="handleBatchDeleteByIds">
-                            {{$t('langMap.button.actions.batchDelByIds')}}
-                        </a-button>
-                    </a-col>
                 </a-row>
             </div>
             <a-divider/>
@@ -49,10 +31,11 @@
                     :rowSelection="rowSelection"
                     @change="handleTableChange"
                 >
-                    <span slot="typeStr" slot-scope="record">
-                        <a-tag color="blue" :key="record.typeStr">
-                            {{record.typeStr}}
-                        </a-tag>
+                    <span slot="beforeTimeRangeRender" slot-scope="record">
+                        {{record.beforeStartTime | formatBaseDateTime}} -> {{record.beforeEndTime | formatBaseDateTime}}
+                    </span>
+                    <span slot="afterTimeRangeRender" slot-scope="record">
+                        {{record.afterStartTime | formatBaseDateTime}} -> {{record.afterEndTime | formatBaseDateTime}}
                     </span>
                     <template slot="action" slot-scope="text,record">
                         <span>
@@ -60,9 +43,21 @@
                                 {{$t('langMap.drawer.actions.detail')}}
                             </a>
                             <a-divider type="vertical"/>
-                            <a-button type="danger" size="small" @click="handleDeleteOneById(record.fid)">{{$t('langMap.button.actions.delById')}}</a-button>
                         </span>
                     </template>
+                    <div slot="expandedRowRender" slot-scope="record" style="margin: 0">
+                        <a-descriptions>
+                            <a-descriptions-item :label="$t('langMap.table.fields.obl.articleRecommendDelayRecord.recommendId')">
+                                {{ record.recommendId }}
+                            </a-descriptions-item>
+                            <a-descriptions-item :label="$t('langMap.table.fields.common.remark')">
+                                {{ record.remark }}
+                            </a-descriptions-item>
+                            <a-descriptions-item :label="$t('langMap.table.fields.common.createTime')">
+                                {{ record.createTime | formatBaseDateTime }}
+                            </a-descriptions-item>
+                        </a-descriptions>
+                    </div>
                 </a-table>
             </div>
         </div>
@@ -94,23 +89,23 @@
             const textAlignDefault = 'left';
             //字段配置(Query/Drawer)
             const fieldBaseConf = {
-                name: {
-                    key: 'name',
+                articleTitle: {
+                    key: 'articleTitle',
                     formType: FormItemTypeEnum.Input,
-                    label: this.$t('langMap.table.fields.common.tagName'),
-                    decorator: ["name", {rules: []}],
+                    label: this.$t('langMap.table.fields.obl.articleRecommendDelayRecord.articleTitle'),
+                    decorator: ["articleTitle", {rules: []}],
                 },
-                description: {
-                    key: 'description',
+                recommendUserName: {
+                    key: 'recommendUserName',
                     formType: FormItemTypeEnum.Input,
-                    label: this.$t('langMap.table.fields.common.description'),
-                    decorator: ["description", {rules: []}],
+                    label: this.$t('langMap.table.fields.obl.articleRecommendDelayRecord.recommendUserName'),
+                    decorator: ["recommendUserName", {rules: []}],
                 },
-                remark: {
-                    key: 'remark',
+                recommendReason: {
+                    key: 'recommendReason',
                     formType: FormItemTypeEnum.Input,
-                    label: this.$t('langMap.table.fields.common.remark'),
-                    decorator: ["title", {rules: []}],
+                    label: this.$t('langMap.table.fields.obl.articleRecommendDelayRecord.recommendReason'),
+                    decorator: ["recommendReason", {rules: []}],
                 }
             };
             return {
@@ -123,20 +118,28 @@
                 tableConf: {
                     data: [],
                     columns: [{
-                        title: this.$t('langMap.table.fields.obl.articleRecommendDelayRecord.name'),
+                        title: this.$t('langMap.table.fields.obl.articleRecommendDelayRecord.articleTitle'),
                         align: textAlignDefault,
-                        dataIndex: 'name',
-                        key: 'name'
+                        dataIndex: 'articleTitle',
+                        key: 'articleTitle'
                     }, {
-                        title: this.$t('langMap.table.fields.common.description'),
+                        title: this.$t('langMap.table.fields.obl.articleRecommendDelayRecord.recommendUserName'),
                         align: textAlignDefault,
-                        dataIndex: 'description',
-                        key: 'description',
+                        dataIndex: 'recommendUserName',
+                        key: 'recommendUserName',
                     }, {
-                        title: this.$t('langMap.table.fields.common.weights'),
+                        title: this.$t('langMap.table.fields.obl.articleRecommendDelayRecord.recommendReason'),
                         align: textAlignDefault,
-                        dataIndex: 'weights',
-                        key: 'weights'
+                        dataIndex: 'recommendReason',
+                        key: 'recommendReason',
+                    },{
+                        title: this.$t('langMap.table.fields.obl.articleRecommendDelayRecord.beforeTimeRange'),
+                        align: textAlignDefault,
+                        scopedSlots: { customRender: 'beforeTimeRangeRender' }
+                    },{
+                        title: this.$t('langMap.table.fields.obl.articleRecommendDelayRecord.afterTimeRange'),
+                        align: textAlignDefault,
+                        scopedSlots: { customRender: 'afterTimeRangeRender' }
                     }, {
                         title: this.$t('langMap.table.header.operation'),
                         align: textAlignDefault,
@@ -161,15 +164,6 @@
                     sorter: {}
                 },
                 tableCheckIdList: [],
-                dialogFormConf: {
-                    visible: false,
-                    actionType: "create"
-                },
-                dialogFormObj: {
-                    name: '',
-                    description: '',
-                    weights: 0
-                },
                 drawerConf: {
                     detail: {
                         articleRecommendDelayRecord: {
@@ -200,33 +194,11 @@
             }
         },
         methods: {
-            dealGetDialogRefFormObj() {    //返回 弹窗表单 的form对象
-                return this.$refs.createFormRef.createForm;
-            },
             changeQueryLoading(loadingFlag) {   //修改[表格搜索]是否在 加载状态中
                 if (typeof loadingFlag == "undefined" || loadingFlag == null) {
                     loadingFlag = false;
                 }
                 this.searchConf.loadingFlag = loadingFlag;
-            },
-            dealBatchDeleteByIds() {  //批量删除
-                var _this = this;
-                var delIds = _this.tableCheckIdList;
-                OblArticleRecommendDelayRecordApi.batchDeleteByIds(delIds).then((res) => {
-                    if (res.success) {  //已经有对错误进行预处理
-                        _this.$message.success(res.msg);
-                        _this.mixin_invokeQuery(_this); //表格重新搜索
-                    }
-                })
-            },
-            dealDelOneRowById(delId) {   //根据id 删除
-                var _this = this;
-                OblArticleRecommendDelayRecordApi.deleteById(delId).then((res) => {
-                    if (res.success) {  //已经有对错误进行预处理
-                        _this.$message.success(res.msg);
-                        _this.mixin_invokeQuery(_this); //表格重新搜索
-                    }
-                })
             },
             handleSearchFormQuery(e, values) {   //带查询条件 检索列表
                 var _this = this;
@@ -240,116 +212,6 @@
                 }).catch((e) => {
                     _this.changeQueryLoading(false);
                 })
-            },
-            handleCreateByForm() {     //新增按钮-点击
-                var _this = this;
-                _this.dialogFormConf.visible = true;   //显示弹窗
-                _this.dialogFormConf.actionType = "create";
-                _this.dialogFormObj = {};
-            },
-            handleUpdateByForm() {  //更新按钮-点击
-                var _this = this;
-                if (_this.tableCheckIdList.length < 1) {
-                    this.$message.warning(this.$t('langMap.message.warning.pleaseSelectTheOnlyRowOfDataForUpdate'));
-                } else if (_this.tableCheckIdList.length > 1) {
-                    this.$message.warning(this.$t('langMap.message.warning.pleaseSelectTheOnlyRowOfDataForUpdate'));
-                } else {
-                    var selectRowId = _this.tableCheckIdList[0];
-                    if (selectRowId) {
-                        OblArticleRecommendDelayRecordApi.getItemById(selectRowId).then((res) => {
-                            var selectUserBean = res.bean;
-                            if (selectUserBean) {
-                                _this.dialogFormConf.visible = true;   //显示弹窗
-                                _this.dialogFormConf.actionType = "update";
-                                _this.dialogFormObj = selectUserBean;
-                                //console.log(_this.dialogFormObj);
-                            }
-                        })
-                    } else {
-                        this.$message.warning(this.$t('langMap.message.error.failedDueToNotGettingId'));
-                    }
-                }
-            },
-            handleBatchDeleteByIds(e) {     // 批量删除
-                var _this = this;
-                var selectDelIds = _this.tableCheckIdList;
-                if (selectDelIds.length < 1) {
-                    _this.$message.warning(this.$t('langMap.message.warning.pleaseSelectTheOnlyRowOfDataForDelete'));
-                } else {
-                    _this.$confirm({
-                        content: _this.$t('langMap.message.confirm.isConfirmDeleteWhatSelectedRow', [selectDelIds.length]),
-                        okText: _this.$t('langMap.button.actions.confirm'),
-                        cancelText: _this.$t('langMap.button.actions.cancel'),
-                        onOk() {
-                            _this.dealBatchDeleteByIds();
-                        },
-                        onCancel() {
-                            _this.$message.info(_this.$t('langMap.message.info.actionOfCancelDelete'));
-                        }
-                    })
-                }
-            },
-            handleCreateFormCancel(e) {  // 创建/更新->取消
-                var _this = this;
-                _this.dialogFormConf.visible = false;
-            },
-            handleCreateFormSubmit(e) {   // 创建/更新->提交
-                var _this = this;
-                const dialogFormObj = _this.dealGetDialogRefFormObj();
-                dialogFormObj.validateFields((err, values) => {
-                    if (err) {
-                        return;
-                    }
-                    var closeDialogFlag = true;
-                    if (_this.dialogFormConf.actionType == "create") {        //新建-提交
-                        OblArticleRecommendDelayRecordApi.createByForm(values).then((res) => {
-                            if (res.success) {  //异常已经有预处理了
-                                _this.$message.success(res.msg);
-                                _this.mixin_invokeQuery(_this); //表格重新搜索
-                            } else {
-                                closeDialogFlag = false;
-                            }
-                            if (closeDialogFlag == true) {    //关闭弹窗
-                                dialogFormObj.resetFields();
-                                _this.dialogFormConf.visible = false;
-                            }
-                        })
-                    } else if (_this.dialogFormConf.actionType == "update") {   //更新-提交
-                        values['fid'] = _this.dialogFormObj.fid;   //提交时，回填fid值
-                        OblArticleRecommendDelayRecordApi.updateByForm(values).then((res) => {
-                            if (res.success) {  //异常已经有预处理了
-                                _this.$message.success(res.msg);
-                                _this.mixin_invokeQuery(_this); //表格重新搜索
-                            } else {
-                                closeDialogFlag = false;
-                            }
-                            if (closeDialogFlag == true) {    //关闭弹窗
-                                dialogFormObj.resetFields();
-                                _this.dialogFormConf.visible = false;
-                            }
-                        })
-                    }
-
-                });
-
-            },
-            handleDeleteOneById(delId) {     //删除指定行
-                var _this = this;
-                if (delId) {
-                    _this.$confirm({
-                        content: this.$t('langMap.message.confirm.isConfirmDeleteSelectedRow'),
-                        okText: _this.$t('langMap.button.actions.confirm'),
-                        cancelText: _this.$t('langMap.button.actions.cancel'),
-                        onOk() {
-                            _this.dealDelOneRowById(delId);
-                        },
-                        onCancel() {
-                            _this.$message.info(_this.$t('langMap.message.info.actionOfCancelDelete'));
-                        }
-                    })
-                } else {
-                    _this.$message.warning(_this.$t('langMap.message.warning.invalidDeleteOperation'));
-                }
             },
             handleTableChange(pagination, filters, sorter) {    //表格变动-页码跳转/排序/筛选
                 this.tableConf.pagination = pagination;

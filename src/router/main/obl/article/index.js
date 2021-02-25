@@ -95,7 +95,7 @@ const ArticleRouter = {
             component:_import('index/obl/article/recommendDelay/OblArticleRecommendDelayRecordView'),
             name:'articleRecommendDelayRecordView',
             meta:{
-                title:'文章推荐延迟记录',icon:"log",keepAliveFlag:true,
+                title:'文章推荐调整记录',icon:"right-square",keepAliveFlag:true,
                 parentRouterCompName,
                 selfCompName:'OblArticleRecommendDelayRecordView'
             }

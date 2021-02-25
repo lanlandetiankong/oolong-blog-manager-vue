@@ -253,6 +253,18 @@ export const langMap = {
                     delayStartDays:'开始延迟天数',
                     delayEndDays:'结束延迟天数',
                 },
+                articleRecommendDelayRecord: {
+                    recommendId:'推荐的id',
+                    articleTitle:'文章标题',
+                    recommendReason:'推荐原因',
+                    recommendUserName:'推荐人',
+                    beforeStartTime:'原开始时间',
+                    beforeEndTime:'原结束时间',
+                    afterStartTime:'现开始时间',
+                    afterEndTime:'现结束时间',
+                    beforeTimeRange:'原时间范围',
+                    afterTimeRange:'现时间范围'
+                },
                 articleCollectCategory:{
                     name:'名称',
                     iconName:'图标',
