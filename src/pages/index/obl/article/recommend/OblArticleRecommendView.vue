@@ -165,14 +165,14 @@
                     decorator: ["reason", {rules: []}]
                 },
                 startTime: {
-                    key: 'startTime',
-                    formType: FormItemTypeEnum.DateTime,
+                    key: 'startTimeRange',
+                    formType: FormItemTypeEnum.DateTimeRange,
                     label: this.$t('langMap.table.fields.obl.articleRecommend.startTime'),
-                    decorator: ["startTime", {rules: []}],
+                    decorator: ["startTimeRange", {rules: []}],
                 },
                 endTime: {
                     key: 'endTime',
-                    formType: FormItemTypeEnum.DateTime,
+                    formType: FormItemTypeEnum.DateTimeRange,
                     label: this.$t('langMap.table.fields.obl.articleRecommend.endTime'),
                     decorator: ["endTime", {rules: []}],
                 },
