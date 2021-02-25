@@ -411,6 +411,7 @@ export const langMap = {
             openInvalidRowDetails:'打开无效的行详情！',
             doNotAllowSelectionOfStartUsing:'所选项中包含已启用的项，请取消勾选所有已启用的项后重试！',
             doNotAllowSelectionOfConfirmed:'所选项中包含已确认的项，请取消勾选所有已确认的项后重试！',
+            doNotAllowSelectionOfNotConfirmed:'所选项中包含未确认的项，请取消勾选所有未确认的项后重试！',
         },
         error:{
             failedDueToNotGettingId:'操作失败！未取得有效的id！',

@@ -68,10 +68,11 @@
                                     {{$t('langMap.button.actions.edit')}}
                                 </a>
                             </template>
-
-                             <a @click="handleAdjust($event,record)">
-                                {{$t('langMap.button.actions.adjustTime')}}
-                            </a>
+                            <template v-if="record.isConfirmed == 1">
+                                 <a @click="handleAdjust($event,record)">
+                                    {{$t('langMap.button.actions.adjustTime')}}
+                                </a>
+                            </template>
                             <a-divider type="vertical"/>
                             <a @click="handleDetailDrawerShow($event,record)">
                                 {{$t('langMap.drawer.actions.detail')}}
@@ -452,7 +453,13 @@
                 if (selectList.length < 1) {
                     _this.$message.warning(this.$t('langMap.message.warning.pleaseSelectTheLeastRowOfDataForOperate'));
                 } else {
-                    this.dialog.adjust.itemList = selectList;
+                    //只能选择[未确认]的数据
+                    let editAbleList = selectList.filter(item => item.isConfirmed == 1) ;
+                    if(editAbleList.length < selectList.length){
+                        _this.$message.warning(this.$t('langMap.message.warning.doNotAllowSelectionOfNotConfirmed'));
+                        return false;
+                    }
+                    this.dialog.adjust.itemList = editAbleList;
                     this.dialog.adjust.visible = true ;
                 }
             },

@@ -405,7 +405,8 @@ export const langMap = {
             invalidPublishOperation:'Invalid publish operation!',
             openInvalidRowDetails:'Open invalid row details!',
             doNotAllowSelectionOfStartUsing:'The selected item contains enabled items. Please uncheck all enabled items and try again!',
-            doNotAllowSelectionOfConfirmed:'The selected item contains confirmed items, please uncheck all confirmed items and try again!'
+            doNotAllowSelectionOfConfirmed:'The selected item contains confirmed items, please uncheck all confirmed items and try again!',
+            doNotAllowSelectionOfNotConfirmed:'The selected item contains not confirmed items, please uncheck all not confirmed items and try again!'
         },
         error:{
             failedDueToNotGettingId:'Failed due to not getting id !',
