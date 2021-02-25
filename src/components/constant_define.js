@@ -23,6 +23,16 @@ export const FormBaseConfObj = {
             sm: { span: 20 },
         },
     },
+    mediumFormItemLayout:{
+        labelCol: {
+            xs: { span: 24 },
+            sm: { span: 8 },
+        },
+        wrapperCol: {
+            xs: { span: 24 },
+            sm: { span: 16 },
+        },
+    }
 };
 
 export const SupportI18nLocale = {

@@ -15,11 +15,12 @@
                     layout="vertical"
                     :form="createForm"
                 >
-                    <a-form-item :label="$t('langMap.table.fields.obl.articleRecommend.startDays')">
+                    <a-form-item v-bind="FormBaseConfObj.mediumFormItemLayout"
+                        :label="$t('langMap.table.fields.obl.articleRecommend.delayStartDays')">
                         <a-input-number v-decorator="formFieldConf.startDays"/>
                     </a-form-item>
-                    <a-form-item :label="$t('langMap.table.fields.obl.articleRecommend.endDays')"
-                                 v-bind="FormBaseConfObj.formItemLayout"
+                    <a-form-item v-bind="FormBaseConfObj.mediumFormItemLayout"
+                        :label="$t('langMap.table.fields.obl.articleRecommend.delayEndDays')"
                     >
                         <a-input-number v-decorator="formFieldConf.endDays"/>
                     </a-form-item>
