@@ -171,10 +171,10 @@
                     decorator: ["startTimeRange", {rules: []}],
                 },
                 endTime: {
-                    key: 'endTime',
+                    key: 'endTimeRange',
                     formType: FormItemTypeEnum.DateTimeRange,
                     label: this.$t('langMap.table.fields.obl.articleRecommend.endTime'),
-                    decorator: ["endTime", {rules: []}],
+                    decorator: ["endTimeRange", {rules: []}],
                 },
                 remark: {
                     key: 'remark',

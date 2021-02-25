@@ -11,6 +11,7 @@
             <!-- 操作按钮-区域-->
             <div>
                 <a-row
+                    v-show="false"
                     :gutter="6"
                     justify="start"
                     type="flex"
@@ -106,7 +107,32 @@
                     formType: FormItemTypeEnum.Input,
                     label: this.$t('langMap.table.fields.obl.articleRecommendDelayRecord.recommendReason'),
                     decorator: ["recommendReason", {rules: []}],
-                }
+                },
+                beforeStartTime: {
+                    key: 'beforeStartTimeRange',
+                    formType: FormItemTypeEnum.DateTimeRange,
+                    label: this.$t('langMap.table.fields.obl.articleRecommendDelayRecord.beforeStartTime'),
+                    decorator: ["beforeStartTimeRange", {rules: []}],
+                },
+                beforeEndTime: {
+                    key: 'beforeEndTimeRange',
+                    formType: FormItemTypeEnum.DateTimeRange,
+                    label: this.$t('langMap.table.fields.obl.articleRecommendDelayRecord.beforeEndTime'),
+                    decorator: ["beforeEndTimeRange", {rules: []}],
+                },
+                afterStartTime: {
+                    key: 'afterStartTimeRange',
+                    formType: FormItemTypeEnum.DateTimeRange,
+                    label: this.$t('langMap.table.fields.obl.articleRecommendDelayRecord.afterStartTime'),
+                    decorator: ["afterStartTimeRange", {rules: []}],
+                },
+                afterEndTime: {
+                    key: 'afterEndTimeRange',
+                    formType: FormItemTypeEnum.DateTimeRange,
+                    label: this.$t('langMap.table.fields.obl.articleRecommendDelayRecord.afterEndTime'),
+                    decorator: ["afterEndTimeRange", {rules: []}],
+                },
+
             };
             return {
                 ConstantObj,
