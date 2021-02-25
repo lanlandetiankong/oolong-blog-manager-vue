@@ -70,18 +70,6 @@
                     <span slot="publishTimeRender" slot-scope="text,record,index">
                         {{record.publishTime | formatBaseDateTime}}
                     </span>
-                    <span slot="auditStateRender" slot-scope="text,record,index">
-                        <span>
-                            <a-tag color="blue"
-                                   v-if="record.auditState == 2">
-                                {{$t('langMap.commons.enums.auditStatus.approved')}}
-                            </a-tag>
-                            <a-tag color="orange"
-                                   v-else-if="record.auditState == 1">
-                                {{$t('langMap.commons.enums.auditStatus.approval')}}
-                            </a-tag>
-                        </span>
-                    </span>
                     <span slot="editorTypeRender" slot-scope="text,record,index">
                         <a-tag color="blue"
                                v-if="record.editorType == 1">
@@ -90,9 +78,11 @@
                     </span>
                     <template slot="action" slot-scope="text,record">
                         <span>
-                            <a @click="handleSetAsRecommended($event,record)">
-                                {{$t('langMap.button.actions.setAsRecommended')}}
-                            </a>
+                            <template v-if="record.auditState == AllEnum.ArticleAuditStateEnum.Approved.value">
+                                <a @click="handleSetAsRecommended($event,record)">
+                                    {{$t('langMap.button.actions.setAsRecommended')}}
+                                </a>
+                            </template>
                             <a-divider type="vertical" />
                             <!--<a @click="handleDetailDrawerShow($event,record)">
                                 {{$t('langMap.drawer.actions.detail')}}
@@ -129,6 +119,7 @@
     import BeeUtil from '~Assets/js/util/bee/BeeUtil.js';
     import {ArticleAllListApi} from './OblArticleAllListApi'
     import {DrawerFieldTypeEnum} from '~Components/regular/common/drawer/drawer_define.js'
+    import {AllEnum,EnumUtils} from '~Config/selectData.js';
     import {OblCommonMixin} from '~Layout/mixin/OblCommonMixin';
     import {ConstantObj, FormItemTypeEnum} from "~Components/constant_define";
     import QueryFormComp from '~Components/regular/query/QueryFormComp'
@@ -183,6 +174,7 @@
                 };
             return {
                 ConstantObj,
+                AllEnum,
                 binding:{
                     articleTagList:[],
                     categoryIdList:[]
@@ -216,10 +208,9 @@
                     },  {
                         title: this.$t('langMap.table.fields.obl.article.auditState'),
                         align:textAlignDefault,
-                        dataIndex: 'auditState',
+                        dataIndex: 'auditStateStr',
                         width:90,
-                        key: 'auditState',
-                        scopedSlots: { customRender: 'auditStateRender' }
+                        key: 'auditState'
                     },  {
                         title: this.$t('langMap.table.fields.obl.article.isPublished'),
                         align:textAlignDefault,
@@ -382,6 +373,18 @@
                     }
                 })
             },
+            handleTransformData(){//数据转化
+                const data = this.tableConf.data;
+                if(!data){
+                    return ;
+                }
+                //Map-模块类型
+                let articleAuditStateValMap = EnumUtils.toValMap(AllEnum.ArticleAuditStateEnum);
+                for (let idx in data){
+                    let item = data[idx] ;
+                    item['auditStateStr'] = articleAuditStateValMap[item.auditState];
+                }
+            },
             handleSearchFormQuery(e,values) {    //带查询条件 检索文章列表
                 const _this = this;
                 _this.changeQueryLoading(true);
@@ -390,6 +393,7 @@
                     this.tableConf.pagination.total = res.vpage.total ;
                     //清空 已勾选
                     _this.tableCheckIdList = [] ;
+                    _this.handleTransformData();
                     _this.changeQueryLoading(false);
                 }).catch((e) =>{
                     _this.changeQueryLoading(false);
@@ -467,7 +471,13 @@
                 if (selectList.length < 1) {
                     _this.$message.warning(this.$t('langMap.message.warning.pleaseSelectTheLeastRowOfDataForOperate'));
                 } else {
-                    this.dialog.setRecommend.articleList = selectList;
+                    //只能选择[审批通过]的数据
+                    let editAbleList = selectList.filter(item => item.auditState == AllEnum.ArticleAuditStateEnum.Approved.value) ;
+                    if(editAbleList.length < selectList.length){
+                        _this.$message.warning(this.$t('langMap.message.warning.doNotAllowSelectionOfNotApproved'));
+                        return false;
+                    }
+                    this.dialog.setRecommend.articleList = editAbleList;
                     this.dialog.setRecommend.visible = true ;
                 }
             },

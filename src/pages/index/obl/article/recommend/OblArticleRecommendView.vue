@@ -466,8 +466,8 @@
                 if (selectList.length < 1) {
                     _this.$message.warning(this.$t('langMap.message.warning.pleaseSelectTheLeastRowOfDataForOperate'));
                 } else {
-                    //只能选择[未确认]的数据
-                    let editAbleList = selectList.filter(item => item.isConfirmed == 0) ;
+                    //只能选择[已确认]的数据
+                    let editAbleList = selectList.filter(item => item.isConfirmed == 1) ;
                     if(editAbleList.length < selectList.length){
                         _this.$message.warning(this.$t('langMap.message.warning.doNotAllowSelectionOfConfirmed'));
                         return false;
