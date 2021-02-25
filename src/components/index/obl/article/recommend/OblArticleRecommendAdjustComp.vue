@@ -119,13 +119,14 @@
             },
             handleSubmit(){
                 this.createForm.validateFields((err, values) => {
+                    var _this = this;
                     if (err) {
                         return ;
                     }
                     OblArticleRecommendAdjustCompApi.adjustTime(values,this.itemIdList).then((res) => {
                         if(res.success){
-                            this.$message.success(res.msg);
-                            this.emitSubmit();
+                            _this.$message.success(res.msg);
+                            _this.emitSubmit();
                         }
                     }) ;
                 })

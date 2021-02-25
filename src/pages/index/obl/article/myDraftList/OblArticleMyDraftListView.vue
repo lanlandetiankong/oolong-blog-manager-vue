@@ -350,7 +350,7 @@
                 var delIds = _this.tableCheckIdList;
                 ArticleMyDraftListApi.batchDeleteByIds(delIds).then((res) => {
                     if (res.success) {  //已经有对错误进行预处理
-                        this.$message.success(res.msg);
+                        _this.$message.success(res.msg);
                         _this.mixin_invokeQuery(_this); //表格重新搜索
                     }
                 })

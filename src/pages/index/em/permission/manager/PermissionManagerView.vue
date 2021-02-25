@@ -274,7 +274,7 @@
                 var delIds = _this.tableCheckIdList;
                 PermissionManagerApi.batchDeleteByIds(delIds).then((res) => {
                     if (res.success) {  //已经有对错误进行预处理
-                        this.$message.success(res.msg);
+                        _this.$message.success(res.msg);
                         _this.mixin_invokeQuery(_this); //表格重新搜索
                     }
                 })
@@ -284,7 +284,7 @@
                 var delIds = _this.tableCheckIdList;
                 PermissionManagerApi.batchEnsureByIds(delIds).then((res) => {
                     if (res.success) {  //已经有对错误进行预处理
-                        this.$message.success(res.msg);
+                        _this.$message.success(res.msg);
                         _this.mixin_invokeQuery(_this); //表格重新搜索
                     }
                 })
@@ -422,7 +422,7 @@
                     if (_this.dialogFormConf.actionType == "create") {        //新建-提交
                         PermissionManagerApi.createByForm(values).then((res) => {
                             if (res.success) {  //异常已经有预处理了
-                                this.$message.success(res.msg);
+                                _this.$message.success(res.msg);
                                 _this.mixin_invokeQuery(_this); //表格重新搜索
                             } else {
                                 closeDialogFlag = false;
@@ -436,7 +436,7 @@
                         values['fid'] = _this.dialogFormObj.fid;   //提交时，回填fid值
                         PermissionManagerApi.updateByForm(values).then((res) => {
                             if (res.success) {  //异常已经有预处理了
-                                this.$message.success(res.msg);
+                                _this.$message.success(res.msg);
                                 _this.mixin_invokeQuery(_this); //表格重新搜索
                             } else {
                                 closeDialogFlag = false;
