@@ -197,6 +197,12 @@ export const ArticleAuditStateEnum = {
         label: i18nUtil.getKey('langMap.commons.enums.auditStatus.approved')
     },
 };
+export const ArticleEditorTypeEnum = {
+    Markdown:{
+        value: 1,
+        label: i18nUtil.getKey('langMap.commons.enums.articleEditorType.markdown')
+    }
+};
 /**
  * 对象转Select的data
  * @param obj
@@ -276,7 +282,8 @@ export const AllEnum = {
     SwitchEnum,
     FlagSwitchEnum,
     PublishStatusEnum,
-    ArticleAuditStateEnum
+    ArticleAuditStateEnum,
+    ArticleEditorTypeEnum
 };
 
 export const EnumUtils = {

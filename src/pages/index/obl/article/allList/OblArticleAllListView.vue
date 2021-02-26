@@ -73,12 +73,6 @@
                     <span slot="auditTimeRender" slot-scope="text,record,index">
                         {{record.auditTime | formatBaseDateTime}}
                     </span>
-                    <span slot="editorTypeRender" slot-scope="text,record,index">
-                        <a-tag color="blue"
-                               v-if="record.editorType == 1">
-                            Markdown
-                        </a-tag>
-                    </span>
                     <template slot="action" slot-scope="text,record">
                         <span>
                             <template v-if="record.auditState == AllEnum.ArticleAuditStateEnum.Approved.value">
@@ -129,6 +123,7 @@
     import OblArticleSetRecommendComp from '~Components/index/obl/article/recommend/OblArticleSetRecommendComp'
 
     import RowDetailDrawerComp from '~Components/regular/common/drawer/RowDetailDrawerComp';
+    import {ArticleEditorTypeEnum} from "~Config/selectData";
 
     export default {
         name: "OblArticleAllListView",
@@ -292,9 +287,9 @@
                     }, {
                         title: this.$t('langMap.table.fields.obl.article.editorType'),
                         align:textAlignDefault,
-                        key: 'editorType',
-                        width:110,
-                        scopedSlots: { customRender: 'editorTypeRender' }
+                        dataIndex: 'editorTypeStr',
+                        key: 'editorTypeStr',
+                        width:110
                     },  {
                         title:this.$t('langMap.table.header.operation'),
                         align:textAlignDefault,
@@ -408,9 +403,11 @@
                 }
                 //Map-模块类型
                 let articleAuditStateValMap = EnumUtils.toValMap(AllEnum.ArticleAuditStateEnum);
+                let articleEditorTypeValMap = EnumUtils.toValMap(AllEnum.ArticleEditorTypeEnum);
                 for (let idx in data){
                     let item = data[idx] ;
                     item['auditStateStr'] = articleAuditStateValMap[item.auditState];
+                    item['editorTypeStr'] = articleEditorTypeValMap[item.editorType];
                 }
             },
             handleSearchFormQuery(e,values) {    //带查询条件 检索文章列表

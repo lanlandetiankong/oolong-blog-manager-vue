@@ -359,6 +359,9 @@ export const langMap = {
             switchFlag:{
                 open:'是',
                 close:'否'
+            },
+            articleEditorType:{
+                markdown:'Markdown'
             }
         },
         valueMap:{

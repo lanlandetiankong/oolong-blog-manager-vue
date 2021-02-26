@@ -354,6 +354,13 @@ export const langMap = {
             switch:{
                 open:'Open',
                 close:'Close'
+            },
+            switchFlag:{
+                open:'Yes',
+                close:'No'
+            },
+            articleEditorType:{
+                markdown:'Markdown'
             }
         },
         valueMap:{

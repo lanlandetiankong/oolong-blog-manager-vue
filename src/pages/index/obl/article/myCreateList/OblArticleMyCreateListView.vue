@@ -67,24 +67,6 @@
                     <span slot="auditTimeRender" slot-scope="text,record,index">
                         {{record.auditTime | formatBaseDateTime}}
                     </span>
-                    <span slot="auditStateRender" slot-scope="text,record,index">
-                        <span>
-                            <a-tag color="blue"
-                                   v-if="record.auditState == 2">
-                                {{$t('langMap.commons.enums.auditStatus.approved')}}
-                            </a-tag>
-                            <a-tag color="orange"
-                                   v-else-if="record.auditState == 1">
-                                {{$t('langMap.commons.enums.auditStatus.approval')}}
-                            </a-tag>
-                        </span>
-                    </span>
-                    <span slot="editorTypeRender" slot-scope="text,record,index">
-                        <a-tag color="blue"
-                               v-if="record.editorType == 1">
-                            Markdown
-                        </a-tag>
-                    </span>
                     <template slot="action" slot-scope="text,record">
                         <span>
                             <a @click="handleDetailDrawerShow($event,record)">
@@ -122,6 +104,7 @@
     import QueryFormComp from '~Components/regular/query/QueryFormComp'
     import RowDetailDrawerComp from '~Components/regular/common/drawer/RowDetailDrawerComp';
     import {ArticleAllListApi} from "~Pages/index/obl/article/allList/OblArticleAllListApi";
+    import {AllEnum, EnumUtils} from "~Config/selectData";
 
     export default {
         name: "OblArticleMyCreateListView",
@@ -202,10 +185,9 @@
                     },  {
                         title: this.$t('langMap.table.fields.obl.article.auditState'),
                         align:textAlignDefault,
-                        dataIndex: 'auditState',
+                        dataIndex: 'auditStateStr',
                         width:90,
-                        key: 'auditState',
-                        scopedSlots: { customRender: 'auditStateRender' }
+                        key: 'auditState'
                     }, {
                         title: this.$t('langMap.table.fields.obl.article.auditComments'),
                         align:textAlignDefault,
@@ -278,9 +260,9 @@
                     }, {
                         title: this.$t('langMap.table.fields.obl.article.editorType'),
                         align:textAlignDefault,
-                        key: 'editorType',
-                        width:110,
-                        scopedSlots: { customRender: 'editorTypeRender' }
+                        dataIndex: 'editorTypeStr',
+                        key: 'editorTypeStr',
+                        width:110
                     },  {
                         title:this.$t('langMap.table.header.operation'),
                         align:textAlignDefault,
@@ -383,6 +365,20 @@
                     }
                 })
             },
+            handleTransformData(){//数据转化
+                const data = this.tableConf.data;
+                if(!data){
+                    return ;
+                }
+                //Map-模块类型
+                let articleAuditStateValMap = EnumUtils.toValMap(AllEnum.ArticleAuditStateEnum);
+                let articleEditorTypeValMap = EnumUtils.toValMap(AllEnum.ArticleEditorTypeEnum);
+                for (let idx in data){
+                    let item = data[idx] ;
+                    item['auditStateStr'] = articleAuditStateValMap[item.auditState];
+                    item['editorTypeStr'] = articleEditorTypeValMap[item.editorType];
+                }
+            },
             handleSearchFormQuery(e,values) {    //带查询条件 检索文章列表
                 const _this = this;
                 _this.changeQueryLoading(true);
@@ -391,6 +387,7 @@
                     this.tableConf.pagination.total = res.vpage.total ;
                     //清空 已勾选
                     _this.tableCheckIdList = [] ;
+                    _this.handleTransformData();
                     _this.changeQueryLoading(false);
                 }).catch((e) =>{
                     _this.changeQueryLoading(false);
