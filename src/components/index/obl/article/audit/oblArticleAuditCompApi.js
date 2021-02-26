@@ -4,6 +4,6 @@ export const OblArticleAuditCompApi = {
     batchAudit(values,idList) {  //审批文章
         let obj = values ;
         obj['articleIdList'] = idList ;
-        return axios.post('/oblCtl/oblArticleAuditRecord/auditArticle',obj).then(res => res.data);
+        return axios.post('/oblCtl/oblArticleAuditRecord/batchAuditArticle',obj).then(res => res.data);
     },
 };
