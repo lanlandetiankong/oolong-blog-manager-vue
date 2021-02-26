@@ -47,7 +47,8 @@ export const langMap = {
             confirmData:'Confirm data',
             delayTime:'Delay time',
             audit:'Audit',
-            antiAudit:'Anti-audit'
+            antiAudit:'Anti-audit',
+            viewAuditRecord:'Audit record'
         },
         member:{
             account:'Account',
@@ -278,6 +279,7 @@ export const langMap = {
                     auditState:'Audit state',
                     auditUserName:'Audit user',
                     selectArticles:'Selected articles',
+                    auditType:'Audit type'
                 },
                 articleCollectCategory:{
                     name:'Name',
@@ -372,6 +374,10 @@ export const langMap = {
             },
             articleEditorType:{
                 markdown:'Markdown'
+            },
+            articleAuditType:{
+                audit:'Audit',
+                antiAudit:'Anti-audit'
             }
         },
         valueMap:{

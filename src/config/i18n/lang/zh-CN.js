@@ -47,7 +47,8 @@ export const langMap = {
             confirmData:'数据确认',
             delayTime:'延迟时间',
             audit:'审批',
-            antiAudit:'反审批'
+            antiAudit:'反审批',
+            viewAuditRecord:'审批记录'
         },
         member:{
             account:'账号',
@@ -279,6 +280,7 @@ export const langMap = {
                     auditState:'审批值',
                     auditUserName:'审批人',
                     selectArticles:'已选文章',
+                    auditType:'审批类型',
                 },
                 articleCollectCategory:{
                     name:'名称',
@@ -373,6 +375,10 @@ export const langMap = {
             },
             articleEditorType:{
                 markdown:'Markdown'
+            },
+            articleAuditType:{
+                audit:'审批',
+                antiAudit:'反审批'
             }
         },
         valueMap:{
@@ -562,5 +568,4 @@ export const langMap = {
             }
         }
     }
-
 }

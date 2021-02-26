@@ -69,6 +69,9 @@
                     </span>
                     <template slot="action" slot-scope="text,record">
                         <span>
+                             <a @click="handleViewAuditRecords($event,record)">
+                                {{$t('langMap.button.actions.viewAuditRecord')}}
+                            </a>
                             <a @click="handleDetailDrawerShow($event,record)">
                                 {{$t('langMap.drawer.actions.detail')}}
                             </a>
@@ -84,6 +87,12 @@
             </div>
             <!-- 弹窗dom-区域 -->
             <div>
+                <obl-article-audit-records-comp
+                    v-if="dialog.viewAuditRecords.visible"
+                    v-bind="dialog.viewAuditRecords"
+                    @cancel="()=> this.dialog.viewAuditRecords.visible = false"
+                    @submit="()=> this.dialog.viewAuditRecords.visible = false"
+                />
                 <row-detail-drawer-comp
                     :drawerConf="drawerConf.detail.article.conf"
                     :dataObj="drawerConf.detail.article.dataObj"
@@ -97,18 +106,20 @@
 </template>
 <script>
     import BeeUtil from '~Assets/js/util/bee/BeeUtil.js';
+    import {ArticleAllListApi} from "~Pages/index/obl/article/allList/OblArticleAllListApi";
+    import {AllEnum, EnumUtils} from "~Config/selectData";
     import {ArticleMyCreateListApi} from './OblArticleMyCreateListApi'
     import {DrawerFieldTypeEnum} from '~Components/regular/common/drawer/drawer_define.js'
     import {OblCommonMixin} from '~Layout/mixin/OblCommonMixin';
     import {ConstantObj, FormItemTypeEnum} from "~Components/constant_define";
     import QueryFormComp from '~Components/regular/query/QueryFormComp'
     import RowDetailDrawerComp from '~Components/regular/common/drawer/RowDetailDrawerComp';
-    import {ArticleAllListApi} from "~Pages/index/obl/article/allList/OblArticleAllListApi";
-    import {AllEnum, EnumUtils} from "~Config/selectData";
+    import OblArticleAuditRecordsComp from '~Components/index/obl/article/audit/OblArticleAuditRecordsComp'
+
 
     export default {
         name: "OblArticleMyCreateListView",
-        components:{QueryFormComp,RowDetailDrawerComp},
+        components:{QueryFormComp,OblArticleAuditRecordsComp,RowDetailDrawerComp},
         mixins:[OblCommonMixin],
         data() {
             const textAlignDefault = 'left' ;
@@ -290,9 +301,11 @@
                     }
                 },
                 tableCheckIdList: [],
-                dialogFormConf: {
-                    visible: false,
-                    actionType: "create"
+                dialog:{
+                    viewAuditRecords:{
+                        visible: false,
+                        formObj:[]
+                    }
                 },
                 drawerConf:{
                     detail:{
@@ -454,6 +467,10 @@
                 var params = record ;
                 var url = BeeUtil.UrlUtils.objToUrl(this.mixinData.routerConst.article.display,params);
                 this.mixin_jump(url);
+            },
+            handleViewAuditRecords(e,record){   //查看文章的审批记录
+                this.dialog.viewAuditRecords.formObj = record;
+                this.dialog.viewAuditRecords.visible = true ;
             },
         },
         watch:{

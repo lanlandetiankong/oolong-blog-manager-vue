@@ -102,6 +102,9 @@
                                     {{$t('langMap.button.actions.setAsRecommended')}}
                                 </a>
                             </template>
+                            <a @click="handleViewAuditRecords($event,record)">
+                                {{$t('langMap.button.actions.viewAuditRecord')}}
+                            </a>
                             <a-divider type="vertical" />
                             <!--<a @click="handleDetailDrawerShow($event,record)">
                                 {{$t('langMap.drawer.actions.detail')}}
@@ -135,6 +138,12 @@
                     @cancel="handleCloseAntiAudit"
                     @submit="handleSubmitAntiAudit"
                 />
+                <obl-article-audit-records-comp
+                    v-if="dialog.viewAuditRecords.visible"
+                    v-bind="dialog.viewAuditRecords"
+                    @cancel="()=> this.dialog.viewAuditRecords.visible = false"
+                    @submit="()=> this.dialog.viewAuditRecords.visible = false"
+                />
                 <row-detail-drawer-comp
                     :drawerConf="drawerConf.detail.article.conf"
                     :dataObj="drawerConf.detail.article.dataObj"
@@ -157,12 +166,14 @@
     import OblArticleSetRecommendComp from '~Components/index/obl/article/recommend/OblArticleSetRecommendComp'
     import OblArticleAuditComp from '~Components/index/obl/article/audit/OblArticleAuditComp'
     import OblArticleAntiAuditComp from '~Components/index/obl/article/audit/OblArticleAntiAuditComp'
+    import OblArticleAuditRecordsComp from '~Components/index/obl/article/audit/OblArticleAuditRecordsComp'
 
     import RowDetailDrawerComp from '~Components/regular/common/drawer/RowDetailDrawerComp';
 
     export default {
         name: "OblArticleAllListView",
-        components:{QueryFormComp,OblArticleSetRecommendComp,OblArticleAuditComp,OblArticleAntiAuditComp,RowDetailDrawerComp},
+        components:{QueryFormComp,OblArticleSetRecommendComp,OblArticleAuditComp,
+            OblArticleAntiAuditComp,OblArticleAuditRecordsComp,RowDetailDrawerComp},
         mixins:[OblCommonMixin],
         data() {
             const textAlignDefault = 'left' ;
@@ -381,6 +392,10 @@
                     antiAudit:{
                         visible: false,
                         articleList:[]
+                    },
+                    viewAuditRecords:{
+                        visible: false,
+                        formObj:[]
                     }
                 },
                 drawerConf:{
@@ -639,6 +654,10 @@
                 this.dialog.antiAudit.articleList = [];
                 this.dialog.antiAudit.visible = false ;
                 this.mixin_invokeQuery(this); //表格重新搜索
+            },
+            handleViewAuditRecords(e,record){   //查看文章的审批记录
+                this.dialog.viewAuditRecords.formObj = record;
+                this.dialog.viewAuditRecords.visible = true ;
             },
         },
         watch:{

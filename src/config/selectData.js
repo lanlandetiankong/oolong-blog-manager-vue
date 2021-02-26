@@ -197,6 +197,21 @@ export const ArticleAuditStateEnum = {
         label: i18nUtil.getKey('langMap.commons.enums.auditStatus.approved')
     },
 };
+export const ArticleAuditTypeEnum = {
+    Audit:{
+        value: 1,
+        label: i18nUtil.getKey('langMap.commons.enums.articleAuditType.audit')
+    },
+    AntiAudit:{
+        value: 2,
+        label: i18nUtil.getKey('langMap.commons.enums.articleAuditType.antiAudit')
+    }
+};
+
+/**
+ * 枚举-文章编辑器类型
+ * @type {{Markdown: {label: string, value: number}}}
+ */
 export const ArticleEditorTypeEnum = {
     Markdown:{
         value: 1,
@@ -303,6 +318,7 @@ export const AllEnum = {
     FlagSwitchEnum,
     PublishStatusEnum,
     ArticleAuditStateEnum,
+    ArticleAuditTypeEnum,
     ArticleEditorTypeEnum
 };
 
