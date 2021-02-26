@@ -184,6 +184,10 @@ export const ArticleAuditStateEnum = {
         value: 1,
         label: i18nUtil.getKey('langMap.commons.enums.auditStatus.approval')
     },
+    ReturnToModify:{
+        value: 2,
+        label: i18nUtil.getKey('langMap.commons.enums.auditStatus.returnToModify')
+    },
     ApprovalFailed:{
         value: 8,
         label: i18nUtil.getKey('langMap.commons.enums.auditStatus.approvalFailed')

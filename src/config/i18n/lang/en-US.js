@@ -315,6 +315,7 @@ export const langMap = {
             auditStatus:{
                 notApproved:'Not approved',
                 approval:'Approval',
+                returnToModify:'Return to modify',
                 approved:'Approved',
                 approvalFailed:'Approval failed'
             },

@@ -312,6 +312,7 @@ export const langMap = {
             auditStatus:{
                 notApproved:'未审批',
                 approval:'审批中',
+                returnToModify:'退回修改',
                 approved:'审批通过',
                 approvalFailed:'审批不通过'
             },
