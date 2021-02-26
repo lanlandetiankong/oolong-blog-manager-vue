@@ -225,6 +225,8 @@ export const langMap = {
                     likeCount:'Like count',
                     collectCount:'Collect count',
                     auditState:'Approval status',
+                    auditComments:'Approval comments',
+                    auditTime:'Approval time',
                     isPublished:'Published status',
                     publishTime:'Published time',
                     tagIds:'Tag id',

@@ -64,6 +64,9 @@
                     <span slot="publishTimeRender" slot-scope="text,record,index">
                         {{record.publishTime | formatBaseDateTime}}
                     </span>
+                    <span slot="auditTimeRender" slot-scope="text,record,index">
+                        {{record.auditTime | formatBaseDateTime}}
+                    </span>
                     <span slot="auditStateRender" slot-scope="text,record,index">
                         <span>
                             <a-tag color="blue"
@@ -203,6 +206,19 @@
                         width:90,
                         key: 'auditState',
                         scopedSlots: { customRender: 'auditStateRender' }
+                    }, {
+                        title: this.$t('langMap.table.fields.obl.article.auditComments'),
+                        align:textAlignDefault,
+                        dataIndex: 'auditComments',
+                        width:90,
+                        key: 'auditComments'
+                    },  {
+                        title: this.$t('langMap.table.fields.obl.article.auditTime'),
+                        align:textAlignDefault,
+                        dataIndex: 'auditTime',
+                        width:180,
+                        key: 'auditTime',
+                        scopedSlots: { customRender: 'auditTimeRender' }
                     },  {
                         title: this.$t('langMap.table.fields.obl.article.isPublished'),
                         align:textAlignDefault,

@@ -226,6 +226,8 @@ export const langMap = {
                     likeCount:'点赞次数',
                     collectCount:'收藏次数',
                     auditState:'审核状态',
+                    auditComments:'审批意见',
+                    auditTime:'审批时间',
                     isPublished:'发布状态',
                     publishTime:'发布时间',
                     tagIds:'标签id',
