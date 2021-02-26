@@ -18,6 +18,12 @@
                 >
                     <a-col>
                         <a-button type="primary" icon="check-square"
+                                  @click="handleBatchAudit">
+                            {{$t('langMap.button.actions.audit')}}
+                        </a-button>
+                    </a-col>
+                    <a-col>
+                        <a-button type="primary" icon="check-square"
                                   @click="handleBatchSetAsRecommended">
                             {{$t('langMap.button.actions.setAsRecommended')}}
                         </a-button>
@@ -101,6 +107,12 @@
                     @cancel="handleCloseSetRecommend"
                     @submit="handleSubmitSetRecommend"
                 />
+                <obl-article-audit-comp
+                    v-if="dialog.audit.visible"
+                    v-bind="dialog.audit"
+                    @cancel="handleCloseAudit"
+                    @submit="handleSubmitAudit"
+                />
                 <row-detail-drawer-comp
                     :drawerConf="drawerConf.detail.article.conf"
                     :dataObj="drawerConf.detail.article.dataObj"
@@ -121,13 +133,13 @@
     import {ConstantObj, FormItemTypeEnum} from "~Components/constant_define";
     import QueryFormComp from '~Components/regular/query/QueryFormComp'
     import OblArticleSetRecommendComp from '~Components/index/obl/article/recommend/OblArticleSetRecommendComp'
+    import OblArticleAuditComp from '~Components/index/obl/article/audit/OblArticleAuditComp'
 
     import RowDetailDrawerComp from '~Components/regular/common/drawer/RowDetailDrawerComp';
-    import {ArticleEditorTypeEnum} from "~Config/selectData";
 
     export default {
         name: "OblArticleAllListView",
-        components:{QueryFormComp,OblArticleSetRecommendComp,RowDetailDrawerComp},
+        components:{QueryFormComp,OblArticleSetRecommendComp,OblArticleAuditComp,RowDetailDrawerComp},
         mixins:[OblCommonMixin],
         data() {
             const textAlignDefault = 'left' ;
@@ -322,6 +334,10 @@
                     setRecommend:{
                         visible: false,
                         articleList:[]
+                    },
+                    audit:{
+                        visible: false,
+                        articleList:[]
                     }
                 },
                 drawerConf:{
@@ -514,7 +530,37 @@
                 this.dialog.setRecommend.articleList = [];
                 this.dialog.setRecommend.visible = false ;
                 this.mixin_invokeQuery(this); //表格重新搜索
-            }
+            },
+            handleBatchAudit(e){ //批量审批
+                var _this = this;
+                var selectList = _this.tableCheckList;
+                if (selectList.length < 1) {
+                    _this.$message.warning(this.$t('langMap.message.warning.pleaseSelectTheLeastRowOfDataForOperate'));
+                } else {
+                    //只能选择非[审批通过、审批不通过]的数据
+                    let notStateArr = [] ;
+                    notStateArr.push(AllEnum.ArticleAuditStateEnum.ApprovalFailed.value);
+                    notStateArr.push(AllEnum.ArticleAuditStateEnum.Approved.value);
+                    let ableList = selectList.filter(item => {
+                        return notStateArr.indexOf(item.auditState) < 0 ;
+                    }) ;
+                    if(ableList.length < selectList.length){
+                        _this.$message.warning(this.$t('langMap.message.warning.doNotAllowSelectionOfAudited'));
+                        return false;
+                    }
+                    this.dialog.audit.articleList = ableList;
+                    this.dialog.audit.visible = true ;
+                }
+            },
+            handleCloseAudit(e){
+                this.dialog.audit.articleList = [];
+                this.dialog.audit.visible = false ;
+            },
+            handleSubmitAudit(e){
+                this.dialog.audit.articleList = [];
+                this.dialog.audit.visible = false ;
+                this.mixin_invokeQuery(this); //表格重新搜索
+            },
         },
         watch:{
             binding:{

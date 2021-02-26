@@ -46,6 +46,8 @@ export const langMap = {
             adjustTime:'调整时间',
             confirmData:'数据确认',
             delayTime:'延迟时间',
+            audit:'审批',
+            antiAudit:'反审批'
         },
         member:{
             account:'账号',
@@ -269,6 +271,14 @@ export const langMap = {
                     beforeTimeRange:'原时间范围',
                     afterTimeRange:'现时间范围'
                 },
+                articleAuditRecord:{
+                    articleTitle:'文章标题',
+                    auditComments:'审批意见',
+                    auditTime:'审批时间',
+                    auditState:'审批值',
+                    auditUserName:'审批人',
+                    selectArticles:'已选文章',
+                },
                 articleCollectCategory:{
                     name:'名称',
                     iconName:'图标',
@@ -422,6 +432,7 @@ export const langMap = {
             doNotAllowSelectionOfConfirmed:'所选项中包含已确认的项，请取消勾选所有已确认的项后重试！',
             doNotAllowSelectionOfNotConfirmed:'所选项中包含未确认的项，请取消勾选所有未确认的项后重试！',
             doNotAllowSelectionOfNotApproved:'所选项中包含非审批通过的项，请取消勾选所有非审批通过的项后重试！',
+            doNotAllowSelectionOfAudited:'所选项中包含已审批的项，请取消勾选所有已审批的项后重试！'
         },
         error:{
             failedDueToNotGettingId:'操作失败！未取得有效的id！',

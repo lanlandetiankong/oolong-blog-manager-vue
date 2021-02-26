@@ -178,7 +178,7 @@ export const PublishStatusEnum = {
 export const ArticleAuditStateEnum = {
     NotApproved:{
         value: 0,
-        label: i18nUtil.getKey('langMap.commons.enums.auditStatus.notApproved')
+        label: i18nUtil.getKey('langMap.commons.enums.auditStatus.notApproved'),
     },
     Approval:{
         value: 1,
@@ -236,6 +236,26 @@ function toSelectData(obj) {
     return arr;
 }
 
+
+function listToSelectData(arr) {
+    let newArr = [] ;
+    for (let idx in arr) {
+        let item = arr[idx];
+        if (!item) {
+            continue;
+        }
+        if (typeof item.value == "undefined" || typeof item.label == "undefined") {
+            continue;
+        }
+        newArr.push({
+            value: item.value,
+            label: item.label
+        });
+    }
+    return newArr;
+}
+
+
 /**
  * 枚举对象转map
  * @param obj
@@ -288,5 +308,6 @@ export const AllEnum = {
 
 export const EnumUtils = {
     toSelectData,
+    listToSelectData,
     toValMap
 };

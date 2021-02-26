@@ -45,7 +45,9 @@ export const langMap = {
             setAsRecommended:'Set as recommended',
             adjustTime:'Adjust time',
             confirmData:'Confirm data',
-            delayTime:'Delay time'
+            delayTime:'Delay time',
+            audit:'Audit',
+            antiAudit:'Anti-audit'
         },
         member:{
             account:'Account',
@@ -268,6 +270,14 @@ export const langMap = {
                     beforeTimeRange:'Before time range',
                     afterTimeRange:'After time range'
                 },
+                articleAuditRecord:{
+                    articleTitle:'Article title',
+                    auditComments:'Audit comment',
+                    auditTime:'Audit time',
+                    auditState:'Audit state',
+                    auditUserName:'Audit user',
+                    selectArticles:'Selected articles',
+                },
                 articleCollectCategory:{
                     name:'Name',
                     iconName:'Icon name',
@@ -419,7 +429,9 @@ export const langMap = {
             openInvalidRowDetails:'Open invalid row details!',
             doNotAllowSelectionOfStartUsing:'The selected item contains enabled items. Please uncheck all enabled items and try again!',
             doNotAllowSelectionOfConfirmed:'The selected item contains confirmed items, please uncheck all confirmed items and try again!',
-            doNotAllowSelectionOfNotConfirmed:'The selected item contains not confirmed items, please uncheck all not confirmed items and try again!'
+            doNotAllowSelectionOfNotConfirmed:'The selected item contains not confirmed items, please uncheck all not confirmed items and try again!',
+            doNotAllowSelectionOfNotApproved:'The selected item contains not approved items, please uncheck all not approved items and try again!',
+            doNotAllowSelectionOfAudited:'The selected item contains audited items, please uncheck all audited items and try again!'
         },
         error:{
             failedDueToNotGettingId:'Failed due to not getting id !',
