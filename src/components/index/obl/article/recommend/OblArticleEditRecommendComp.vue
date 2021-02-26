@@ -134,7 +134,6 @@
             moment,
             dealUpdateFormValue(){
                 var _this = this ;
-                debugger;
                 if(_this.isSingleUpdate == true){
                     _this.formValObj = _this.itemList[0] ;
                     //日期范围
