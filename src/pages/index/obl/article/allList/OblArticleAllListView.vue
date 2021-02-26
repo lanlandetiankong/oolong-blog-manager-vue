@@ -17,7 +17,7 @@
                     align="middle"
                 >
                     <a-col>
-                        <a-button type="primary" icon="check-square"
+                        <a-button type="primary" icon="audit"
                                   @click="handleBatchAudit">
                             {{$t('langMap.button.actions.audit')}}
                         </a-button>
@@ -81,7 +81,12 @@
                     </span>
                     <template slot="action" slot-scope="text,record">
                         <span>
-                            <template v-if="record.auditState == AllEnum.ArticleAuditStateEnum.Approved.value">
+                            <template v-if="record.auditAbleFlag == true">
+                                <a @click="handleAudit($event,record)">
+                                    {{$t('langMap.button.actions.audit')}}
+                                </a>
+                            </template>
+                            <template v-if="record.setRecommendAbleFlag == true">
                                 <a @click="handleSetAsRecommended($event,record)">
                                     {{$t('langMap.button.actions.setAsRecommended')}}
                                 </a>
@@ -182,9 +187,18 @@
                         drawerAble:false
                     }
                 };
+            //审批-只能选择非[审批通过、审批不通过]的数据
+            let auditDisableStateArr = [] ;
+            auditDisableStateArr.push(AllEnum.ArticleAuditStateEnum.ApprovalFailed.value);
+            auditDisableStateArr.push(AllEnum.ArticleAuditStateEnum.Approved.value);
+            //设为推荐-
+            let setRecommendAbleStateArr = [] ;
+            setRecommendAbleStateArr.push(AllEnum.ArticleAuditStateEnum.Approved.value);
             return {
                 ConstantObj,
                 AllEnum,
+                auditDisableStateArr,
+                setRecommendAbleStateArr,
                 binding:{
                     articleTagList:[],
                     categoryIdList:[]
@@ -413,6 +427,7 @@
                 })
             },
             handleTransformData(){//数据转化
+                let _this = this ;
                 const data = this.tableConf.data;
                 if(!data){
                     return ;
@@ -422,8 +437,12 @@
                 let articleEditorTypeValMap = EnumUtils.toValMap(AllEnum.ArticleEditorTypeEnum);
                 for (let idx in data){
                     let item = data[idx] ;
+                    //枚举值
                     item['auditStateStr'] = articleAuditStateValMap[item.auditState];
                     item['editorTypeStr'] = articleEditorTypeValMap[item.editorType];
+                    //是否可审批
+                    item['auditAbleFlag'] = _this.auditDisableStateArr.indexOf(item.auditState) < 0 ;
+                    item['setRecommendAbleFlag'] = _this.setRecommendAbleStateArr.indexOf(item.auditState) >= 0 ;
                 }
             },
             handleSearchFormQuery(e,values) {    //带查询条件 检索文章列表
@@ -531,18 +550,18 @@
                 this.dialog.setRecommend.visible = false ;
                 this.mixin_invokeQuery(this); //表格重新搜索
             },
+            handleAudit(e,record){
+                this.dialog.audit.articleList = [record];
+                this.dialog.audit.visible = true ;
+            },
             handleBatchAudit(e){ //批量审批
                 var _this = this;
                 var selectList = _this.tableCheckList;
                 if (selectList.length < 1) {
                     _this.$message.warning(this.$t('langMap.message.warning.pleaseSelectTheLeastRowOfDataForOperate'));
                 } else {
-                    //只能选择非[审批通过、审批不通过]的数据
-                    let notStateArr = [] ;
-                    notStateArr.push(AllEnum.ArticleAuditStateEnum.ApprovalFailed.value);
-                    notStateArr.push(AllEnum.ArticleAuditStateEnum.Approved.value);
                     let ableList = selectList.filter(item => {
-                        return notStateArr.indexOf(item.auditState) < 0 ;
+                        return _this.auditDisableStateArr.indexOf(item.auditState) < 0 ;
                     }) ;
                     if(ableList.length < selectList.length){
                         _this.$message.warning(this.$t('langMap.message.warning.doNotAllowSelectionOfAudited'));
