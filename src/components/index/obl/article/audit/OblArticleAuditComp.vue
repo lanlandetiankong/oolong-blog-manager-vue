@@ -80,10 +80,10 @@
         data(){
             let paramsRules ={
                 auditComments:[
-                    {required:false,message:this.$t('langMap.commons.forms.pleaseFillOut',[this.$t('langMap.table.fields.obl.articleAuditRecord.auditComments')])}
+                    {required:true,message:this.$t('langMap.commons.forms.pleaseFillOut',[this.$t('langMap.table.fields.obl.articleAuditRecord.auditComments')])}
                 ],
                 auditStateList:[
-                    {required:false,message:this.$t('langMap.commons.forms.pleaseFillOut',[this.$t('langMap.table.fields.obl.articleAuditRecord.auditState')])}
+                    {required:true,message:this.$t('langMap.commons.forms.pleaseFillOut',[this.$t('langMap.table.fields.obl.articleAuditRecord.auditState')])}
                 ]
             };
             //允许选择的[审批值]
@@ -95,7 +95,7 @@
                 },
                 formFieldConf:{
                     auditComments:["auditComments",{rules:paramsRules.auditComments}],
-                    auditState:["auditState",{rules:paramsRules.auditState}],
+                    auditState:["auditState",{rules:paramsRules.auditStateList}],
                 },
                 formValObj:{},
                 createForm:{}

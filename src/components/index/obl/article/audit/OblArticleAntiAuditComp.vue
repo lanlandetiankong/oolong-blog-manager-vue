@@ -66,7 +66,7 @@
         data(){
             let paramsRules ={
                 auditComments:[
-                    {required:false,message:this.$t('langMap.commons.forms.pleaseFillOut',[this.$t('langMap.table.fields.obl.articleAuditRecord.auditComments')])}
+                    {required:true,message:this.$t('langMap.commons.forms.pleaseFillOut',[this.$t('langMap.table.fields.obl.articleAuditRecord.auditComments')])}
                 ]
             };
             return {
