@@ -272,6 +272,7 @@ export const langMap = {
                 },
                 articleAuditRecord:{
                     articleTitle:'Article title',
+                    antiAuditComments:'Anti audit comment',
                     auditComments:'Audit comment',
                     auditTime:'Audit time',
                     auditState:'Audit state',
@@ -431,7 +432,8 @@ export const langMap = {
             doNotAllowSelectionOfConfirmed:'The selected item contains confirmed items, please uncheck all confirmed items and try again!',
             doNotAllowSelectionOfNotConfirmed:'The selected item contains not confirmed items, please uncheck all not confirmed items and try again!',
             doNotAllowSelectionOfNotApproved:'The selected item contains not approved items, please uncheck all not approved items and try again!',
-            doNotAllowSelectionOfAudited:'The selected item contains audited items, please uncheck all audited items and try again!'
+            doNotAllowSelectionOfAudited:'The selected item contains audited items, please uncheck all audited items and try again!',
+            doNotAllowSelectionOfUnAudited:'The selected item contains not audited items, please uncheck all not audited items and try again!'
         },
         error:{
             failedDueToNotGettingId:'Failed due to not getting id !',

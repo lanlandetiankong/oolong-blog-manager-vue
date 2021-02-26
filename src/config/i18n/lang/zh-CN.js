@@ -273,6 +273,7 @@ export const langMap = {
                 },
                 articleAuditRecord:{
                     articleTitle:'文章标题',
+                    antiAuditComments:'反审批意见',
                     auditComments:'审批意见',
                     auditTime:'审批时间',
                     auditState:'审批值',
@@ -432,7 +433,8 @@ export const langMap = {
             doNotAllowSelectionOfConfirmed:'所选项中包含已确认的项，请取消勾选所有已确认的项后重试！',
             doNotAllowSelectionOfNotConfirmed:'所选项中包含未确认的项，请取消勾选所有未确认的项后重试！',
             doNotAllowSelectionOfNotApproved:'所选项中包含非审批通过的项，请取消勾选所有非审批通过的项后重试！',
-            doNotAllowSelectionOfAudited:'所选项中包含已审批的项，请取消勾选所有已审批的项后重试！'
+            doNotAllowSelectionOfAudited:'所选项中包含已审批的项，请取消勾选所有已审批的项后重试！',
+            doNotAllowSelectionOfUnAudited:'所选项中包含未审批的项，请取消勾选所有未审批的项后重试！',
         },
         error:{
             failedDueToNotGettingId:'操作失败！未取得有效的id！',

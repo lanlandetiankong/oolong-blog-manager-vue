@@ -23,6 +23,12 @@
                         </a-button>
                     </a-col>
                     <a-col>
+                        <a-button type="primary" icon="audit"
+                                  @click="handleBatchAntiAudit">
+                            {{$t('langMap.button.actions.antiAudit')}}
+                        </a-button>
+                    </a-col>
+                    <a-col>
                         <a-button type="primary" icon="check-square"
                                   @click="handleBatchSetAsRecommended">
                             {{$t('langMap.button.actions.setAsRecommended')}}
@@ -81,6 +87,11 @@
                     </span>
                     <template slot="action" slot-scope="text,record">
                         <span>
+                            <template v-if="record.antiAuditAbleFlag == true">
+                                <a @click="handleAntiAudit($event,record)">
+                                    {{$t('langMap.button.actions.antiAudit')}}
+                                </a>
+                            </template>
                             <template v-if="record.auditAbleFlag == true">
                                 <a @click="handleAudit($event,record)">
                                     {{$t('langMap.button.actions.audit')}}
@@ -118,6 +129,12 @@
                     @cancel="handleCloseAudit"
                     @submit="handleSubmitAudit"
                 />
+                <obl-article-anti-audit-comp
+                    v-if="dialog.antiAudit.visible"
+                    v-bind="dialog.antiAudit"
+                    @cancel="handleCloseAntiAudit"
+                    @submit="handleSubmitAntiAudit"
+                />
                 <row-detail-drawer-comp
                     :drawerConf="drawerConf.detail.article.conf"
                     :dataObj="drawerConf.detail.article.dataObj"
@@ -139,12 +156,13 @@
     import QueryFormComp from '~Components/regular/query/QueryFormComp'
     import OblArticleSetRecommendComp from '~Components/index/obl/article/recommend/OblArticleSetRecommendComp'
     import OblArticleAuditComp from '~Components/index/obl/article/audit/OblArticleAuditComp'
+    import OblArticleAntiAuditComp from '~Components/index/obl/article/audit/OblArticleAntiAuditComp'
 
     import RowDetailDrawerComp from '~Components/regular/common/drawer/RowDetailDrawerComp';
 
     export default {
         name: "OblArticleAllListView",
-        components:{QueryFormComp,OblArticleSetRecommendComp,OblArticleAuditComp,RowDetailDrawerComp},
+        components:{QueryFormComp,OblArticleSetRecommendComp,OblArticleAuditComp,OblArticleAntiAuditComp,RowDetailDrawerComp},
         mixins:[OblCommonMixin],
         data() {
             const textAlignDefault = 'left' ;
@@ -187,11 +205,17 @@
                         drawerAble:false
                     }
                 };
-            //审批-只能选择非[审批通过、审批不通过]的数据
+            //审批-只能选择非[审批通过、审批不通过、退回修改]的数据
             let auditDisableStateArr = [] ;
             auditDisableStateArr.push(AllEnum.ArticleAuditStateEnum.ApprovalFailed.value);
             auditDisableStateArr.push(AllEnum.ArticleAuditStateEnum.Approved.value);
-            //设为推荐-
+            auditDisableStateArr.push(AllEnum.ArticleAuditStateEnum.ReturnToModify.value);
+            //反审批-只能选择[审批通过、审批不通过、退回修改]的数据
+            let antiAuditAbleStateArr = [] ;
+            antiAuditAbleStateArr.push(AllEnum.ArticleAuditStateEnum.ApprovalFailed.value);
+            antiAuditAbleStateArr.push(AllEnum.ArticleAuditStateEnum.Approved.value);
+            antiAuditAbleStateArr.push(AllEnum.ArticleAuditStateEnum.ReturnToModify.value);
+            //设为推荐-只能选择[审批通过]的数据
             let setRecommendAbleStateArr = [] ;
             setRecommendAbleStateArr.push(AllEnum.ArticleAuditStateEnum.Approved.value);
             return {
@@ -199,6 +223,7 @@
                 AllEnum,
                 auditDisableStateArr,
                 setRecommendAbleStateArr,
+                antiAuditAbleStateArr,
                 binding:{
                     articleTagList:[],
                     categoryIdList:[]
@@ -352,6 +377,10 @@
                     audit:{
                         visible: false,
                         articleList:[]
+                    },
+                    antiAudit:{
+                        visible: false,
+                        articleList:[]
                     }
                 },
                 drawerConf:{
@@ -442,6 +471,7 @@
                     item['editorTypeStr'] = articleEditorTypeValMap[item.editorType];
                     //是否可审批
                     item['auditAbleFlag'] = _this.auditDisableStateArr.indexOf(item.auditState) < 0 ;
+                    item['antiAuditAbleFlag'] = _this.antiAuditAbleStateArr.indexOf(item.auditState) >= 0 ;
                     item['setRecommendAbleFlag'] = _this.setRecommendAbleStateArr.indexOf(item.auditState) >= 0 ;
                 }
             },
@@ -578,6 +608,36 @@
             handleSubmitAudit(e){
                 this.dialog.audit.articleList = [];
                 this.dialog.audit.visible = false ;
+                this.mixin_invokeQuery(this); //表格重新搜索
+            },
+            handleAntiAudit(e,record){  //反审批
+                this.dialog.antiAudit.articleList = [record];
+                this.dialog.antiAudit.visible = true ;
+            },
+            handleBatchAntiAudit(e){ //批量-反审批
+                var _this = this;
+                var selectList = _this.tableCheckList;
+                if (selectList.length < 1) {
+                    _this.$message.warning(this.$t('langMap.message.warning.pleaseSelectTheLeastRowOfDataForOperate'));
+                } else {
+                    let ableList = selectList.filter(item => {
+                        return _this.antiAuditAbleStateArr.indexOf(item.auditState) >= 0 ;
+                    }) ;
+                    if(ableList.length < selectList.length){
+                        _this.$message.warning(this.$t('langMap.message.warning.doNotAllowSelectionOfAudited'));
+                        return false;
+                    }
+                    this.dialog.antiAudit.articleList = ableList;
+                    this.dialog.antiAudit.visible = true ;
+                }
+            },
+            handleCloseAntiAudit(e){
+                this.dialog.antiAudit.articleList = [];
+                this.dialog.antiAudit.visible = false ;
+            },
+            handleSubmitAntiAudit(e){
+                this.dialog.antiAudit.articleList = [];
+                this.dialog.antiAudit.visible = false ;
                 this.mixin_invokeQuery(this); //表格重新搜索
             },
         },
