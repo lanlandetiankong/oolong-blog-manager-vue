@@ -213,6 +213,12 @@
                         width:90,
                         key: 'auditComments'
                     },  {
+                        title: this.$t('langMap.table.fields.obl.article.auditUserName'),
+                        align:textAlignDefault,
+                        dataIndex: 'auditUserName',
+                        width:90,
+                        key: 'auditUserName'
+                    },  {
                         title: this.$t('langMap.table.fields.obl.article.auditTime'),
                         align:textAlignDefault,
                         dataIndex: 'auditTime',

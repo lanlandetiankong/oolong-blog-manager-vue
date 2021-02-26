@@ -194,6 +194,12 @@
                         dataIndex: 'title',
                         width:180,
                         key: 'title'
+                    }, {
+                        title: this.$t('langMap.table.fields.obl.article.authorName'),
+                        align:textAlignDefault,
+                        dataIndex: 'authorName',
+                        width:180,
+                        key: 'authorName'
                     },  {
                         title: this.$t('langMap.table.fields.obl.article.categoryNames'),
                         align:textAlignDefault,
@@ -220,6 +226,12 @@
                         dataIndex: 'auditComments',
                         width:90,
                         key: 'auditComments'
+                    }, {
+                        title: this.$t('langMap.table.fields.obl.article.auditUserName'),
+                        align:textAlignDefault,
+                        dataIndex: 'auditUserName',
+                        width:90,
+                        key: 'auditUserName'
                     }, {
                         title: this.$t('langMap.table.fields.obl.article.auditTime'),
                         align:textAlignDefault,

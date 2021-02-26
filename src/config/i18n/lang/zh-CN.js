@@ -232,6 +232,8 @@ export const langMap = {
                     publishTime:'发布时间',
                     tagIds:'标签id',
                     tagName:'标签',
+                    authorName:'作者',
+                    auditUserName:'审批人',
                 },
                 articleCategory:{
                     name:'名称',

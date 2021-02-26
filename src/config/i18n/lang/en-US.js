@@ -230,7 +230,9 @@ export const langMap = {
                     isPublished:'Published status',
                     publishTime:'Published time',
                     tagIds:'Tag id',
-                    tagName:'Tag'
+                    tagName:'Tag',
+                    authorName:'Author',
+                    auditUserName:'Audit user',
                 },
                 articleCategory:{
                     name:'Name',
