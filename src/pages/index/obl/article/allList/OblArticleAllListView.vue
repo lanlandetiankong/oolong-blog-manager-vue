@@ -489,7 +489,9 @@
                     item['editorTypeStr'] = articleEditorTypeValMap[item.editorType];
                     //是否可审批
                     item['auditAbleFlag'] = _this.auditDisableStateArr.indexOf(item.auditState) < 0 ;
+                    //是否可反审批
                     item['antiAuditAbleFlag'] = _this.antiAuditAbleStateArr.indexOf(item.auditState) >= 0 ;
+                    //是否可设置推荐
                     item['setRecommendAbleFlag'] = _this.setRecommendAbleStateArr.indexOf(item.auditState) >= 0 ;
                 }
             },
