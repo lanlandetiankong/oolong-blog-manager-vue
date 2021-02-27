@@ -2,6 +2,7 @@
     <div>
         <a-modal
             class="modal-big-cls"
+            :zIndex="overZIndex ? 2000 : 1000"
             :visible="visible"
             :maskClosable=false
             :title="$t('langMap.button.actions.viewAuditRecord')"
@@ -75,6 +76,10 @@
         components: {},
         props:{
             visible:Boolean,
+            overZIndex:{
+                type: Boolean,
+                default: false
+            },
             formObj:{
                 type:Object,
                 required:true

@@ -2,15 +2,21 @@
     <div>
         <div >
             <a-page-header
-                style="border: 1px solid rgb(235, 237, 240)"
+                style="background-color: #F5F5F5; padding: 24px;border: 1px solid rgb(235, 237, 240)"
                 :backIcon="false"
                 :ghost="false"
                 :title="formData.title"
                 :sub-title="formData.summary"
                 @back="() => null"
             >
+                <template slot="extra">
+                    <a-button @click="handleViewAuditRecords($event)">
+                        {{$t('langMap.button.actions.viewAuditRecord')}}
+                    </a-button>
+                </template>
                 <template slot="footer">
                     <a-descriptions
+                        size="small"
                         :column="{ xxl: 5, xl: 4, lg: 4, md: 3, sm: 2, xs: 1 }"
                     >
                         <a-descriptions-item :label="$t('langMap.table.fields.obl.article.tagNames')">
@@ -39,16 +45,26 @@
                 :formData="formData"
             />
         </div>
+        <!-- 弹窗dom-区域 -->
+        <div>
+            <obl-article-audit-records-comp
+                v-if="dialog.viewAuditRecords.visible"
+                v-bind="dialog.viewAuditRecords"
+                @cancel="()=> this.dialog.viewAuditRecords.visible = false"
+                @submit="()=> this.dialog.viewAuditRecords.visible = false"
+            />
+        </div>
     </div>
 </template>
 
 <script>
     import {AllEnum,EnumUtils} from '~Config/selectData.js';
     import MavonReadOnlyComp from '~Components/regular/common/mavon/MavonReadOnlyComp';
+    import OblArticleAuditRecordsComp from '~Components/index/obl/article/audit/OblArticleAuditRecordsComp'
     import {OblArticleDisplayApi} from './oblArticleDisplayApi'
     export default {
         name: "OblArticleDisplayView",
-        components: {MavonReadOnlyComp},
+        components: {MavonReadOnlyComp,OblArticleAuditRecordsComp},
         data(){
             return {
                 formData:{
@@ -63,6 +79,13 @@
                     isPublishedStr:'',
                     publishTime:undefined
                 },
+                dialog:{
+                    viewAuditRecords:{
+                        visible: false,
+                        formObj:[],
+                        overZIndex:true
+                    }
+                }
             }
         },
         computed:{
@@ -98,7 +121,11 @@
                         _this.handleTransformData();
                     }
                 });
-            }
+            },
+            handleViewAuditRecords(e){   //查看文章的审批记录
+                this.dialog.viewAuditRecords.formObj = this.formData;
+                this.dialog.viewAuditRecords.visible = true ;
+            },
         },
         watch: {
             $route(route) {
@@ -115,5 +142,5 @@
 </script>
 
 <style scoped>
-
+    .v-note-wrapper{ z-index:1 !important; }
 </style>
