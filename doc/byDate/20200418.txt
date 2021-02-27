@@ -132,3 +132,9 @@ _this.handleTransformData();
 
 OblArticleMyCreateListView
 OblArticleMyDraftListView
+
+
+<a-table
+<table-head-info :checked-size="tableCheckIdList.length"/>
+import TableHeadInfo from '~Components/regular/common/table/TableHeadInfo'
+

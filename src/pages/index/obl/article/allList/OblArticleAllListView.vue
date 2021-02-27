@@ -45,6 +45,7 @@
             <a-divider/>
             <!-- 表格-区域 -->
             <div>
+                <table-head-info :checked-size="tableCheckIdList.length"/>
                 <a-table
                     :locale="{emptyText:$t('langMap.table.config.emptyData')}"
                     :pagination="tableConf.pagination"
@@ -163,6 +164,7 @@
     import {OblCommonMixin} from '~Layout/mixin/OblCommonMixin';
     import {ConstantObj, FormItemTypeEnum} from "~Components/constant_define";
     import QueryFormComp from '~Components/regular/query/QueryFormComp'
+    import TableHeadInfo from '~Components/regular/common/table/TableHeadInfo'
     import OblArticleSetRecommendComp from '~Components/index/obl/article/recommend/OblArticleSetRecommendComp'
     import OblArticleAuditComp from '~Components/index/obl/article/audit/OblArticleAuditComp'
     import OblArticleAntiAuditComp from '~Components/index/obl/article/audit/OblArticleAntiAuditComp'
@@ -173,6 +175,7 @@
     export default {
         name: "OblArticleAllListView",
         components:{QueryFormComp,OblArticleSetRecommendComp,OblArticleAuditComp,
+            TableHeadInfo,
             OblArticleAntiAuditComp,OblArticleAuditRecordsComp,RowDetailDrawerComp},
         mixins:[OblCommonMixin],
         data() {

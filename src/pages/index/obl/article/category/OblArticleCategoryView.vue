@@ -39,6 +39,7 @@
             <a-divider/>
             <!-- 表格-区域 -->
             <div>
+                <table-head-info :checked-size="tableCheckIdList.length"/>
                 <a-table
                     :locale="{emptyText:$t('langMap.table.config.emptyData')}"
                     :pagination="tableConf.pagination"
@@ -97,8 +98,8 @@
     import {ConstantObj, FormItemTypeEnum} from "~Components/constant_define";
 
     import QueryFormComp from '~Components/regular/query/QueryFormComp'
-    import OblArticleCategoryCreateFormComp
-        from "~Components/index/obl/article/category/OblArticleCategoryCreateFormComp";
+    import TableHeadInfo from '~Components/regular/common/table/TableHeadInfo'
+    import OblArticleCategoryCreateFormComp from "~Components/index/obl/article/category/OblArticleCategoryCreateFormComp";
     import RowDetailDrawerComp from '~Components/regular/common/drawer/RowDetailDrawerComp';
 
     import AFormItem from "ant-design-vue/es/form/FormItem";
@@ -106,7 +107,7 @@
 
     export default {
         name: "OblArticleCategoryView",
-        components: {QueryFormComp, OblArticleCategoryCreateFormComp, RowDetailDrawerComp, ACol, AFormItem},
+        components: {QueryFormComp, OblArticleCategoryCreateFormComp,TableHeadInfo, RowDetailDrawerComp, ACol, AFormItem},
         mixins: [OblCommonMixin],
         data() {
             const textAlignDefault = 'left';
