@@ -15,6 +15,7 @@ export const ArticleCreateApi = {
         return axios.post("/oblCtl/oblArticle/createFromDraft",formObj).then(res => res.data);
     },
     createDraftByForm(formObj) {     //提交文章到草稿箱
+        formObj['categoryIdList'] = HttpUtil.strToList(formObj['categoryIdList']);
         return axios.post("/oblCtl/oblArticle/createDraftByForm",formObj).then(res => res.data);
     },
     updateDraftByForm(formObj) {     //更新文章草稿
@@ -22,6 +23,7 @@ export const ArticleCreateApi = {
             formObj["createTime"] = undefined;
             formObj["updateTime"] = undefined;
         }
+        formObj['categoryIdList'] = HttpUtil.strToList(formObj['categoryIdList']);
         return axios.post("/oblCtl/oblArticle/updateDraftByForm",formObj).then(res => res.data);
     },
     getIDraftItemById(fid){  //根据 文章草稿id 取得文章草稿
