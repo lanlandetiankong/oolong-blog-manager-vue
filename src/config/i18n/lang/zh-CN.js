@@ -3,6 +3,7 @@ export const langMap = {
         actions:{
             lookOver:'查看',
             confirm:'确认',
+            close:'关闭',
             confirmSubmit:'确认提交',
             cancel:'取消',
             query:'搜索',

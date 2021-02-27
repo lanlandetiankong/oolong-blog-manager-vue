@@ -6,11 +6,14 @@
             :visible="visible"
             :maskClosable=false
             :title="$t('langMap.button.actions.viewAuditRecord')"
-            :okText="$t('langMap.button.actions.confirm')"
-            :cancelText="$t('langMap.button.actions.cancel')"
             @cancel="() => { $emit('cancel')}"
             @ok="handleSubmit"
         >
+            <template slot="footer">
+                <a-button type="primary" @click="handleSubmit">
+                    {{$t('langMap.button.actions.close')}}
+                </a-button>
+            </template>
             <div>
                 <a-timeline>
                     <template v-for="item in timelines.data">

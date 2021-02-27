@@ -3,6 +3,7 @@ export const langMap = {
         actions:{
             lookOver:'Look up',
             confirm:'Confirm',
+            close:'Close',
             confirmSubmit:'Confirm Submit',
             cancel:'Cancel',
             query:'Query',
