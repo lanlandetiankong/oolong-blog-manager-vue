@@ -42,6 +42,12 @@
                                 <a-descriptions-item :label="$t('langMap.table.fields.obl.articleRecommend.isConfirmed')">
                                     {{item.isConfirmedStr}}
                                 </a-descriptions-item>
+                                <a-descriptions-item :label="$t('langMap.table.fields.obl.articleRecommend.confirmedTime')">
+                                    {{item.confirmedTime | formatBaseDateTime}}
+                                </a-descriptions-item>
+                                <a-descriptions-item :label="$t('langMap.table.fields.obl.articleRecommend.confirmedUserName')">
+                                    {{item.confirmedUserName}}
+                                </a-descriptions-item>
                             </a-descriptions>
                         </a-timeline-item>
                         <a-timeline-item v-else-if="item.isConfirmed == 0">

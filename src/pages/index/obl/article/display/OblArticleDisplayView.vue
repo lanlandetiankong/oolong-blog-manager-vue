@@ -141,7 +141,7 @@
                 this.dialog.viewAuditRecords.formObj = this.formData;
                 this.dialog.viewAuditRecords.visible = true ;
             },
-            handleViewRecommendRecords(e,record){   //查看文章的推荐记录
+            handleViewRecommendRecords(e){   //查看文章的推荐记录
                 this.dialog.viewRecommendRecords.formObj = this.formData;
                 this.dialog.viewRecommendRecords.visible = true ;
             },

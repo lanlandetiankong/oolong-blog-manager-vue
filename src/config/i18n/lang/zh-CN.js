@@ -267,6 +267,8 @@ export const langMap = {
                     recommendUserName:'推荐人',
                     selectArticles:'已选文章',
                     isConfirmed:'已确认',
+                    confirmedTime:'确认时间',
+                    confirmedUserName:'确认人',
                     delayStartDays:'开始延迟天数',
                     delayEndDays:'结束延迟天数',
                 },
