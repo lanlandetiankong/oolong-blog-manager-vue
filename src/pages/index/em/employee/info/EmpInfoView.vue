@@ -102,24 +102,34 @@
                         {{record.lockedStr}}
                     </a-tag>
                 </span>
-                <template slot="action" slot-scope="text,record">
-                    <span>
-                        <a @click="handleDetailDrawerShow($event,record)">
-                            {{$t('langMap.drawer.actions.detail')}}
-                        </a>
-                        <a-divider type="vertical" />
-                        <a-dropdown>
-                              <a-menu slot="overlay" @click="handleTableActionGroupClick($event,record)">
-                                    <a-menu-item key="recordDel">{{$t('langMap.button.actions.delById')}}</a-menu-item>
-                                    <a-menu-item v-if="record.locked == 0" key="recordLock">{{$t('langMap.button.actions.lockUser')}}</a-menu-item>
-                                    <a-menu-item v-else-if="record.locked == 1" key="recordUnlock">{{$t('langMap.button.actions.unlockUser')}}</a-menu-item>
-                                    <a-menu-item key="grantRole">{{$t('langMap.button.actions.assigningRoles')}}</a-menu-item>
-                                    <a-menu-item key="grantJob">{{$t('langMap.button.actions.setPosition')}}</a-menu-item>
-                              </a-menu>
-                              <a-button> {{$t('langMap.button.actions.operate')}} <a-icon type="down" /> </a-button>
-                        </a-dropdown>
-                    </span>
-                </template>
+                <obl-table-action slot="action" slot-scope="text,record">
+                    <template slot="operates">
+                        <table-operate-btn v-show="record.locked == 0"
+                                            icon="lock"
+                                            :content="$t('langMap.button.actions.lockUser')"
+                                             @click="handleChangeLockOneById(record.fid,true)"
+                        >
+                        </table-operate-btn>
+                        <table-operate-btn v-show="record.locked == 1"
+                                           icon="unlock"
+                                           :content="$t('langMap.button.actions.unlockUser')"
+                                           @click="handleChangeLockOneById(record.fid,false)"
+                        >
+                        </table-operate-btn>
+                        <table-operate-btn icon="book"
+                                           :content="$t('langMap.button.actions.assigningRoles')"
+                                           @click="dealUserGrantRolesById(record.fid)"
+                        >
+                        </table-operate-btn>
+                        <table-operate-btn icon="book"
+                                           :content="$t('langMap.button.actions.setPosition')"
+                                           @click="dealUserGrantJobsById(record.fid)"
+                        >
+                        </table-operate-btn>
+                        <table-delete-operate-btn @click="handleDeleteOneById(record.fid)" />
+                        <table-row-detail-operate-btn @click="handleDetailDrawerShow($event,record)" />
+                    </template>
+                </obl-table-action>
             </a-table>
         </div>
         <!-- 挂载弹窗、抽屉 等组件的dom -->
@@ -185,6 +195,10 @@
 
     import QueryFormComp from '~Components/regular/query/QueryFormComp'
     import TableHeadInfo from '~Components/regular/common/table/TableHeadInfo'
+    import OblTableAction from '~Components/regular/common/table/OblTableAction'
+    import TableOperateBtn from '~Components/regular/common/table/operate/TableOperateBtn'
+    import TableDeleteOperateBtn from '~Components/regular/common/table/operate/TableDeleteOperateBtn'
+    import TableRowDetailOperateBtn from '~Components/regular/common/table/operate/TableRowDetailOperateBtn'
     import EmployeeInfoCreateFormComp from '~Components/index/em/user/employee/info/EmployeeInfoCreateFormComp'
     import UserGrantRoleFormComp from '~Components/index/em/user/employee/info/UserGrantRoleFormComp';
     import UserGrantJobFormComp from '~Components/index/em/user/employee/info/UserGrantJobFormComp';
@@ -196,9 +210,10 @@
 
     export default {
         name: "EmpInfoView",
-        components: {QueryFormComp,TableHeadInfo,
-            RowDetailDrawerComp,ExcelImportDataComp,
-            UserGrantJobFormComp, UserGrantRoleFormComp, AFormItem, ACol, EmployeeInfoCreateFormComp},
+        components: {
+            QueryFormComp,RowDetailDrawerComp,ExcelImportDataComp,UserGrantJobFormComp, UserGrantRoleFormComp,EmployeeInfoCreateFormComp,
+            TableHeadInfo,OblTableAction,TableOperateBtn,TableRowDetailOperateBtn,TableDeleteOperateBtn,
+             AFormItem, ACol},
         mixins:[OblCommonMixin],
         data() {
             const textAlignDefault = 'left' ;
@@ -612,20 +627,6 @@
                 }).catch((e) =>{
                     _this.changeQueryLoading(false);
                 })
-            },
-            handleTableActionGroupClick(e,record){  //表格-更多操作：按key区分操作类型
-                var _this = this ;
-                if(e.key == "recordDel"){   //行删除
-                    _this.handleDeleteOneById(record.fid);
-                }   else if(e.key == "recordLock"){ //行锁定
-                    _this.handleChangeLockOneById(record.fid,true);
-                }   else if(e.key == "recordUnlock"){   //行解锁
-                    _this.handleChangeLockOneById(record.fid,false);
-                }   else if(e.key == "grantRole"){  //分配角色
-                    _this.dealUserGrantRolesById(record.fid);
-                }   else if(e.key == "grantJob"){  //设置职务
-                    _this.dealUserGrantJobsById(record.fid);
-                }
             },
             handleTableChange(pagination, filters, sorter) {    //表格变动-页码跳转/排序/筛选
                 this.tableConf.pagination = pagination ;

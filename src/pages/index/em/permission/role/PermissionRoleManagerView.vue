@@ -66,22 +66,17 @@
                             {{record.typeStr}}
                         </a-tag>
                     </span>
-
-                    <template slot="action" slot-scope="text,record">
-                        <span>
-                            <a @click="handleDetailDrawerShow($event,record)">
-                                {{$t('langMap.drawer.actions.detail')}}
-                            </a>
-                            <a-divider type="vertical" />
-                            <a-dropdown>
-                                  <a-menu slot="overlay" @click="handleTableActionGroupClick($event,record)">
-                                        <a-menu-item key="recordDel">{{$t('langMap.button.actions.delById')}}</a-menu-item>
-                                        <a-menu-item key="grantPermission">{{$t('langMap.button.actions.authorize')}}</a-menu-item>
-                                  </a-menu>
-                                  <a-button> {{$t('langMap.button.actions.operate')}} <a-icon type="down" /> </a-button>
-                            </a-dropdown>
-                        </span>
-                </template>
+                    <obl-table-action slot="action" slot-scope="text,record">
+                        <template slot="operates">
+                            <table-operate-btn icon="book"
+                                :content="$t('langMap.button.actions.authorize')"
+                                @click="dealDefineRoleGrantPermissionsById(record.fid)"
+                            >
+                            </table-operate-btn>
+                            <table-delete-operate-btn @click="handleDeleteOneById(record.fid)" />
+                            <table-row-detail-operate-btn @click="handleDetailDrawerShow($event,record)" />
+                        </template>
+                    </obl-table-action>
                 </a-table>
             </div>
         </div>
@@ -137,13 +132,20 @@
 
     import QueryFormComp from '~Components/regular/query/QueryFormComp'
     import TableHeadInfo from '~Components/regular/common/table/TableHeadInfo'
+    import OblTableAction from '~Components/regular/common/table/OblTableAction'
+    import TableOperateBtn from '~Components/regular/common/table/operate/TableOperateBtn'
+    import TableDeleteOperateBtn from '~Components/regular/common/table/operate/TableDeleteOperateBtn'
+    import TableRowDetailOperateBtn from '~Components/regular/common/table/operate/TableRowDetailOperateBtn'
     import DefineRoleCreateFormComp from '~Components/index/em/define/permission/role/DefineRoleCreateFormComp';
     import RoleGrantPermissionFormComp from '~Components/index/em/define/permission/role/RoleGrantPermissionFormComp';
     import RoleGrantMenusFormComp from '~Components/index/em/define/permission/role/RoleGrantMenusFormComp';
     import RowDetailDrawerComp from '~Components/regular/common/drawer/RowDetailDrawerComp';
     export default {
         name: "PermissionRoleManagerView",
-        components: {QueryFormComp,TableHeadInfo,RoleGrantPermissionFormComp, DefineRoleCreateFormComp,RowDetailDrawerComp,RoleGrantMenusFormComp},
+        components: {
+            QueryFormComp,RoleGrantPermissionFormComp, DefineRoleCreateFormComp,RowDetailDrawerComp,RoleGrantMenusFormComp,
+            TableHeadInfo,OblTableAction,TableOperateBtn,TableRowDetailOperateBtn,TableDeleteOperateBtn
+        },
         mixins:[OblCommonMixin],
         data(){
             const textAlignDefault = 'left';
@@ -584,14 +586,6 @@
                 this.tableConf.filters = filters ;
                 this.tableConf.sorter = sorter ;
                 this.mixin_invokeQuery(this);
-            },
-            handleTableActionGroupClick(e,record){  //表格-更多操作：按key区分操作类型
-                var _this = this ;
-                if(e.key == "recordDel"){   //行删除
-                    _this.handleDeleteOneById(record.fid);
-                }   else if(e.key == "grantPermission"){ //行锁定
-                    _this.dealDefineRoleGrantPermissionsById(record.fid);
-                }
             },
             handleDetailDrawerShow(e,record){   //Drawer-角色定义 详情展示
                 if(typeof record != "undefined"){

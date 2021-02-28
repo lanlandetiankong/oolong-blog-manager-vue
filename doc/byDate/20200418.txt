@@ -145,7 +145,7 @@ import TableDeleteOperateBtn from '~Components/regular/common/table/operate/Tabl
 import TableRowDetailOperateBtn from '~Components/regular/common/table/operate/TableRowDetailOperateBtn'
 
 
-TableHeadInfo,OblTableAction,TableRowDetailOperateBtn,TableDeleteOperateBtn,
+OblTableAction,TableRowDetailOperateBtn,TableDeleteOperateBtn,
 
 <obl-table-action slot="action" slot-scope="text,record">
                         <template slot="operates">
@@ -163,7 +163,7 @@ import TableOperateBtn from '~Components/regular/common/table/operate/TableOpera
 import TableDeleteOperateBtn from '~Components/regular/common/table/operate/TableDeleteOperateBtn'
 import TableRowDetailOperateBtn from '~Components/regular/common/table/operate/TableRowDetailOperateBtn'
 
-TableHeadInfo,OblTableAction,TableOperateBtn,TableRowDetailOperateBtn,TableDeleteOperateBtn,
+OblTableAction,TableOperateBtn,TableRowDetailOperateBtn,TableDeleteOperateBtn,
 
 
 

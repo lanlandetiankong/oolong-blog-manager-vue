@@ -58,25 +58,19 @@
                             </a-tag>
                         </template>
                     </span>
-
-                    <template slot="action" slot-scope="text,record">
-                        <span>
-                            <a-button type="link" size="small" @click="handleEditDraft($event,record)">
-                                {{$t('langMap.button.actions.edit')}}
-                            </a-button>
-                             <a-button type="link" size="small" @click="handlePublishOneById($event,record)">
-                                {{$t('langMap.button.actions.publish')}}
-                            </a-button>
-                            <a-divider type="vertical" />
-                            <a-button type="danger" ghost size="small" @click="handleDeleteOneById($event,record)">
-                                {{$t('langMap.button.actions.delById')}}
-                            </a-button>
-                            <a-divider type="vertical" />
-                            <a @click="handleDraftDetailDrawerShow($event,record)">
-                                {{$t('langMap.drawer.actions.detail')}}
-                            </a>
-                        </span>
-                    </template>
+                    <obl-table-action slot="action" slot-scope="text,record">
+                        <template slot="operates">
+                            <table-operate-btn icon="check"
+                                               :content="$t('langMap.button.actions.publish')"
+                                               @click="handlePublishOneById($event,record)"
+                            >
+                            </table-operate-btn>
+                            <table-edit-operate-btn
+                                @click="handleEditDraft($event,record)"/>
+                            <table-delete-operate-btn @click="handleDeleteOneById($event,record)" />
+                            <table-row-detail-operate-btn @click="handleDraftDetailDrawerShow($event,record)" />
+                        </template>
+                    </obl-table-action>
                 </a-table>
             </div>
             <!-- 弹窗dom-区域 -->
@@ -100,11 +94,18 @@
 
     import QueryFormComp from '~Components/regular/query/QueryFormComp'
     import TableHeadInfo from '~Components/regular/common/table/TableHeadInfo'
+    import OblTableAction from '~Components/regular/common/table/OblTableAction'
+    import TableOperateBtn from '~Components/regular/common/table/operate/TableOperateBtn'
+    import TableEditOperateBtn from '~Components/regular/common/table/operate/TableEditOperateBtn'
+    import TableDeleteOperateBtn from '~Components/regular/common/table/operate/TableDeleteOperateBtn'
+    import TableRowDetailOperateBtn from '~Components/regular/common/table/operate/TableRowDetailOperateBtn'
     import RowDetailDrawerComp from '~Components/regular/common/drawer/RowDetailDrawerComp';
 
     export default {
         name: "AnnouncementMyDraftListView",
-        components:{QueryFormComp,TableHeadInfo,RowDetailDrawerComp},
+        components:{QueryFormComp,RowDetailDrawerComp,
+            TableHeadInfo,OblTableAction,TableOperateBtn,TableRowDetailOperateBtn,TableEditOperateBtn,TableDeleteOperateBtn
+        },
         mixins:[OblCommonMixin],
         data() {
             const textAlignDefault = 'left' ;
@@ -420,7 +421,7 @@
             handleDetailDrawerClose(e){ //Drawer-公告草稿 详情关闭
                 this.drawerConf.detail.announcementDraft.visible = false ;
             },
-            handleEditDraft(e,item){    //更新公告
+            handleEditDraft(e,item){    //更新公告草稿
                 let params = {
                     fid:item.fid,
                     action:"update"

@@ -46,18 +46,18 @@
                             </a-tag>
                         </template>
                     </span>
-                    <template slot="action" slot-scope="text,record">
-                        <a @click="handleDetailDrawerShow($event,record)">
-                            {{$t('langMap.drawer.actions.detail')}}
-                        </a>
-                        <a-button type="link" @click="handleAnnouncementViewItemClick($event,record)">
-                            {{$t('langMap.button.actions.lookOver')}}
-                        </a-button>
-                        <a-divider type="vertical"/>
-                        <a-button type="danger" size="small" @click="handleDeleteOneById(record.fid)">
-                            {{$t('langMap.button.actions.delById')}}
-                        </a-button>
-                    </template>
+                    <obl-table-action slot="action" slot-scope="text,record">
+                        <template slot="operates">
+                            <table-operate-btn
+                                icon="read"
+                                :content="$t('langMap.button.actions.lookOver')"
+                                @click="handleAnnouncementViewItemClick($event,record)"
+                            >
+                            </table-operate-btn>
+                            <table-delete-operate-btn @click="handleDeleteOneById(record.fid)" />
+                            <table-row-detail-operate-btn @click="handleDetailDrawerShow($event,record)" />
+                        </template>
+                    </obl-table-action>
                 </a-table>
             </div>
             <!-- 弹窗dom-区域 -->
@@ -80,11 +80,18 @@
     import {FormItemTypeEnum, ConstantObj} from "~Components/constant_define";
     import QueryFormComp from '~Components/regular/query/QueryFormComp'
     import TableHeadInfo from '~Components/regular/common/table/TableHeadInfo'
+    import OblTableAction from '~Components/regular/common/table/OblTableAction'
+    import TableOperateBtn from '~Components/regular/common/table/operate/TableOperateBtn'
+    import TableDeleteOperateBtn from '~Components/regular/common/table/operate/TableDeleteOperateBtn'
+    import TableRowDetailOperateBtn from '~Components/regular/common/table/operate/TableRowDetailOperateBtn'
     import RowDetailDrawerComp from '~Components/regular/common/drawer/RowDetailDrawerComp';
 
     export default {
         name: "AnnouncementAllListView",
-        components: {QueryFormComp, TableHeadInfo, RowDetailDrawerComp},
+        components: {
+            QueryFormComp,RowDetailDrawerComp,
+            TableHeadInfo,OblTableAction,TableOperateBtn,TableRowDetailOperateBtn,TableDeleteOperateBtn
+        },
         mixins: [OblCommonMixin],
         data() {
             const textAlignDefault = 'left';

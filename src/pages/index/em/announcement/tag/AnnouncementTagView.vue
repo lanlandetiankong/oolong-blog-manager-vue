@@ -55,15 +55,12 @@
                             {{record.typeStr}}
                         </a-tag>
                     </span>
-                    <template slot="action" slot-scope="text,record">
-                        <span>
-                            <a @click="handleDetailDrawerShow($event,record)">
-                                {{$t('langMap.drawer.actions.detail')}}
-                            </a>
-                            <a-divider type="vertical"/>
-                            <a-button type="danger" size="small" @click="handleDeleteOneById(record.fid)">{{$t('langMap.button.actions.delById')}}</a-button>
-                        </span>
-                    </template>
+                    <obl-table-action slot="action" slot-scope="text,record">
+                        <template slot="operates">
+                            <table-delete-operate-btn @click="handleDeleteOneById(record.fid)" />
+                            <table-row-detail-operate-btn @click="handleDetailDrawerShow($event,record)" />
+                        </template>
+                    </obl-table-action>
                 </a-table>
             </div>
         </div>
@@ -95,12 +92,18 @@
 
     import QueryFormComp from '~Components/regular/query/QueryFormComp'
     import TableHeadInfo from '~Components/regular/common/table/TableHeadInfo'
+    import OblTableAction from '~Components/regular/common/table/OblTableAction'
+    import TableDeleteOperateBtn from '~Components/regular/common/table/operate/TableDeleteOperateBtn'
+    import TableRowDetailOperateBtn from '~Components/regular/common/table/operate/TableRowDetailOperateBtn'
     import AnnouncementTagCreateFormComp from "~Components/index/em/announcement/tag/AnnouncementTagCreateFormComp";
     import RowDetailDrawerComp from '~Components/regular/common/drawer/RowDetailDrawerComp';
 
     export default {
         name: "AnnouncementTagView",
-        components: {QueryFormComp,TableHeadInfo, AnnouncementTagCreateFormComp, RowDetailDrawerComp},
+        components: {
+            QueryFormComp,AnnouncementTagCreateFormComp, RowDetailDrawerComp,
+            TableHeadInfo,OblTableAction,TableRowDetailOperateBtn,TableDeleteOperateBtn,
+        },
         mixins: [OblCommonMixin],
         data() {
             const textAlignDefault = 'left';
