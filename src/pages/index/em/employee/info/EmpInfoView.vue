@@ -286,9 +286,10 @@
                     },{
                         title: this.$t('langMap.table.fields.em.department.belongDepartment'),
                         align:textAlignDefault,
-                        dataIndex: 'belongDepartment.name',
+                        dataIndex: 'belongDepartmentName',
                         sorter:true,
-                        key: 'belongDepartment.name',
+                        width:120,
+                        key: 'belongDepartmentName',
                     },  {
                         title: this.$t('langMap.table.fields.em.user.phone'),
                         align:textAlignDefault,
