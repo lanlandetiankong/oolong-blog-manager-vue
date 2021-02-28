@@ -86,37 +86,34 @@
                     <span slot="auditTimeRender" slot-scope="text,record,index">
                         {{record.auditTime | formatBaseDateTime}}
                     </span>
-                    <template slot="action" slot-scope="text,record">
-                        <span>
-                            <template v-if="record.antiAuditAbleFlag == true">
-                                <a @click="handleAntiAudit($event,record)">
-                                    {{$t('langMap.button.actions.antiAudit')}}
-                                </a>
-                            </template>
-                            <template v-if="record.auditAbleFlag == true">
-                                <a @click="handleAudit($event,record)">
-                                    {{$t('langMap.button.actions.audit')}}
-                                </a>
-                            </template>
-                            <template v-if="record.setRecommendAbleFlag == true">
-                                <a @click="handleSetAsRecommended($event,record)">
-                                    {{$t('langMap.button.actions.setAsRecommended')}}
-                                </a>
-                            </template>
-                            <a @click="handleViewAuditRecords($event,record)">
-                                {{$t('langMap.button.actions.viewAuditRecord')}}
-                            </a>
-                            <a-divider type="vertical" />
-                            <!--<a @click="handleDetailDrawerShow($event,record)">
-                                {{$t('langMap.drawer.actions.detail')}}
-                            </a>-->
-                            <a @click="goToViewDetail($event,record)">
-                                {{$t('langMap.results.article.create.success.extra.viewDetail')}}
-                            </a>
-                            <a-divider type="vertical" />
-                            <a style="color:red;" @click="handleDeleteOneById(record.fid)">{{$t('langMap.button.actions.delById')}}</a>
-                        </span>
-                    </template>
+                    <obl-table-action slot="action" slot-scope="text,record">
+                        <template slot="operates">
+                            <table-operate-btn v-show="record.antiAuditAbleFlag == true"
+                                               :content="$t('langMap.button.actions.antiAudit')"
+                                               icon="audit"
+                                               @click="handleAntiAudit($event,record)"
+                            >
+                            </table-operate-btn>
+                            <table-operate-btn v-show="record.setRecommendAbleFlag == true"
+                                               :content="$t('langMap.button.actions.setAsRecommended')"
+                                               icon="check-square"
+                                               @click="handleSetAsRecommended($event,record)"
+                            >
+                            </table-operate-btn>
+                            <table-operate-btn :content="$t('langMap.button.actions.viewAuditRecord')"
+                                               icon="unordered-list"
+                                               @click="handleViewAuditRecords($event,record)"
+                            >
+                            </table-operate-btn>
+                            <table-operate-btn :content="$t('langMap.results.article.create.success.extra.viewDetail')"
+                                               icon="read"
+                                               @click="goToViewDetail($event,record)"
+                            >
+                            </table-operate-btn>
+                            <table-delete-operate-btn @click="handleDeleteOneById(record.fid)" />
+                            <table-row-detail-operate-btn @click="handleDetailDrawerShow($event,record)" />
+                        </template>
+                    </obl-table-action>
                 </a-table>
             </div>
             <!-- 弹窗dom-区域 -->
@@ -165,6 +162,10 @@
     import {ConstantObj, FormItemTypeEnum} from "~Components/constant_define";
     import QueryFormComp from '~Components/regular/query/QueryFormComp'
     import TableHeadInfo from '~Components/regular/common/table/TableHeadInfo'
+    import OblTableAction from '~Components/regular/common/table/OblTableAction'
+    import TableOperateBtn from '~Components/regular/common/table/operate/TableOperateBtn'
+    import TableRowDetailOperateBtn from '~Components/regular/common/table/operate/TableRowDetailOperateBtn'
+    import TableDeleteOperateBtn from '~Components/regular/common/table/operate/TableDeleteOperateBtn'
     import OblArticleSetRecommendComp from '~Components/index/obl/article/recommend/OblArticleSetRecommendComp'
     import OblArticleAuditComp from '~Components/index/obl/article/audit/OblArticleAuditComp'
     import OblArticleAntiAuditComp from '~Components/index/obl/article/audit/OblArticleAntiAuditComp'
@@ -175,7 +176,7 @@
     export default {
         name: "OblArticleAllListView",
         components:{QueryFormComp,OblArticleSetRecommendComp,OblArticleAuditComp,
-            TableHeadInfo,
+            TableHeadInfo,OblTableAction,TableOperateBtn,TableRowDetailOperateBtn,TableDeleteOperateBtn,
             OblArticleAntiAuditComp,OblArticleAuditRecordsComp,RowDetailDrawerComp},
         mixins:[OblCommonMixin],
         data() {

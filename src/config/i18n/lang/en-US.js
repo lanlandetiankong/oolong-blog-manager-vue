@@ -118,6 +118,14 @@ export const langMap = {
             weights:'Weights',
             type:'Type'
         },
+        actions:{
+            popover:{
+                defaultConf:{
+                    title:'Operate',
+                    content:'No description of the operation'
+                }
+            }
+        },
         config:{
             emptyData:'Empty data',
             showQuery:'Show query',

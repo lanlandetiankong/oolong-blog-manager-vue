@@ -119,6 +119,14 @@ export const langMap = {
             weights:'权重',
             type:'类型'
         },
+        actions:{
+            popover:{
+                defaultConf:{
+                    title:'操作',
+                    content:'暂无操作的描述信息'
+                }
+            }
+        },
         config:{
             emptyData:'暂无数据',
             showQuery:'展示搜索',
