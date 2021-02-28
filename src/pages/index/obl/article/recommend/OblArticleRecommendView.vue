@@ -18,7 +18,7 @@
                 >
                     <a-col>
                         <a-button type="primary" icon="edit"
-                                  @click="handleBatchEditRecommended">
+                                  @click="handleBatchEditItems">
                             {{$t('langMap.button.actions.batchEdit')}}
                         </a-button>
                     </a-col>
@@ -62,26 +62,19 @@
                     <span slot="endTimeRender" slot-scope="text,record">
                         {{record.endTime | formatBaseDateTime}}
                     </span>
-                    <template slot="action" slot-scope="text,record">
-                        <span>
-                            <template v-if="record.isConfirmed == 0">
-                                <a @click="handleEditRecommend($event,record)">
-                                    {{$t('langMap.button.actions.edit')}}
-                                </a>
-                            </template>
-                            <template v-if="record.isConfirmed == 1">
-                                 <a @click="handleAdjust($event,record)">
-                                    {{$t('langMap.button.actions.adjustTime')}}
-                                </a>
-                            </template>
-                            <a-divider type="vertical"/>
-                            <a @click="handleDetailDrawerShow($event,record)">
-                                {{$t('langMap.drawer.actions.detail')}}
-                            </a>
-                            <a-divider type="vertical"/>
-                            <a-button type="danger" size="small" @click="handleDeleteOneById(record.fid)">{{$t('langMap.button.actions.delById')}}</a-button>
-                        </span>
-                    </template>
+                    <obl-table-action slot="action" slot-scope="text,record">
+                        <template slot="operates">
+                            <table-edit-operate-btn v-show="record.isConfirmed == 0"
+                                                    @click="handleEditItem($event,record)" />
+                            <table-operate-btn v-show="record.isConfirmed == 1"
+                                               :content="$t('langMap.button.actions.adjustTime')"
+                                               icon="sliders"
+                                               @click="handleAdjust($event,record)">
+                            </table-operate-btn>
+                            <table-delete-operate-btn @click="handleDeleteOneById(record.fid)" />
+                            <table-row-detail-operate-btn @click="handleDetailDrawerShow($event,record)" />
+                        </template>
+                    </obl-table-action>
                     <div slot="expandedRowRender" slot-scope="record" style="margin: 0">
                         <a-descriptions>
                             <a-descriptions-item :label="$t('langMap.table.fields.common.remark')">
@@ -130,13 +123,20 @@
 
     import QueryFormComp from '~Components/regular/query/QueryFormComp'
     import TableHeadInfo from '~Components/regular/common/table/TableHeadInfo'
+    import OblTableAction from '~Components/regular/common/table/OblTableAction'
+    import TableOperateBtn from '~Components/regular/common/table/operate/TableOperateBtn'
+    import TableEditOperateBtn from '~Components/regular/common/table/operate/TableEditOperateBtn'
+    import TableDeleteOperateBtn from '~Components/regular/common/table/operate/TableDeleteOperateBtn'
+    import TableRowDetailOperateBtn from '~Components/regular/common/table/operate/TableRowDetailOperateBtn'
     import RowDetailDrawerComp from '~Components/regular/common/drawer/RowDetailDrawerComp';
     import OblArticleRecommendAdjustComp from '~Components/index/obl/article/recommend/OblArticleRecommendAdjustComp'
     import OblArticleEditRecommendComp from '~Components/index/obl/article/recommend/OblArticleEditRecommendComp'
 
     export default {
         name: "OblArticleRecommendView",
-        components: {QueryFormComp,OblArticleRecommendAdjustComp,TableHeadInfo,OblArticleEditRecommendComp,RowDetailDrawerComp},
+        components: {QueryFormComp,OblArticleRecommendAdjustComp,OblArticleEditRecommendComp,RowDetailDrawerComp,
+            TableHeadInfo,OblTableAction,TableOperateBtn,TableRowDetailOperateBtn,TableEditOperateBtn,TableDeleteOperateBtn
+        },
         mixins: [OblCommonMixin],
         data() {
             const textAlignDefault = 'left';
@@ -465,11 +465,11 @@
                     this.dialog.adjust.visible = true ;
                 }
             },
-            handleEditRecommend(e,record){
+            handleEditItem(e,record){
                 this.dialog.editRecommend.itemList = record;
                 this.dialog.editRecommend.visible = true ;
             },
-            handleBatchEditRecommended(e){ //批量更新推荐
+            handleBatchEditItems(e){ //批量更新推荐
                 var _this = this;
                 let selectList = _this.tableCheckList;
                 if (selectList.length < 1) {

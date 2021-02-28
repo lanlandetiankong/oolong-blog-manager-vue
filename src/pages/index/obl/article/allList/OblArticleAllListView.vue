@@ -177,7 +177,8 @@
         name: "OblArticleAllListView",
         components:{QueryFormComp,OblArticleSetRecommendComp,OblArticleAuditComp,
             TableHeadInfo,OblTableAction,TableOperateBtn,TableRowDetailOperateBtn,TableDeleteOperateBtn,
-            OblArticleAntiAuditComp,OblArticleAuditRecordsComp,RowDetailDrawerComp},
+            OblArticleAntiAuditComp,OblArticleAuditRecordsComp,RowDetailDrawerComp
+        },
         mixins:[OblCommonMixin],
         data() {
             const textAlignDefault = 'left' ;

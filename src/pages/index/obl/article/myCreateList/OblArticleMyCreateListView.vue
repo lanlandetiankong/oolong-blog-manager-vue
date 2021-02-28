@@ -68,22 +68,22 @@
                     <span slot="auditTimeRender" slot-scope="text,record,index">
                         {{record.auditTime | formatBaseDateTime}}
                     </span>
-                    <template slot="action" slot-scope="text,record">
-                        <span>
-                             <a @click="handleViewAuditRecords($event,record)">
-                                {{$t('langMap.button.actions.viewAuditRecord')}}
-                            </a>
-                            <a @click="handleDetailDrawerShow($event,record)">
-                                {{$t('langMap.drawer.actions.detail')}}
-                            </a>
-                            <a-divider type="vertical" />
-                            <a @click="goToViewDetail($event,record)">
-                                {{$t('langMap.results.article.create.success.extra.viewDetail')}}
-                            </a>
-                            <a-divider type="vertical" />
-                            <a-button type="danger" size="small" @click="handleDeleteOneById(record.fid)">{{$t('langMap.button.actions.delById')}}</a-button>
-                        </span>
-                    </template>
+                    <obl-table-action slot="action" slot-scope="text,record">
+                        <template slot="operates">
+                            <table-operate-btn :content="$t('langMap.results.article.create.success.extra.viewDetail')"
+                                               icon="read"
+                                               @click="goToViewDetail($event,record)"
+                            >
+                            </table-operate-btn>
+                            <table-operate-btn :content="$t('langMap.button.actions.viewAuditRecord')"
+                                               icon="unordered-list"
+                                               @click="handleViewAuditRecords($event,record)"
+                            >
+                            </table-operate-btn>
+                            <table-delete-operate-btn @click="handleDeleteOneById(record.fid)" />
+                            <table-row-detail-operate-btn @click="handleDetailDrawerShow($event,record)" />
+                        </template>
+                    </obl-table-action>
                 </a-table>
             </div>
             <!-- 弹窗dom-区域 -->
@@ -115,13 +115,19 @@
     import {ConstantObj, FormItemTypeEnum} from "~Components/constant_define";
     import QueryFormComp from '~Components/regular/query/QueryFormComp'
     import TableHeadInfo from '~Components/regular/common/table/TableHeadInfo'
+    import OblTableAction from '~Components/regular/common/table/OblTableAction'
+    import TableOperateBtn from '~Components/regular/common/table/operate/TableOperateBtn'
+    import TableDeleteOperateBtn from '~Components/regular/common/table/operate/TableDeleteOperateBtn'
+    import TableRowDetailOperateBtn from '~Components/regular/common/table/operate/TableRowDetailOperateBtn'
     import RowDetailDrawerComp from '~Components/regular/common/drawer/RowDetailDrawerComp';
     import OblArticleAuditRecordsComp from '~Components/index/obl/article/audit/OblArticleAuditRecordsComp'
 
 
     export default {
         name: "OblArticleMyCreateListView",
-        components:{QueryFormComp,OblArticleAuditRecordsComp,TableHeadInfo,RowDetailDrawerComp},
+        components:{QueryFormComp,OblArticleAuditRecordsComp,RowDetailDrawerComp,
+            TableHeadInfo,OblTableAction,TableOperateBtn,TableRowDetailOperateBtn,TableDeleteOperateBtn
+        },
         mixins:[OblCommonMixin],
         data() {
             const textAlignDefault = 'left' ;

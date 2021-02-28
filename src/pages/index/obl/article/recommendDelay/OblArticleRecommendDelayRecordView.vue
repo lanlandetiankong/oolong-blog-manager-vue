@@ -39,14 +39,11 @@
                     <span slot="afterTimeRangeRender" slot-scope="record">
                         {{record.afterStartTime | formatBaseDateTime}} -> {{record.afterEndTime | formatBaseDateTime}}
                     </span>
-                    <template slot="action" slot-scope="text,record">
-                        <span>
-                            <a @click="handleDetailDrawerShow($event,record)">
-                                {{$t('langMap.drawer.actions.detail')}}
-                            </a>
-                            <a-divider type="vertical"/>
-                        </span>
-                    </template>
+                    <obl-table-action slot="action" slot-scope="text,record">
+                        <template slot="operates">
+                            <table-row-detail-operate-btn @click="handleDetailDrawerShow($event,record)" />
+                        </template>
+                    </obl-table-action>
                     <div slot="expandedRowRender" slot-scope="record" style="margin: 0">
                         <a-descriptions>
                             <a-descriptions-item :label="$t('langMap.table.fields.obl.articleRecommendDelayRecord.recommendId')">
@@ -82,11 +79,15 @@
 
     import QueryFormComp from '~Components/regular/query/QueryFormComp'
     import TableHeadInfo from '~Components/regular/common/table/TableHeadInfo'
+    import OblTableAction from '~Components/regular/common/table/OblTableAction'
+    import TableRowDetailOperateBtn from '~Components/regular/common/table/operate/TableRowDetailOperateBtn'
     import RowDetailDrawerComp from '~Components/regular/common/drawer/RowDetailDrawerComp';
 
     export default {
         name: "OblArticleRecommendDelayRecordView",
-        components: {QueryFormComp,TableHeadInfo, RowDetailDrawerComp},
+        components: {QueryFormComp,TableHeadInfo,RowDetailDrawerComp,
+            OblTableAction,TableRowDetailOperateBtn
+        },
         mixins: [OblCommonMixin],
         data() {
             const textAlignDefault = 'left';
