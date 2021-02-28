@@ -49,7 +49,8 @@ export const langMap = {
             delayTime:'延迟时间',
             audit:'审批',
             antiAudit:'反审批',
-            viewAuditRecord:'审批记录'
+            viewAuditRecord:'审批记录',
+            viewRecommendRecord:'推荐记录'
         },
         member:{
             account:'账号',

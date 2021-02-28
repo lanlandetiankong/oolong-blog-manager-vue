@@ -49,7 +49,8 @@ export const langMap = {
             delayTime:'Delay time',
             audit:'Audit',
             antiAudit:'Anti-audit',
-            viewAuditRecord:'Audit record'
+            viewAuditRecord:'Audit record',
+            viewRecommendRecord:'Recommend record'
         },
         member:{
             account:'Account',
