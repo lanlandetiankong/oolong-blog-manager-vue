@@ -15,18 +15,19 @@
                 </a-button>
             </template>
             <div>
-                <a-timeline>
+                <a-empty v-show="!hasData"/>
+                <a-timeline v-show="hasData">
                     <template v-for="item in timelines.data">
                         <a-timeline-item v-if="item.auditType == 1"
                          >
                             <a-icon slot="dot" type="audit" />
                             <a-descriptions :column="{ xxl: 2, xl: 2, lg: 2, md: 2, sm: 1, xs: 1 }"
                                 :title="item.auditTime | formatBaseDateTime">
-                                <a-descriptions-item span="2"
+                                <a-descriptions-item
                                     :label="$t('langMap.table.fields.obl.articleAuditRecord.articleTitle')">
                                     {{item.articleTitle}}
                                 </a-descriptions-item>
-                                <a-descriptions-item span="2"
+                                <a-descriptions-item
                                     :label="$t('langMap.table.fields.obl.articleAuditRecord.auditComments')">
                                     {{item.auditComments}}
                                 </a-descriptions-item>
@@ -94,6 +95,11 @@
                 timelines:{
                     data:[]
                 }
+            }
+        },
+        computed:{
+            hasData(){
+                return this.timelines.data.length > 0 ;
             }
         },
         methods:{
