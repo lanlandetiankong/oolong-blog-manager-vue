@@ -13,6 +13,9 @@
                     <a-button @click="handleViewAuditRecords($event)">
                         {{$t('langMap.button.actions.viewAuditRecord')}}
                     </a-button>
+                    <a-button @click="handleViewRecommendRecords($event)">
+                        {{$t('langMap.button.actions.viewRecommendRecord')}}
+                    </a-button>
                 </template>
                 <template slot="footer">
                     <a-descriptions
@@ -53,6 +56,12 @@
                 @cancel="()=> this.dialog.viewAuditRecords.visible = false"
                 @submit="()=> this.dialog.viewAuditRecords.visible = false"
             />
+            <obl-article-recommend-records-comp
+                v-if="dialog.viewRecommendRecords.visible"
+                v-bind="dialog.viewRecommendRecords"
+                @cancel="()=> this.dialog.viewRecommendRecords.visible = false"
+                @submit="()=> this.dialog.viewRecommendRecords.visible = false"
+            />
         </div>
     </div>
 </template>
@@ -61,10 +70,11 @@
     import {AllEnum,EnumUtils} from '~Config/selectData.js';
     import MavonReadOnlyComp from '~Components/regular/common/mavon/MavonReadOnlyComp';
     import OblArticleAuditRecordsComp from '~Components/index/obl/article/audit/OblArticleAuditRecordsComp'
+    import OblArticleRecommendRecordsComp from '~Components/index/obl/article/audit/OblArticleRecommendRecordsComp'
     import {OblArticleDisplayApi} from './oblArticleDisplayApi'
     export default {
         name: "OblArticleDisplayView",
-        components: {MavonReadOnlyComp,OblArticleAuditRecordsComp},
+        components: {MavonReadOnlyComp,OblArticleAuditRecordsComp,OblArticleRecommendRecordsComp},
         data(){
             return {
                 formData:{
@@ -82,7 +92,12 @@
                 dialog:{
                     viewAuditRecords:{
                         visible: false,
-                        formObj:[],
+                        formObj:{},
+                        overZIndex:true
+                    },
+                    viewRecommendRecords:{
+                        visible: false,
+                        formObj:{},
                         overZIndex:true
                     }
                 }
@@ -125,6 +140,10 @@
             handleViewAuditRecords(e){   //查看文章的审批记录
                 this.dialog.viewAuditRecords.formObj = this.formData;
                 this.dialog.viewAuditRecords.visible = true ;
+            },
+            handleViewRecommendRecords(e,record){   //查看文章的推荐记录
+                this.dialog.viewRecommendRecords.formObj = this.formData;
+                this.dialog.viewRecommendRecords.visible = true ;
             },
         },
         watch: {

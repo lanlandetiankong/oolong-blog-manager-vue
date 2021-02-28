@@ -412,11 +412,11 @@
                     },
                     viewAuditRecords:{
                         visible: false,
-                        formObj:[]
+                        formObj:{}
                     },
                     viewRecommendRecords:{
                         visible: false,
-                        formObj:[]
+                        formObj:{}
                     }
                 },
                 drawerConf:{

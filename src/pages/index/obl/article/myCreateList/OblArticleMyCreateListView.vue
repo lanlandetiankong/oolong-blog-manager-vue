@@ -80,6 +80,11 @@
                                                @click="handleViewAuditRecords($event,record)"
                             >
                             </table-operate-btn>
+                            <table-operate-btn :content="$t('langMap.button.actions.viewRecommendRecord')"
+                                               icon="ordered-list"
+                                               @click="handleViewRecommendRecords($event,record)"
+                            >
+                            </table-operate-btn>
                             <table-delete-operate-btn @click="handleDeleteOneById(record.fid)" />
                             <table-row-detail-operate-btn @click="handleDetailDrawerShow($event,record)" />
                         </template>
@@ -93,6 +98,12 @@
                     v-bind="dialog.viewAuditRecords"
                     @cancel="()=> this.dialog.viewAuditRecords.visible = false"
                     @submit="()=> this.dialog.viewAuditRecords.visible = false"
+                />
+                <obl-article-recommend-records-comp
+                    v-if="dialog.viewRecommendRecords.visible"
+                    v-bind="dialog.viewRecommendRecords"
+                    @cancel="()=> this.dialog.viewRecommendRecords.visible = false"
+                    @submit="()=> this.dialog.viewRecommendRecords.visible = false"
                 />
                 <row-detail-drawer-comp
                     :drawerConf="drawerConf.detail.article.conf"
@@ -121,11 +132,11 @@
     import TableRowDetailOperateBtn from '~Components/regular/common/table/operate/TableRowDetailOperateBtn'
     import RowDetailDrawerComp from '~Components/regular/common/drawer/RowDetailDrawerComp';
     import OblArticleAuditRecordsComp from '~Components/index/obl/article/audit/OblArticleAuditRecordsComp'
-
+    import OblArticleRecommendRecordsComp from '~Components/index/obl/article/audit/OblArticleRecommendRecordsComp'
 
     export default {
         name: "OblArticleMyCreateListView",
-        components:{QueryFormComp,OblArticleAuditRecordsComp,RowDetailDrawerComp,
+        components:{QueryFormComp,OblArticleAuditRecordsComp,OblArticleRecommendRecordsComp,RowDetailDrawerComp,
             TableHeadInfo,OblTableAction,TableOperateBtn,TableRowDetailOperateBtn,TableDeleteOperateBtn
         },
         mixins:[OblCommonMixin],
@@ -312,7 +323,11 @@
                 dialog:{
                     viewAuditRecords:{
                         visible: false,
-                        formObj:[]
+                        formObj:{}
+                    },
+                    viewRecommendRecords:{
+                        visible: false,
+                        formObj:{}
                     }
                 },
                 drawerConf:{
@@ -479,6 +494,10 @@
             handleViewAuditRecords(e,record){   //查看文章的审批记录
                 this.dialog.viewAuditRecords.formObj = record;
                 this.dialog.viewAuditRecords.visible = true ;
+            },
+            handleViewRecommendRecords(e,record){   //查看文章的推荐记录
+                this.dialog.viewRecommendRecords.formObj = record;
+                this.dialog.viewRecommendRecords.visible = true ;
             },
         },
         watch:{
