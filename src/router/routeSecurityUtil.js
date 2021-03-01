@@ -1,8 +1,7 @@
 import router from '@/router/index';
 import {message} from 'ant-design-vue';
 import {i18nUtil} from "~Config/i18n/i18nUtil";
-
-
+import {RouteSecurityApi} from './routeSecurityApi'
 
 /**
  * routeSecurityUtil 路由安全工具
@@ -75,6 +74,7 @@ function getUserToken() {
 
 export const TokenUtil = {
     loginOut(){
+        RouteSecurityApi.loginOut();
         jumpToLoginPage() ;
     },
     handleVerifyToken(){
