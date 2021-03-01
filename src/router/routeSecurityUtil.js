@@ -10,12 +10,14 @@ import {i18nUtil} from "~Config/i18n/i18nUtil";
 const RoutePageConst = {
     login:'/member/login',
     register:'/member/register',
-    forgetPassword:'/member/password/forget'
+    forgetPassword:'/member/password/forget',
+    serverDown:'/errorPage/server_down'
 };
 const whiteUrlList = [
     RoutePageConst.login,
     RoutePageConst.register,
     RoutePageConst.forgetPassword,
+    RoutePageConst.serverDown
 ];
 
 function removeTokenSession(){
@@ -93,6 +95,9 @@ export const TokenUtil = {
     },
     getUserToken(){
         return getUserToken();
+    },
+    goToServerDown(){
+        router.push(RoutePageConst.serverDown);
     }
-}
+};
 export const RouteConst = RoutePageConst;

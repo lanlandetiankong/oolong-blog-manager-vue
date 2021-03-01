@@ -22,7 +22,7 @@ import ArticleRouter from './main/obl/article/index'
 import UserZoneRouter from './main/regular/userZone/index'
 import MemberRouter from './member/index.js'
 //错误页面
-import Error4XXRouter from  './error/error4xx/index'
+import Error4XXRouter from './error'
 
 
 Vue.use(VueRouter);

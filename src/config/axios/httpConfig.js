@@ -188,9 +188,11 @@ http.post = function (url, data, options) {
         instance
             .post(url, data, options)
             .then((response) => {
+                debugger ;
                 store.dispatch('doSetAjaxLoading',false) ;
                 if(typeof response == "undefined"){
                     reject(response) ;
+                    TokenUtil.goToServerDown();
                     return false ;
                 }
                 //对返回结果的预先处理
@@ -231,6 +233,7 @@ http.post = function (url, data, options) {
                 }
             })
             .catch(e => {
+                debugger ;
                 store.dispatch('doSetAjaxLoading',false) ;
                 console.error(e);
                 reject(e);

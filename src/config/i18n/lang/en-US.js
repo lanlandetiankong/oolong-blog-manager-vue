@@ -540,6 +540,14 @@ export const langMap = {
                 extra:{
                     serverError:'System error'
                 }
+            },
+            serverDown:{
+                title:'Operation failed',
+                message:{
+                    goBack:'Back to the previous page',
+                    main:'The system is under maintenance',
+                    secondary:'We are resuming operation as soon as possible, please wait 15-30 minutes...'
+                }
             }
         },
         article:{

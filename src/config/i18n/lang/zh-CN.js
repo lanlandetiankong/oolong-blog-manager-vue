@@ -543,6 +543,14 @@ export const langMap = {
               extra:{
                   serverError:'系统出错了'
               }
+          },
+          serverDown:{
+              title:'操作失败',
+                message:{
+                    goBack:'返回上个页面',
+                    main:'系统正在维护中',
+                    secondary:'我们正在尽快恢复运行,请稍等15-30分钟....'
+                }
           }
         },
         article:{
