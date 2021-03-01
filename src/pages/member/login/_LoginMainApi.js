@@ -4,8 +4,8 @@ export const LoginMainApi = {
     doGetAllMenu() {    //取得用户 能访问菜单列表
         return axios.post('/oblCtl/define/defineMenu/user/gainGrantTree').then(res => res.data) ;
     },
-    flushLoginerInfo(){ //刷新*查询-当前用户信息
-        return axios.post('/oblCtl/flushCache/user/flushLoginerInfo').then(res => res.data) ;
+    flushUserInfo(){ //刷新*查询-当前用户信息
+        return axios.post('/oblCtl/flushCache/user/flushUserInfo').then(res => res.data) ;
     },
     flushUserVisitAbleUrls(){   //刷新*查询-用户可访问的[菜单url]
         return axios.post('/oblCtl/flushCache/user/flushUserVisitAbleUrls').then(res => res.data) ;
