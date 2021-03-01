@@ -36,7 +36,7 @@ export const CacheMixin = {
         cacheMixin_handleMenuListToCache(self,reflush){  //将后台的[菜单配置]更新到 VueRouter配置中
             var _this = self ;
             if(reflush == true){
-                LoginMainApi.flushCacheAndGetAllMenu().then(res => {
+                LoginMainApi.flushUserVisitAbleMenuTree().then(res => {
                     _this.cacheMixin_handleMenuInfoCacheLocal(_this,res);
                 });
             }   else {
