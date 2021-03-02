@@ -409,7 +409,7 @@
                     limitSize:1,
                     limitMinSize:1,
                     moreData:{
-                        prefixFolder:"/menuManager",
+                        prefixFolder:"",
                         fid:''
                     },
                     uploadedBeanList:[] //当前菜单已经设置的已上传的文件列表
