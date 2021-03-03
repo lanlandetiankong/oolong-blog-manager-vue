@@ -44,7 +44,8 @@
                     :activeTabKey="currentTabKey"
                     @tabChange="key => handleTabChange(key, 'currentTabKey')"
                 >
-                    <obl-my-article-list-comp v-if="currentTabKey === 'article'"/>
+                    <obl-my-article-list-comp v-if="currentTabKey === 'myArticleList'"/>
+                    <obl-my-announcement-list-comp v-if="currentTabKey === 'myAnnouncementList'"/>
                 </a-card>
             </a-col>
         </a-row>
@@ -55,24 +56,26 @@
     import {AllEnum, EnumUtils} from "~Config/selectData";
     import {UserZoneCenterApi} from "~Pages/index/regular/userZone/center/userZoneCenterApi";
     import OblMyArticleListComp from "~Components/index/obl/article/mylist/OblMyArticleListComp";
+    import OblMyAnnouncementListComp from "~Components/index/em/announcement/mylist/OblMyAnnouncementListComp";
     export default {
         name:'UserZoneCenterView',
         components: {
-            OblMyArticleListComp
+            OblMyArticleListComp,
+            OblMyAnnouncementListComp
         },
         data () {
             return {
                 userBaseInfo:{},
-                currentTabKey: 'article'
+                currentTabKey: 'myArticleList'
             }
         },
         computed: {
             tabListNoTitle(){
                 let arr = [{
-                        key: 'article',
+                        key: 'myArticleList',
                         tab: this.$t('langMap.commons.dashBoard.myArticleList')
                     }, {
-                        key: 'announcement',
+                        key: 'myAnnouncementList',
                         tab: this.$t('langMap.commons.dashBoard.myAnnouncementList')
                     }
                 ];
