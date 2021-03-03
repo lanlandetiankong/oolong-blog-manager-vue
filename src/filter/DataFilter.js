@@ -13,6 +13,17 @@ Vue.filter('formatBaseDateTime', function(value) {
     }
     return moment(value).format('YYYY-MM-DD HH:mm:ss');
 });
+
+
+/**
+ * 常规日期格式化
+ */
+Vue.filter('formatCnDateTime', function(value) {
+    if(!value){
+        return '' ;
+    }
+    return moment(value).format('YYYY年MM月DD日 HH:mm:ss');
+});
 /**
  * 距离现在多少天前
  */

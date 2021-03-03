@@ -1,5 +1,18 @@
 <template>
     <div>
+        <a-page-header :backIcon="false"
+                       :ghost="false"
+        >
+            <template slot="title" >
+                <a-avatar size="large" :src="userInfoStore_userToken.avatarUrl"/> {{userInfoStore_userToken.userName}}
+            </template>
+            <template slot="subTitle">
+                <a-tag>
+                    {{userInfoStore_userToken.belongDepartmentName}}
+                </a-tag>
+                {{theCurrentTime}}
+            </template>
+        </a-page-header>
         <a-tabs
             :defaultActiveKey="layoutConf.tab.defaultActiveKey"
             :tabPosition="layoutConf.tab.mode"
@@ -29,7 +42,7 @@
     import { mapGetters } from 'vuex';
     import UniversalShowComp from '~Components/regular/dashboard/UniversalShowComp'
     import AnnouncementListComp from '~Components/regular/dashboard/announcement/AnnouncementListComp'
-
+    import moment from 'moment';
     export default {
         name: "DashBoardPage",
         components: {UniversalShowComp,AnnouncementListComp},
@@ -68,8 +81,12 @@
         },
         computed:{
             ...mapGetters([
-                'styleStore_appMain'
-            ])
+                'styleStore_appMain',
+                'userInfoStore_userToken'
+            ]),
+            theCurrentTime(){
+                return moment().format("YYYY年MM月DD日 HH:mm:ss");
+            }
         },
         methods:{
             dealGetTabItem(tabKey){     //根据tab的key 取得tab对应的项
