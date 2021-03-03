@@ -50,7 +50,8 @@ export const langMap = {
             audit:'审批',
             antiAudit:'反审批',
             viewAuditRecord:'审批记录',
-            viewRecommendRecord:'推荐记录'
+            viewRecommendRecord:'推荐记录',
+            loadMore:'加载更多'
         },
         member:{
             account:'账号',
@@ -429,6 +430,8 @@ export const langMap = {
             universal:'常规',
             announcementList:'公告列表',
             articleList:'文章列表',
+            myArticleList:'我的文章',
+            myAnnouncementList:'我的公告',
         }
     },
     message:{

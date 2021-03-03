@@ -68,14 +68,12 @@
         },
         computed: {
             tabListNoTitle(){
-                let arr = [
-                    {
+                let arr = [{
                         key: 'article',
-                        tab: '文章'
-                    },
-                    {
+                        tab: this.$t('langMap.commons.dashBoard.myArticleList')
+                    }, {
                         key: 'announcement',
-                        tab: '公告'
+                        tab: this.$t('langMap.commons.dashBoard.myAnnouncementList')
                     }
                 ];
                 return  arr ;

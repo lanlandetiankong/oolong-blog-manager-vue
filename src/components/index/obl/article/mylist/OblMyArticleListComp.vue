@@ -30,7 +30,7 @@
                 <article-list-content v-bind="item"/>
             </a-list-item>
             <div slot="footer" v-if="data.length > 0" style="text-align: center; margin-top: 16px;">
-                <a-button @click="loadMore" :loading="loadingMore">加载更多</a-button>
+                <a-button @click="loadMore" :loading="loadingMore">{{$t('langMap.button.actions.loadMore')}}</a-button>
             </div>
         </a-list>
     </div>

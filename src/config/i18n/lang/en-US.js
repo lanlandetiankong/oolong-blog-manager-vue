@@ -50,7 +50,8 @@ export const langMap = {
             audit:'Audit',
             antiAudit:'Anti-audit',
             viewAuditRecord:'Audit record',
-            viewRecommendRecord:'Recommend record'
+            viewRecommendRecord:'Recommend record',
+            loadMore:'Load more'
         },
         member:{
             account:'Account',
@@ -426,6 +427,8 @@ export const langMap = {
             universal:'Universal',
             announcementList:'Announcement list',
             articleList:'Article list',
+            myArticleList:'My article list',
+            myAnnouncementList:'My announcement list',
         }
     },
     message:{
