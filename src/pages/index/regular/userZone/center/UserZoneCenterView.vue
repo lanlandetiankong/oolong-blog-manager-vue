@@ -71,11 +71,11 @@
                 let arr = [
                     {
                         key: 'article',
-                        tab: '文章(8)'
+                        tab: '文章'
                     },
                     {
                         key: 'announcement',
-                        tab: '公告(8)'
+                        tab: '公告'
                     }
                 ];
                 return  arr ;
