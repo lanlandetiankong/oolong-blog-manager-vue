@@ -44,7 +44,7 @@
                     :activeTabKey="currentTabKey"
                     @tabChange="key => handleTabChange(key, 'currentTabKey')"
                 >
-                    <my-article-list v-if="currentTabKey === 'article'"/>
+                    <obl-my-article-list-comp v-if="currentTabKey === 'article'"/>
                 </a-card>
             </a-col>
         </a-row>
@@ -54,11 +54,11 @@
 <script>
     import {AllEnum, EnumUtils} from "~Config/selectData";
     import {UserZoneCenterApi} from "~Pages/index/regular/userZone/center/userZoneCenterApi";
-    import MyArticleList from "~Components/index/obl/article/mylist/OblMyArticleListComp";
+    import OblMyArticleListComp from "~Components/index/obl/article/mylist/OblMyArticleListComp";
     export default {
         name:'UserZoneCenterView',
         components: {
-            MyArticleList
+            OblMyArticleListComp
         },
         data () {
             return {
