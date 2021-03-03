@@ -57,7 +57,6 @@
 </template>
 
 <script>
-    import constantParams from '~Config/constantParams' ;
     import ACol from "ant-design-vue/es/grid/Col";
     import ARow from "ant-design-vue/es/grid/Row";
     import I18nChangeComp from '~Components/regular/i18n/I18nChangeComp.vue'
@@ -87,10 +86,7 @@
                 if(userTokenCache){
                     var userTokenObj = JSON.parse(userTokenCache);
                     var avatarUrl = userTokenObj.avatarUrl ;
-                    if(avatarUrl){
-                        var urlPrefix = constantParams.props.upload.url.prefix ;
-                        return urlPrefix+avatarUrl ;
-                    }
+                   return avatarUrl ;
                 }
             }
 
