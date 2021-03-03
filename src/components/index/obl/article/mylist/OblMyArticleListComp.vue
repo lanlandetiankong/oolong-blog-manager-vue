@@ -3,9 +3,9 @@
         <a-list
             size="large"
             rowKey="id"
-            :loading="loading"
+            :loading="listConf.loading"
             itemLayout="vertical"
-            :dataSource="data"
+            :dataSource="listConf.data"
         >
             <a-list-item :key="item.fid" slot="renderItem" slot-scope="item">
                 <template slot="actions">
@@ -29,8 +29,9 @@
                 </a-list-item-meta>
                 <article-list-content v-bind="item"/>
             </a-list-item>
-            <div slot="footer" v-if="data.length > 0" style="text-align: center; margin-top: 16px;">
-                <a-button @click="loadMore" :loading="loadingMore">{{$t('langMap.button.actions.loadMore')}}</a-button>
+            <div slot="footer" v-if="listConf.data.length > 0" style="text-align: center; margin-top: 16px;">
+                <a-button v-show="hasMoreData"
+                    @click="loadMore" :loading="listConf.loadingMore">{{$t('langMap.button.actions.loadMore')}}</a-button>
             </div>
         </a-list>
     </div>
@@ -49,9 +50,23 @@
         },
         data() {
             return {
-                loading: true,
-                loadingMore: false,
-                data: []
+                listConf:{
+                    data: [],
+                    loading: true,
+                    loadingMore: false,
+                    pagination: {
+                        current:1,
+                        pageSize:10,
+                        total:0
+                    },
+                },
+
+            }
+        },
+        computed:{
+            hasMoreData(){  //判断是否还有更多数据
+                let pagination = this.listConf.pagination ;
+                return pagination.total > pagination.current * pagination.pageSize ;
             }
         },
         mounted() {
@@ -59,17 +74,21 @@
         },
         methods: {
             getList() {
-                OblMyArticleListCompApi.querySelfDtoPage().then(res => {
-                    this.data = res.gridList;
-                    this.loading = false
+                OblMyArticleListCompApi.querySelfDtoPage(this.listConf).then(res => {
+                    this.listConf.data = res.gridList;
+                    this.listConf.loading = false;
+                    this.listConf.pagination.total = res.vpage.total ;
+                    this.listConf.pagination.current += 1 ;
                 })
             },
             loadMore() {
-                this.loadingMore = true;
-                OblMyArticleListCompApi.querySelfDtoPage().then(res => {
-                    this.data = this.data.concat(res.gridList)
+                this.listConf.loadingMore = true;
+                OblMyArticleListCompApi.querySelfDtoPage(this.listConf).then(res => {
+                    this.listConf.data = this.listConf.data.concat(res.gridList);
+                    this.listConf.pagination.total = res.vpage.total ;
+                    this.listConf.pagination.current += 1 ;
                 }).finally(() => {
-                    this.loadingMore = false
+                    this.listConf.loadingMore = false;
                 })
             }
         }
