@@ -11,7 +11,6 @@
                     <a-tag v-show="userInfoStore_userToken.belongDepartmentName">
                         {{userInfoStore_userToken.belongDepartmentName}}
                     </a-tag>
-                    {{theCurrentTime}}
                 </template>
                 <template slot="extra">
 
@@ -62,16 +61,13 @@
         data(){
             return {
                 userBaseInfo:{},
-                currentTabKey: 'myArticleList'
+                currentTabKey: 'myArticleList',
             }
         },
         computed:{
             ...mapGetters([
                 'userInfoStore_userToken'
             ]),
-            theCurrentTime(){
-                return moment().format("YYYY年MM月DD日 HH:mm:ss");
-            },
             tabListNoTitle(){
                 let arr = [{
                     key: 'myArticleList',

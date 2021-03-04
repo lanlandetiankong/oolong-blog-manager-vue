@@ -17,7 +17,6 @@
         },
         methods:{
             goToIndex(){
-                debugger;
                 if(this.goAble){
                     this.mixin_goToIndex() ;
                 }
