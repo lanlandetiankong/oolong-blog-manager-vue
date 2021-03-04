@@ -394,10 +394,6 @@
                     item['auditStateStr'] = articleAuditStateValMap[item.auditState];
                     item['editorTypeStr'] = articleEditorTypeValMap[item.editorType];
                     item['sourceTypeStr'] = articleSourceTypeValMap[item.sourceType];
-                    //是否可审批
-                    item['auditAbleFlag'] = _this.auditDisableStateArr.indexOf(item.auditState) < 0 ;
-                    item['antiAuditAbleFlag'] = _this.antiAuditAbleStateArr.indexOf(item.auditState) >= 0 ;
-                    item['setRecommendAbleFlag'] = _this.setRecommendAbleStateArr.indexOf(item.auditState) >= 0 ;
                 }
             },
             handleSearchFormQuery(e,values) {    //带查询条件 检索文章列表
