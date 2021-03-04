@@ -81,10 +81,7 @@
             handleTabChange (key, type) {
                 this[type] = key
             }
-        },
-        mounted () {
-            this.dealGetMyBaseInfo();
-        },
+        }
     }
 </script>
 

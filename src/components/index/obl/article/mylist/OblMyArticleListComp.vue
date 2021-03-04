@@ -14,20 +14,21 @@
                     <icon-text type="message" :text="item.commentCount"/>
                 </template>
                 <a-list-item-meta>
-                    <a slot="title">{{ item.title }}</a>
+                    <a slot="title" @click="goToViewDetail($event,item)">{{ item.title }}</a>
                     <template slot="description">
                         <a-row>
-                        <span v-for="categoryNamItem in item.categoryNameList">
-                            <a-tag color="#108ee9">{{categoryNamItem}}</a-tag>
-                        </span>
+                            <span v-for="categoryNamItem in item.categoryNameList">
+                                <a-tag color="#108ee9">{{categoryNamItem}}</a-tag>
+                            </span>
                             <a-divider type="vertical"/>
                             <span v-for="tagItem in item.tagNameList">
-                            <a-tag color="#87d068">{{tagItem}}</a-tag>
-                          </span>
+                                <a-tag color="#87d068">{{tagItem}}</a-tag>
+                            </span>
                         </a-row>
                     </template>
                 </a-list-item-meta>
-                <article-list-content v-bind="item"/>
+                <article-list-content v-bind="item"
+                                      @click="goToViewDetail($event,item)"/>
             </a-list-item>
             <div slot="footer" v-if="listConf.data.length > 0" style="text-align: center; margin-top: 16px;">
                 <a-button v-show="hasMoreData"
@@ -41,6 +42,7 @@
     import {OblMyArticleListCompApi} from './oblMyArticleListCompApi.js'
     import ArticleListContent from '~Components/index/obl/article/basic/ArticleListContent'
     import IconText from '~Components/regular/common/IconText'
+    import BeeUtil from "~Assets/js/util/bee/BeeUtil";
 
     export default {
         name: 'OblMyArticleList',
@@ -73,6 +75,14 @@
             this.getList();
         },
         methods: {
+            goToViewDetail(e,record) {  //跳转到文章展示页面
+                if(!record){
+                    return ;
+                }
+                let params = record ;
+                let url = BeeUtil.UrlUtils.objToUrl(this.mixinData.routerConst.article.display,params);
+                this.mixin_jump(url);
+            },
             getList() {
                 OblMyArticleListCompApi.querySelfDtoPage(this.listConf).then(res => {
                     this.listConf.data = res.gridList;

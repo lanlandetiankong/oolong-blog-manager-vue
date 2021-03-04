@@ -1,5 +1,5 @@
 <template>
-    <div class="antd-pro-components-article-list-content-index-listContent">
+    <div class="antd-pro-components-article-list-content-index-listContent" @click="$emit('click')">
         <div class="content">
             <slot>
                 {{ shortContent }}
