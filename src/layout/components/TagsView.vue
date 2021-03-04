@@ -1,6 +1,8 @@
 <template>
     <div class="tags-view-container">
-        <vue-scroll class="tags-view-wrapper">
+        <vue-scroll class="tags-view-wrapper"
+                    v-bind="VueScrollConf"
+        >
             <router-link ref='tagsRef'
                          v-for="tag in tagsArray"
                          class="tags-view-item"
@@ -27,9 +29,12 @@
 </template>
 
 <script>
-
+    import VueScroll from 'vuescroll';
+    import VueScrollConf from '~Config/vuescroll/vuescroll.conf.js'
     export default {
-        components: {},
+        components: {
+            VueScroll
+        },
         props: {
             tagsArray: {
                 type: Array,
@@ -39,7 +44,7 @@
         },
         data() {
             return {
-
+                VueScrollConf
             }
         },
         computed: {

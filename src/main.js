@@ -12,10 +12,6 @@ import 'ant-design-vue/dist/antd.css'
 import VueDraggableResizable from 'vue-draggable-resizable';
 Vue.component('vue-draggable-resizable', VueDraggableResizable);
 
-
-import VueScroll from 'vuescroll'
-import VueScrollConf from '~Config/vuescroll/vuescroll.conf.js'
-
 import VueCookies from 'vue-cookies'
 
 //富文本编辑器
@@ -37,7 +33,6 @@ Vue.config.productionTip = (process.env.NODE_ENV === 'development');
 
 //use
 Vue.use(Antd)
-Vue.use(VueScroll,VueScrollConf)
 Vue.use(VueQuillEditor)
 Vue.use(VueI18n)
 Vue.use(VueCookies)
