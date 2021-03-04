@@ -1,4 +1,9 @@
 const BeeUtil = {
+    DataUtils:{
+        defaultIfNull(val,defVal){
+            return val == null ? defVal : val;
+        }
+    },
     //PhoneUtils命名空间
     PhoneUtils: {
         phoneRegexs: {
@@ -323,6 +328,17 @@ const BeeUtil = {
             }   else {
                 return num.toString();
             }
+        },
+        emptyIfNull(str,repStr){    //如果遇到 Undefine或者null，替换为repStr
+            if(typeof str == "undefined" || str == null){
+                if(typeof repStr != "undefined" && repStr == null){
+                    return repStr ;
+                }   else {
+                    return "";
+                }
+            }   else {
+                return str;
+            }
         }
     },
     //ObjectUtils命名空间
@@ -356,6 +372,15 @@ const BeeUtil = {
                 }
             }
             return formData;
+        },
+        deepClone(obj) {  //对象深复制
+            if(typeof obj == "undefined" || obj == null){
+                return {};
+            }
+            //返回 深复制后的对象
+            var _obj = JSON.stringify(obj),
+                objClone = JSON.parse(_obj);
+            return objClone;
         }
     },
     //IdCardUtils命名空间
@@ -4564,6 +4589,7 @@ var BEE_AREAS = {
 }
 
 export default BeeUtil ;
+export const DataUtils  = BeeUtil.DataUtils ;
 export const StringUtils  = BeeUtil.StringUtils ;
 export const ObjectUtils  = BeeUtil.ObjectUtils ;
 export const UrlUtils  = BeeUtil.UrlUtils ;

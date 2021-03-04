@@ -192,7 +192,7 @@
     import {FormItemTypeEnum,ConstantObj} from "~Components/constant_define";
     import {OblCommonMixin} from '~Layout/mixin/OblCommonMixin';
     import {AllEnum,EnumUtils} from '~Config/selectData.js';
-
+    import {StringUtils} from "~Utils/basic/BeeUtil";
     import QueryFormComp from '~Components/regular/query/QueryFormComp'
     import TableHeadInfo from '~Components/regular/common/table/TableHeadInfo'
     import OblTableAction from '~Components/regular/common/table/OblTableAction'
@@ -518,9 +518,9 @@
                     jquery.each(allItemArr,function (idx,val) {
                         if(val){
                             dataSourceArrTemp.push({
-                                key:_this.mixin_dealNullStrToEmpty(val.fid),
-                                title:_this.mixin_dealNullStrToEmpty(val.name),
-                                description:_this.mixin_dealNullStrToEmpty(val.remark),
+                                key:StringUtils.emptyIfNull(val.fid),
+                                title:StringUtils.emptyIfNull(val.name),
+                                description:StringUtils.emptyIfNull(val.remark),
                                 disabled:false
                             })
                         }
@@ -535,9 +535,9 @@
                     jquery.each(allItemArr,function (idx,val) {
                         if(val){
                             dataSourceArrTemp.push({
-                                key:_this.mixin_dealNullStrToEmpty(val.fid),
-                                title:_this.mixin_dealNullStrToEmpty(val.name),
-                                description:_this.mixin_dealNullStrToEmpty(val.remark),
+                                key:StringUtils.emptyIfNull(val.fid),
+                                title:StringUtils.emptyIfNull(val.name),
+                                description:StringUtils.emptyIfNull(val.remark),
                                 disabled:false
                             })
                         }

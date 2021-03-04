@@ -13,14 +13,12 @@
     </div>
 </template>
 <script>
-    import {OblCommonMixin} from '~Layout/mixin/OblCommonMixin';
-
+    import {ObjectUtils,DataUtils} from "~Utils/basic/BeeUtil";
     import SimpleDetailDrawerComp from '~Components/regular/common/drawer/SimpleDetailDrawerComp';
     import {DrawerFieldTypeEnum,CommonDateFormatTypeEnum} from "./drawer_define";
     export default {
         name: "RowDetailDrawerComp",
         components:{SimpleDetailDrawerComp},
-        mixins:[OblCommonMixin],
         props:{
             drawerConf:{
                 type:Object,
@@ -79,21 +77,21 @@
                 //prop.drawerConf 默认初始化
                 var _this = this ;
                 const obj = {};
-                obj['title'] = _this.mixin_defaultIfNull(_this.drawerConf['title'],this.$t('langMap.drawer.actions.detail'));
-                obj['closable'] = _this.mixin_defaultIfNull(_this.drawerConf['closable'],true);
+                obj['title'] = DataUtils.defaultIfNull(_this.drawerConf['title'],this.$t('langMap.drawer.actions.detail'));
+                obj['closable'] = DataUtils.defaultIfNull(_this.drawerConf['closable'],true);
                 obj['visible'] = _this.$props.visible ;
-                obj['placement'] = _this.mixin_defaultIfNull(_this.drawerConf['placement'],"right");
-                obj['mask'] = _this.mixin_defaultIfNull(_this.drawerConf['mask'],true);
-                obj['maskStyle'] = _this.mixin_defaultIfNull(_this.drawerConf['maskStyle'],{
+                obj['placement'] = DataUtils.defaultIfNull(_this.drawerConf['placement'],"right");
+                obj['mask'] = DataUtils.defaultIfNull(_this.drawerConf['mask'],true);
+                obj['maskStyle'] = DataUtils.defaultIfNull(_this.drawerConf['maskStyle'],{
                     overFlowY:"auto"
                 });
-                obj['wrapStyle'] = _this.mixin_defaultIfNull(_this.drawerConf['wrapStyle'],{
+                obj['wrapStyle'] = DataUtils.defaultIfNull(_this.drawerConf['wrapStyle'],{
                     overFlowY:"auto"
                 });
-                obj['drawerStyle'] = _this.mixin_defaultIfNull(_this.drawerConf['drawerStyle'],{
+                obj['drawerStyle'] = DataUtils.defaultIfNull(_this.drawerConf['drawerStyle'],{
                     overFlowY:"auto"
                 });
-                obj['maskClosable'] = _this.mixin_defaultIfNull(_this.drawerConf['maskClosable'],true);
+                obj['maskClosable'] = DataUtils.defaultIfNull(_this.drawerConf['maskClosable'],true);
                return obj ;
             },
             drawerFieldConfObj(){
@@ -101,7 +99,7 @@
                 if(_this.$props.autoAddFixedField == false){
                     return _this.$props.drawerFieldConf ;
                 }
-                var obj = _this.mixin_deepClone(_this.$props.drawerFieldConf) ;
+                var obj = ObjectUtils.deepClone(_this.$props.drawerFieldConf) ;
                 if(obj.hasOwnProperty('remark') === false){
                     obj['remark'] = _this.fixedFieldConf['remark'] ;
                 }

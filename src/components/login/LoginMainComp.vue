@@ -98,8 +98,8 @@
 
 <script>
     import {RouteConst} from '~Router/routeSecurityUtil';
-    import {OblCommonMixin} from '~Layout/mixin/OblCommonMixin';
     import {LoginMainCompApi} from './_LoginMainCompApi'
+    import {DataUtils} from "~Utils/basic/BeeUtil";
     import AFormItem from "ant-design-vue/es/form/FormItem";
     import ARow from "ant-design-vue/es/grid/Row";
     import ACol from "ant-design-vue/es/grid/Col";
@@ -110,7 +110,6 @@
     export default {
         name: "LoginMainComp",
         components: {ACol, ARow, AFormItem,Verify},
-        mixins:[OblCommonMixin],
         data() {
             return {
                 RouteConst,
@@ -140,7 +139,7 @@
         },
         methods: {
             changeLoading(loadingFlag){   //修改[axios]是否在 加载状态中
-                this.loadingFlag = this.mixin_defaultIfNull(loadingFlag,false);
+                this.loadingFlag = DataUtils.defaultIfNull(loadingFlag,false);
             },
             dealTriggerVerify(){    //触发 Verify 的验证事件
                 this.$refs.loginVerifyRef.$refs.instance.checkCode() ;

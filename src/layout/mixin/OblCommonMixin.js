@@ -55,24 +55,6 @@ export const OblCommonMixin = {
             }
             return menuId ;
         },
-        mixin_defaultIfNull(val,defval){   //当null时取默认值
-            if(typeof val == "undefined" || val == null){
-                return defval ;
-            }   else {
-                return val ;
-            }
-        },
-        mixin_dealNullStrToEmpty(str,repStr){ //如果遇到 Undefine或者null，替换为repStr
-            if(typeof str == "undefined" || str == null){
-                if(typeof repStr != "undefined" && repStr == null){
-                    return repStr ;
-                }   else {
-                    return "";
-                }
-            }   else {
-                return str;
-            }
-        },
         mixin_refreshChildViewCaches(self,pageCompName){    //使用在 *Page.vue，用于优化页面组件缓存
             var _this = self;
             var cachedViewMap = this.$store.state.tagsView.cachedViews ;
@@ -100,15 +82,6 @@ export const OblCommonMixin = {
         mixin_invokeQuery(self,refName){
             refName = (refName) ? refName : ConstantObj.queryFormCompRef ;
             self.$refs[refName].triggerQuery();
-        },
-        mixin_deepClone(obj) {  //对象深复制
-            if(typeof obj == "undefined" || obj == null){
-                return {};
-            }
-            //返回 深复制后的对象
-            var _obj = JSON.stringify(obj),
-                objClone = JSON.parse(_obj);
-            return objClone;
         },
         mixin_closeTagAndJump(goToRoute){  //关闭当前标签并跳转到指定路由
             var selectedTag = this.$route ;
