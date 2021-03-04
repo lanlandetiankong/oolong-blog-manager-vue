@@ -1,36 +1,3 @@
-
-
-export const pageUtil = {
-    parseSorterToObj(sorter){
-        var obj = {} ;
-        if(typeof sorter == "undefined" || sorter == null || typeof (sorter.length) == "undefined"){
-            return obj ;
-        }   else if(typeof sorter.field =="undefined") {
-            return obj ;
-        }  else {
-            obj[sorter.field] = isOrderAsc(sorter.order);
-            return obj;
-        }
-    }
-}
-
-/**
- * 判断 是否正序
- * @param val
- * @returns {boolean}
- */
-function isOrderAsc(val) {
-    if(!val){
-        return true ;
-    }   else {
-        if(val == "asc" || val == false){
-            return false ;
-        }   else {
-            return true ;
-        }
-    }
-}
-
 export const axiosForExcelUtil = {
     exportExcelDownload(response) {
         if(!response){
