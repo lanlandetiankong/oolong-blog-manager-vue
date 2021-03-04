@@ -4,7 +4,9 @@
             :backIcon="false"
             :ghost="false"
         >
-            <span slot="title" @click="goToIndex">Oolong Blog Manager</span>
+            <span slot="title">
+                <obl-project-title />
+            </span>
             <obl-breadcrumb slot="subTitle" />
             <template slot="extra">
                 <i18n-change-comp />
@@ -61,9 +63,11 @@
     import ARow from "ant-design-vue/es/grid/Row";
     import I18nChangeComp from '~Components/regular/i18n/I18nChangeComp.vue'
     import OblBreadcrumb from '~Components/regular/common/breadcrumb/OblBreadcrumb.vue'
+    import OblProjectTitle from '~Components/regular/common/OblProjectTitle'
+
     export default {
         name: "NavBar",
-        components: {I18nChangeComp, ARow, ACol,OblBreadcrumb},
+        components: {I18nChangeComp, ARow, ACol,OblBreadcrumb,OblProjectTitle},
         props: {
             userInfo:Object
         },
@@ -92,16 +96,6 @@
 
         },
         methods:{
-            goToIndex(){
-                var _currentRoute = this.$route;
-                if(_currentRoute){
-                    if(_currentRoute.fullPath == "" || _currentRoute.fullPath == "/index"){
-                        //当前已经在 index页面了，无需再跳转
-                    }   else {
-                        this.$router.push('/index');
-                    }
-                }
-            },
             handleClearCacheClick(e){  //清理缓存-点击事件
                 var _this = this ;
                 if(e.key == "refreshMenuCache"){   //退出登录

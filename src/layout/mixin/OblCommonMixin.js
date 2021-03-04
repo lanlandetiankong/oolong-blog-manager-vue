@@ -23,6 +23,16 @@ export const OblCommonMixin = {
 
     },
     methods:{
+        mixin_goToIndex(){
+            var _currentRoute = this.$route;
+            if(_currentRoute){
+                if(_currentRoute.fullPath == "" || _currentRoute.fullPath == "/index"){
+                    //当前已经在 index页面了，无需再跳转
+                }   else {
+                    this.$router.push('/index');
+                }
+            }
+        },
         mixin_handlePermissionDomShow(permCode){    //根据后台传递的[可展示权限]列表进行[权限按钮]展示的控制
             return this.userInfoStore_grantedPermissions.includes(permCode) ;
         },
