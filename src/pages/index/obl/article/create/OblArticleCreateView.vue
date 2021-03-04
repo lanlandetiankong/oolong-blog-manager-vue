@@ -43,6 +43,29 @@
                 <a-row :gutter="16"
                        :type="formLayout.row.type">
                     <a-col :span="18">
+                        <a-form-item :label="$t('langMap.table.fields.obl.article.sourceType')">
+                            <a-select allowClear
+                                      :placeholder="$t('langMap.commons.forms.pleaseChoose')"
+                                      optionFilterProp="children"
+                                      :options="bindData.articleSourceTypeList"
+                                      :filterOption="mixin_getFilterOption"
+                                      v-decorator="formFieldConf.sourceType"
+                                      @change="handleSourceTypeChange"
+                            />
+                        </a-form-item>
+                    </a-col>
+                    <a-col :span="18">
+                        <a-form-item :label="$t('langMap.table.fields.obl.article.sourceUrl')" v-show="!formFlags.isSourceUrlRequired">
+                            <a-input allowClear
+                                      v-decorator="['sourceUrl', {rules: [{
+                                            required: this.formFlags.isSourceUrlRequired,
+                                            message: this.$t('langMap.commons.forms.pleaseFillOut', [this.$t('langMap.table.fields.obl.article.sourceUrl')])
+                                        }]}
+                                      ]"
+                            />
+                        </a-form-item>
+                    </a-col>
+                    <a-col :span="18">
                         <a-form-item :label="$t('langMap.table.fields.common.tag')">
                             <a-select showSearch allowClear
                                       mode="multiple"
@@ -132,6 +155,7 @@
 </template>
 
 <script>
+    import {ArticleSourceTypeEnum,EnumUtils} from "~Config/selectData";
     import {routerConst} from '~Config/BaseDataConst.js'
     import {toolbars} from '~Config/editor/mavon_editor/mavon.conf'
     import {ArticleCreateApi} from './oblArticleCreateApi.js'
@@ -143,6 +167,12 @@
         data() {
             //form验证规则
             const paramsRules = {
+                sourceType: [
+                    {
+                        required: true,
+                        message: this.$t('langMap.commons.forms.pleaseFillOut', [this.$t('langMap.table.fields.obl.article.sourceType')])
+                    }
+                ],
                 summary: [
                     {
                         required: true,
@@ -205,9 +235,11 @@
                 },
                 bindData: {
                     articleTagList: [],
-                    categoryIdList: []
+                    categoryIdList: [],
+                    articleSourceTypeList:EnumUtils.toSelectData(ArticleSourceTypeEnum)
                 },
                 formFieldConf: {
+                    sourceType: ["sourceType", {rules: paramsRules.sourceType}],
                     summary: ["summary", {rules: paramsRules.summary}],
                     tagIdList: ["tagIdList", {rules: paramsRules.tagIdList}],
                     categoryIdList: ["categoryIdList", {rules: paramsRules.categoryIdList}],
@@ -221,7 +253,12 @@
                     originContent: '',
                     tagIdList: undefined,
                     categoryIdList: undefined,
+                    sourceType:undefined,
+                    sourceUrl:'',
                     summary: ''
+                },
+                formFlags:{
+                    isSourceUrlRequired:true
                 },
                 treeSelectConf: {
                     categoryId: {
@@ -229,6 +266,18 @@
                         treeNodeFilterProp: "title",
                     }
                 }
+            }
+        },
+        computed: {
+            currentStepKey() {
+                const arr = this.currentStepArr;
+                return arr[this.stepConf.current];
+            },
+            currentStepArr() {
+                if (!this.stepConf.stepsMap) {
+                    return [];
+                }
+                return Array.from(this.stepConf.stepsMap.keys());
             }
         },
         methods: {
@@ -284,6 +333,14 @@
                 var _this = this;
                 if (typeof _this.createForm.updateFields != "undefined") { //避免未初始化form的时候就调用了updatefield
                     _this.createForm.updateFields({
+                        sourceType: _this.$form.createFormField({
+                            ...formObj,
+                            value: formObj.sourceType,
+                        }),
+                        sourceUrl: _this.$form.createFormField({
+                            ...formObj,
+                            value: formObj.sourceUrl,
+                        }),
                         summary: _this.$form.createFormField({
                             ...formObj,
                             value: formObj.summary,
@@ -332,6 +389,8 @@
             dealFormValuesMapToObj(values) {
                 var formObjTemp = this.formObj;
                 if (values) {
+                    formObjTemp['sourceType'] = values.sourceType;
+                    formObjTemp['sourceUrl'] = values.sourceUrl;
                     formObjTemp['summary'] = values.summary;
                     formObjTemp['tagIdList'] = values.tagIdList;
                     formObjTemp['categoryIdList'] = values.categoryIdList;
@@ -437,30 +496,32 @@
                 };
                 this.mixin_closeTagAndJump(routerConst.article.display,params);
             },
-        },
-        computed: {
-            currentStepKey() {
-                const arr = this.currentStepArr;
-                return arr[this.stepConf.current];
-            },
-            currentStepArr() {
-                if (!this.stepConf.stepsMap) {
-                    return [];
-                }
-                return Array.from(this.stepConf.stepsMap.keys());
+            handleSourceTypeChange(value){
+                this.formObj.sourceType = value ;
+                this.formFlags.isSourceUrlRequired = value == 1 ;
+                this.$nextTick(() => {
+                    this.createForm.validateFields(['sourceUrl'], { force: true });
+                });
             }
         },
         created() {
             var _this = this;
             _this.createForm = this.$form.createForm(_this, {
                 name: 'createForm',
-                onFieldsChange: (_, changedFields) => {
-                    //console.log(changedFields);
-                    this.$emit('change', changedFields);
+                onFieldsChange: (theProps, values) => {
+                    this.$emit('change', values);
                 },
                 mapPropsToFields: () => {
                     //console.log(_this.formObj);
                     return {
+                        sourceType: this.$form.createFormField({
+                            ..._this.formObj,
+                            value: _this.formObj.sourceType
+                        }),
+                        sourceUrl: this.$form.createFormField({
+                            ..._this.formObj,
+                            value: _this.formObj.sourceUrl
+                        }),
                         summary: this.$form.createFormField({
                             ..._this.formObj,
                             value: _this.formObj.summary

@@ -234,6 +234,8 @@ export const langMap = {
                     tagNames:'Tag',
                     categoryNames:'Category',
                     editorType:'Editor type',
+                    sourceType:'Source type',
+                    sourceUrl:'Source url',
                     viewCount:'View count',
                     commentCount:'Comment count',
                     likeCount:'Like count',
@@ -389,6 +391,10 @@ export const langMap = {
             articleAuditType:{
                 audit:'Audit',
                 antiAudit:'Anti-audit'
+            },
+            articleSourceType:{
+                original:'Original',
+                reprint:'Reprint'
             }
         },
         valueMap:{

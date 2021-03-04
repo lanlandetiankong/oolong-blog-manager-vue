@@ -235,6 +235,8 @@ export const langMap = {
                     tagNames:'标签',
                     categoryNames:'分类',
                     editorType:'编辑器类型',
+                    sourceType:'来源类型',
+                    sourceUrl:'来源地址',
                     viewCount:'浏览次数',
                     commentCount:'评论次数',
                     likeCount:'点赞次数',
@@ -392,6 +394,10 @@ export const langMap = {
             articleAuditType:{
                 audit:'审批',
                 antiAudit:'反审批'
+            },
+            articleSourceType:{
+                original:'原创',
+                reprint:'转载'
             }
         },
         valueMap:{

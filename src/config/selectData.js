@@ -218,6 +218,17 @@ export const ArticleEditorTypeEnum = {
         label: i18nUtil.getKey('langMap.commons.enums.articleEditorType.markdown')
     }
 };
+
+export const ArticleSourceTypeEnum = {
+    Original:{
+        value: 1,
+        label: i18nUtil.getKey('langMap.commons.enums.articleSourceType.original')
+    },
+    Reprint:{
+        value: 2,
+        label: i18nUtil.getKey('langMap.commons.enums.articleSourceType.reprint')
+    }
+};
 /**
  * 对象转Select的data
  * @param obj
@@ -319,7 +330,8 @@ export const AllEnum = {
     PublishStatusEnum,
     ArticleAuditStateEnum,
     ArticleAuditTypeEnum,
-    ArticleEditorTypeEnum
+    ArticleEditorTypeEnum,
+    ArticleSourceTypeEnum
 };
 
 export const EnumUtils = {
