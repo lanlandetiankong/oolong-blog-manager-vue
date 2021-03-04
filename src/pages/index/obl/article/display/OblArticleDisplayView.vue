@@ -22,6 +22,14 @@
                         size="small"
                         :column="{ xxl: 5, xl: 4, lg: 4, md: 3, sm: 2, xs: 1 }"
                     >
+                        <a-descriptions-item :label="$t('langMap.table.fields.obl.article.sourceType')">
+                            <a-tag color="#87d068">
+                                {{formData.sourceTypeStr}}
+                            </a-tag>
+                            <a href="http://www.baidu.com/" target="_blank"
+                                v-show="formData.sourceType == 2"
+                                >{{$t('langMap.table.fields.obl.article.sourceUrl')}}</a>
+                        </a-descriptions-item>
                         <a-descriptions-item :label="$t('langMap.table.fields.obl.article.tagNames')">
                             <a-tag color="#2db7f5">
                                 {{formData.tagNames}}
@@ -122,8 +130,10 @@
                 }
                 let publishStatusValMap = EnumUtils.toValMap(AllEnum.PublishStatusEnum);
                 let articleAuditStateValMap = EnumUtils.toValMap(AllEnum.ArticleAuditStateEnum);
+                let articleSourceTypeValMap = EnumUtils.toValMap(AllEnum.ArticleSourceTypeEnum);
                 formData['isPublishedStr'] = publishStatusValMap[formData.isPublished] ;
                 formData['auditStateStr'] = articleAuditStateValMap[formData.auditState] ;
+                formData['sourceTypeStr'] = articleSourceTypeValMap[formData.sourceType] ;
             },
             renderFormData(){
                 var _this = this ;

@@ -235,7 +235,7 @@ export const langMap = {
                     tagNames:'标签',
                     categoryNames:'分类',
                     editorType:'编辑器类型',
-                    sourceType:'来源类型',
+                    sourceType:'文章来源',
                     sourceUrl:'来源地址',
                     viewCount:'浏览次数',
                     commentCount:'评论次数',

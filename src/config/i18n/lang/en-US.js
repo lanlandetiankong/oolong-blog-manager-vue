@@ -234,7 +234,7 @@ export const langMap = {
                     tagNames:'Tag',
                     categoryNames:'Category',
                     editorType:'Editor type',
-                    sourceType:'Source type',
+                    sourceType:'Article source type',
                     sourceUrl:'Source url',
                     viewCount:'View count',
                     commentCount:'Comment count',

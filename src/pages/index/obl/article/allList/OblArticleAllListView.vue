@@ -86,6 +86,11 @@
                     <span slot="auditTimeRender" slot-scope="text,record,index">
                         {{record.auditTime | formatBaseDateTime}}
                     </span>
+                    <span slot="sourceUrlRender" slot-scope="text,record,index">
+                        <a target="_blank"
+                           v-show="record.sourceType == 2"
+                           :href="record.sourceUrl">{{record.sourceUrl}}</a>
+                    </span>
                     <obl-table-action slot="action" slot-scope="text,record">
                         <template slot="operates">
                             <table-operate-btn v-show="record.antiAuditAbleFlag == true"
@@ -274,7 +279,13 @@
                         dataIndex: 'authorName',
                         width:180,
                         key: 'authorName'
-                    },  {
+                    }, {
+                        title: this.$t('langMap.table.fields.obl.article.sourceType'),
+                        align:textAlignDefault,
+                        dataIndex: 'sourceTypeStr',
+                        width:100,
+                        key: 'sourceType'
+                    }, {
                         title: this.$t('langMap.table.fields.obl.article.categoryNames'),
                         align:textAlignDefault,
                         dataIndex: 'categoryNames',
@@ -327,6 +338,14 @@
                         width:180,
                         key: 'publishTime',
                         scopedSlots: { customRender: 'publishTimeRender' }
+                    }, {
+                        title: this.$t('langMap.table.fields.obl.article.sourceUrl'),
+                        align:textAlignDefault,
+                        dataIndex: 'sourceUrl',
+                        width:220,
+                        ellipsis:true,
+                        key: 'sourceUrl',
+                        scopedSlots: { customRender: 'sourceUrlRender' }
                     }, {
                         title: this.$t('langMap.table.fields.obl.article.summary'),
                         align:textAlignDefault,
@@ -500,11 +519,13 @@
                 //Map-模块类型
                 let articleAuditStateValMap = EnumUtils.toValMap(AllEnum.ArticleAuditStateEnum);
                 let articleEditorTypeValMap = EnumUtils.toValMap(AllEnum.ArticleEditorTypeEnum);
+                let articleSourceTypeValMap = EnumUtils.toValMap(AllEnum.ArticleSourceTypeEnum);
                 for (let idx in data){
                     let item = data[idx] ;
                     //枚举值
                     item['auditStateStr'] = articleAuditStateValMap[item.auditState];
                     item['editorTypeStr'] = articleEditorTypeValMap[item.editorType];
+                    item['sourceTypeStr'] = articleSourceTypeValMap[item.sourceType] ;
                     //是否可审批
                     item['auditAbleFlag'] = _this.auditDisableStateArr.indexOf(item.auditState) < 0 ;
                     //是否可反审批
