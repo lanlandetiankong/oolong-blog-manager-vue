@@ -1,5 +1,5 @@
 <template>
-    <div class="basic-announcement-content-comp-cls">
+    <div class="basic-announcement-content-comp-cls" @click="$emit('click')">
         <div class="content">
             <slot>
                 {{ shortContent }}

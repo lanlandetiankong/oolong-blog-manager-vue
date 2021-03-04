@@ -9,7 +9,7 @@
         >
             <a-list-item :key="item.fid" slot="renderItem" slot-scope="item">
                 <a-list-item-meta>
-                    <a slot="title">{{ item.title }}</a>
+                    <a slot="title" @click="goToViewDetail($event,item)">{{ item.title }}</a>
                     <template slot="description">
                         <a-row>
                             <span v-for="tagItem in item.tagNames">
@@ -18,7 +18,8 @@
                         </a-row>
                     </template>
                 </a-list-item-meta>
-                <announcement-list-content v-bind="item"/>
+                <announcement-list-content v-bind="item"
+                                           @click="goToViewDetail($event,item)"/>
             </a-list-item>
             <div slot="footer" v-if="listConf.data.length > 0" style="text-align: center; margin-top: 16px;">
                 <a-button v-show="hasMoreData"
@@ -30,8 +31,10 @@
 
 <script>
     import {OblMyAnnouncementListCompApi} from './oblMyAnnouncementListCompApi.js'
+    import {OblCommonMixin} from '~Layout/mixin/OblCommonMixin';
     import AnnouncementListContent from '~Components/index/em/announcement/basic/AnnouncementListContent'
     import IconText from '~Components/regular/common/IconText'
+    import BeeUtil from "~Assets/js/util/bee/BeeUtil";
 
     export default {
         name: 'OblMyAnnouncementListComp',
@@ -39,6 +42,7 @@
             IconText,
             AnnouncementListContent
         },
+        mixins:[OblCommonMixin],
         data() {
             return {
                 listConf:{
@@ -64,6 +68,11 @@
             this.getList();
         },
         methods: {
+            goToViewDetail(e,item) {  //跳转到文章展示页面
+                let params = item ;
+                let url = BeeUtil.UrlUtils.objToUrl(this.mixinData.routerConst.announcement.display,params);
+                this.mixin_jump(url);
+            },
             getList() {
                 OblMyAnnouncementListCompApi.querySelfDtoPage(this.listConf).then(res => {
                     this.listConf.data = res.gridList;
