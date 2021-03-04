@@ -428,6 +428,7 @@ export const langMap = {
             announcementList:'Announcement list',
             articleList:'Article list',
             myArticleList:'My article list',
+            recentHotArticleList:'Recent popular articles',
             myAnnouncementList:'My announcement list',
         }
     },

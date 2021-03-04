@@ -31,7 +31,7 @@
                             :activeTabKey="currentTabKey"
                             @tabChange="key => handleTabChange(key, 'currentTabKey')"
                         >
-                            <obl-my-article-list-comp v-if="currentTabKey === 'myArticleList'"/>
+                            <obl-recent-hot-article-list-comp v-if="currentTabKey === 'recentHotArticleList'"/>
                             <obl-my-announcement-list-comp v-if="currentTabKey === 'myAnnouncementList'"/>
                         </a-card>
                     </a-layout-content>
@@ -48,20 +48,19 @@
     import { mapGetters } from 'vuex';
     import UniversalShowComp from '~Components/regular/dashboard/UniversalShowComp'
     import AnnouncementListComp from '~Components/regular/dashboard/announcement/AnnouncementListComp'
-    import OblMyArticleListComp from "~Components/index/obl/article/mylist/OblMyArticleListComp";
+    import OblRecentHotArticleListComp from "~Components/index/obl/article/hotlist/OblRecentHotArticleListComp";
     import OblMyAnnouncementListComp from "~Components/index/em/announcement/mylist/OblMyAnnouncementListComp";
     import OblProjectTitle from '~Components/regular/common/OblProjectTitle';
-    import moment from 'moment';
     import {AllEnum, EnumUtils} from "~Config/selectData";
     import {UserZoneCenterApi} from "~Pages/index/regular/userZone/center/userZoneCenterApi";
     export default {
         name: "DashBoardPage",
-        components: {UniversalShowComp,AnnouncementListComp,OblMyArticleListComp,
+        components: {UniversalShowComp,AnnouncementListComp,OblRecentHotArticleListComp,
             OblMyAnnouncementListComp,OblProjectTitle},
         data(){
             return {
                 userBaseInfo:{},
-                currentTabKey: 'myArticleList',
+                currentTabKey: 'recentHotArticleList',
             }
         },
         computed:{
@@ -70,8 +69,8 @@
             ]),
             tabListNoTitle(){
                 let arr = [{
-                    key: 'myArticleList',
-                    tab: this.$t('langMap.commons.dashBoard.myArticleList')
+                    key: 'recentHotArticleList',
+                    tab: this.$t('langMap.commons.dashBoard.recentHotArticleList')
                 }, {
                     key: 'myAnnouncementList',
                     tab: this.$t('langMap.commons.dashBoard.myAnnouncementList')

@@ -431,6 +431,7 @@ export const langMap = {
             announcementList:'公告列表',
             articleList:'文章列表',
             myArticleList:'我的文章',
+            recentHotArticleList:'近期热门文章',
             myAnnouncementList:'我的公告',
         }
     },
