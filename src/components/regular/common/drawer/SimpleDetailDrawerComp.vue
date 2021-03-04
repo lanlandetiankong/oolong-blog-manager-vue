@@ -36,7 +36,7 @@
 <script>
     import {DrawerFieldTypeEnum,CommonDateFormatTypeEnum} from '~Components/regular/common/drawer/drawer_define.js'
 
-    import {DateUtils} from '~Assets/js/util/bee/BeeUtil.js'
+    import {DateUtils} from '~Utils/basic/BeeUtil.js'
     export default {
         name: "SimpleDetailDrawerComp",
         props: {

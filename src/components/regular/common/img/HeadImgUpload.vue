@@ -21,7 +21,7 @@
 </template>
 
 <script>
-    import {StringUtils} from '~Assets/js/util/bee/BeeUtil.js'
+    import {StringUtils} from '~Utils/basic/BeeUtil.js'
     import baseUrl from '~Config/axios/baseUrl.js'
     function getBase64(img, callback) {
         const reader = new FileReader();

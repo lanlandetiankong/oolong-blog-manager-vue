@@ -106,7 +106,7 @@
 </template>
 
 <script>
-    import {ObjectUtils} from '~Assets/js/util/bee/BeeUtil.js' ;
+    import {ObjectUtils} from '~Utils/basic/BeeUtil.js' ;
     import {OblCommonMixin} from '~Layout/mixin/OblCommonMixin';
     import {FormItemTypeEnum} from '~Components/constant_define';
     export default {

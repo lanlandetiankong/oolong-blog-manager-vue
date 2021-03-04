@@ -97,7 +97,7 @@
     </div>
 </template>
 <script>
-    import {UrlUtils} from '~Assets/js/util/bee/BeeUtil.js';
+    import {UrlUtils} from '~Utils/basic/BeeUtil.js';
     import {ArticleMyDraftListApi} from './OblArticleMyDraftListApi'
     import {DrawerFieldTypeEnum} from '~Components/regular/common/drawer/drawer_define.js'
     import {OblCommonMixin} from '~Layout/mixin/OblCommonMixin';

@@ -10,7 +10,7 @@
 </template>
 
 <script>
-    import {StringUtils} from "~Assets/js/util/bee/BeeUtil";
+    import {StringUtils} from "~Utils/basic/BeeUtil";
     export default {
         name: "OblBreadcrumb",
         computed:{

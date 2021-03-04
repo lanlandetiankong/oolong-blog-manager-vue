@@ -2,7 +2,7 @@ import Vue from 'vue'
 import moment from 'moment'
 import 'moment/locale/zh-cn';
 moment.locale('zh-cn');
-import {ArrayUtils} from "~Assets/js/util/bee/BeeUtil";
+import {ArrayUtils} from "~Utils/basic/BeeUtil";
 
 /**
  * 常规日期格式化

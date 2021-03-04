@@ -30,7 +30,7 @@
 </template>
 
 <script>
-    import {UrlUtils} from "~Assets/js/util/bee/BeeUtil";
+    import {UrlUtils} from "~Utils/basic/BeeUtil";
     import {OblRecentAnnouncementListCompApi} from './oblRecentAnnouncementListCompApi.js'
     import {OblCommonMixin} from '~Layout/mixin/OblCommonMixin';
     import AnnouncementListContent from '~Components/index/em/announcement/basic/AnnouncementListContent'

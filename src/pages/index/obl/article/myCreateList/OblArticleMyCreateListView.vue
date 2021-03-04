@@ -117,7 +117,7 @@
     </div>
 </template>
 <script>
-    import {UrlUtils} from '~Assets/js/util/bee/BeeUtil.js';
+    import {UrlUtils} from '~Utils/basic/BeeUtil.js';
     import {ArticleAllListApi} from "~Pages/index/obl/article/allList/OblArticleAllListApi";
     import {AllEnum, EnumUtils} from "~Config/selectData";
     import {ArticleMyCreateListApi} from './OblArticleMyCreateListApi'

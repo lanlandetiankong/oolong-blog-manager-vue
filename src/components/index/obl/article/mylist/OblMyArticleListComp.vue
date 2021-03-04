@@ -42,7 +42,7 @@
     import {OblMyArticleListCompApi} from './oblMyArticleListCompApi.js'
     import ArticleListContent from '~Components/index/obl/article/basic/ArticleListContent'
     import IconText from '~Components/regular/common/IconText'
-    import {UrlUtils} from "~Assets/js/util/bee/BeeUtil";
+    import {UrlUtils} from "~Utils/basic/BeeUtil";
 
     export default {
         name: 'OblMyArticleList',

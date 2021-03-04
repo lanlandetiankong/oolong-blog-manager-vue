@@ -132,7 +132,7 @@
 </template>
 
 <script>
-    import {UrlUtils} from '~Assets/js/util/bee/BeeUtil.js' ;
+    import {UrlUtils} from '~Utils/basic/BeeUtil.js' ;
     import {toolbars} from '~Config/editor/mavon_editor/mavon.conf'
     import {ArticleCreateApi} from './oblArticleCreateApi.js'
     import {OblCommonMixin} from '~Layout/mixin/OblCommonMixin';

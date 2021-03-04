@@ -85,7 +85,7 @@
     import TableDeleteOperateBtn from '~Components/regular/common/table/operate/TableDeleteOperateBtn'
     import TableRowDetailOperateBtn from '~Components/regular/common/table/operate/TableRowDetailOperateBtn'
     import RowDetailDrawerComp from '~Components/regular/common/drawer/RowDetailDrawerComp';
-    import {UrlUtils} from "~Assets/js/util/bee/BeeUtil";
+    import {UrlUtils} from "~Utils/basic/BeeUtil";
     export default {
         name: "AnnouncementAllListView",
         components:{QueryFormComp,RowDetailDrawerComp,

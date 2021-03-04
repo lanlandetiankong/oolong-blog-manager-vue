@@ -41,7 +41,7 @@
     </div>
 </template>
 <script>
-    import {StringUtils,ObjectUtils} from '~Assets/js/util/bee/BeeUtil.js' ;
+    import {StringUtils,ObjectUtils} from '~Utils/basic/BeeUtil.js' ;
     import {CommonExcelCompApi} from './CommonExcelCompApi.js'
 
     export default {

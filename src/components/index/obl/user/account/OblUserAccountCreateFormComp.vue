@@ -54,7 +54,7 @@
 </template>
 <script>
     import {FormBaseConfObj} from "~Components/constant_define";
-    import {StringUtils} from '~Assets/js/util/bee/BeeUtil.js' ;
+    import {StringUtils} from '~Utils/basic/BeeUtil.js' ;
     import AFormItem from "ant-design-vue/es/form/FormItem";
     import HeadImgUpload from "~Components/regular/common/img/HeadImgUpload";
     export default {

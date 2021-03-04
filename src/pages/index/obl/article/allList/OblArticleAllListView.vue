@@ -165,7 +165,7 @@
     </div>
 </template>
 <script>
-    import {UrlUtils} from '~Assets/js/util/bee/BeeUtil.js';
+    import {UrlUtils} from '~Utils/basic/BeeUtil.js';
     import {ArticleAllListApi} from './OblArticleAllListApi'
     import {DrawerFieldTypeEnum} from '~Components/regular/common/drawer/drawer_define.js'
     import {AllEnum,EnumUtils} from '~Config/selectData.js';

@@ -34,7 +34,7 @@
     import {OblCommonMixin} from '~Layout/mixin/OblCommonMixin';
     import AnnouncementListContent from '~Components/index/em/announcement/basic/AnnouncementListContent'
     import IconText from '~Components/regular/common/IconText'
-    import {UrlUtils} from "~Assets/js/util/bee/BeeUtil";
+    import {UrlUtils} from "~Utils/basic/BeeUtil";
 
     export default {
         name: 'OblMyAnnouncementListComp',

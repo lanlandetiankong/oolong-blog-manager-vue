@@ -39,7 +39,7 @@
 </template>
 
 <script>
-    import {UrlUtils} from "~Assets/js/util/bee/BeeUtil";
+    import {UrlUtils} from "~Utils/basic/BeeUtil";
     import {OblRecentHotArticleListCompApi} from './oblRecentHotArticleListCompApi.js'
     import {OblCommonMixin} from '~Layout/mixin/OblCommonMixin';
     import ArticleListContent from '~Components/index/obl/article/basic/ArticleListContent'
