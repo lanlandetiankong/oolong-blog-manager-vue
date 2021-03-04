@@ -433,6 +433,7 @@ export const langMap = {
             myArticleList:'我的文章',
             recentHotArticleList:'近期热门文章',
             myAnnouncementList:'我的公告',
+            recentAnnouncementList:'近期公告',
         }
     },
     message:{

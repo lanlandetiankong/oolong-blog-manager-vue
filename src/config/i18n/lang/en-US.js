@@ -430,6 +430,7 @@ export const langMap = {
             myArticleList:'My article list',
             recentHotArticleList:'Recent popular articles',
             myAnnouncementList:'My announcement list',
+            recentAnnouncementList:'Recent announcement',
         }
     },
     message:{

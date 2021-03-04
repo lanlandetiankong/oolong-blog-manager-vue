@@ -29,12 +29,12 @@
 </template>
 
 <script>
-    import {OblMyAnnouncementListCompApi} from './oblMyAnnouncementListCompApi.js'
+    import {OblRecentAnnouncementListCompApi} from './oblRecentAnnouncementListCompApi.js'
     import AnnouncementListContent from '~Components/index/em/announcement/basic/AnnouncementListContent'
     import IconText from '~Components/regular/common/IconText'
 
     export default {
-        name: 'OblMyAnnouncementListComp',
+        name: 'OblRecentAnnouncementListComp',
         components: {
             IconText,
             AnnouncementListContent
@@ -65,7 +65,7 @@
         },
         methods: {
             getList() {
-                OblMyAnnouncementListCompApi.querySelfDtoPage(this.listConf).then(res => {
+                OblRecentAnnouncementListCompApi.queryRecentPage(this.listConf).then(res => {
                     this.listConf.data = res.gridList;
                     this.listConf.loading = false;
                     this.listConf.pagination.total = res.vpage.total ;
@@ -74,7 +74,7 @@
             },
             loadMore() {
                 this.listConf.loadingMore = true;
-                OblMyAnnouncementListCompApi.querySelfDtoPage(this.listConf).then(res => {
+                OblRecentAnnouncementListCompApi.queryRecentPage(this.listConf).then(res => {
                     this.listConf.data = this.listConf.data.concat(res.gridList);
                     this.listConf.pagination.total = res.vpage.total ;
                     this.listConf.pagination.current += 1 ;
