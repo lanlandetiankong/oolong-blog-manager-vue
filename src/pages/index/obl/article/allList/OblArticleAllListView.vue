@@ -165,7 +165,7 @@
     </div>
 </template>
 <script>
-    import {UrlUtils} from '~Utils/basic/BeeUtil.js';
+    import {routerConst} from '~Config/BaseDataConst.js'
     import {ArticleAllListApi} from './OblArticleAllListApi'
     import {DrawerFieldTypeEnum} from '~Components/regular/common/drawer/drawer_define.js'
     import {AllEnum,EnumUtils} from '~Config/selectData.js';
@@ -586,8 +586,7 @@
                     return ;
                 }
                 var params = record ;
-                var url = UrlUtils.objToUrl(this.mixinData.BaseDataConst.routerConst.article.display,params);
-                this.mixin_jump(url);
+                this.mixin_jump(routerConst.article.display,params);
             },
             handleSetAsRecommended(e,record){
                 this.dialog.setRecommend.articleList = [record];

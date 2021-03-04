@@ -117,6 +117,7 @@
     </div>
 </template>
 <script>
+    import {routerConst} from '~Config/BaseDataConst.js'
     import {UrlUtils} from '~Utils/basic/BeeUtil.js';
     import {ArticleAllListApi} from "~Pages/index/obl/article/allList/OblArticleAllListApi";
     import {AllEnum, EnumUtils} from "~Config/selectData";
@@ -488,8 +489,7 @@
                     return ;
                 }
                 var params = record ;
-                var url = UrlUtils.objToUrl(this.mixinData.BaseDataConst.routerConst.article.display,params);
-                this.mixin_jump(url);
+                this.mixin_jump(routerConst.article.display,params);
             },
             handleViewAuditRecords(e,record){   //查看文章的审批记录
                 this.dialog.viewAuditRecords.formObj = record;

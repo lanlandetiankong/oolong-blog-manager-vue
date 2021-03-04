@@ -30,12 +30,11 @@
 </template>
 
 <script>
-    import {UrlUtils} from "~Utils/basic/BeeUtil";
+    import {routerConst} from '~Config/BaseDataConst.js'
     import {OblRecentAnnouncementListCompApi} from './oblRecentAnnouncementListCompApi.js'
     import {OblCommonMixin} from '~Layout/mixin/OblCommonMixin';
     import AnnouncementListContent from '~Components/index/em/announcement/basic/AnnouncementListContent'
     import IconText from '~Components/regular/common/IconText'
-    import {BaseDataConst} from "~Config/BaseDataConst";
 
 
     export default {
@@ -72,8 +71,7 @@
         methods: {
             goToViewDetail(e,item) {  //跳转到文章展示页面
                 let params = item ;
-                let url = UrlUtils.objToUrl(this.mixinData.BaseDataConst.routerConst.announcement.display,params);
-                this.mixin_jump(url);
+                this.mixin_jump(routerConst.announcement.display,params);
             },
             getList() {
                 OblRecentAnnouncementListCompApi.queryRecentPage(this.listConf).then(res => {

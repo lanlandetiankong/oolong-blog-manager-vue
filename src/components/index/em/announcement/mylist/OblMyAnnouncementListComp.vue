@@ -30,11 +30,11 @@
 </template>
 
 <script>
+    import {routerConst} from '~Config/BaseDataConst.js'
     import {OblMyAnnouncementListCompApi} from './oblMyAnnouncementListCompApi.js'
     import {OblCommonMixin} from '~Layout/mixin/OblCommonMixin';
     import AnnouncementListContent from '~Components/index/em/announcement/basic/AnnouncementListContent'
     import IconText from '~Components/regular/common/IconText'
-    import {UrlUtils} from "~Utils/basic/BeeUtil";
 
     export default {
         name: 'OblMyAnnouncementListComp',
@@ -70,8 +70,7 @@
         methods: {
             goToViewDetail(e,item) {  //跳转到文章展示页面
                 let params = item ;
-                let url = UrlUtils.objToUrl(this.mixinData.BaseDataConst.routerConst.announcement.display,params);
-                this.mixin_jump(url);
+                this.mixin_jump(routerConst.announcement.display,params);
             },
             getList() {
                 OblMyAnnouncementListCompApi.querySelfDtoPage(this.listConf).then(res => {

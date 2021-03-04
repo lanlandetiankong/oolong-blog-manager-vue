@@ -74,6 +74,7 @@
     </div>
 </template>
 <script>
+    import {routerConst} from '~Config/BaseDataConst.js'
     import {AnnouncementAllListApi} from './announcementAllListApi'
     import {DrawerFieldTypeEnum} from '~Components/regular/common/drawer/drawer_define.js'
     import {OblCommonMixin} from '~Layout/mixin/OblCommonMixin';
@@ -85,7 +86,6 @@
     import TableDeleteOperateBtn from '~Components/regular/common/table/operate/TableDeleteOperateBtn'
     import TableRowDetailOperateBtn from '~Components/regular/common/table/operate/TableRowDetailOperateBtn'
     import RowDetailDrawerComp from '~Components/regular/common/drawer/RowDetailDrawerComp';
-    import {UrlUtils} from "~Utils/basic/BeeUtil";
     export default {
         name: "AnnouncementAllListView",
         components:{QueryFormComp,RowDetailDrawerComp,
@@ -340,8 +340,7 @@
             },
             handleAnnouncementViewItemClick(e,item){    //查看公告
                 let params = item ;
-                let url = UrlUtils.objToUrl(this.mixinData.BaseDataConst.routerConst.announcement.display,params);
-                this.mixin_jump(url);
+                this.mixin_jump(routerConst.announcement.display,params);
             }
         },
         watch:{

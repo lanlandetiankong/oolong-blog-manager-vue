@@ -39,10 +39,10 @@
 </template>
 
 <script>
+    import {routerConst} from '~Config/BaseDataConst.js'
     import {OblMyArticleListCompApi} from './oblMyArticleListCompApi.js'
     import ArticleListContent from '~Components/index/obl/article/basic/ArticleListContent'
     import IconText from '~Components/regular/common/IconText'
-    import {UrlUtils} from "~Utils/basic/BeeUtil";
 
     export default {
         name: 'OblMyArticleList',
@@ -80,8 +80,7 @@
                     return ;
                 }
                 let params = record ;
-                let url = UrlUtils.objToUrl(this.mixinData.BaseDataConst.routerConst.article.display,params);
-                this.mixin_jump(url);
+                this.mixin_jump(routerConst.article.display,params);
             },
             getList() {
                 OblMyArticleListCompApi.querySelfDtoPage(this.listConf).then(res => {

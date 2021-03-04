@@ -1,13 +1,14 @@
 import { mapGetters } from 'vuex' ;
 import {ConstantObj} from "~Components/constant_define";
-import {BaseDataConst} from  '~Config/BaseDataConst.js'
+import {routerConst} from  '~Config/BaseDataConst.js'
+import {UrlUtils} from "~Utils/basic/BeeUtil";
 
 export const OblCommonMixin = {
     data(){
         return {
             //数据必须都写到mixinData之下
             mixinData:{
-                BaseDataConst
+                routerConst
             }
         }
     },
@@ -77,13 +78,15 @@ export const OblCommonMixin = {
             refName = (refName) ? refName : ConstantObj.queryFormCompRef ;
             self.$refs[refName].triggerQuery();
         },
-        mixin_closeTagAndJump(goToRoute){  //关闭当前标签并跳转到指定路由
+        mixin_closeTagAndJump(goToRoute,params){  //关闭当前标签并跳转到指定路由
             var selectedTag = this.$route ;
+            params = (params) ? params : {} ;
             //关闭当前所选标签
             this.$store.dispatch('doDelVisitedViews',selectedTag).then((views) => {
                 if(goToRoute){
+                    let routerUrl = UrlUtils.objToUrl(goToRoute,params);
                     //有指定路由，跳转
-                    this.$router.push(goToRoute) ;
+                    this.$router.push(routerUrl) ;
                 }   else {
                     //无指定路由，跳转上一个tag
                     const latestView = views.slice(-1)[0] ;
@@ -95,11 +98,13 @@ export const OblCommonMixin = {
                 }
             })
         },
-        mixin_jump(goToRoute){  //跳转到指定路由
+        mixin_jump(goToRoute,params){  //跳转到指定路由
             if(!goToRoute){
                 return ;
             }
-            this.$router.push(goToRoute) ;
+            params = (params) ? params : {} ;
+            let routerUrl = UrlUtils.objToUrl(goToRoute,params);
+            this.$router.push(routerUrl) ;
         },
         mixin_getFilterOption(input,option){
             return (option.componentOptions.children[0].text.toLowerCase().indexOf(input.toLowerCase()) >= 0);

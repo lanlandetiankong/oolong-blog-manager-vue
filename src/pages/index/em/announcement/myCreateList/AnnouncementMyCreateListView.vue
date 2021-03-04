@@ -74,6 +74,7 @@
     </div>
 </template>
 <script>
+    import {routerConst} from '~Config/BaseDataConst.js'
     import {AnnouncementMyCreateListApi} from './announcementMyCreateListApi'
     import {DrawerFieldTypeEnum} from '~Components/regular/common/drawer/drawer_define.js'
     import {OblCommonMixin} from '~Layout/mixin/OblCommonMixin';
@@ -336,8 +337,7 @@
             },
             handleAnnouncementViewItemClick(e,item){    //查看公告
                 let params = item ;
-                let url = UrlUtils.objToUrl(this.mixinData.BaseDataConst.routerConst.announcement.display,params);
-                this.mixin_jump(url);
+                this.mixin_jump(routerConst.announcement.display,params);
             }
         },
         watch: {

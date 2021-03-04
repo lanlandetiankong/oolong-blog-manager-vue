@@ -8,3 +8,6 @@ export const BaseDataConst = {
         }
     }
 };
+
+export default BaseDataConst ;
+export const routerConst  = BaseDataConst.routerConst ;

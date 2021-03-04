@@ -97,7 +97,7 @@
     </div>
 </template>
 <script>
-    import {UrlUtils} from '~Utils/basic/BeeUtil.js';
+    import {routerConst} from '~Config/BaseDataConst.js'
     import {ArticleMyDraftListApi} from './OblArticleMyDraftListApi'
     import {DrawerFieldTypeEnum} from '~Components/regular/common/drawer/drawer_define.js'
     import {OblCommonMixin} from '~Layout/mixin/OblCommonMixin';
@@ -453,8 +453,7 @@
                     return ;
                 }
                 var params = record ;
-                var url = UrlUtils.objToUrl(this.mixinData.BaseDataConst.routerConst.article.display,params);
-                this.mixin_jump(url);
+                this.mixin_jump(routerConst.article.display,params);
             },
         },
         watch:{
