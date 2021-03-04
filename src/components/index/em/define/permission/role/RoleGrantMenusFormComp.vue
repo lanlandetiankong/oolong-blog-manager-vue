@@ -49,7 +49,6 @@
             visible:{
                 handler(val,oval){  //隐藏与展示弹窗时监听
                     if(val){
-                        console.log("授权页面展示...") ;
                         this.treeConf.treeCheckdKeys = this.checkArr ;
                         this.handleInitDefaultExpandedKeys() ;
                     }

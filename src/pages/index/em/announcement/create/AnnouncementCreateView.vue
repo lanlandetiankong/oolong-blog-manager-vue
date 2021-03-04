@@ -135,8 +135,7 @@
         methods:{
             dealUpdateFormValue(formObj){   //form表单更新
                 var _this = this ;
-                console.log("dealUpdateFormValue");
-                console.log(formObj);
+                //console.log("dealUpdateFormValue",formObj);
                 if(typeof _this.createForm.updateFields != "undefined"){ //避免未初始化form的时候就调用了updatefield
                     _this.createForm.updateFields({
                         keyWord: _this.$form.createFormField({
@@ -196,12 +195,9 @@
                     return false ;
                 }   else {
                     //取得请求的参数：标题&内容、用户信息
-                    var formObjTemp = _this.formObj ;
                     this.createForm.validateFields((err, values) => {
                         if (!err) {
                             _this.formObj = _this.dealFormValuesMapToObj(values) ;
-                            console.log("dealFormValuesMapToObj");
-                            console.log(_this.formObj);
                             if(_this.updateForm.flag == true){  //发布 更新后的 公告草稿
                                 AnnouncementCreateApi.createFromDraft(_this.formObj).then((res) =>{
                                     if(res.success){
@@ -267,8 +263,6 @@
                         var resBean = res.bean ;
                         if(resBean){
                             _this.formObj = resBean ;
-                            console.log("_this.formObj");
-                            console.log(_this.formObj);
                         }
                     }
                 })

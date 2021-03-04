@@ -100,7 +100,7 @@
                     this.uploadConf.loading = false;
                 }
                 if (info.file.status === 'error') {
-                    console.log("error") ;
+                    console.log("handleUploadChange-error") ;
                 }
 
             },

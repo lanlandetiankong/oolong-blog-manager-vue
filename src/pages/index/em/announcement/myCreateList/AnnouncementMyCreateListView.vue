@@ -352,7 +352,6 @@
         },
         created() {
             this.dealGetAllAnnouncementTagList();
-            var currentRoute = this.$route;
         },
         mounted() {
             this.mixin_invokeQuery(this);

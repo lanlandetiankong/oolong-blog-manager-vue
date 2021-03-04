@@ -162,7 +162,7 @@
                 _this.$emit('createFormSubmit',e,_this.dealGetHeadAvatarUrlVal());
             },
             handleBelongDepartmentOfSearchChange(value){  //[所属部门] SelectTree cchange事件
-                console.log("handleBelongDepartmentOfSearchChange",value);
+                //console.log("handleBelongDepartmentOfSearchChange",value);
             },
             handleCreateActionInit(){   //弹窗展示为[创建-操作]的初始化
                 var _this = this ;
@@ -178,20 +178,14 @@
                 return "create" == this.actionType ?  this.$t('langMap.button.actions.addByForm') : this.$t('langMap.button.actions.updateByForm') ;
             }
         },
-        beforeCreate(){
-            var _this = this ;
-
-        },
         created(){
             var _this = this ;
             _this.createForm = this.$form.createForm(_this,{
                 name:'createForm',
                 onFieldsChange: (_, changedFields) => {
-                    //console.log(changedFields);
                     this.$emit('change', changedFields);
                 },
                 mapPropsToFields:() =>{
-                    //console.log(_this.formObj);
                     return {
                         account: this.$form.createFormField({
                             ..._this.formObj,

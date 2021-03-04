@@ -437,7 +437,7 @@
                 this.mixin_invokeQuery(this);
             },
             handleParentTreeOfSearchChange(value) {  //[上级] SelectTree cchange事件
-                console.log("handleParentTreeOfSearchChange", value);
+                //console.log("handleParentTreeOfSearchChange", value);
             },
             handleDetailDrawerShow(e, record) {   //Drawer-详情展示
                 if (typeof record != "undefined") {
@@ -456,7 +456,7 @@
                 handler(val, oval) {
                     //绑定枚举值变化监听并处理
                     this.searchConf.formItemConf.pid.treeData = this.binding.pidList;
-                    console.log(this.searchConf.formItemConf.pid.treeData);
+                    //console.log(this.searchConf.formItemConf.pid.treeData);
                 },
                 deep: true,
                 immediate: true
@@ -469,7 +469,7 @@
             this.mixin_invokeQuery(this);
         },
         destroyed() {
-            console.log("文章类别管理-页面销毁 ...");
+            console.log("文章分类-页面销毁 ...");
         }
     }
 </script>

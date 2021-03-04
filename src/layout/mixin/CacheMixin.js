@@ -16,7 +16,7 @@ export const CacheMixin = {
             var _this = self ;
             _this.$store.dispatch('doSetUserToken',userTokenObj) ;
             window.sessionStorage.setItem("userToken",JSON.stringify(userTokenObj));
-            console.log(JSON.stringify(window.sessionStorage.getItem("userToken")));
+            //console.log(JSON.stringify(window.sessionStorage.getItem("userToken")));
         },
         cacheMixin_handleSetAuthorizationToCache(self,authorization){   //设置 JWT 值
             var _this = self ;

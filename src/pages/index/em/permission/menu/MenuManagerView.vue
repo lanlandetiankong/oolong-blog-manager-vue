@@ -578,7 +578,7 @@
                 this.mixin_invokeQuery(this);
             },
             handleParentTreeOfSearchChange(value){  //[上级菜单] SelectTree cchange事件
-                console.log("handleParentTreeOfSearchChange",value);
+                //console.log("handleParentTreeOfSearchChange",value);
             },
             handleDetailDrawerShow(e,record){   //Drawer-菜单定义 详情展示
                 if(typeof record != "undefined"){

@@ -412,7 +412,7 @@
             this.mixin_invokeQuery(this);
         },
         destroyed() {
-            console.log("【字典表】-页面销毁 ...")
+            console.log("字典表-页面销毁 ...")
         }
     }
 </script>

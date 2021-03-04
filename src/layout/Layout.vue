@@ -121,7 +121,6 @@
                 this.doToggleCurrentTag(clickTag) ;
             },
             doToggleCurrentTag(tag) {
-                //console.log("doToggleCurrentTag",tag);
                 this.tagsConf.selectedTag = tag ;
             },
             doTagItemSelectedClose(e,selectedTag,isTagActive){
@@ -154,9 +153,6 @@
                 });
                 //切换到主页
                 this.$router.push("/");
-            },
-            dealMenuClick(obj) {
-                //console.log("dealMenuClick",obj);
             },
             handleUserLoginOut(e){     //子组件命令-退出登录
                 TokenUtil.loginOut();

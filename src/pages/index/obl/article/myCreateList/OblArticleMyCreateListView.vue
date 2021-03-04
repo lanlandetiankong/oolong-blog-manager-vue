@@ -519,7 +519,7 @@
             this.mixin_invokeQuery(this);
         },
         destroyed(){
-            console.log("所有文章-页面销毁 ...")
+            console.log("我的文章-页面销毁 ...")
         }
     }
 </script>

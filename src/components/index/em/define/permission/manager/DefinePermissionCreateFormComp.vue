@@ -122,7 +122,6 @@
             _this.createForm = this.$form.createForm(_this,{
                 name:'createForm',
                 onFieldsChange: (_, changedFields) => {
-                    //console.log(changedFields);
                     this.$emit('change', changedFields);
                 },
                 mapPropsToFields:() =>{

@@ -61,7 +61,7 @@
         },
         methods:{
             handleTransferChange(targetKeys, direction, moveKeys){
-                console.log(targetKeys, direction, moveKeys);
+                //console.log(targetKeys, direction, moveKeys);
                 this.transferConf.targetKeys = targetKeys;
             },
             handleTransfeSelectChange(sourceSelectedKeys, targetSelectedKeys){
@@ -72,15 +72,8 @@
                 this.$emit('grantRoleFormSubmit',e,this.userAccountId,transferTargetList) ;
             }
         },
-        computed:{
-
-        },
-        created(){
-            console.log("created");
-        },
         mounted(){
-            console.log("mounted");
-            console.log(this.checkArr);
+            //console.log(this.checkArr);
             this.transferConf.targetKeys = this.checkArr ;
         },
         watch:{

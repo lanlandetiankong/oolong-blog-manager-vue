@@ -267,7 +267,7 @@
             this.mixin_invokeQuery(this);
         },
         destroyed() {
-            console.log("文章类别-页面销毁 ...")
+            console.log("文章推迟记录-页面销毁 ...")
         }
     }
 </script>

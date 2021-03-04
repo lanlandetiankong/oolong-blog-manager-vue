@@ -46,15 +46,12 @@
 
 <script>
     import { mapGetters } from 'vuex';
-    import UniversalShowComp from '~Components/regular/dashboard/UniversalShowComp'
-    import AnnouncementListComp from '~Components/regular/dashboard/announcement/AnnouncementListComp'
     import OblRecentHotArticleListComp from "~Components/index/obl/article/hotlist/OblRecentHotArticleListComp";
     import OblRecentAnnouncementListComp from "~Components/index/em/announcement/recentlist/OblRecentAnnouncementListComp";
     import OblProjectTitle from '~Components/regular/common/OblProjectTitle';
     export default {
         name: "DashBoardPage",
-        components: {UniversalShowComp,AnnouncementListComp,OblRecentHotArticleListComp,
-            OblRecentAnnouncementListComp,OblProjectTitle},
+        components: {OblRecentHotArticleListComp,OblRecentAnnouncementListComp,OblProjectTitle},
         data(){
             return {
                 currentTabKey: 'recentAnnouncementList',

@@ -116,10 +116,6 @@
                 return "create" == this.actionType ? this.$t('langMap.button.actions.addByForm') : this.$t('langMap.button.actions.updateByForm') ;
             }
         },
-        beforeCreate(){
-            var _this = this ;
-
-        },
         created(){
             var _this = this ;
             _this.createForm = this.$form.createForm(_this,{

@@ -23,7 +23,7 @@ const userInfoStore = {
     },
     mutations:{
         SET_USER_TOKEN:(state,userTokenObj) => {
-            console.log("SET_USER_TOKEN",userTokenObj) ;
+            //console.log("SET_USER_TOKEN",userTokenObj) ;
             if(typeof userTokenObj == "undefined"){
                 userTokenObj = {} ;
             }

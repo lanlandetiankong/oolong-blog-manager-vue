@@ -144,7 +144,7 @@
                }
             },
             handleParentTreeOfSearchChange(value){  //[上级部门] SelectTree cchange事件
-                console.log("handleParentTreeOfSearchChange",value);
+                //console.log("handleParentTreeOfSearchChange",value);
             },
             handleCreateActionInit(){   //弹窗展示为[创建-操作]的初始化
                 var _this = this ;
@@ -164,10 +164,6 @@
                 return "create" == this.actionType ?  this.$t('langMap.button.actions.addByForm') : this.$t('langMap.button.actions.updateByForm') ;
             }
         },
-        beforeCreate(){
-            var _this = this ;
-
-        },
         created(){
             var _this = this ;
             _this.createForm = this.$form.createForm(_this,{
@@ -177,7 +173,6 @@
                     this.$emit('change', changedFields);
                 },
                 mapPropsToFields:() =>{
-                    //console.log(_this.formObj);
                     return {
                         pid: this.$form.createFormField({
                             ..._this.formObj,
