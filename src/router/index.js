@@ -1,6 +1,6 @@
 import Vue from 'vue'
 import VueRouter from 'vue-router'
-import {message,Modal} from 'ant-design-vue';
+import {Modal} from 'ant-design-vue';
 import constantParams from '~Config/constantParams';
 import {TokenUtil,RouteConst} from '~Router/routeSecurityUtil';
 const _import = require('~Router/_import_' + process.env.NODE_ENV)
@@ -107,7 +107,7 @@ vueRouter.beforeEach((to,from,next) => {
     }
     if(passFlag){   //放行
         //顶部标题名称变动
-        document.title = (to.meta.title) ? to.meta.title : constantParams.defalutObj.projectTitle;
+        document.title = (to.meta.title) ? to.meta.title : constantParams.defaultObj.projectTitle;
         next();
     }   else {  //拦截,判断用户是否跳转到首页
         Modal.confirm({

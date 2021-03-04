@@ -72,8 +72,7 @@ http://47.99.160.215
 ​    		在静态资源目录下打开cmd,执行 =>
 ​        			anywhere -p 端口号
 ​        			(1)静态资源与该vue项目以及后端项目是分开的，可以放在任意位置，但是端口号需要与后端和前端进行配合修改)
-​        			(2)vue前端项目配置端口路径： src/config/constantParams.js 的  constantParams.props.upload.url.prefix
-​        			(3)后端项目端口配置路径在 obl-web/resource/props-upload.properties 文件的 props.upload.urlPrefix
+​        			(2)后端项目端口配置路径在 obl-web/resource/props-upload.properties 文件的 props.upload.urlPrefix
 
 ### 4、项目截图
 

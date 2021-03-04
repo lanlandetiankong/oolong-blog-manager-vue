@@ -18,21 +18,7 @@ function dealGetConstantParamsByEnv() {
  */
 function dealGetDevConstantParams() {
     return {
-        props:{
-            upload:{
-                location:{
-                    prefix:"M:\\static_dir\\",
-                    img:"\\img"
-                },
-                url:{
-                    prefix:"http:\\\\localhost:8090"
-                },
-                project:{
-                    name:"oolong-blog-manager"
-                }
-            }
-        },
-        defalutObj:{    //一些常用的默认值
+        defaultObj:{    //一些常用的默认值
             projectTitle:'Oolong Blog Manager',
             avatarUrl:"/static/img/user/panda_egg.jpg"
         }
@@ -43,21 +29,7 @@ function dealGetDevConstantParams() {
  */
 function dealGetProdConstantParams() {
     return {
-        props:{
-            upload:{
-                location:{
-                    prefix:"C:\\swordsman\\projects\\oolong_blog\\static_dir",
-                    img:"\\img"
-                },
-                url:{
-                    prefix:"http:\\\\47.99.160.215:8090"
-                },
-                project:{
-                    name:"oolong-blog-manager"
-                }
-            }
-        },
-        defalutObj:{    //一些常用的默认值
+        defaultObj:{    //一些常用的默认值
             projectTitle:'OolongBlogManager',
             avatarUrl:"/static/img/user/panda_egg.jpg"
         }
