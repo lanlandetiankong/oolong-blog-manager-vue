@@ -48,8 +48,7 @@
     </div>
 </template>
 <script>
-    import BeeUtil from '~Assets/js/util/bee/BeeUtil.js' ;
-    import {jsObjectToFormData} from '~Assets/js/util/baseUtil.js' ;
+    import {StringUtils,ObjectUtils} from '~Assets/js/util/bee/BeeUtil.js' ;
 
     export default {
         name: "ExcelImportDataComp",
@@ -86,8 +85,7 @@
         },
         methods:{
             dealVerifyIsExcel(fileName){    //验证是否合法的Excel文件格式
-                var flag = BeeUtil.StringUtils.endsWith(fileName,".xls") ||  BeeUtil.StringUtils.endsWith(fileName,".xlsx");
-                return flag;
+                return StringUtils.endsWith(fileName,".xls") ||  StringUtils.endsWith(fileName,".xlsx");
             },
             handleRemove(file) {    //文件移除
                 const index = this.fileList.indexOf(file);
@@ -125,7 +123,7 @@
                 fileList.forEach(file => {
                     formData.append('files', file);
                 });
-                formData = jsObjectToFormData(this.uploadConf.processData,formData);
+                formData = ObjectUtils.jsObjectToFormData(this.uploadConf.processData,formData);
                 this.$emit("modalSubmit",formData,this.uploadConf.processData) ;
             }
         },

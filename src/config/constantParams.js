@@ -9,7 +9,7 @@ function dealGetConstantParamsByEnv() {
         return dealGetProdConstantParams();
     }   else if(process.env.NODE_ENV === "testing"){
         //测试环境
-        return dealGetTestConstantParams();;
+        return dealGetTestConstantParams();
     }
 }
 

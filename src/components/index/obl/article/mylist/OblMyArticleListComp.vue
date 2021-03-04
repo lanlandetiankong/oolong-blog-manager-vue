@@ -42,7 +42,7 @@
     import {OblMyArticleListCompApi} from './oblMyArticleListCompApi.js'
     import ArticleListContent from '~Components/index/obl/article/basic/ArticleListContent'
     import IconText from '~Components/regular/common/IconText'
-    import BeeUtil from "~Assets/js/util/bee/BeeUtil";
+    import {UrlUtils} from "~Assets/js/util/bee/BeeUtil";
 
     export default {
         name: 'OblMyArticleList',
@@ -80,7 +80,7 @@
                     return ;
                 }
                 let params = record ;
-                let url = BeeUtil.UrlUtils.objToUrl(this.mixinData.routerConst.article.display,params);
+                let url = UrlUtils.objToUrl(this.mixinData.routerConst.article.display,params);
                 this.mixin_jump(url);
             },
             getList() {

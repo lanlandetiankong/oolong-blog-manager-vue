@@ -1,4 +1,4 @@
-import {StringUtil} from '~Assets/js/util/bee/BeeUtil.js' ;
+import {StringUtils} from '~Assets/js/util/bee/BeeUtil.js' ;
 /**
  * 格式化参数-分页查询
  * @param queryObj
@@ -45,7 +45,7 @@ function strToList(obj) {
     if(typeof obj != "string"){
         return obj ;
     }
-    if(StringUtil.isBlank(obj)){
+    if(StringUtils.isBlank(obj)){
         return [] ;
     }
     return obj.split(",") ;

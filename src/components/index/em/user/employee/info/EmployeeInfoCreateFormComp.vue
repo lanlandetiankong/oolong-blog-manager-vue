@@ -68,7 +68,7 @@
 </template>
 <script>
     import {FormBaseConfObj} from "~Components/constant_define";
-    import {dealNumberToStr} from '~Assets/js/util/baseUtil';
+    import {StringUtils} from '~Assets/js/util/bee/BeeUtil.js' ;
     import {OblCommonMixin} from '~Layout/mixin/OblCommonMixin';
     import AFormItem from "ant-design-vue/es/form/FormItem";
     import HeadImgUpload from "~Components/regular/common/img/HeadImgUpload";
@@ -149,7 +149,7 @@
                         }),
                         locked: _this.$form.createFormField({
                             ...formObj,
-                            value: dealNumberToStr(formObj.locked),
+                            value: StringUtils.parseFormNumber(formObj.locked),
                         }),
                     });
                 }
@@ -215,7 +215,7 @@
                         }),
                         locked: this.$form.createFormField({
                             ..._this.formObj,
-                            value: dealNumberToStr(_this.formObj.locked)
+                            value: StringUtils.parseFormNumber(_this.formObj.locked)
                         }),
                     }
                 }

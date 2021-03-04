@@ -10,7 +10,7 @@
 </template>
 
 <script>
-    import BeeUtil from "~Assets/js/util/bee/BeeUtil";
+    import {StringUtils} from "~Assets/js/util/bee/BeeUtil";
     export default {
         name: "OblBreadcrumb",
         computed:{
@@ -21,7 +21,7 @@
                     if(metaFlag == false){
                         return ;
                     }
-                    if(BeeUtil.StringUtils.isBlank(item.meta.title)){
+                    if(StringUtils.isBlank(item.meta.title)){
                         return ;
                     }
                     let title = (metaFlag && item.meta.title) ? item.meta.title : '' ;

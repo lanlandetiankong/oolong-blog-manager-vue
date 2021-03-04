@@ -312,6 +312,17 @@ const BeeUtil = {
                 }
             }
             return stack.length === 0;
+        },
+        parseFormNumber(num,defaultVal){
+            if(typeof num == "undefined" || num == null){
+                if(typeof defaultVal == "undefined"){
+                    return 0;
+                }   else {
+                    return defaultVal;
+                }
+            }   else {
+                return num.toString();
+            }
         }
     },
     //ObjectUtils命名空间
@@ -336,6 +347,15 @@ const BeeUtil = {
                 }
             }
             return nobj ;
+        },
+        jsObjectToFormData(confObj,formData){   //对象转formdata格式
+            formData = (typeof formData != "undefined" && formData != null) ? formData : new FormData();
+            if(typeof confObj != "undefined" && confObj != null){
+                for(var confItem in confObj){
+                    formData.append(confItem,confObj[confItem]);
+                }
+            }
+            return formData;
         }
     },
     //IdCardUtils命名空间
@@ -4544,4 +4564,8 @@ var BEE_AREAS = {
 }
 
 export default BeeUtil ;
-export const StringUtil  = BeeUtil.StringUtils ;
+export const StringUtils  = BeeUtil.StringUtils ;
+export const ObjectUtils  = BeeUtil.ObjectUtils ;
+export const UrlUtils  = BeeUtil.UrlUtils ;
+export const ArrayUtils  = BeeUtil.ArrayUtils ;
+export const DateUtils  = BeeUtil.DateUtils ;

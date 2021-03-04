@@ -39,7 +39,7 @@
 </template>
 
 <script>
-    import BeeUtil from "~Assets/js/util/bee/BeeUtil";
+    import {UrlUtils} from "~Assets/js/util/bee/BeeUtil";
     import {OblRecentHotArticleListCompApi} from './oblRecentHotArticleListCompApi.js'
     import {OblCommonMixin} from '~Layout/mixin/OblCommonMixin';
     import ArticleListContent from '~Components/index/obl/article/basic/ArticleListContent'
@@ -83,7 +83,7 @@
                     return ;
                 }
                 let params = record ;
-                let url = BeeUtil.UrlUtils.objToUrl(this.mixinData.routerConst.article.display,params);
+                let url = UrlUtils.objToUrl(this.mixinData.routerConst.article.display,params);
                 this.mixin_jump(url);
             },
             getList() {

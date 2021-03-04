@@ -85,7 +85,7 @@
     import TableDeleteOperateBtn from '~Components/regular/common/table/operate/TableDeleteOperateBtn'
     import TableRowDetailOperateBtn from '~Components/regular/common/table/operate/TableRowDetailOperateBtn'
     import RowDetailDrawerComp from '~Components/regular/common/drawer/RowDetailDrawerComp';
-    import BeeUtil from "~Assets/js/util/bee/BeeUtil";
+    import {UrlUtils} from "~Assets/js/util/bee/BeeUtil";
 
     export default {
         name: "AnnouncementAllListView",
@@ -336,7 +336,7 @@
             },
             handleAnnouncementViewItemClick(e,item){    //查看公告
                 let params = item ;
-                let url = BeeUtil.UrlUtils.objToUrl(this.mixinData.routerConst.announcement.display,params);
+                let url = UrlUtils.objToUrl(this.mixinData.routerConst.announcement.display,params);
                 this.mixin_jump(url);
             }
         },

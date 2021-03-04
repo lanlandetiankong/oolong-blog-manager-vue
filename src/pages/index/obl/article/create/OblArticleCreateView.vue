@@ -132,7 +132,7 @@
 </template>
 
 <script>
-    import BeeUtil from '~Assets/js/util/bee/BeeUtil.js' ;
+    import {UrlUtils} from '~Assets/js/util/bee/BeeUtil.js' ;
     import {toolbars} from '~Config/mavon_editor/mavon.conf'
     import {ArticleCreateApi} from './oblArticleCreateApi.js'
     import {OblCommonMixin} from '~Layout/mixin/OblCommonMixin';
@@ -435,7 +435,7 @@
                 var params = {
                     fid: this.rstConf.bean.fid
                 }
-                var url = BeeUtil.UrlUtils.objToUrl(this.mixinData.routerConst.article.display, params);
+                var url = UrlUtils.objToUrl(this.mixinData.routerConst.article.display, params);
                 this.mixin_closeTagAndJump(url);
             },
         },

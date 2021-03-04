@@ -106,7 +106,7 @@
 </template>
 
 <script>
-    import BeeUtil from '~Assets/js/util/bee/BeeUtil.js' ;
+    import {ObjectUtils} from '~Assets/js/util/bee/BeeUtil.js' ;
     import {OblCommonMixin} from '~Layout/mixin/OblCommonMixin';
     import {FormItemTypeEnum} from '~Components/constant_define';
     export default {
@@ -149,7 +149,7 @@
                     return this.formItemConf ;
                 }   else {
                     //超过两个，flag不允许展示所有，取前两个。
-                    return BeeUtil.ObjectUtils.getTopNItem(this.formItemConf,2) ;
+                    return ObjectUtils.getTopNItem(this.formItemConf,2) ;
                 }
             }
         },

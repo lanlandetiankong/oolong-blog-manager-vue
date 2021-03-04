@@ -165,7 +165,7 @@
     </div>
 </template>
 <script>
-    import BeeUtil from '~Assets/js/util/bee/BeeUtil.js';
+    import {UrlUtils} from '~Assets/js/util/bee/BeeUtil.js';
     import {ArticleAllListApi} from './OblArticleAllListApi'
     import {DrawerFieldTypeEnum} from '~Components/regular/common/drawer/drawer_define.js'
     import {AllEnum,EnumUtils} from '~Config/selectData.js';
@@ -586,7 +586,7 @@
                     return ;
                 }
                 var params = record ;
-                var url = BeeUtil.UrlUtils.objToUrl(this.mixinData.routerConst.article.display,params);
+                var url = UrlUtils.objToUrl(this.mixinData.routerConst.article.display,params);
                 this.mixin_jump(url);
             },
             handleSetAsRecommended(e,record){

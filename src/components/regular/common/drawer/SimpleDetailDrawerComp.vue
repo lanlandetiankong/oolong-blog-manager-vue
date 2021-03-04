@@ -36,7 +36,7 @@
 <script>
     import {DrawerFieldTypeEnum,CommonDateFormatTypeEnum} from '~Components/regular/common/drawer/drawer_define.js'
 
-    import BeeUtil from '~Assets/js/util/bee/BeeUtil.js'
+    import {DateUtils} from '~Assets/js/util/bee/BeeUtil.js'
     export default {
         name: "SimpleDetailDrawerComp",
         props: {
@@ -123,7 +123,7 @@
                             if(dateFormatFlag === true){
                                 var fieldDateFormat = fieldFormatConf.date ;
                                 fieldDateFormat = typeof fieldDateFormat != "undefined" ? fieldDateFormat : CommonDateFormatTypeEnum.yMdhms_cn ;
-                                fieldValTemp = BeeUtil.DateUtils.format(fieldVal,fieldDateFormat);
+                                fieldValTemp = DateUtils.format(fieldVal,fieldDateFormat);
                             }
                         }
                     }

@@ -21,8 +21,7 @@
 </template>
 
 <script>
-    import constantParams from '~Config/constantParams'
-    import BeeUtil from '~Assets/js/util/bee/BeeUtil.js'
+    import {StringUtils} from '~Assets/js/util/bee/BeeUtil.js'
     import baseUrl from '~Config/axios/baseUrl.js'
     function getBase64(img, callback) {
         const reader = new FileReader();
@@ -113,8 +112,8 @@
                 var _this = this ;
                 var imgUri = "" ;
                 var showImgFlag = true ;
-                if(BeeUtil.StringUtils.isBlank(_this.uploadConf.imageUri)){
-                    if(BeeUtil.StringUtils.isNotBlank(_this.avatarUrl)){
+                if(StringUtils.isBlank(_this.uploadConf.imageUri)){
+                    if(StringUtils.isNotBlank(_this.avatarUrl)){
                         imgUri = _this.avatarUrl ;
                     }   else {
                         showImgFlag = false ;
@@ -137,8 +136,8 @@
                 var _this = this ;
                 var imgUri = "" ;
                 var showImgFlag = true ;
-                if(BeeUtil.StringUtils.isBlank(_this.uploadConf.imageUri)){
-                    if(BeeUtil.StringUtils.isNotBlank(_this.avatarUrl)){
+                if(StringUtils.isBlank(_this.uploadConf.imageUri)){
+                    if(StringUtils.isNotBlank(_this.avatarUrl)){
                         imgUri = _this.avatarUrl ;
                     }   else {
                         showImgFlag = false ;

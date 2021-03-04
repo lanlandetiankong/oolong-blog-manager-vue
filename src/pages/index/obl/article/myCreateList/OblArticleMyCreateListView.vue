@@ -117,7 +117,7 @@
     </div>
 </template>
 <script>
-    import BeeUtil from '~Assets/js/util/bee/BeeUtil.js';
+    import {UrlUtils} from '~Assets/js/util/bee/BeeUtil.js';
     import {ArticleAllListApi} from "~Pages/index/obl/article/allList/OblArticleAllListApi";
     import {AllEnum, EnumUtils} from "~Config/selectData";
     import {ArticleMyCreateListApi} from './OblArticleMyCreateListApi'
@@ -488,7 +488,7 @@
                     return ;
                 }
                 var params = record ;
-                var url = BeeUtil.UrlUtils.objToUrl(this.mixinData.routerConst.article.display,params);
+                var url = UrlUtils.objToUrl(this.mixinData.routerConst.article.display,params);
                 this.mixin_jump(url);
             },
             handleViewAuditRecords(e,record){   //查看文章的审批记录
