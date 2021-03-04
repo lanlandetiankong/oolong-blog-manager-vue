@@ -1,19 +1,13 @@
 import { mapGetters } from 'vuex' ;
 import {ConstantObj} from "~Components/constant_define";
+import {BaseDataConst} from  '~Config/BaseDataConst.js'
 
 export const OblCommonMixin = {
     data(){
         return {
             //数据必须都写到mixinData之下
             mixinData:{
-                routerConst:{
-                    article:{
-                        display:'/index/article/display'
-                    },
-                    announcement:{
-                        display:'/index/announcement/display'
-                    }
-                }
+                BaseDataConst
             }
         }
     },

@@ -80,7 +80,7 @@
                     return ;
                 }
                 let params = record ;
-                let url = UrlUtils.objToUrl(this.mixinData.routerConst.article.display,params);
+                let url = UrlUtils.objToUrl(this.mixinData.BaseDataConst.routerConst.article.display,params);
                 this.mixin_jump(url);
             },
             getList() {

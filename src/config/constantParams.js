@@ -30,7 +30,7 @@ function dealGetDevConstantParams() {
 function dealGetProdConstantParams() {
     return {
         defaultObj:{    //一些常用的默认值
-            projectTitle:'OolongBlogManager',
+            projectTitle:'Oolong Blog Manager',
             avatarUrl:"/static/img/user/panda_egg.jpg"
         }
     }

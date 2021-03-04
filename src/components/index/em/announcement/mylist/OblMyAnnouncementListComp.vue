@@ -70,7 +70,7 @@
         methods: {
             goToViewDetail(e,item) {  //跳转到文章展示页面
                 let params = item ;
-                let url = UrlUtils.objToUrl(this.mixinData.routerConst.announcement.display,params);
+                let url = UrlUtils.objToUrl(this.mixinData.BaseDataConst.routerConst.announcement.display,params);
                 this.mixin_jump(url);
             },
             getList() {

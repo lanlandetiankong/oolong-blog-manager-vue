@@ -435,7 +435,7 @@
                 var params = {
                     fid: this.rstConf.bean.fid
                 }
-                var url = UrlUtils.objToUrl(this.mixinData.routerConst.article.display, params);
+                var url = UrlUtils.objToUrl(this.mixinData.BaseDataConst.routerConst.article.display, params);
                 this.mixin_closeTagAndJump(url);
             },
         },

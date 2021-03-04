@@ -453,7 +453,7 @@
                     return ;
                 }
                 var params = record ;
-                var url = UrlUtils.objToUrl(this.mixinData.routerConst.article.display,params);
+                var url = UrlUtils.objToUrl(this.mixinData.BaseDataConst.routerConst.article.display,params);
                 this.mixin_jump(url);
             },
         },

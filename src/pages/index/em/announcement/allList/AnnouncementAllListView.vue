@@ -340,7 +340,7 @@
             },
             handleAnnouncementViewItemClick(e,item){    //查看公告
                 let params = item ;
-                let url = UrlUtils.objToUrl(this.mixinData.routerConst.announcement.display,params);
+                let url = UrlUtils.objToUrl(this.mixinData.BaseDataConst.routerConst.announcement.display,params);
                 this.mixin_jump(url);
             }
         },
