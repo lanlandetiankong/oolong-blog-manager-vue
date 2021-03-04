@@ -11,6 +11,7 @@
 
 <script>
     import baseUrl from '~Config/axios/baseUrl.js'
+    import {quillToolbarConfig} from '~Config/editor/quill/myQuillEditorConfig.js'
     //使用 扩展模块
     import {container, ImageExtend, QuillWatch} from 'quill-image-extend-module'
     import ImageResize from 'quill-image-resize-module'
@@ -38,14 +39,14 @@
                         imageDrop: true,
                         modules:{
                             toolbar: {
-                                container:this.$quillToolbarConfig.quillToolbarOptions,
+                                container:quillToolbarConfig.quillToolbarOptions,
                                 handlers: {
                                     'image': function () {  // 劫持原来的图片点击按钮事件
                                         QuillWatch.emit(this.quill.id)
                                     }
                                 }
                             },
-                            history: this.$quillToolbarConfig.quillHistoryOptions,
+                            history: quillToolbarConfig.quillHistoryOptions,
                             ImageExtend: {
                                 loading: true,
                                 name: 'file',

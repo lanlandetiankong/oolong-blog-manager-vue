@@ -31,8 +31,6 @@ import 'mavon-editor/dist/css/index.css'
 //---------------------------------------------------------------------------->>>>>>css
 import '~Assets/styles/reset.css'
 import '~Assets/styles/border.css'
-import {quillToolbarConfig} from '~Assets/plugins/quill/myQuillEditorConfig.js'
-Vue.prototype.$quillToolbarConfig = quillToolbarConfig
 
 Vue.config.productionTip = (process.env.NODE_ENV === 'development');
 
