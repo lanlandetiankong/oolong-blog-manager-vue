@@ -48,7 +48,7 @@ const ArticleRouter = [
         component:_import('index/obl/article/category/OblArticleCategoryView'),
         name:'articleCategory',
         meta:{
-            title:'文章分类',icon:"reconciliation",keepAlOblArticleRecommendViewiveFlag:true,
+            title:'文章分类',icon:"reconciliation",keepAliveFlag:true,
             parentRouterCompName,
             selfCompName:'ArticleCategoryView'
         }

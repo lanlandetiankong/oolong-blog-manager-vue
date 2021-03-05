@@ -1,12 +1,19 @@
 const _import = require('~Router/_import_' + process.env.NODE_ENV)
-import MemberLoginRouter from './login/index' ;
 
-let basePath = 'member/' ;
+let basePath = '/member/' ;
 /**
  * 用户 的路由(登录、注册
  */
 const MemberRouter = [
-    MemberLoginRouter,
+    {
+        path:basePath+'login',
+        component:_import('member/login/LoginPage'),
+        name:'member_login_page',
+        meta:{
+            visitLimit:false ,title:'登录页面',
+            visitedCacheAble:false
+        }
+    },
     {
         path:basePath+'register',
         component:_import('member/register/RegisterPage'),
