@@ -50,10 +50,9 @@ export const OblCommonMixin = {
             }
             return menuId ;
         },
-        mixin_refreshChildViewCaches(self,pageCompName){    //使用在 *Page.vue，用于优化页面组件缓存
+        mixin_refreshChildViewCaches(self){    //使用在 *Page.vue，用于优化页面组件缓存
             var _this = self;
             var cachedViewArr = this.$store.state.tagsView.cachedViews ;
-            debugger;
             if(typeof cachedViewArr != "undefined" && cachedViewArr != null && cachedViewArr.length > 0){
                 _this.cachedChildrenViews = cachedViewArr ;
             }   else {

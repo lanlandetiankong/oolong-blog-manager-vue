@@ -438,7 +438,6 @@
                 let articleSourceTypeValMap = EnumUtils.toValMap(AllEnum.ArticleSourceTypeEnum);
                 for (let idx in data){
                     let item = data[idx] ;
-                    debugger;
                     item['auditStateStr'] = articleAuditStateValMap[item.auditState];
                     item['editorTypeStr'] = articleEditorTypeValMap[item.editorType];
                     item['sourceTypeStr'] = articleSourceTypeValMap[item.sourceType] ;

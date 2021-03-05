@@ -29,7 +29,6 @@ const tagsView = {
                     title:viewMetaTemp.title || 'UnknowName',
                     meta:viewMetaTemp
                 })
-                debugger;
                 if(viewMetaTemp.keepAliveFlag == true){
                     var selfCompName = viewMetaTemp.selfCompName ;
                     if(selfCompName){
