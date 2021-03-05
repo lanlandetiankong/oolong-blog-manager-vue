@@ -55,16 +55,16 @@ export const constantRouterMap = [
                     selfCompName:'UserZoneCenterView'
                 }
             },
-            AnnouncementRouter,
-            SysRouter,
-            EmployeeRouter,
-            PermissionRouter,
-            ArticleRouter,
-            UserZoneRouter,
+            ...AnnouncementRouter,
+            ...SysRouter,
+            ...EmployeeRouter,
+            ...PermissionRouter,
+            ...ArticleRouter,
+            ...UserZoneRouter,
         ]
     },
-    MemberRouter,
-    Error4XXRouter
+    ...MemberRouter,
+    ...Error4XXRouter
 ]
 
 
