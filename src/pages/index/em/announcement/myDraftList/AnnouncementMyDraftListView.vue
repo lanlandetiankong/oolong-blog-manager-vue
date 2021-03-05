@@ -89,6 +89,7 @@
 <script>
     import {AnnouncementMyDraftListApi} from './announcementMyDraftListApi'
     import {DrawerFieldTypeEnum} from '~Components/regular/common/drawer/drawer_define.js'
+    import {routerConst} from  '~Config/BaseDataConst.js'
     import {OblCommonMixin} from '~Layout/mixin/OblCommonMixin';
     import {FormItemTypeEnum,ConstantObj} from "~Components/constant_define";
 
@@ -404,11 +405,11 @@
                 }
             },
             dealGoToAnnouncementCreateView(fid){   //跳转到 [新建公告] 页面 处理
-                var routeParam = {
+                let routeParam = {
                     fid: fid,
                     action:"update"
-                }
-                this.$router.push({ path: '/index/announcement/create', query: routeParam});
+                };
+                this.mixin_jump(routerConst.announcement.create,routeParam);
             },
             handleDraftDetailDrawerShow(e,record){   //Drawer-公告草稿 详情展示
                 if(typeof record != "undefined"){
@@ -426,7 +427,7 @@
                     fid:item.fid,
                     action:"update"
                 };
-                this.$router.push({ path: '/index/announcement/create', query: params});
+                this.mixin_jump(routerConst.announcement.create,params);
             }
         },
         watch:{

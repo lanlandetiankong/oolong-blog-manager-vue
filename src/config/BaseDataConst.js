@@ -1,10 +1,12 @@
 export const BaseDataConst = {
     routerConst:{
         article:{
-            display:'/index/article/display'
+            display:'/index/article/display',
+            create:'/index/article/create'
         },
         announcement:{
-            display:'/index/announcement/display'
+            display:'/index/announcement/display',
+            create:'/index/announcement/create'
         }
     }
 };

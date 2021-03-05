@@ -466,7 +466,7 @@
                     fid: item.fid,
                     action:"update"
                 };
-                this.$router.push({ path: '/index/article/create', query: routeParam});
+                this.mixin_jump(routerConst.article.create,routeParam);
             },
             handleDetailDrawerClose(e){ //Drawer-文章 详情关闭
                 this.drawerConf.detail.article.visible = false ;
