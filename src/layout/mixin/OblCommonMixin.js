@@ -88,8 +88,7 @@ export const OblCommonMixin = {
                 return ;
             }
             params = (params) ? params : {} ;
-            let routerUrl = UrlUtils.objToUrl(goToRoute,params);
-            this.$router.push(routerUrl) ;
+            this.$router.push({path:goToRoute,query:params}) ;
         },
         mixin_getFilterOption(input,option){
             return (option.componentOptions.children[0].text.toLowerCase().indexOf(input.toLowerCase()) >= 0);

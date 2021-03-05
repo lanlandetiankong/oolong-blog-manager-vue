@@ -7,7 +7,7 @@
                          v-for="tag in tagsArray"
                          class="tags-view-item"
                          :class="checkIsTagActive(tag)?'active':''"
-                         :to="tag.path"
+                         :to="tag.fullPath"
                          :key="tag.id"
                          @click.native="handleTagItemNativeClick(tag,$event)"
                          @contextmenu.prevent.native="handleOpenContextMenu(tag,$event)"
