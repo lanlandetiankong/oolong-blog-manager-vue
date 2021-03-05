@@ -336,7 +336,9 @@
                 this.drawerConf.detail.announcement.visible = false;
             },
             handleAnnouncementViewItemClick(e,item){    //查看公告
-                let params = item ;
+                let params = {
+                    fid:item.fid
+                } ;
                 this.mixin_jump(routerConst.announcement.display,params);
             }
         },

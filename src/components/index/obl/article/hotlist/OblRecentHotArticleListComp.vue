@@ -79,10 +79,9 @@
         },
         methods: {
             goToViewDetail(e,record) {  //跳转到文章展示页面
-                if(!record){
-                    return ;
-                }
-                let params = record ;
+                let params = {
+                    fid:record.fid
+                } ;
                 this.mixin_jump(routerConst.article.display,params);
             },
             getList() {

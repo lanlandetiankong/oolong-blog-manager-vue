@@ -512,10 +512,9 @@
                 this.drawerConf.detail.article.visible = false ;
             },
             goToViewDetail(e,record) {
-                if(!record){
-                    return ;
-                }
-                var params = record ;
+                let params = {
+                    fid:record.fid
+                } ;
                 this.mixin_jump(routerConst.article.display,params);
             },
             handleViewAuditRecords(e,record){   //查看文章的审批记录
