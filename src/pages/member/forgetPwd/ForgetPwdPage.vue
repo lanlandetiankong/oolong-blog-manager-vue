@@ -92,7 +92,7 @@
 
 <script>
     import {ForgetPwdApi} from './ForgetPwdApi'
-    import {RouteConst} from "~Router/routeSecurityUtil";
+    import {routerConst} from  '~Config/BaseDataConst.js'
     import I18nChangeComp from "~Components/regular/i18n/I18nChangeComp";
 
     export default {
@@ -172,15 +172,15 @@
         methods:{
             goBack(){
                 //跳转到-回退
-                this.$router.push(RouteConst.login);
+                this.$router.push(routerConst.basic.login);
             },
             goLogin(){
                 //跳转到-登录页面
-                this.$router.push(RouteConst.login);
+                this.$router.push(routerConst.basic.login);
             },
             goRegister(){
                 //跳转到-注册页面
-                this.$router.push(RouteConst.register);
+                this.$router.push(routerConst.basic.register);
             },
             handleSubmit (e) {
                 e.preventDefault();

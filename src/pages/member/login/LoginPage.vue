@@ -23,7 +23,6 @@
 </template>
 <script>
     import {routerConst} from  '~Config/BaseDataConst.js'
-    import {RouteConst} from '~Router/routeSecurityUtil';
     import { mapGetters } from 'vuex'
     import {CacheMixin} from '~Layout/mixin/CacheMixin';
     import I18nChangeComp from "~Components/regular/i18n/I18nChangeComp";
@@ -51,11 +50,11 @@
         methods:{
             goRegister(){
                 //跳转到-注册页面
-                this.$router.push(RouteConst.register);
+                this.$router.push(routerConst.basic.register);
             },
             goForgetPwd(){
                 //跳转到-修改密码
-                this.$router.push(RouteConst.forgetPassword);
+                this.$router.push(routerConst.basic.forgetPassword);
             },
             handleLoginFormSubmit(e,loginForm,submitRes){
                 var _this = this ;

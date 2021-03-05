@@ -1,6 +1,5 @@
 import {LoginMainApi} from "../../pages/member/login/_LoginMainApi";
 import {AsyncRouterUtil} from '~Router/asyncRouterUtil.js';
-import {routerConst} from  '~Config/BaseDataConst.js'
 
 export const CacheMixin = {
     data(){

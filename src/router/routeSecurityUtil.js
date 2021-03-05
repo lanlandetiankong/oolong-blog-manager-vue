@@ -3,20 +3,24 @@ import {message} from 'ant-design-vue';
 import {i18nUtil} from "~Config/i18n/i18nUtil";
 import {RouteSecurityApi} from './routeSecurityApi'
 
+import {routerConst} from  '~Config/BaseDataConst.js'
+
 /**
  * routeSecurityUtil 路由安全工具
  */
-const RoutePageConst = {
-    login:'/member/login',
-    register:'/member/register',
-    forgetPassword:'/member/password/forget',
-    serverDown:'/errorPage/server_down'
-};
+
+
+
+
+/**
+ * 路径-白名单
+ * @type {(string)[]}
+ */
 const whiteUrlList = [
-    RoutePageConst.login,
-    RoutePageConst.register,
-    RoutePageConst.forgetPassword,
-    RoutePageConst.serverDown
+    routerConst.basic.login,
+    routerConst.basic.register,
+    routerConst.basic.forgetPassword,
+    routerConst.basic.serverDown
 ];
 
 function removeTokenSession(){
@@ -33,11 +37,11 @@ function removeTokenSession(){
  */
 function jumpToLoginPage() {
     removeTokenSession();
-    if(RoutePageConst.login == router.app._route.fullPath){
+    if(routerConst.basic.login == router.app._route.fullPath){
         //当前已经是登录界面
     }   else {
         //跳转到登录界面
-        router.push(RoutePageConst.login);
+        router.push(routerConst.basic.login);
     }
 }
 
@@ -97,7 +101,6 @@ export const TokenUtil = {
         return getUserToken();
     },
     goToServerDown(){
-        router.push(RoutePageConst.serverDown);
+        router.push(routerConst.basic.serverDown);
     }
 };
-export const RouteConst = RoutePageConst;

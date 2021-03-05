@@ -60,7 +60,7 @@
 
 <script>
     import {RegisterApi} from './RegisterApi.js'
-    import {RouteConst} from '~Router/routeSecurityUtil';
+    import {routerConst} from  '~Config/BaseDataConst.js'
     import {FormBaseConfObj} from "~Components/constant_define";
     import I18nChangeComp from "~Components/regular/i18n/I18nChangeComp";
     import {OblCommonMixin} from '~Layout/mixin/OblCommonMixin';
@@ -89,7 +89,6 @@
                 avatarUrl:[],
             };
             return {
-                RouteConst,
                 FormBaseConfObj,
                 form: this.$form.createForm(this),
                 formFieldConf:{
@@ -108,15 +107,15 @@
         methods:{
             goBack(){
                 //跳转到-回退
-                this.$router.push(RouteConst.login);
+                this.$router.push(routerConst.basic.login);
             },
             goLogin(){
                 //跳转到-登录页面
-                this.$router.push(RouteConst.login);
+                this.$router.push(routerConst.basic.login);
             },
             goForgetPwd(){
                 //跳转到-修改密码
-                this.$router.push(RouteConst.forgetPassword);
+                this.$router.push(routerConst.basic.forgetPassword);
             },
             handleSubmit (e) {
                 e.preventDefault();

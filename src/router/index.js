@@ -2,8 +2,9 @@ import Vue from 'vue'
 import VueRouter from 'vue-router'
 import {Modal} from 'ant-design-vue';
 import constantParams from '~Config/constantParams';
-import {TokenUtil,RouteConst} from '~Router/routeSecurityUtil';
+import {TokenUtil} from '~Router/routeSecurityUtil';
 const _import = require('~Router/_import_' + process.env.NODE_ENV)
+import {routerConst} from  '~Config/BaseDataConst.js'
 
 //index的基本布局
 import Layout from '@/layout/Layout'
@@ -84,7 +85,7 @@ vueRouter.beforeEach((to,from,next) => {
     //判断token等信息，决定路由是否可以放行
     let carryOnFlag = TokenUtil.isRouteCarryOn(to,from);
     if(carryOnFlag == false){
-        next(RouteConst.login);
+        next(routerConst.basic.login);
     }
     if(to && from){
         const toPath = to.fullPath ;

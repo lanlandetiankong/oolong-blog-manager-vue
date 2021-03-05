@@ -97,7 +97,6 @@
 </template>
 
 <script>
-    import {RouteConst} from '~Router/routeSecurityUtil';
     import {LoginMainCompApi} from './_LoginMainCompApi'
     import {DataUtils} from "~Utils/basic/BeeUtil";
     import AFormItem from "ant-design-vue/es/form/FormItem";
@@ -112,7 +111,6 @@
         components: {ACol, ARow, AFormItem,Verify},
         data() {
             return {
-                RouteConst,
                 loadingFlag:false,
                 loginForm: {
                     userAccount: 'SuperRoot',
