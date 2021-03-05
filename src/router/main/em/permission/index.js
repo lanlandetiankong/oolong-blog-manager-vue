@@ -1,6 +1,4 @@
 const _import = require('~Router/_import_' + process.env.NODE_ENV) ;
-//所挂载的 page 组件名
-const parentRouterCompName = "PermissionPage" ;
 let basePath = 'permission/' ;
 
 const PermissionRouter = [
@@ -10,7 +8,6 @@ const PermissionRouter = [
         name:'permissionManager',
         meta:{
             title:'权限管理',icon:"user",keepAliveFlag:true,
-            parentRouterCompName,
             selfCompName:'PermissionManagerView'
         }
     },
@@ -20,7 +17,6 @@ const PermissionRouter = [
         name:'permissionRoleManager',
         meta:{
             title:'角色定义',icon:"user",keepAliveFlag:true,
-            parentRouterCompName,
             selfCompName:'PermissionRoleManagerView'
         }
     },
@@ -30,7 +26,6 @@ const PermissionRouter = [
         name:'menuManager',
         meta:{
             title:'菜单管理',icon:"user",keepAliveFlag:true,
-            parentRouterCompName,
             selfCompName:'MenuManagerView'
         }
     },
@@ -40,7 +35,6 @@ const PermissionRouter = [
         name:'moduleManager',
         meta:{
             title:'模块管理',icon:"user",keepAliveFlag:true,
-            parentRouterCompName,
             selfCompName:'ModuleManagerView'
         }
     }

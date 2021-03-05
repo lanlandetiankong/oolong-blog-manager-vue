@@ -1,6 +1,4 @@
 const _import = require('~Router/_import_' + process.env.NODE_ENV);
-//所挂载的 page 组件名
-const parentRouterCompName = "AnnouncementPage";
 let basePath = 'announcement/';
 const AnnouncementRouter = [{
         path:basePath+'create',
@@ -8,7 +6,6 @@ const AnnouncementRouter = [{
         name: 'announcementCreate',
         meta: {
             title: '创建通知公告', icon: "reconciliation", keepAliveFlag: true,
-            parentRouterCompName,
             selfCompName: 'AnnouncementCreateView'
         }
     },
@@ -18,7 +15,6 @@ const AnnouncementRouter = [{
         name: 'announcementAllList',
         meta: {
             title: '公告列表', icon: "bars", keepAliveFlag: true,
-            parentRouterCompName,
             selfCompName: 'AnnouncementAllListView'
         }
     },
@@ -28,7 +24,6 @@ const AnnouncementRouter = [{
         name: 'announcementMyCreateList',
         meta: {
             title: '我创建的公告列表', icon: "bars", keepAliveFlag: true,
-            parentRouterCompName,
             selfCompName: 'AnnouncementMyCreateListView'
         }
     },
@@ -38,7 +33,6 @@ const AnnouncementRouter = [{
         name: 'announcementTag',
         meta: {
             title: '公告标签', icon: "reconciliation", keepAliveFlag: true,
-            parentRouterCompName,
             selfCompName: 'AnnouncementTagView'
         }
     },
@@ -48,7 +42,6 @@ const AnnouncementRouter = [{
         name: 'announcementMyDraftList',
         meta: {
             title: '草稿箱', icon: "bars", keepAliveFlag: true,
-            parentRouterCompName,
             selfCompName: 'AnnouncementMyDraftListView'
         }
     },
@@ -59,7 +52,6 @@ const AnnouncementRouter = [{
         meta: {
             title: '公告展示', icon: "book", keepAliveFlag: true,
             visitLimit: false,
-            parentRouterCompName,
             selfCompName: 'AnnouncementDisplayView'
         }
     }];

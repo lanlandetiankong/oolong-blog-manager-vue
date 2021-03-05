@@ -1,6 +1,4 @@
 const _import = require('~Router/_import_' + process.env.NODE_ENV);
-//所挂载的 page 组件名
-const parentRouterCompName = "OblArticlePage" ;
 let basePath = 'article/' ;
 const ArticleRouter = [
     {
@@ -9,8 +7,7 @@ const ArticleRouter = [
         name:'articleCreate',
         meta:{
             title:'写文章',icon:"reconciliation",keepAliveFlag:true,
-            parentRouterCompName,
-            selfCompName:'ArticleCreateView'
+            selfCompName:'OblArticleCreateView'
         }
     },
     {
@@ -19,8 +16,7 @@ const ArticleRouter = [
         name:'articleAllList',
         meta:{
             title:'文章列表',icon:"bars",keepAliveFlag:true,
-            parentRouterCompName,
-            selfCompName:'ArticleAllListView'
+            selfCompName:'OblArticleAllListView'
         }
     },
     {
@@ -29,8 +25,7 @@ const ArticleRouter = [
         name:'articleMyCreateList',
         meta:{
             title:'我的文章',icon:"bars",keepAliveFlag:true,
-            parentRouterCompName,
-            selfCompName:'ArticleMyCreateListView'
+            selfCompName:'OblArticleMyCreateListView'
         }
     },
     {
@@ -39,8 +34,7 @@ const ArticleRouter = [
         name:'articleTag',
         meta:{
             title:'文章标签',icon:"reconciliation",keepAliveFlag:true,
-            parentRouterCompName,
-            selfCompName:'ArticleTagView'
+            selfCompName:'OblArticleTagView'
         }
     },
     {
@@ -49,8 +43,7 @@ const ArticleRouter = [
         name:'articleCategory',
         meta:{
             title:'文章分类',icon:"reconciliation",keepAliveFlag:true,
-            parentRouterCompName,
-            selfCompName:'ArticleCategoryView'
+            selfCompName:'OblArticleCategoryView'
         }
     },
     {
@@ -59,8 +52,7 @@ const ArticleRouter = [
         name:'articleMyDraftList',
         meta:{
             title:'草稿箱',icon:"bars",keepAliveFlag:true,
-            parentRouterCompName,
-            selfCompName:'ArticleMyDraftListView'
+            selfCompName:'OblArticleMyDraftListView'
         }
     },
     {
@@ -70,8 +62,7 @@ const ArticleRouter = [
         meta:{
             title:'文章展示',icon:"book",keepAliveFlag:true,
             visitLimit:false ,
-            parentRouterCompName,
-            selfCompName:'ArticleTagView'
+            selfCompName:'OblArticleTagView'
         }
     },
     {
@@ -80,8 +71,7 @@ const ArticleRouter = [
         name:'articleRecommendView',
         meta:{
             title:'文章推荐',icon:"check-square",keepAliveFlag:true,
-            parentRouterCompName,
-            selfCompName:'OblArticleRecommendView'
+            selfCompName:'OblOblArticleRecommendView'
         }
     },
     {
@@ -90,7 +80,6 @@ const ArticleRouter = [
         name:'articleRecommendDelayRecordView',
         meta:{
             title:'文章推荐调整记录',icon:"right-square",keepAliveFlag:true,
-            parentRouterCompName,
             selfCompName:'OblArticleRecommendDelayRecordView'
         }
     },

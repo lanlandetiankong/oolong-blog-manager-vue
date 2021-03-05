@@ -1,6 +1,4 @@
 const _import = require('~Router/_import_' + process.env.NODE_ENV)
-//所挂载的 page 组件名
-const parentRouterCompName = "EmployeePage" ;
 let basePath = 'employee/' ;
 
 const EmployeeRouter = [
@@ -10,7 +8,6 @@ const EmployeeRouter = [
         name:'employeeInfo',
         meta:{
             title:'用户信息',icon:"user",keepAliveFlag:true,
-            parentRouterCompName,
             selfCompName:'EmpInfoView'
         }
     },
@@ -20,7 +17,6 @@ const EmployeeRouter = [
         name:'employeeJob',
         meta:{
             title:'职务管理',icon:"user",keepAliveFlag:true,
-            parentRouterCompName,
             selfCompName:'EmpJobManagerView'
         }
     },
@@ -30,7 +26,6 @@ const EmployeeRouter = [
         name:'departmentManager',
         meta:{
             title:'部门管理',icon:"gold",keepAliveFlag:true,
-            parentRouterCompName,
             selfCompName:'DepartmentManagerView'
         }
     }

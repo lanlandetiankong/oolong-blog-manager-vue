@@ -27,8 +27,6 @@ import Error4XXRouter from './error'
 
 Vue.use(VueRouter);
 
-var indexParentRouterCompName = "Layout"
-
 export const constantRouterMap = [
     {
         path:'',
@@ -51,7 +49,6 @@ export const constantRouterMap = [
                 meta:{
                     title:'首页',icon:"dashboard",keepAliveFlag:true,
                     visitLimit:false ,
-                    parentRouterCompName:indexParentRouterCompName,
                     selfCompName:'UserZoneCenterView'
                 }
             },
