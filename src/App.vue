@@ -14,6 +14,7 @@
 </template>
 
 <script>
+    import {routerConst} from  '~Config/BaseDataConst.js'
     import {SupportI18nLocale} from '~Components/constant_define';
     import {i18nUtil} from "~Config/i18n/i18nUtil";
     import $ from 'jquery';
@@ -98,8 +99,8 @@
             },
             handleAfterPageRefresh(){
                 this.$store.dispatch("doDelAllViews");
-                if(this.$route.path != "/index"){
-                    this.$router.push("/index");
+                if(this.$route.path != routerConst.basic.index){
+                    this.$router.push(routerConst.basic.index);
                 }
             },
             handleMenuListToRouters(){

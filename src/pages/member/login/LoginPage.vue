@@ -22,6 +22,7 @@
     </div>
 </template>
 <script>
+    import {routerConst} from  '~Config/BaseDataConst.js'
     import {RouteConst} from '~Router/routeSecurityUtil';
     import { mapGetters } from 'vuex'
     import {CacheMixin} from '~Layout/mixin/CacheMixin';
@@ -65,7 +66,7 @@
                     _this.cacheMixin_handleSetRouterUrlsToCache(_this,rstBean.urls);
                     _this.cacheMixin_handleSetGrantedPermissionsToCache(_this,rstBean.permissionCodes);
                     _this.cacheMixin_handleMenuListToCache(_this,false);
-                    _this.$router.push("/index");
+                    _this.$router.push(routerConst.basic.index);
                 }
             },
         }

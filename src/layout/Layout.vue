@@ -47,6 +47,7 @@
 </template>
 
 <script>
+    import {routerConst} from  '~Config/BaseDataConst.js'
     import {TokenUtil} from '~Router/routeSecurityUtil';
     import { mapGetters } from 'vuex'
     import ResizeMixin from './mixin/ResizeHandler';
@@ -103,7 +104,7 @@
                     if(_currentRoute.fullPath == "" || _currentRoute.fullPath == "/index"){
                         //当前已经在 index页面了，无需再跳转
                     }   else {
-                        this.$router.push('/index');
+                        this.$router.push(routerConst.basic.index);
                     }
                 }
             },
@@ -152,7 +153,7 @@
                     //do something
                 });
                 //切换到主页
-                this.$router.push("/");
+                this.$router.push(routerConst.basic.index);
             },
             handleUserLoginOut(e){     //子组件命令-退出登录
                 TokenUtil.loginOut();

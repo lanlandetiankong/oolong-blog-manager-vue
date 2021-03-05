@@ -1,5 +1,9 @@
 export const BaseDataConst = {
     routerConst:{
+        basic:{
+           index:'/index',
+           index2:'/'
+        },
         article:{
             display:'/index/article/display',
             create:'/index/article/create'

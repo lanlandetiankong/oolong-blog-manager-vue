@@ -27,7 +27,7 @@ export const OblCommonMixin = {
                 if(_currentRoute.fullPath == "" || _currentRoute.fullPath == "/index"){
                     //当前已经在 index页面了，无需再跳转
                 }   else {
-                    this.$router.push('/index');
+                    this.$router.push(this.mixinData.routerConst.basic.index);
                 }
             }
         },
@@ -64,6 +64,7 @@ export const OblCommonMixin = {
             self.$refs[refName].triggerQuery();
         },
         mixin_closeTagAndJump(goToRoute,params){  //关闭当前标签并跳转到指定路由
+            let _this = this ;
             var selectedTag = this.$route ;
             params = (params) ? params : {} ;
             //关闭当前所选标签
@@ -78,7 +79,7 @@ export const OblCommonMixin = {
                     if(latestView) {
                         this.$router.push(latestView.path) ;
                     }   else {
-                        this.$router.push('/') ;
+                        this.$router.push(_this.mixinData.routerConst.basic.index) ;
                     }
                 }
             })

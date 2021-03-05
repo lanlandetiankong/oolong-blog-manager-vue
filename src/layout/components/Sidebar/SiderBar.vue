@@ -21,7 +21,6 @@
 </template>
 
 <script>
-
     import SubMenuComp from '~Components/regular/layout/menu/SubMenuComp' ;
     export default {
         name: "SiderBar",
@@ -37,26 +36,11 @@
 
             }
         },
-        computed: {
-        },
         methods: {
             dealMenuClick(obj) {
                 this.$emit('sideBar-menu-open',obj.item,obj.key,obj.keyPath);
             },
-            dealGotoIndex(){
-                var _currentRoute = this.$route;
-                if(_currentRoute){
-                    if(_currentRoute.fullPath == "" || _currentRoute.fullPath == "/index"){
-                        //当前已经在 index页面了，无需再跳转
-                    }   else {
-                        this.$router.push('/index');
-                    }
-                }
-            }
         },
-        mounted() {
-
-        }
     }
 </script>
 
