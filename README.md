@@ -6,7 +6,7 @@
 
 ## 预览地址
 
-http://47.99.160.215
+http://oblmg.tharlo.space
 
 测试账号: SuperRoot
 
