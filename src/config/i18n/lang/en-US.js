@@ -102,6 +102,7 @@ export const langMap = {
                 detailForDefineFormType:'Detail for define form type',
                 detailForSysDic:'Detail for define system dic',
                 detailForSysFeedback:'Detail for define system feedback',
+                detailForSysFeedbackType:'Detail for define system feedback type',
             }
         },
         obl:{
@@ -237,6 +238,12 @@ export const langMap = {
                     operateProgress:'Operate progress',
                     operateTime:'Operate time',
                     isFinish:'Is finish'
+                },
+                sysFeedbackType:{
+                    parentName:'Parent name',
+                    name:'Name',
+                    description:'Description',
+                    level:'Level'
                 }
             },
             obl:{

@@ -238,6 +238,12 @@ export const langMap = {
                     operateProgress:'操作步骤',
                     operateTime:'操作时间',
                     isFinish:'是否完成'
+                },
+                sysFeedbackType:{
+                    parentName:'上级',
+                    name:'名称',
+                    description:'描述',
+                    level:'层级'
                 }
             },
             obl:{
