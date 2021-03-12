@@ -100,6 +100,8 @@ export const langMap = {
                 detailForDefinePermission:'权限定义详情',
                 detailForDefineForm:'表单定义详情',
                 detailForDefineFormType:'表单类型定义详情',
+                detailForSysDic:'字典详情',
+                detailForSysFeedback:'反馈详情',
             }
         },
         obl:{
@@ -225,6 +227,17 @@ export const langMap = {
                     type:'类型',
                     code:'编码',
                     value:'值'
+                },
+                sysFeedback:{
+                    title:'标题',
+                    authorName:'提出人',
+                    content:'内容',
+                    type:'类型',
+                    editorType:'编辑器类型',
+                    operateUserName:'操作人',
+                    operateProgress:'操作步骤',
+                    operateTime:'操作时间',
+                    isFinish:'是否完成'
                 }
             },
             obl:{
@@ -398,7 +411,10 @@ export const langMap = {
             articleSourceType:{
                 original:'原创',
                 reprint:'转载'
-            }
+            },
+            feedbackEditorType:{
+                markdown:'Markdown'
+            },
         },
         valueMap:{
             transferConf:{

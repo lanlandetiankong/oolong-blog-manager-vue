@@ -152,14 +152,14 @@
                     key: 'summary',
                     formType: FormItemTypeEnum.Input,
                     label: this.$t('langMap.table.fields.obl.articleRecommend.summary'),
-                    decorator: ["summary", {rules: []}],
-                    options:[],
+                    decorator: ["summary", {rules: []}]
                 },
                 isConfirmed: {
                     key: 'isConfirmed',
                     formType: FormItemTypeEnum.Select,
                     label: this.$t('langMap.table.fields.obl.articleRecommend.isConfirmed'),
-                    decorator: ["isConfirmed", {rules: []}]
+                    decorator: ["isConfirmed", {rules: []}],
+                    options:[],
                 },
                 reason: {
                     key: 'reason',

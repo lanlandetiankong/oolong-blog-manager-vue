@@ -100,6 +100,8 @@ export const langMap = {
                 detailForDefinePermission:'Detail for define permission',
                 detailForDefineForm:'Detail for define form ',
                 detailForDefineFormType:'Detail for define form type',
+                detailForSysDic:'Detail for define system dic',
+                detailForSysFeedback:'Detail for define system feedback',
             }
         },
         obl:{
@@ -224,6 +226,17 @@ export const langMap = {
                     type:'Type',
                     code:'Code',
                     value:'Value'
+                },
+                sysFeedback:{
+                    title:'Title',
+                    authorName:'Proposer',
+                    content:'Content',
+                    type:'Type',
+                    editorType:'Editor type',
+                    operateUserName:'Operate user name',
+                    operateProgress:'Operate progress',
+                    operateTime:'Operate time',
+                    isFinish:'Is finish'
                 }
             },
             obl:{
@@ -395,7 +408,10 @@ export const langMap = {
             articleSourceType:{
                 original:'Original',
                 reprint:'Reprint'
-            }
+            },
+            feedbackEditorType:{
+                markdown:'Markdown'
+            },
         },
         valueMap:{
             transferConf:{
