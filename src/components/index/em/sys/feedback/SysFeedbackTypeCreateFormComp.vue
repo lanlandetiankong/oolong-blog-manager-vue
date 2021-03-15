@@ -16,7 +16,14 @@
                 <a-form-item :label="$t('langMap.table.fields.em.sysFeedbackType.parentName')"
                              v-bind="FormBaseConfObj.formItemLayout"
                 >
-                    <a-input v-decorator="formFieldConf.parentName"/>
+                    <a-tree-select
+                        :placeholder="$t('langMap.button.placeholder.filterSuperiors')"
+                        showSearch allowClear
+                        :treeNodeFilterProp="treeSelectConf.pid.treeNodeFilterProp"
+                        :treeDefaultExpandAll="treeSelectConf.pid.treeDefaultExpandAll"
+                        v-decorator="formFieldConf.pid"
+                        :treeData="treeSelectConf.pid.selfTreeData"
+                    />
                 </a-form-item>
                 <a-form-item :label="$t('langMap.table.fields.em.sysFeedbackType.name')"
                              v-bind="FormBaseConfObj.formItemLayout"
@@ -28,13 +35,23 @@
                 >
                     <a-input v-decorator="formFieldConf.description"/>
                 </a-form-item>
+                <a-form-item :label="$t('langMap.table.fields.common.weights')"
+                             v-bind="FormBaseConfObj.formItemLayout"
+                >
+                    <a-input-number v-decorator="formFieldConf.weights"/>
+                </a-form-item>
+                <a-form-item :label="$t('langMap.table.fields.common.remark')"
+                             v-bind="FormBaseConfObj.formItemLayout"
+                >
+                    <a-textarea v-decorator="formFieldConf.remark"/>
+                </a-form-item>
             </a-form>
         </a-modal>
     </div>
 </template>
 <script>
     import {FormBaseConfObj} from "~Components/constant_define";
-
+    import {SysFeedbackTypeCreateFormCompApi} from  './SysFeedbackTypeCreateFormCompApi'
     import AFormItem from "ant-design-vue/es/form/FormItem";
     import ATextarea from "ant-design-vue/es/input/TextArea";
 
@@ -48,7 +65,7 @@
         },
         data() {
             var paramsRules = {
-                parentName: [
+                pid: [
                     {
                         required: true,
                         message: this.$t('langMap.commons.forms.pleaseFillOut', [this.$t('langMap.table.fields.em.sysFeedbackType.parentName')])
@@ -65,16 +82,37 @@
                         required: true,
                         message: this.$t('langMap.commons.forms.pleaseFillOut', [this.$t('langMap.table.fields.em.sysFeedbackType.description')])
                     }
+                ],
+                weights: [
+                    {
+                        required: true,
+                        message: this.$t('langMap.commons.forms.pleaseFillOut', [this.$t('langMap.table.fields.common.weights')])
+                    },
+                ],
+                remark: [
+                    {
+                        required: false,
+                        message: this.$t('langMap.commons.forms.pleaseFillOut', [this.$t('langMap.table.fields.common.remark')])
+                    }
                 ]
             };
             return {
                 FormBaseConfObj,
                 formFieldConf: {
-                    parentName: ["parentName", {rules: paramsRules.parentName}],
+                    pid: ["pid", {rules: paramsRules.pid}],
                     name: ["name", {rules: paramsRules.name}],
-                    description: ["description", {rules: paramsRules.description}]
+                    description: ["description", {rules: paramsRules.description}],
+                    weights: ["weights", {rules: paramsRules.weights}],
+                    remark: ["remark", {rules: paramsRules.remark}]
                 },
-                createForm: {}
+                createForm: {},
+                treeSelectConf:{
+                    pid:{
+                        treeDefaultExpandAll:false,
+                        treeNodeFilterProp:"title",
+                        selfTreeData:[]
+                    }
+                }
             }
         },
         methods: {
@@ -82,9 +120,9 @@
                 var _this = this;
                 if (typeof _this.createForm.updateFields != "undefined") { //避免未初始化form的时候就调用了updatefield
                     _this.createForm.updateFields({
-                        parentName: _this.$form.createFormField({
+                        pid: _this.$form.createFormField({
                             ...formObj,
-                            value: formObj.parentName,
+                            value: formObj.pid,
                         }),
                         name: _this.$form.createFormField({
                             ...formObj,
@@ -94,9 +132,33 @@
                             ...formObj,
                             value: formObj.description,
                         }),
+                        weights: _this.$form.createFormField({
+                            ...formObj,
+                            value: formObj.weights,
+                        }),
+                        remark: _this.$form.createFormField({
+                            ...formObj,
+                            value: formObj.remark,
+                        })
                     });
                 }
-            }
+            },
+            handleCreateActionInit(){   //弹窗展示为[创建-操作]的初始化
+                var _this = this ;
+                SysFeedbackTypeCreateFormCompApi.getTreeFilterChildrens(_this.formObj.fid).then((res) => { //更新 上级文章类别 树
+                    if(res.success){
+                        _this.treeSelectConf.pid.selfTreeData  = res.gridList ;
+                    }
+                })
+            },
+            handleUpdateActionInit(){   //弹窗展示为[更新-操作]的初始化
+                var _this = this ;
+                SysFeedbackTypeCreateFormCompApi.getTreeFilterChildrens(_this.formObj.fid).then((res) => { //更新 上级文章类别 树
+                    if(res.success){
+                        _this.treeSelectConf.pid.selfTreeData  = res.gridList ;
+                    }
+                })
+            },
         },
         computed: {
             modalCompTitle() {
@@ -112,9 +174,9 @@
                 },
                 mapPropsToFields: () => {
                     return {
-                        parentName: this.$form.createFormField({
+                        pid: this.$form.createFormField({
                             ..._this.formObj,
-                            value: _this.formObj.parentName
+                            value: _this.formObj.pid
                         }),
                         name: this.$form.createFormField({
                             ..._this.formObj,
@@ -123,7 +185,15 @@
                         description: _this.$form.createFormField({
                             ..._this.formObj,
                             value: _this.formObj.description,
-                        })
+                        }),
+                        weights: this.$form.createFormField({
+                            ..._this.formObj,
+                            value: _this.formObj.weights
+                        }),
+                        remark: this.$form.createFormField({
+                            ..._this.formObj,
+                            value: _this.formObj.remark
+                        }),
                     }
                 }
             });
@@ -136,6 +206,21 @@
                 },
                 deep: true,
                 immediate: true
+            },
+            visible:{
+                handler(val,oval){  //隐藏与展示弹窗时监听
+                    var _this = this ;
+                    if(val === true){
+                        if("create" == _this.actionType){   //打开=>创建
+                            _this.handleCreateActionInit();
+                        }   else if("update" == _this.actionType){  //打开=>更新
+                            _this.handleUpdateActionInit();
+                        }
+                    }   else {  //弹窗关闭
+                        //console.log("弹窗展示状态变更:关闭");
+                    }
+                },
+                immediate:true
             }
         }
     }

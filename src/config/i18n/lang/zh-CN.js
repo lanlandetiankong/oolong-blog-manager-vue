@@ -102,6 +102,7 @@ export const langMap = {
                 detailForDefineFormType:'表单类型定义详情',
                 detailForSysDic:'字典详情',
                 detailForSysFeedback:'反馈详情',
+                detailForSysFeedbackType:'反馈详情',
             }
         },
         obl:{

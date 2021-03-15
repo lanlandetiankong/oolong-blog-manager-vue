@@ -14,7 +14,15 @@ const SysRouter = [{
     name:'sysFeedback',
     meta:{
         title:'系统反馈',icon:"flag",keepAliveFlag:true,
-        selfCompName:'SysDicView'
+        selfCompName:'SysFeedbackView'
+    }
+},{
+    path:basePath+'feedback_type',
+    component:_import('index/em/sys/feedback/SysFeedbackTypeView'),
+    name:'sysFeedbackType',
+    meta:{
+        title:'系统反馈类别',icon:"tag",keepAliveFlag:true,
+        selfCompName:'SysFeedbackTypeView'
     }
 }];
 export default SysRouter ;
