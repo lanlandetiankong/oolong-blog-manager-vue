@@ -303,7 +303,7 @@
                     item['isFinishStr'] = flagSwitchValMap[item.isFinish] ;
                 }
             },
-            handleSearchFormQuery(e, values) {   //带查询条件 检索【字典表】列表
+            handleSearchFormQuery(e, values) {   //带查询条件 检索【系统反馈】列表
                 var _this = this;
                 _this.changeQueryLoading(true);
                 SysFeedbackApi.getPageQuery(values, _this.tableConf).then((res) => {
@@ -461,7 +461,7 @@
             this.mixin_invokeQuery(this);
         },
         destroyed() {
-            console.log("字典表-页面销毁 ...")
+            console.log("系统反馈-页面销毁 ...")
         }
     }
 </script>
