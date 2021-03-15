@@ -32,5 +32,14 @@ const SysRouter = [{
         title:'编辑系统反馈',icon:"edit",keepAliveFlag:true,
         selfCompName:'SysFeedbackCreateView'
     }
-}];
+}, {
+    path:basePath+'feedback/display',
+    component:_import('index/em/sys/feedback/display/SysFeedbackDisplayView'),
+    name:'EmSysFeedbackDisplayView',
+    meta:{
+        title:'反馈详情',icon:"book",keepAliveFlag:true,
+        visitLimit:false ,
+        selfCompName:'EmSysFeedbackDisplayView'
+    }
+},];
 export default SysRouter ;

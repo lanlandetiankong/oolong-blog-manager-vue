@@ -1,3 +1,5 @@
+import {i18nUtil} from "~Config/i18n/i18nUtil";
+
 export const langMap = {
     button:{
         actions:{
@@ -422,6 +424,12 @@ export const langMap = {
             feedbackEditorType:{
                 markdown:'Markdown'
             },
+            feedBackOperateProgress:{
+                operateProgressOfPublished:'已提交',
+                operateProgressOfProcessing:'处理中',
+                operateProgressOfTobeVerified:'待验证',
+                operateProgressOfFinish:'已完成',
+            },
         },
         valueMap:{
             transferConf:{
@@ -565,7 +573,26 @@ export const langMap = {
                 title:'修改密码',
                 description:'填写新密码'
             },
-        }
+        },
+        feedback:{
+            create:{
+                basic:{
+                    key:'basic',
+                    title:'写',
+                    description:'写'
+                },
+                more:{
+                    key:'more',
+                    title:'其他',
+                    description:'其他设置'
+                },
+                done:{
+                    key:'done',
+                    title:'提交',
+                    description:'提交'
+                }
+            }
+        },
     },
     results:{
         universal:{
@@ -588,6 +615,20 @@ export const langMap = {
           }
         },
         article:{
+            create:{
+                success:{
+                    extra:{
+                        viewDetail:'查看'
+                    }
+                },
+                failure:{
+                    extra:{
+                        retry:'重试'
+                    }
+                }
+            }
+        },
+        feedback:{
             create:{
                 success:{
                     extra:{

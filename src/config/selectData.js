@@ -241,6 +241,31 @@ export const FeedBackEditorTypeEnum = {
     }
 };
 
+
+/**
+ * 枚举-反馈操作步骤
+ * @type {{OperateProgressOfPublished: {label: string, value: number}, OperateProgressOfTobeFinish: {label: string, value: number}, OperateProgressOfProcessing: {label: string, value: number}, OperateProgressOfTobeVerified: {label: string, value: number}}}
+ */
+export const FeedBackOperateProgressEnum = {
+    OperateProgressOfPublished:{
+        value: 1,
+        label: i18nUtil.getKey('langMap.commons.enums.feedBackOperateProgress.operateProgressOfPublished')
+    },
+    OperateProgressOfProcessing:{
+        value: 2,
+        label: i18nUtil.getKey('langMap.commons.enums.feedBackOperateProgress.operateProgressOfProcessing')
+    },
+    OperateProgressOfTobeVerified:{
+        value: 3,
+        label: i18nUtil.getKey('langMap.commons.enums.feedBackOperateProgress.operateProgressOfTobeVerified')
+    },
+    OperateProgressOfFinish:{
+        value: 4,
+        label: i18nUtil.getKey('langMap.commons.enums.feedBackOperateProgress.operateProgressOfFinish')
+    },
+};
+
+
 /**
  * 对象转Select的data
  * @param obj
@@ -344,7 +369,8 @@ export const AllEnum = {
     ArticleAuditTypeEnum,
     ArticleEditorTypeEnum,
     ArticleSourceTypeEnum,
-    FeedBackEditorTypeEnum
+    FeedBackEditorTypeEnum,
+    FeedBackOperateProgressEnum
 };
 
 export const EnumUtils = {

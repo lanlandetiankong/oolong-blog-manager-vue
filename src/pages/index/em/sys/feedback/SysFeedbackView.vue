@@ -60,6 +60,10 @@
                     </span>
                     <obl-table-action slot="action" slot-scope="text,record">
                         <template slot="operates">
+                            <table-operate-btn :content="$t('langMap.results.article.create.success.extra.viewDetail')"
+                                               icon="read"
+                                               @click="goToViewDetail($event,record)"
+                            />
                             <table-delete-operate-btn @click="handleDeleteOneById(record.fid)" />
                             <table-row-detail-operate-btn @click="handleDetailDrawerShow($event,record)" />
                         </template>
@@ -86,15 +90,17 @@
     import QueryFormComp from '~Components/regular/query/QueryFormComp'
     import TableHeadInfo from '~Components/regular/common/table/TableHeadInfo'
     import OblTableAction from '~Components/regular/common/table/OblTableAction'
+    import TableOperateBtn from '~Components/regular/common/table/operate/TableOperateBtn'
     import TableDeleteOperateBtn from '~Components/regular/common/table/operate/TableDeleteOperateBtn'
     import TableRowDetailOperateBtn from '~Components/regular/common/table/operate/TableRowDetailOperateBtn'
     import RowDetailDrawerComp from '~Components/regular/common/drawer/RowDetailDrawerComp';
     import {AllEnum, EnumUtils, FeedBackEditorTypeEnum, FlagSwitchEnum} from "~Config/selectData";
+    import {routerConst} from "~Config/BaseDataConst";
     export default {
         name: "SysFeedbackView",
         components: {
             QueryFormComp, RowDetailDrawerComp,
-            TableHeadInfo,OblTableAction,TableRowDetailOperateBtn,TableDeleteOperateBtn
+            TableHeadInfo,OblTableAction,TableRowDetailOperateBtn,TableOperateBtn,TableDeleteOperateBtn
         },
         mixins: [OblCommonMixin],
         data() {
@@ -120,11 +126,11 @@
                     label: this.$t('langMap.table.fields.em.sysFeedback.content'),
                     decorator: ["content", {rules: []}],
                 },
-                type: {
-                    key: 'type',
+                typeId: {
+                    key: 'typeId',
                     formType: FormItemTypeEnum.Input,
                     label: this.$t('langMap.table.fields.em.sysFeedback.type'),
-                    decorator: ["type", {rules: []}],
+                    decorator: ["typeId", {rules: []}],
                 }
             };
             return {
@@ -156,13 +162,13 @@
                     }, {
                         title: this.$t('langMap.table.fields.em.sysFeedback.content'),
                         align: textAlignDefault,
-                        dataIndex: 'content',
-                        key: 'content'
+                        dataIndex: 'shortContent',
+                        key: 'shortContent'
                     }, {
                         title: this.$t('langMap.table.fields.em.sysFeedback.type'),
                         align: textAlignDefault,
-                        dataIndex: 'type',
-                        key: 'type'
+                        dataIndex: 'typeName',
+                        key: 'typeName'
                     },  {
                         title: this.$t('langMap.table.fields.em.sysFeedback.operateUserName'),
                         align: textAlignDefault,
@@ -399,7 +405,13 @@
             },
             handleDetailDrawerClose(e) { //Drawer-详情关闭
                 this.drawerConf.detail.sysFeedback.visible = false;
-            }
+            },
+            goToViewDetail(e,record) {
+                let params = {
+                    fid:record.fid
+                } ;
+                this.mixin_jump(routerConst.feedback.display,params);
+            },
         },
         watch: {
             binding:{

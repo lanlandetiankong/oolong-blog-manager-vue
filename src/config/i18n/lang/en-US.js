@@ -419,6 +419,12 @@ export const langMap = {
             feedbackEditorType:{
                 markdown:'Markdown'
             },
+            feedBackOperateProgress:{
+                OperateProgressOfPublished:'Submitted',
+                OperateProgressOfProcessing:'Processing',
+                OperateProgressOfTobeVerified:'Tobe verified',
+                operateProgressOfFinish:'Finish',
+            },
         },
         valueMap:{
             transferConf:{
@@ -585,6 +591,20 @@ export const langMap = {
             }
         },
         article:{
+            create:{
+                success:{
+                    extra:{
+                        viewDetail:'View'
+                    }
+                },
+                failure:{
+                    extra:{
+                        retry:'Retry'
+                    }
+                }
+            }
+        },
+        feedback:{
             create:{
                 success:{
                     extra:{

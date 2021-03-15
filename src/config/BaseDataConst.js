@@ -15,6 +15,10 @@ export const BaseDataConst = {
         announcement: {
             display: '/index/announcement/display',
             create: '/index/announcement/create'
+        },
+        feedback:{
+            display: '/index/sys/feedback/display',
+            create: '/index/sys/feedback/create'
         }
     }
 };

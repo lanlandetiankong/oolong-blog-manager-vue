@@ -87,6 +87,7 @@ vueRouter.beforeEach((to,from,next) => {
     if(carryOnFlag == false){
         next(routerConst.basic.login);
     }
+    debugger;
     if(to && from){
         const toPath = to.fullPath ;
         if(defaultPassRouterUrls.indexOf(toPath) == -1){    //要访问的路径不在 [默认放行路径] ?
