@@ -9,7 +9,7 @@ const SysRouter = [{
         selfCompName:'SysDicView'
     }
 },{
-    path:basePath+'feedback',
+    path:basePath+'feedback/manager',
     component:_import('index/em/sys/feedback/SysFeedbackView'),
     name:'sysFeedback',
     meta:{
@@ -17,12 +17,20 @@ const SysRouter = [{
         selfCompName:'SysFeedbackView'
     }
 },{
-    path:basePath+'feedback_type',
-    component:_import('index/em/sys/feedback/SysFeedbackTypeView'),
+    path:basePath+'feedback_type/manager',
+    component:_import('index/em/sys/feedback/type/SysFeedbackTypeView'),
     name:'sysFeedbackType',
     meta:{
         title:'系统反馈类别',icon:"tag",keepAliveFlag:true,
         selfCompName:'SysFeedbackTypeView'
+    }
+},{
+    path:basePath+'feedback/create',
+    component:_import('index/em/sys/feedback/create/SysFeedbackCreateView'),
+    name:'sysFeedbackCreate',
+    meta:{
+        title:'编辑系统反馈',icon:"edit",keepAliveFlag:true,
+        selfCompName:'SysFeedbackCreateView'
     }
 }];
 export default SysRouter ;

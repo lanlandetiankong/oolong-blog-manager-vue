@@ -365,50 +365,6 @@
                     })
                 }
             },
-            handleCreateFormCancel(e) {  // 创建/更新 公告标签定义表单->取消
-                var _this = this;
-                _this.dialogFormConf.visible = false;
-            },
-            handleCreateFormSubmit(e) {   // 创建/更新 公告标签表单->提交
-                var _this = this;
-                const dialogFormObj = _this.dealGetDialogRefFormObj();
-                dialogFormObj.validateFields((err, values) => {
-                    if (err) {
-                        return;
-                    }
-                    var closeDialogFlag = true;
-                    if (_this.dialogFormConf.actionType == "create") {        //新建-提交
-                        SysFeedbackApi.createByForm(values).then((res) => {
-                            if (res.success) {  //异常已经有预处理了
-                                _this.$message.success(res.msg);
-                                _this.mixin_invokeQuery(_this); //表格重新搜索
-                            } else {
-                                closeDialogFlag = false;
-                            }
-                            if (closeDialogFlag == true) {    //关闭弹窗
-                                dialogFormObj.resetFields();
-                                _this.dialogFormConf.visible = false;
-                            }
-                        })
-                    } else if (_this.dialogFormConf.actionType == "update") {   //更新-提交
-                        values['fid'] = _this.dialogFormObj.fid;   //提交时，回填fid值
-                        SysFeedbackApi.updateByForm(values).then((res) => {
-                            if (res.success) {  //异常已经有预处理了
-                                _this.$message.success(res.msg);
-                                _this.mixin_invokeQuery(_this); //表格重新搜索
-                            } else {
-                                closeDialogFlag = false;
-                            }
-                            if (closeDialogFlag == true) {    //关闭弹窗
-                                dialogFormObj.resetFields();
-                                _this.dialogFormConf.visible = false;
-                            }
-                        })
-                    }
-
-                });
-
-            },
             handleDeleteOneById(delId) {     //删除指定行
                 var _this = this;
                 if (delId) {
