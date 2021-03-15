@@ -23,12 +23,6 @@
                         </a-button>
                     </a-col>
                     <a-col>
-                        <a-button type="primary" icon="edit"
-                                  @click="handleUpdateByForm">
-                            {{$t('langMap.button.actions.updateByForm')}}
-                        </a-button>
-                    </a-col>
-                    <a-col>
                         <a-button type="danger" icon="delete"
                                   @click="handleBatchDeleteByIds">
                             {{$t('langMap.button.actions.batchDelByIds')}}
@@ -55,6 +49,11 @@
                     </span>
                     <obl-table-action slot="action" slot-scope="text,record">
                         <template slot="operates">
+                            <table-operate-btn :content="$t('langMap.button.actions.operate')"
+                                               icon="control"
+                                               @click="handleOperateForm($event,record)"
+                            >
+                            </table-operate-btn>
                             <table-operate-btn :content="$t('langMap.button.actions.viewOperateRecord')"
                                                icon="unordered-list"
                                                @click="handleViewOperateRecords($event,record)"
@@ -79,6 +78,13 @@
                 @cancel="()=> this.dialog.viewOperateRecords.visible = false"
                 @submit="()=> this.dialog.viewOperateRecords.visible = false"
             />
+            <sys-feedback-operate-form-comp
+                ref="sysFeedbackOperateFormRef"
+                :visible="dialog.operateForm.visible"
+                :formObj="dialog.operateForm.formObj"
+                @createFormCancel="()=> this.dialog.operateForm.visible = false"
+                @createFormSubmit="()=> this.dialog.operateForm.visible = false"
+            />
             <row-detail-drawer-comp
                 :drawerConf="drawerConf.detail.sysFeedback.conf"
                 :dataObj="drawerConf.detail.sysFeedback.dataObj"
@@ -94,6 +100,7 @@
     import {OblCommonMixin} from '~Layout/mixin/OblCommonMixin';
     import {FormItemTypeEnum, ConstantObj} from "~Components/constant_define";
     import SysFeedbackOperateRecordsComp from '~Components/index/em/sys/feedback/SysFeedbackOperateRecordsComp';
+    import SysFeedbackOperateFormComp from '~Components/index/em/sys/feedback/SysFeedbackOperateFormComp';
     import QueryFormComp from '~Components/regular/query/QueryFormComp'
     import TableHeadInfo from '~Components/regular/common/table/TableHeadInfo'
     import OblTableAction from '~Components/regular/common/table/OblTableAction'
@@ -106,7 +113,7 @@
     export default {
         name: "SysFeedbackView",
         components: {
-            SysFeedbackOperateRecordsComp,
+            SysFeedbackOperateRecordsComp,SysFeedbackOperateFormComp,
             QueryFormComp, RowDetailDrawerComp,
             TableHeadInfo,OblTableAction,TableRowDetailOperateBtn,TableOperateBtn,TableDeleteOperateBtn
         },
@@ -246,16 +253,6 @@
                     sorter: {}
                 },
                 tableCheckIdList: [],
-                dialogFormConf: {
-                    visible: false,
-                    actionType: "create"
-                },
-                dialogFormObj: {
-                    name: '',
-                    key:'',
-                    value:'',
-                    weights: 0
-                },
                 drawerConf: {
                     detail: {
                         sysFeedback: {
@@ -273,6 +270,10 @@
                         visible: false,
                         formObj:{}
                     },
+                    operateForm:{
+                        visible: false,
+                        formObj:{}
+                    }
                 }
             }
         },
@@ -361,33 +362,7 @@
                 })
             },
             handleCreateByForm() {     //新增按钮-点击
-                var _this = this;
-                _this.dialogFormConf.visible = true;   //显示弹窗
-                _this.dialogFormConf.actionType = "create";
-                _this.dialogFormObj = {};
-            },
-            handleUpdateByForm() {  //更新按钮-点击
-                var _this = this;
-                if (_this.tableCheckIdList.length < 1) {
-                    this.$message.warning(this.$t('langMap.message.warning.pleaseSelectTheOnlyRowOfDataForUpdate'));
-                } else if (_this.tableCheckIdList.length > 1) {
-                    this.$message.warning(this.$t('langMap.message.warning.pleaseSelectTheOnlyRowOfDataForUpdate'));
-                } else {
-                    var selectRowId = _this.tableCheckIdList[0];
-                    if (selectRowId) {
-                        SysFeedbackApi.getItemById(selectRowId).then((res) => {
-                            var selectUserBean = res.bean;
-                            if (selectUserBean) {
-                                _this.dialogFormConf.visible = true;   //显示弹窗
-                                _this.dialogFormConf.actionType = "update";
-                                _this.dialogFormObj = selectUserBean;
-                                //console.log(_this.dialogFormObj);
-                            }
-                        })
-                    } else {
-                        this.$message.warning(this.$t('langMap.message.error.failedDueToNotGettingId'));
-                    }
-                }
+
             },
             handleBatchDeleteByIds(e) {     // 批量删除
                 var _this = this;
@@ -452,6 +427,10 @@
             handleViewOperateRecords(e,record){   //查看操作记录
                 this.dialog.viewOperateRecords.formObj = record;
                 this.dialog.viewOperateRecords.visible = true ;
+            },
+            handleOperateForm(e,record){   //查看操作记录
+                this.dialog.operateForm.formObj = record;
+                this.dialog.operateForm.visible = true ;
             },
         },
         watch: {
