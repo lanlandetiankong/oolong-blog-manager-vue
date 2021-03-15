@@ -54,8 +54,8 @@
                             />
                         </a-form-item>
                     </a-col>
-                    <a-col :span="18">
-                        <a-form-item :label="$t('langMap.table.fields.obl.article.sourceUrl')" v-show="!formFlags.isSourceUrlRequired">
+                    <a-col :span="18" v-show="formFlags.isSourceUrlRequired">
+                        <a-form-item :label="$t('langMap.table.fields.obl.article.sourceUrl')" >
                             <a-input allowClear
                                       v-decorator="['sourceUrl', {rules: [{
                                             required: this.formFlags.isSourceUrlRequired,
@@ -498,7 +498,8 @@
             },
             handleSourceTypeChange(value){
                 this.formObj.sourceType = value ;
-                this.formFlags.isSourceUrlRequired = value == 1 ;
+                let flag = (value == 2) ;
+                this.formFlags.isSourceUrlRequired = flag ;
                 this.$nextTick(() => {
                     this.createForm.validateFields(['sourceUrl'], { force: true });
                 });

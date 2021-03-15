@@ -38,7 +38,9 @@ export const ArticleCreateApi = {
         return axios.post('/oblCtl/oblArticleTag/gainEnumSelect',obj).then(res => res.data);
     },
     getAllArticleCategoryTree() {  //取得 文章分类 树
-        let obj = HttpUtil.formatQueryPage({},{});
+        let obj = HttpUtil.formatQueryPage({
+            withRoot:false
+        },{});
         //查询所有文章标签信息
         return axios.post('/oblCtl/oblArticleCategory/queryTreeSelect',obj).then(res => res.data);
     },
