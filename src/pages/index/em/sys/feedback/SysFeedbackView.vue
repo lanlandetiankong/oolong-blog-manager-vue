@@ -143,12 +143,20 @@
                     treeNodeFilterProp:"title",
                     treeData:[],
                     drawerAble:false
+                },
+                operateProgress:{
+                    key: 'operateProgress',
+                    formType: FormItemTypeEnum.Select,
+                    label: this.$t('langMap.table.fields.em.sysFeedback.operateProgress'),
+                    decorator: ["operateProgress", {rules: []}],
+                    options:[]
                 }
             };
             return {
                 ConstantObj,
                 binding: {
                     switchEnums:EnumUtils.toSelectData(AllEnum.FlagSwitchEnum),
+                    operateProgressEnums:EnumUtils.toSelectData(AllEnum.FeedBackOperateProgressEnum),
                     typeIdList:[]
                 },
                 searchConf: {
@@ -190,7 +198,7 @@
                     },   {
                         title: this.$t('langMap.table.fields.em.sysFeedback.operateProgress'),
                         align: textAlignDefault,
-                        dataIndex: 'operateProgress',
+                        dataIndex: 'operateProgressStr',
                         key: 'operateProgress'
                     }, {
                         title: this.$t('langMap.table.fields.em.sysFeedback.operateTime'),
@@ -329,11 +337,13 @@
                 //Map-模块类型
                 let feedbackEditorTypeValMap = EnumUtils.toValMap(AllEnum.FeedBackEditorTypeEnum);
                 let flagSwitchValMap = EnumUtils.toValMap(AllEnum.FlagSwitchEnum);
+                let feedBackOperateProgressValMap = EnumUtils.toValMap(AllEnum.FeedBackOperateProgressEnum);
                 for (let idx in data){
                     let item = data[idx] ;
                     //枚举值
                     item['editorTypeStr'] = feedbackEditorTypeValMap[item.editorType] ;
                     item['isFinishStr'] = flagSwitchValMap[item.isFinish] ;
+                    item['operateProgressStr'] = feedBackOperateProgressValMap[item.operateProgress] ;
                 }
             },
             handleSearchFormQuery(e, values) {   //带查询条件 检索【系统反馈】列表
@@ -449,6 +459,7 @@
                 handler (val, oval) {
                     //绑定枚举值变化监听并处理
                     this.searchConf.formItemConf.isFinish.options = this.binding.switchEnums ;
+                    this.searchConf.formItemConf.operateProgress.options = this.binding.operateProgressEnums ;
                     this.searchConf.formItemConf.typeId.treeData = this.binding.typeIdList ;
                 },
                 deep: true,
