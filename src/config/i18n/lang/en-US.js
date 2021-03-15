@@ -51,7 +51,8 @@ export const langMap = {
             antiAudit:'Anti-audit',
             viewAuditRecord:'Audit record',
             viewRecommendRecord:'Recommend record',
-            loadMore:'Load more'
+            loadMore:'Load more',
+            viewOperateRecord:'Operate record'
         },
         member:{
             account:'Account',
@@ -244,6 +245,14 @@ export const langMap = {
                     name:'Name',
                     description:'Description',
                     level:'Level'
+                },
+                sysFeedbackOperate:{
+                    title:'Title',
+                    content:'Content',
+                    operateUserName:'Operate user name',
+                    operateProgress:'Operate progress',
+                    operateTime:'Operate time',
+                    isFinish:'Is finish'
                 }
             },
             obl:{

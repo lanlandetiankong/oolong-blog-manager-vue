@@ -9,7 +9,9 @@
                 @back="() => null"
             >
                 <template slot="extra">
-
+                    <a-button @click="handleViewOperateRecords($event)">
+                        {{$t('langMap.button.actions.viewOperateRecord')}}
+                    </a-button>
                 </template>
                 <template slot="footer">
                     <a-descriptions
@@ -26,7 +28,7 @@
                             {{formData.operateProgressStr}}
                         </a-descriptions-item>
                         <a-descriptions-item :label="$t('langMap.table.fields.em.sysFeedback.operateTime')">
-                            {{formData.publishTime | operateTime}}
+                            {{formData.publishTime | formatBaseDateTime}}
                         </a-descriptions-item>
                         <a-descriptions-item :label="$t('langMap.table.fields.em.sysFeedback.isFinish')">
                             {{formData.isFinishStr}}
@@ -40,7 +42,12 @@
         </div>
         <!-- 弹窗dom-区域 -->
         <div>
-
+            <sys-feedback-operate-records-comp
+                v-if="dialog.viewOperateRecords.visible"
+                v-bind="dialog.viewOperateRecords"
+                @cancel="()=> this.dialog.viewOperateRecords.visible = false"
+                @submit="()=> this.dialog.viewOperateRecords.visible = false"
+            />
         </div>
     </div>
 </template>
@@ -48,18 +55,16 @@
 <script>
     import {AllEnum,EnumUtils} from '~Config/selectData.js';
     import MavonReadOnlyComp from '~Components/regular/common/mavon/MavonReadOnlyComp';
+    import SysFeedbackOperateRecordsComp from '~Components/index/em/sys/feedback/SysFeedbackOperateRecordsComp';
     import {SysFeedbackDisplayApi} from './SysFeedbackDisplayApi'
-    import {FeedBackOperateProgressEnum} from "~Config/selectData";
     export default {
         name: "SysFeedbackDisplayView",
-        components: {MavonReadOnlyComp},
+        components: {MavonReadOnlyComp,SysFeedbackOperateRecordsComp},
         data(){
             return {
                 formData:{
                     fid:'',
                     title:'',
-                    auditState:undefined,
-                    auditStateStr:'',
                     createTime:undefined,
                     originContent:'',
                     isPublished:undefined,
@@ -67,7 +72,11 @@
                     publishTime:undefined
                 },
                 dialog:{
-
+                    viewOperateRecords:{
+                        visible: false,
+                        formObj:{},
+                        overZIndex:true
+                    },
                 }
             }
         },
@@ -104,6 +113,10 @@
                         _this.handleTransformData();
                     }
                 });
+            },
+            handleViewOperateRecords(e){   //查看文章的审批记录
+                this.dialog.viewOperateRecords.formObj = this.formData;
+                this.dialog.viewOperateRecords.visible = true ;
             },
         },
         watch: {

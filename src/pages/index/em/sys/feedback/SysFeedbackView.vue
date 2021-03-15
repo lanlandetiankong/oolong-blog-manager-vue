@@ -50,16 +50,16 @@
                     :rowSelection="rowSelection"
                     @change="handleTableChange"
                 >
-                    <span slot="typeStr" slot-scope="record">
-                        <a-tag color="blue" :key="record.typeStr">
-                            {{record.typeStr}}
-                        </a-tag>
-                    </span>
-                    <span slot="operationRender" slot-scope="text,record,index">
-                        {{record.operationTime | formatBaseDateTime}}
+                    <span slot="operateTimeRender" slot-scope="text,record,index">
+                        {{record.operateTime | formatBaseDateTime}}
                     </span>
                     <obl-table-action slot="action" slot-scope="text,record">
                         <template slot="operates">
+                            <table-operate-btn :content="$t('langMap.button.actions.viewOperateRecord')"
+                                               icon="unordered-list"
+                                               @click="handleViewOperateRecords($event,record)"
+                            >
+                            </table-operate-btn>
                             <table-operate-btn :content="$t('langMap.results.article.create.success.extra.viewDetail')"
                                                icon="read"
                                                @click="goToViewDetail($event,record)"
@@ -73,6 +73,12 @@
         </div>
         <!-- 弹窗dom-区域 -->
         <div>
+            <sys-feedback-operate-records-comp
+                v-if="dialog.viewOperateRecords.visible"
+                v-bind="dialog.viewOperateRecords"
+                @cancel="()=> this.dialog.viewOperateRecords.visible = false"
+                @submit="()=> this.dialog.viewOperateRecords.visible = false"
+            />
             <row-detail-drawer-comp
                 :drawerConf="drawerConf.detail.sysFeedback.conf"
                 :dataObj="drawerConf.detail.sysFeedback.dataObj"
@@ -87,6 +93,7 @@
     import {SysFeedbackApi} from './SysFeedbackApi.js'
     import {OblCommonMixin} from '~Layout/mixin/OblCommonMixin';
     import {FormItemTypeEnum, ConstantObj} from "~Components/constant_define";
+    import SysFeedbackOperateRecordsComp from '~Components/index/em/sys/feedback/SysFeedbackOperateRecordsComp';
     import QueryFormComp from '~Components/regular/query/QueryFormComp'
     import TableHeadInfo from '~Components/regular/common/table/TableHeadInfo'
     import OblTableAction from '~Components/regular/common/table/OblTableAction'
@@ -99,6 +106,7 @@
     export default {
         name: "SysFeedbackView",
         components: {
+            SysFeedbackOperateRecordsComp,
             QueryFormComp, RowDetailDrawerComp,
             TableHeadInfo,OblTableAction,TableRowDetailOperateBtn,TableOperateBtn,TableDeleteOperateBtn
         },
@@ -252,6 +260,12 @@
                         },
                     },
                 },
+                dialog:{
+                    viewOperateRecords:{
+                        visible: false,
+                        formObj:{}
+                    },
+                }
             }
         },
         computed: {
@@ -424,6 +438,10 @@
                     fid:record.fid
                 } ;
                 this.mixin_jump(routerConst.feedback.display,params);
+            },
+            handleViewOperateRecords(e,record){   //查看操作记录
+                this.dialog.viewOperateRecords.formObj = record;
+                this.dialog.viewOperateRecords.visible = true ;
             },
         },
         watch: {

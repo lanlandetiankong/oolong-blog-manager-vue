@@ -53,7 +53,8 @@ export const langMap = {
             antiAudit:'反审批',
             viewAuditRecord:'审批记录',
             viewRecommendRecord:'推荐记录',
-            loadMore:'加载更多'
+            loadMore:'加载更多',
+            viewOperateRecord:'操作记录'
         },
         member:{
             account:'账号',
@@ -247,6 +248,15 @@ export const langMap = {
                     name:'名称',
                     description:'描述',
                     level:'层级'
+                },
+                sysFeedbackOperate:{
+                    title:'标题',
+                    authorName:'提出人',
+                    content:'内容',
+                    operateUserName:'操作人',
+                    operateProgress:'操作步骤',
+                    operateTime:'操作时间',
+                    isFinish:'是否完成'
                 }
             },
             obl:{
