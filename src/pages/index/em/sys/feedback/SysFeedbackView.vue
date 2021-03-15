@@ -94,7 +94,7 @@
     import TableDeleteOperateBtn from '~Components/regular/common/table/operate/TableDeleteOperateBtn'
     import TableRowDetailOperateBtn from '~Components/regular/common/table/operate/TableRowDetailOperateBtn'
     import RowDetailDrawerComp from '~Components/regular/common/drawer/RowDetailDrawerComp';
-    import {AllEnum, EnumUtils, FeedBackEditorTypeEnum, FlagSwitchEnum} from "~Config/selectData";
+    import {AllEnum, EnumUtils} from "~Config/selectData";
     import {routerConst} from "~Config/BaseDataConst";
     export default {
         name: "SysFeedbackView",
@@ -128,15 +128,20 @@
                 },
                 typeId: {
                     key: 'typeId',
-                    formType: FormItemTypeEnum.Input,
+                    formType: FormItemTypeEnum.TreeSelect,
                     label: this.$t('langMap.table.fields.em.sysFeedback.type'),
                     decorator: ["typeId", {rules: []}],
+                    treeDefaultExpandAll:false,
+                    treeNodeFilterProp:"title",
+                    treeData:[],
+                    drawerAble:false
                 }
             };
             return {
                 ConstantObj,
                 binding: {
-                    switchEnums:EnumUtils.toSelectData(AllEnum.SwitchEnum)
+                    switchEnums:EnumUtils.toSelectData(AllEnum.FlagSwitchEnum),
+                    typeIdList:[]
                 },
                 searchConf: {
                     loadingFlag: false,
@@ -273,6 +278,14 @@
                     loadingFlag = false;
                 }
                 this.searchConf.loadingFlag = loadingFlag;
+            },
+            dealGetAllTypeTree() {    //取得所有的 类型-树
+                var _this = this;
+                SysFeedbackApi.queryTypeTree().then((res) => {
+                    if (res.success) {
+                        _this.binding.typeIdList = res.gridList;
+                    }
+                })
             },
             dealBatchDeleteByIds() {  //批量删除
                 var _this = this;
@@ -418,12 +431,14 @@
                 handler (val, oval) {
                     //绑定枚举值变化监听并处理
                     this.searchConf.formItemConf.isFinish.options = this.binding.switchEnums ;
+                    this.searchConf.formItemConf.typeId.treeData = this.binding.typeIdList ;
                 },
                 deep: true,
                 immediate:true
             }
         },
         created() {
+            this.dealGetAllTypeTree();
         },
         mounted() {
             this.mixin_invokeQuery(this);

@@ -13,6 +13,12 @@ export const SysFeedbackApi = {
         };
         return axios.post("/oblCtl/emSysFeedback/queryOneById", params).then(res => res.data);
     },
+    queryTypeTree() {
+        let obj = {
+            withRoot:true  ,   //是否包含根节点
+        };
+        return axios.post('/oblCtl/emSysFeedbackType/queryTree',obj).then(res => res.data);
+    },
     createByForm(formObj) {     //新增
         return axios.post("/oblCtl/emSysFeedback/createByForm", formObj).then(res => res.data);
     },
