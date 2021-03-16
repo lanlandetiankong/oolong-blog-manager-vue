@@ -49,6 +49,11 @@
                     </span>
                     <obl-table-action slot="action" slot-scope="text,record">
                         <template slot="operates">
+                            <table-operate-btn :content="$t('langMap.button.actions.edit')"
+                                               icon="edit"
+                                               @click="goToCreateView($event,record)"
+                            >
+                            </table-operate-btn>
                             <table-operate-btn :content="$t('langMap.button.actions.operate')"
                                                icon="control"
                                                @click="handleOperateForm($event,record)"
@@ -431,6 +436,13 @@
             handleOperateForm(e,record){   //查看操作记录
                 this.dialog.operateForm.formObj = record;
                 this.dialog.operateForm.visible = true ;
+            },
+            goToCreateView(e,item){   //跳转到 [编辑反馈] 页面 处理
+                let routeParam = {
+                    fid: item.fid,
+                    action:"update"
+                };
+                this.mixin_jump(routerConst.feedback.create,routeParam);
             },
         },
         watch: {

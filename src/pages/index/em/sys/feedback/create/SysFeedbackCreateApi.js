@@ -36,6 +36,12 @@ export const SysFeedbackCreateApi = {
         let params = {
             fid:fid
         };
-        return axios.post("/oblCtl/emSysFeedbackType/queryOneById",params).then(res => res.data);
+        return axios.post("/oblCtl/emSysFeedback/queryOneById",params).then(res => res.data);
+    },
+    getIDraftItemById(fid){  //根据 文章草稿id 取得文章草稿
+        let params = {
+            fid:fid
+        };
+        return axios.post("/oblCtl/emSysFeedback/queryOneById",params).then(res => res.data);
     },
 };
