@@ -17,6 +17,22 @@ const SysRouter = [{
         selfCompName:'SysFeedbackView'
     }
 },{
+    path:basePath+'feedback/my_create_list',
+    component:_import('index/em/sys/feedback/myCreateList/SysFeedbackMyCreateListView'),
+    name:'SysFeedbackMyCreateListView',
+    meta:{
+        title:'我的反馈',icon:"flag",keepAliveFlag:true,
+        selfCompName:'SysFeedbackMyCreateListView'
+    }
+},{
+    path:basePath+'feedback/my_draft_list',
+    component:_import('index/em/sys/feedback/myDraftList/SysFeedbackMyDraftListView'),
+    name:'SysFeedbackMyDraftListView',
+    meta:{
+        title:'我的反馈草稿',icon:"bars",keepAliveFlag:true,
+        selfCompName:'SysFeedbackMyDraftListView'
+    }
+},{
     path:basePath+'feedback_type/manager',
     component:_import('index/em/sys/feedback/type/SysFeedbackTypeView'),
     name:'sysFeedbackType',
