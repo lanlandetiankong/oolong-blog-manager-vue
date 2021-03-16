@@ -9,8 +9,8 @@ const SysRouter = [{
         selfCompName:'SysDicView'
     }
 },{
-    path:basePath+'feedback/manager',
-    component:_import('index/em/sys/feedback/SysFeedbackView'),
+    path:basePath+'feedback/all_list',
+    component:_import('index/em/sys/feedback/allList/SysFeedbackView'),
     name:'sysFeedback',
     meta:{
         title:'系统反馈',icon:"flag",keepAliveFlag:true,

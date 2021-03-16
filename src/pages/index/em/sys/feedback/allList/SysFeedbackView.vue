@@ -362,7 +362,7 @@
                 })
             },
             handleCreateByForm() {     //新增按钮-点击
-
+                this.mixin_jump(routerConst.feedback.create,{});
             },
             handleBatchDeleteByIds(e) {     // 批量删除
                 var _this = this;
