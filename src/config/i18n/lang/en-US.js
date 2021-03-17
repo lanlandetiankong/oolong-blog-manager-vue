@@ -577,7 +577,26 @@ export const langMap = {
                 title:'Change Password',
                 description:'Set new password'
             },
-        }
+        },
+        feedback:{
+            create:{
+                basic:{
+                    key:'basic',
+                    title:'Write',
+                    description:'Write'
+                },
+                more:{
+                    key:'more',
+                    title:'Other',
+                    description:'More setting'
+                },
+                done:{
+                    key:'done',
+                    title:'Submit',
+                    description:'Submit'
+                }
+            }
+        },
     },
     results:{
         universal:{
