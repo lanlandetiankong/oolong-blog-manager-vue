@@ -45,7 +45,7 @@
     import ATextarea from "ant-design-vue/es/input/TextArea";
 
     export default {
-        name: "OblArticleAuditComp",
+        name: "OblArticleAntiAuditComp",
         components: {ATextarea, AFormItem},
         mixins:[OblCommonMixin],
         props:{
