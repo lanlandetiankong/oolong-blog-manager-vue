@@ -47,7 +47,7 @@ const VueScrollConf = {
                   true 或者 false 或者一个数组指定哪个方向可以超出边界，可选项分别是：
                   ['top','bottom','left','right']
                 */
-                bouncing: true,
+                bouncing: [],
                 /** Enable locking to the main axis if user moves only slightly on one of them at start */
                 locking: true,
                 /** 最小缩放级别 */

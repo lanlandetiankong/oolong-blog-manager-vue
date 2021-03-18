@@ -1,7 +1,7 @@
 <template>
     <div class="tags-view-container">
         <vue-scroll class="tags-view-wrapper"
-                    v-bind="VueScrollConf"
+                    :ops="VueScrollConf"
         >
             <router-link ref='tagsRef'
                          v-for="tag in tagsArray"
