@@ -13,7 +13,7 @@ module.exports = {
       proxyTable: {
           '/1.0.3-SNAPSHOT': {
               // 测试环境
-              target: 'http://www.localhost:20100',  // 接口域名
+              target: 'http://oblmg.api.tharlo.space',  // 接口域名
               changeOrigin: true,  //是否跨域
               pathRewrite: {
                   //需要rewrite重写的,
