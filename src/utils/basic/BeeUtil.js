@@ -381,6 +381,16 @@ const BeeUtil = {
             var _obj = JSON.stringify(obj),
                 objClone = JSON.parse(_obj);
             return objClone;
+        },
+        filterElement(obj){
+            var param = {};
+            if ( obj === null || obj === undefined || obj === "" ) return param;
+            for ( var key in obj ){
+                if ( obj[key] !== null && obj[key] !== undefined){
+                    param[key] = obj[key];
+                }
+            }
+            return param;
         }
     },
     //IdCardUtils命名空间

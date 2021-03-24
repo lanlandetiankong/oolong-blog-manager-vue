@@ -123,9 +123,17 @@
             }
         },
         data(){
+            let _this = this ;
             return {
+                formValues:{},
                 formItemTypeEnum:FormItemTypeEnum,
-                searchForm:this.$form.createForm(this,{name:'search_form'}),
+                searchForm:this.$form.createForm(this,{
+                    name:'search_form',
+                    onValuesChange: (theProps, values) => {
+                        _this.formValues = ObjectUtils.filterElement(Object.assign(_this.formValues,values));
+                        this.$emit('valuesChange',this.formValues);
+                    },
+                }),
                 searchConf:{
                     defaultColSpan: 8,
                     binding:{
