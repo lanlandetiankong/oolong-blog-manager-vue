@@ -6,7 +6,7 @@ export const BaseDataConst = {
             login: '/member/login',
             register: '/member/register',
             forgetPassword: '/member/password/forget',
-            serverDown: '/errorPage/server_down'
+            serverDown: '/error/server_down'
         },
         article: {
             display: '/index/article/display',
