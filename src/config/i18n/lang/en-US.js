@@ -112,7 +112,8 @@ export const langMap = {
                 detailForOblArticleCategory:'Detail for article category',
                 detailForOblArticleTag:'Detail for article tag',
                 detailForArticleCollectCategory:'Detail for article collect category',
-                detailForArticleRecommend:'Detail for article recommend category'
+                detailForArticleRecommend:'Detail for article recommend category',
+                detailForOblArticleRecommendDelayRecord:'Detail for article recommend delay record'
             }
         }
     },
@@ -248,6 +249,7 @@ export const langMap = {
                 },
                 sysFeedbackOperate:{
                     title:'Title',
+                    authorName:'Author',
                     content:'Content',
                     operateUserName:'Operate user name',
                     operateProgress:'Operate progress',
@@ -298,6 +300,8 @@ export const langMap = {
                     recommendUserName:'Recommend user',
                     selectArticles:'Selected articles',
                     isConfirmed:'Is confirmed',
+                    confirmedTime:'Confirmed time',
+                    confirmedUserName:'Confirmor',
                     delayStartDays:'Start delay days',
                     delayEndDays:'End delay days',
                 },
