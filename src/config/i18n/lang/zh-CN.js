@@ -329,6 +329,15 @@ export const langMap = {
                     selectArticles:'已选文章',
                     auditType:'审批类型',
                 },
+                articleCommentAuditRecord:{
+                    antiAuditComments:'反审批意见',
+                    auditComments:'审批意见',
+                    auditTime:'审批时间',
+                    auditState:'审批值',
+                    auditUserName:'审批人',
+                    selectComments:'已选评论',
+                    auditType:'审批类型',
+                },
                 articleCollectCategory:{
                     name:'名称',
                     iconName:'图标',
@@ -373,6 +382,12 @@ export const langMap = {
                 notApproved:'未审批',
                 approval:'审批中',
                 returnToModify:'退回修改',
+                approved:'审批通过',
+                approvalFailed:'审批不通过'
+            },
+            commentAuditStatus:{
+                notApproved:'未审批',
+                approval:'审批中',
                 approved:'审批通过',
                 approvalFailed:'审批不通过'
             },
@@ -424,6 +439,10 @@ export const langMap = {
                 markdown:'Markdown'
             },
             articleAuditType:{
+                audit:'审批',
+                antiAudit:'反审批'
+            },
+            articleCommentAuditType:{
                 audit:'审批',
                 antiAudit:'反审批'
             },

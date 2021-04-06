@@ -208,6 +208,38 @@ export const ArticleAuditTypeEnum = {
     }
 };
 
+
+export const ArticleCommentAuditStateEnum = {
+    NotApproved:{
+        value: 0,
+        label: i18nUtil.getKey('langMap.commons.enums.commentAuditStatus.notApproved'),
+    },
+    Approval:{
+        value: 1,
+        label: i18nUtil.getKey('langMap.commons.enums.commentAuditStatus.approval')
+    },
+    ApprovalFailed:{
+        value: 8,
+        label: i18nUtil.getKey('langMap.commons.enums.commentAuditStatus.approvalFailed')
+    },
+    Approved:{
+        value: 9,
+        label: i18nUtil.getKey('langMap.commons.enums.commentAuditStatus.approved')
+    },
+};
+
+export const ArticleCommentAuditTypeEnum = {
+    Audit:{
+        value: 1,
+        label: i18nUtil.getKey('langMap.commons.enums.articleCommentAuditType.audit')
+    },
+    AntiAudit:{
+        value: 2,
+        label: i18nUtil.getKey('langMap.commons.enums.articleCommentAuditType.antiAudit')
+    }
+};
+
+
 /**
  * 枚举-文章编辑器类型
  * @type {{Markdown: {label: string, value: number}}}
@@ -366,7 +398,9 @@ export const AllEnum = {
     FlagSwitchEnum,
     PublishStatusEnum,
     ArticleAuditStateEnum,
+    ArticleCommentAuditStateEnum,
     ArticleAuditTypeEnum,
+    ArticleCommentAuditTypeEnum,
     ArticleEditorTypeEnum,
     ArticleSourceTypeEnum,
     FeedBackEditorTypeEnum,

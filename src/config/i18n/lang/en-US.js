@@ -327,6 +327,15 @@ export const langMap = {
                     selectArticles:'Selected articles',
                     auditType:'Audit type'
                 },
+                articleCommentAuditRecord:{
+                    antiAuditComments:'Anti audit comment',
+                    auditComments:'Audit comment',
+                    auditTime:'Audit time',
+                    auditState:'Audit state',
+                    auditUserName:'Audit user',
+                    selectComments:'Selected comments',
+                    auditType:'Audit type'
+                },
                 articleCollectCategory:{
                     name:'Name',
                     iconName:'Icon name',
@@ -378,6 +387,12 @@ export const langMap = {
                 approved:'Approved',
                 approvalFailed:'Approval failed'
             },
+            commentAuditStatus:{
+                notApproved:'Not approved',
+                approval:'Approval',
+                approved:'Approved',
+                approvalFailed:'Approval failed'
+            },
             jobType:{
                 simpleJob:'Simple job'
             },
@@ -422,6 +437,10 @@ export const langMap = {
                 markdown:'Markdown'
             },
             articleAuditType:{
+                audit:'Audit',
+                antiAudit:'Anti-audit'
+            },
+            articleCommentAuditType:{
                 audit:'Audit',
                 antiAudit:'Anti-audit'
             },
