@@ -156,6 +156,14 @@
                     label:this.$t('langMap.table.fields.obl.article.title'),
                     decorator:["title", {rules: []}],
                 },
+                auditState:{
+                    key:'auditState',
+                    formType:FormItemTypeEnum.Select,
+                    label:this.$t('langMap.table.fields.obl.articleComment.auditState'),
+                    decorator:["auditState", {rules: []}],
+                    options:[],
+                    drawerAble:false
+                },
                 content: {
                     key:'content',
                     formType:FormItemTypeEnum.Input,
@@ -185,12 +193,14 @@
                     treeNodeFilterProp:"title",
                     treeData:[],
                     drawerAble:false
-                }
+                },
+
             };
             return {
                 ConstantObj,
                 binding:{
-                    articleTagList:[]
+                    articleTagList:[],
+                    articleAuditStateArr:EnumUtils.toSelectData(AllEnum.ArticleCommentAuditStateEnum)
                 },
                 searchConf:{
                     loadingFlag:false,
@@ -532,6 +542,7 @@
                     //绑定枚举值变化监听并处理
                     this.searchConf.formItemConf.tagIds.options = this.binding.articleTagList ;
                     this.searchConf.formItemConf.categoryIdList.treeData = this.binding.categoryIdList ;
+                    this.searchConf.formItemConf.auditState.options = this.binding.articleAuditStateArr ;
                 },
                 deep: true,
                 immediate:true
