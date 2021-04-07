@@ -29,7 +29,7 @@
                             :data-source="commentList"
                     >
                         <a-list-item slot="renderItem" slot-scope="item,index">
-                            {{ item.title }}
+                            {{ item.content }}
                         </a-list-item>
                     </a-list>
                 </div>

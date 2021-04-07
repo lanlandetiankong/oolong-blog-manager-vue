@@ -17,7 +17,16 @@
                     align="middle"
                 >
                     <a-col>
-
+                        <a-col>
+                            <a-button type="primary" icon="audit"
+                                      @click="handleBatchAudit">
+                                {{$t('langMap.button.actions.audit')}}
+                            </a-button>
+                            <a-button type="primary" icon="audit"
+                                      @click="handleBatchAntiAudit">
+                                {{$t('langMap.button.actions.antiAudit')}}
+                            </a-button>
+                        </a-col>
                     </a-col>
                 </a-row>
             </div>
@@ -41,6 +50,12 @@
                     </span>
                     <obl-table-action slot="action" slot-scope="text,record">
                         <template slot="operates">
+                            <table-operate-btn v-show="record.antiAuditAbleFlag == true"
+                                               :content="$t('langMap.button.actions.antiAudit')"
+                                               icon="audit"
+                                               @click="handleAntiAudit($event,record)"
+                            >
+                            </table-operate-btn>
                             <table-operate-btn :content="$t('langMap.results.article.create.success.extra.viewDetail')"
                                                icon="read"
                                                @click="goToViewDetail($event,record)"
@@ -64,6 +79,18 @@
                     @cancel="()=> this.dialog.viewAuditRecords.visible = false"
                     @submit="()=> this.dialog.viewAuditRecords.visible = false"
                 />
+                <obl-article-comment-audit-comp
+                    v-if="dialog.audit.visible"
+                    v-bind="dialog.audit"
+                    @cancel="handleCloseAudit"
+                    @submit="handleSubmitAudit"
+                />
+                <obl-article-comment-anti-audit-comp
+                    v-if="dialog.antiAudit.visible"
+                    v-bind="dialog.antiAudit"
+                    @cancel="handleCloseAntiAudit"
+                    @submit="handleSubmitAntiAudit"
+                />
                 <row-detail-drawer-comp
                     :drawerConf="drawerConf.detail.article.conf"
                     :dataObj="drawerConf.detail.article.dataObj"
@@ -77,7 +104,7 @@
 </template>
 <script>
     import {routerConst} from '~Config/BaseDataConst.js'
-    import {AllEnum, EnumUtils} from "~Config/selectData";
+    import {AllEnum, ArticleCommentAuditStateEnum, EnumUtils} from "~Config/selectData";
     import {ArticleCommentListApi} from './OblArticleCommentListApi'
     import {OblCommonMixin} from '~Layout/mixin/OblCommonMixin';
     import {ConstantObj, FormItemTypeEnum} from "~Components/constant_define";
@@ -88,11 +115,13 @@
     import TableRowDetailOperateBtn from '~Components/regular/common/table/operate/TableRowDetailOperateBtn'
     import RowDetailDrawerComp from '~Components/regular/common/drawer/RowDetailDrawerComp';
     import OblArticleCommentAuditRecordsComp from '~Components/index/obl/article/commentAudit/OblArticleCommentAuditRecordsComp'
+    import OblArticleCommentAntiAuditComp from '~Components/index/obl/article/commentAudit/OblArticleCommentAntiAuditComp'
+    import OblArticleCommentAuditComp from '~Components/index/obl/article/commentAudit/OblArticleCommentAuditComp'
 
     export default {
         name: "OblArticleCommentListView",
-        components:{QueryFormComp,OblArticleCommentAuditRecordsComp,RowDetailDrawerComp,
-            TableHeadInfo,OblTableAction,TableOperateBtn,TableRowDetailOperateBtn
+        components:{QueryFormComp,RowDetailDrawerComp,TableHeadInfo,OblTableAction,TableOperateBtn,TableRowDetailOperateBtn
+            ,OblArticleCommentAuditRecordsComp,OblArticleCommentAntiAuditComp,OblArticleCommentAuditComp
         },
         mixins:[OblCommonMixin],
         data() {
@@ -120,8 +149,23 @@
                     decorator:["articleTitle", {rules: []}],
                 },
             };
+
+            //审批-只能选择非[审批通过、审批不通过、退回修改]的数据
+            let auditDisableStateArr = [] ;
+            auditDisableStateArr.push(AllEnum.ArticleCommentAuditStateEnum.ApprovalFailed.value);
+            auditDisableStateArr.push(AllEnum.ArticleCommentAuditStateEnum.Approved.value);
+            //反审批-只能选择[审批通过、审批不通过、退回修改]的数据
+            let antiAuditAbleStateArr = [] ;
+            antiAuditAbleStateArr.push(AllEnum.ArticleCommentAuditStateEnum.ApprovalFailed.value);
+            antiAuditAbleStateArr.push(AllEnum.ArticleCommentAuditStateEnum.Approved.value);
+            //设为推荐-只能选择[审批通过]的数据
+            let setRecommendAbleStateArr = [] ;
+            setRecommendAbleStateArr.push(AllEnum.ArticleCommentAuditStateEnum.Approved.value);
             return {
                 ConstantObj,
+                auditDisableStateArr,
+                setRecommendAbleStateArr,
+                antiAuditAbleStateArr,
                 binding:{
                     commentAuditStateArr:EnumUtils.toSelectData(AllEnum.ArticleCommentAuditStateEnum)
                 },
@@ -212,8 +256,17 @@
                         x: 750
                     }
                 },
+                tableCheckList: [],
                 tableCheckIdList: [],
                 dialog:{
+                    audit:{
+                        visible: false,
+                        commentList:[]
+                    },
+                    antiAudit:{
+                        visible: false,
+                        commentList:[]
+                    },
                     viewAuditRecords:{
                         visible: false,
                         formObj:{}
@@ -239,6 +292,7 @@
                     selectedRowKeys: this.tableCheckIdList,
                     onChange: (selectedRowKeys, selectedRows) => {  //勾选 修改事件
                         this.tableCheckIdList = selectedRowKeys;
+                        this.tableCheckList = selectedRows;
                     },
                     getCheckboxProps: record => ({  //选择框的默认属性配置
                         props: {
@@ -256,6 +310,7 @@
                 this.searchConf.loadingFlag = loadingFlag;
             },
             handleTransformData(){//数据转化
+                let _this = this ;
                 const data = this.tableConf.data;
                 if(!data){
                     return ;
@@ -264,7 +319,9 @@
                 let articleAuditStateValMap = EnumUtils.toValMap(AllEnum.ArticleAuditStateEnum);
                 for (let idx in data){
                     let item = data[idx] ;
-                    item['auditStateStr'] = articleAuditStateValMap[item.auditState];
+                    item['auditStateStr'] = articleAuditStateValMap[item.auditState]
+                    debugger;
+                    item['antiAuditAbleFlag'] = _this.antiAuditAbleStateArr.indexOf(item.auditState) >= 0 ;
                 }
             },
             handleSearchFormQuery(e,values) {    //带查询条件 检索评论列表
@@ -307,6 +364,66 @@
             handleViewAuditRecords(e,record){   //查看评论的审批记录
                 this.dialog.viewAuditRecords.formObj = record;
                 this.dialog.viewAuditRecords.visible = true ;
+            },
+            handleAudit(e,record){
+                this.dialog.audit.commentList = [record];
+                this.dialog.audit.visible = true ;
+            },
+            handleBatchAudit(e){ //批量审批
+                var _this = this;
+                var selectList = _this.tableCheckList;
+                if (selectList.length < 1) {
+                    _this.$message.warning(this.$t('langMap.message.warning.pleaseSelectTheLeastRowOfDataForOperate'));
+                } else {
+                    let ableList = selectList.filter(item => {
+                        return _this.auditDisableStateArr.indexOf(item.auditState) < 0 ;
+                    }) ;
+                    if(ableList.length < selectList.length){
+                        _this.$message.warning(this.$t('langMap.message.warning.doNotAllowSelectionOfAudited'));
+                        return false;
+                    }
+                    this.dialog.audit.commentList = ableList;
+                    this.dialog.audit.visible = true ;
+                }
+            },
+            handleCloseAudit(e){
+                this.dialog.audit.commentList = [];
+                this.dialog.audit.visible = false ;
+            },
+            handleSubmitAudit(e){
+                this.dialog.audit.commentList = [];
+                this.dialog.audit.visible = false ;
+                this.mixin_invokeQuery(this); //表格重新搜索
+            },
+            handleAntiAudit(e,record){  //反审批
+                this.dialog.antiAudit.commentList = [record];
+                this.dialog.antiAudit.visible = true ;
+            },
+            handleBatchAntiAudit(e){ //批量-反审批
+                var _this = this;
+                var selectList = _this.tableCheckList;
+                if (selectList.length < 1) {
+                    _this.$message.warning(this.$t('langMap.message.warning.pleaseSelectTheLeastRowOfDataForOperate'));
+                } else {
+                    let ableList = selectList.filter(item => {
+                        return _this.antiAuditAbleStateArr.indexOf(item.auditState) >= 0 ;
+                    }) ;
+                    if(ableList.length < selectList.length){
+                        _this.$message.warning(this.$t('langMap.message.warning.doNotAllowSelectionOfAudited'));
+                        return false;
+                    }
+                    this.dialog.antiAudit.commentList = ableList;
+                    this.dialog.antiAudit.visible = true ;
+                }
+            },
+            handleCloseAntiAudit(e){
+                this.dialog.antiAudit.commentList = [];
+                this.dialog.antiAudit.visible = false ;
+            },
+            handleSubmitAntiAudit(e){
+                this.dialog.antiAudit.commentList = [];
+                this.dialog.antiAudit.visible = false ;
+                this.mixin_invokeQuery(this); //表格重新搜索
             },
         },
         watch:{
