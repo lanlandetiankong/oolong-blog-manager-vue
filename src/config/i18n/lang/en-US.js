@@ -347,6 +347,21 @@ export const langMap = {
                     avatarUrl:'Avatar',
                     email:'Email',
                     userType:'User type',
+                },
+                articleComment:{
+                    content:'Content',
+                    articleTitle:'Article title',
+                    articleAuthorName:'Article author',
+                    replyFromUserName:'Reply user',
+                    replyFromUserAvatarUrl:'Reply user avatar',
+                    replyToUserName:'Reply to user',
+                    replyToUserAvatarUrl:'Reply to user avatar',
+                    auditState:'Audit state',
+                    auditComments:'Audit comments',
+                    auditTime:'Audit time',
+                    auditUserName:'Audit user',
+                    totalLike:'Total like',
+                    totalDislike:'Total dislike',
                 }
             }
         },

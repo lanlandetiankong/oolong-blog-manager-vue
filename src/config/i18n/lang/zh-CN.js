@@ -349,6 +349,21 @@ export const langMap = {
                     avatarUrl:'头像',
                     email:'邮箱',
                     userType:'用户类型',
+                },
+                articleComment:{
+                    content:'评论内容',
+                    articleTitle:'文章标题',
+                    articleAuthorName:'文章作者',
+                    replyFromUserName:'回复人',
+                    replyFromUserAvatarUrl:'回复人头像',
+                    replyToUserName:'被回复人',
+                    replyToUserAvatarUrl:'被回复人头像',
+                    auditState:'审批状态',
+                    auditComments:'审批意见',
+                    auditTime:'审批时间',
+                    auditUserName:'审批人',
+                    totalLike:'总点赞数',
+                    totalDislike:'总踩低数',
                 }
             }
         }

@@ -83,5 +83,14 @@ const ArticleRouter = [
             selfCompName:'OblArticleRecommendDelayRecordView'
         }
     },
+    {
+        path:basePath+'comment_list',
+        component:_import('index/obl/article/comments/OblArticleCommentListView'),
+        name:'oblArticleCommentListView',
+        meta:{
+            title:'评论列表',icon:"bars",keepAliveFlag:true,
+            selfCompName:'OblArticleCommentListView'
+        }
+    },
 ];
 export default ArticleRouter ;
