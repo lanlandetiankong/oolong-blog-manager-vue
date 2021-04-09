@@ -1,91 +1,119 @@
 # oolong-blog-manager-vue
 
-> A management system project by Vue.js
+
+
+## 1、项目地址
+
+#### 1、博客前台-前端
+
+- gitee:  https://gitee.com/hashChange/oolong-blog-vue.git
+
+####  2、博客后台-前端
+
+- gitee:   https://gitee.com/hashChange/oolong-blog-manager-vue.git
+- github:  https://github.com/lanlandetiankong/oolong-blog-manager-vue.git
+
+####  3、博客-后端
+
+- gitee:  https://gitee.com/hashChange/oolong-blog-server.git
+- github:  https://github.com/lanlandetiankong/oolong-blog-server.git
+
+## 2、当前项目 ---> 博客后台-前端
+## 3、主要相关技术
+- Node.js
+- Vue
+- VueRouter(Vue官方的路由管理)
+- Vuex(Vue官方的状态管理)
+- Vue-i18n(国际化)
+- ant-design-vue(样式与组件)
+- axios(Http请求)
+- vue-quill-editor(富文本编辑器)
+- vue2-verify(登录验证)
+- vuescroll(滚动条)
+- mavon-editor(MD文档编辑器)
+- less(css样式)
+
+## 4、主要内容
+
+#### 1、通用页面
+
+- 用户登录页面
+- 用户注册页面
+- 用户修改密码页面
+
+#### 2、数据维护
+
+- 主页
+- 字典(分页搜索、创建、编辑、删除、确认数据)
+- 系统反馈(类别、分页搜索、创建、编辑、删除)
+- 公告(类别、分页搜索、创建、编辑、删除)
+- 菜单(分页搜索、创建、编辑、删除、配置模板)
+- 用户组(分页搜索、创建、编辑、删除)
+- 用户职务(分页搜索、创建、编辑、删除)
+- 权限(分页搜索、创建、编辑、删除)
+- 角色(分页搜索、创建、编辑、删除、设置权限、分配可访问菜单)
+- 用户(分页搜索、创建、编辑、删除、分配角色)
+- 文章分类树(分页搜索、创建、编辑、删除)
+- 文章标签(分页搜索、创建、编辑、删除)
+- 写文章
+- 文章列表(分页搜索、创建、编辑、删除、审批、反审批、审批记录)
+- 文章推荐(分页搜索、推荐记录)
+- 文章审批(分页搜索、审批、反审批、审批记录)
+- 文章评论(分页搜索、审批、反审批、审批记录)
+
+
+## 5、预览
+- 地址(由于部署服务器配置问题,访问可能偏慢):  http://obl.tharlo.space
+- 测试账号:  Admin 123456
+
+## 6、本地部署
+1. 先在本地项目文件夹打开cmd
+2. cmd输入 git clone https://gitee.com/hashChange/oolong-blog-manager-vue.git
+3. npm install 或 cnpm install 或 yarn add
+4. 本地运行:  npm run dev
+
+## 7、编译打包
+1、 使用Npm对项目进行打包编译(生成的内容在 项目路径/dist 文件夹下)
+npm run build
+2、将dist拷贝出来放到要部署的文件夹，用nginx指向该文件夹即可。
+
+## 8、TODO
+##### 暂无。
 
 
 
-## 预览地址
 
-http://oblmg.tharlo.space
 
-测试账号: SuperRoot
 
-密码: 123456
 
-## 简介(Intro)
 
-##### 该项目为前后端分离。
-​	>前端项目即当前项目:
-​    		git地址： https://github.com/lanlandetiankong/oolong-blog-manager-vue
-​    		主要框架： vue + antdesign vue + axios + quill  等
 
-​	>对应的后端项目:
-​    		git地址： https://github.com/lanlandetiankong/oolong-blog-server
-​    		主要框架： springboot + mybatis + mybatis-plus+druid+swagger2+shiro 等
-## Build Setup
 
-#### 一、导入 oolong-blog-server 到本地
 
-	>​	导入项目到本地
-	​		git clone https://github.com/lanlandetiankong/oolong-blog-manager-vue
-	​		cd 本地项目路径
-	>​	安装依赖
-	​		npm install 或 cnpm install
 
-## 二、启动项目
 
-### 1 、本地运行
 
-​	npm run dev
 
-### 2、打包到服务器运行
 
-​	1、使用Npm对项目进行打包编译(生成的内容在 项目路径/dist 文件夹下)
 
-​		npm run build
 
-​	2、由于vue-router 采用的模式是 history 模式，所以需要做一些修改。具体参考( https://router.vuejs.org/zh/guide/essentials/history-mode.html#html5-history-%E6%A8%A1%E5%BC%8F )
 
-​			方式1=>
-​    			(1)、要求
-​    				node.js环境
-​    			(2)、将build生成的 dist文件夹放到服务器
-​    			(3)、将该项目的 /doc/buildAssets/app.js 复制到 dist/ 下(与index.html同一层)
-​    			(4)、可以通过修改复制后的app.js进行vue项目发布端口的修改
-​    			(5)、最后在dist目录下打开cmd，执行    node app.js
 
-​			方式2=>
-​    			(1)、要求
-​    				http-server环境
-​    				  ->安装http-server:
-​        				npm install http-server -g  或
-​        				yarn -g http-server
-​    			(2)、启动http-server(在build生成的dist文件夹下启动cmd)
-​              		http-server -p 端口号
 
-### 3、静态资源服务器
-​			要求 =>
-​    				anywhere
-​    		安装anywhere =>
-​            		npm install anywhere -g  或
-​            		yarn -g anywhere
-​    		在静态资源目录下打开cmd,执行 =>
-​        			anywhere -p 端口号
-​        			(1)静态资源与该vue项目以及后端项目是分开的，可以放在任意位置，但是端口号需要与后端和前端进行配合修改)
-​        			(2)后端项目端口配置路径在 obl-web/resource/props-upload.properties 文件的 props.upload.urlPrefix
 
-### 4、项目截图
 
-​	1、登录界面
 
-![images](https://github.com/lanlandetiankong/oolong-blog--manager-vue/blob/master/md_images/image-20200307215347922.png)
 
-2、主页面
 
-![image](https://github.com/lanlandetiankong/oolong-blog--manager-vue/blob/master/md_images/image-20200307215508375.png)
 
-3、员工信息 Tag页面
 
-![image](https://github.com/lanlandetiankong/oolong-blog--manager-vue/blob/master/md_images/image-20200307215552430.png)
 
-### 5、更多配置以及备注 在项目的 doc\ 目录下。
+
+
+
+
+
+
+
+
+
